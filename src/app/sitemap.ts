@@ -31,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sip-calculator',
     '/electricity-bill-calculator',
     '/calorie-calculator',
+    '/price-per-weight-calculator',
+    '/average-calculator',
     '/blog'
   ]
 

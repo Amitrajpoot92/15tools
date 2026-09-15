@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { TOOLS } from "@/lib/constants";
 import { ToolCard } from "@/components/ToolCard";
-import { Search, Sparkles } from "lucide-react";
+import { Search, Sparkles, CheckCircle2, Zap, Smartphone, MousePointer2, ShieldCheck, HelpCircle, FileQuestion, Calculator } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -52,7 +52,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-xl font-medium px-2"
           >
-            Your all-in-one suite for everyday math, finance, and time calculations.
+            Free Online Calculators for Finance, Math, Health, Time & Everyday Calculations
           </motion.p>
 
           {/* Search Bar */}
@@ -88,10 +88,59 @@ export default function Home() {
         </div>
 
         {filteredTools.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredTools.map((tool, idx) => (
-              <ToolCard key={tool.slug} tool={tool} index={idx} />
-            ))}
+          <div className="space-y-12">
+            {[
+              "FINANCE & MONEY CALCULATORS",
+              "STUDENT & EDUCATION CALCULATORS",
+              "DATE & AGE CALCULATORS",
+              "DAILY LIFE CALCULATORS",
+            ].map((category) => {
+              const categoryTools = filteredTools.filter(t => t.category === category);
+              if (categoryTools.length === 0) return null;
+              
+              return (
+                <div key={category} className="space-y-6">
+                  <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 pl-2">
+                    <h3 className="text-xl font-extrabold text-slate-800 tracking-tight">{category}</h3>
+                    <span className="text-xs font-bold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100">
+                      {categoryTools.length}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {categoryTools.map((tool, idx) => (
+                      <ToolCard key={tool.slug} tool={tool} index={idx} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+            
+            {/* Other categories fallback */}
+            {(() => {
+              const otherTools = filteredTools.filter(t => ![
+                "FINANCE & MONEY CALCULATORS",
+                "STUDENT & EDUCATION CALCULATORS",
+                "DATE & AGE CALCULATORS",
+                "DAILY LIFE CALCULATORS",
+              ].includes(t.category));
+              if (otherTools.length === 0) return null;
+              
+              return (
+                <div key="other" className="space-y-6">
+                  <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 pl-2">
+                    <h3 className="text-xl font-extrabold text-slate-800 tracking-tight">OTHER CALCULATORS</h3>
+                    <span className="text-xs font-bold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100">
+                      {otherTools.length}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {otherTools.map((tool, idx) => (
+                      <ToolCard key={tool.slug} tool={tool} index={idx} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         ) : (
           <motion.div 
@@ -106,6 +155,117 @@ export default function Home() {
             <p className="text-slate-500 mt-2">Try searching for something else, like "Percentage" or "Age".</p>
           </motion.div>
         )}
+      </div>
+      {/* Home Page SEO & Info Section */}
+      <div className="mt-16 space-y-8 md:space-y-12">
+        
+        {/* Why Use TopCalcBox */}
+        <section className="bg-white rounded-[2rem] p-8 md:p-12 border border-slate-200 shadow-xl shadow-slate-200/40 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
+          <div className="relative z-10">
+            <div className="inline-flex items-center space-x-2 bg-orange-50 text-orange-600 px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-6 border border-orange-100">
+              <Sparkles className="w-4 h-4" />
+              <span>Why Choose Us</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-6">
+              Why Use TopCalcBox?
+            </h2>
+            <p className="text-lg text-slate-600 leading-relaxed max-w-4xl mb-10">
+              TopCalcBox provides free, fast, and highly accurate online calculators designed to simplify your everyday math and financial decisions. Whether you are calculating percentage changes, retail discounts, loan EMIs, age differences, or profit margins, our intuitive suite of tools delivers instant results without the need for complex formulas or spreadsheets.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { icon: ShieldCheck, title: "100% Free to Use", desc: "No hidden fees, no subscriptions, and completely unrestricted access to all features." },
+                { icon: Zap, title: "Lightning Fast", desc: "Client-side processing ensures your results appear instantly as you type." },
+                { icon: Smartphone, title: "Mobile-Friendly", desc: "Perfectly responsive on all smartphones, tablets, and desktop displays." },
+                { icon: CheckCircle2, title: "Easy to Understand", desc: "Clean, distraction-free interfaces built for absolute simplicity and ease of use." },
+                { icon: MousePointer2, title: "No Sign-up Required", desc: "Instant access with absolute privacy. We do not store or track your data." },
+              ].map((feature, idx) => (
+                <div key={idx} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200 mb-4 text-orange-500">
+                    <feature.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-800 mb-2">{feature.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works & FAQ Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* How Our Calculators Work */}
+          <section className="bg-slate-900 rounded-[2rem] p-8 md:p-12 border border-slate-800 shadow-xl relative overflow-hidden">
+            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+            
+            <div className="relative z-10">
+              <div className="inline-flex items-center space-x-2 bg-white/10 text-blue-300 px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-6 border border-white/10 backdrop-blur-md">
+                <Calculator className="w-4 h-4" />
+                <span>Simple Process</span>
+              </div>
+              <h2 className="text-3xl font-extrabold text-white tracking-tight mb-8">
+                How Our Calculators Work
+              </h2>
+              
+              <div className="space-y-6">
+                {[
+                  { num: "1", title: "Select Your Tool", desc: "Browse our categorized dashboard or use the search bar to find the exact calculator you need." },
+                  { num: "2", title: "Enter Your Values", desc: "Type your numbers into the clearly labeled input fields." },
+                  { num: "3", title: "Choose Options", desc: "Adjust any required units, currencies, or parameters from the dropdown menus." },
+                  { num: "4", title: "Instant Processing", desc: "Our engine calculates the math in real-time as you type." },
+                  { num: "5", title: "Get Your Result", desc: "View your accurate, formatted answers immediately." }
+                ].map((step, idx) => (
+                  <div key={idx} className="flex gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 bg-blue-500/20 border border-blue-400/30 rounded-full flex items-center justify-center text-blue-300 font-extrabold">
+                      {step.num}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-1">{step.title}</h3>
+                      <p className="text-slate-400 text-sm">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Frequently Asked Questions */}
+          <section className="bg-white rounded-[2rem] p-8 md:p-12 border border-slate-200 shadow-xl shadow-slate-200/40 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-slate-100 rounded-full blur-[80px] pointer-events-none" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center space-x-2 bg-slate-100 text-slate-600 px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-6 border border-slate-200">
+                <HelpCircle className="w-4 h-4" />
+                <span>FAQ</span>
+              </div>
+              <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-8">
+                Frequently Asked Questions
+              </h2>
+              
+              <div className="space-y-6">
+                {[
+                  { q: "Are the calculators completely free?", a: "Yes, all calculators on TopCalcBox are 100% free to use for both personal and commercial purposes." },
+                  { q: "Is my data private and secure?", a: "Absolutely. Our calculators run directly in your web browser. Your inputs are never sent to external servers or stored in any database." },
+                  { q: "Can I use TopCalcBox on my mobile phone?", a: "Yes, the entire platform is optimized as a Progressive Web App (PWA). You can even install it on your home screen for offline-like access." },
+                  { q: "How accurate are the financial calculations?", a: "Our financial tools, including the EMI, Margin, and SIP calculators, use industry-standard mathematical formulas to ensure high precision and accuracy up to multiple decimal points." },
+                  { q: "Do I need to create an account?", a: "No account creation or login is ever required. We believe in providing instant, frictionless utility to our users." }
+                ].map((faq, idx) => (
+                  <div key={idx} className="pb-6 border-b border-slate-100 last:border-0 last:pb-0">
+                    <h3 className="text-base font-bold text-slate-800 mb-2 flex items-start gap-2">
+                      <FileQuestion className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                      {faq.q}
+                    </h3>
+                    <p className="text-sm text-slate-500 leading-relaxed pl-7">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+        </div>
       </div>
 
     </div>
