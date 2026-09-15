@@ -14,7 +14,7 @@ export function Footer() {
                 <Calculator className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-extrabold text-slate-800 tracking-tight">
-                ToolZen
+                TopCalcBox
               </span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed mb-8 pr-4">
@@ -42,7 +42,7 @@ export function Footer() {
             <h4 className="text-slate-900 font-bold mb-6 uppercase tracking-wider text-xs">Top Tools</h4>
             <ul className="space-y-4">
               <li><Link href="/percentage-calculator" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Percentage Calc</Link></li>
-              <li><Link href="/age-calculator" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Age Calculator</Link></li>
+              <li><Link href="/age-calculator-online" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Age Calculator</Link></li>
               <li><Link href="/discount-calculator" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Discount Calc</Link></li>
               <li><Link href="/gst-calculator" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">GST Calculator</Link></li>
             </ul>
@@ -82,11 +82,12 @@ export function Footer() {
 
         <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row items-center justify-between">
           <p className="text-sm text-slate-500 font-medium">
-            &copy; {new Date().getFullYear()} ToolZen. All rights reserved.
+            © 2026 TopCalcBox. All Rights Reserved. All calculators are for informational and educational purposes only.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-6 mt-4 md:mt-0 flex-wrap justify-center gap-y-2">
             <Link href="/privacy-policy" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Privacy Policy</Link>
-            <Link href="/terms-of-service" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Terms of Service</Link>
+            <Link href="/terms-and-conditions" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Terms and Conditions</Link>
+            <Link href="/disclaimer" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Disclaimer</Link>
             <Link href="/sitemap.xml" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Sitemap</Link>
           </div>
         </div>

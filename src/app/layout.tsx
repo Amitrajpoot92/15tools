@@ -7,8 +7,8 @@ import { Footer } from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ToolZen - Premium Calculators",
-  description: "A collection of 15 premium calculators and tools.",
+  title: "TopCalcBox - Fast & Accurate Online Calculators",
+  description: "A premium suite of online calculators for everyday mathematics and finance.",
 };
 
 export default function RootLayout({

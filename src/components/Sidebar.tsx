@@ -10,14 +10,14 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 h-screen border-r border-slate-200/60 bg-white/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.02)] hidden md:flex flex-col fixed left-0 top-0 z-50">
-      <div className="h-16 flex items-center px-6 border-b border-slate-100/50">
-        <div className="p-1.5 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg mr-3 shadow-md shadow-orange-500/20">
-          <Calculator className="w-5 h-5 text-white" />
-        </div>
-        <span className="text-xl font-extrabold text-orange-600">
-          ToolZen
-        </span>
+    <aside className="w-64 h-screen bg-white border-r border-slate-200 flex flex-col fixed left-0 top-0 shadow-sm z-50 overflow-hidden">
+      <div className="p-6 border-b border-slate-100 bg-white">
+        <Link href="/" className="flex items-center space-x-3 group">
+          <div className="p-2 bg-orange-500 rounded-lg shadow-sm group-hover:scale-105 transition-transform duration-300">
+            <Calculator className="w-6 h-6 text-white" />
+          </div>
+          <span className="text-xl font-extrabold text-slate-800 tracking-tight">TopCalcBox</span>
+        </Link>
       </div>
       
       <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1 scrollbar-thin scrollbar-thumb-slate-200">
