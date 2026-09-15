@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TOOLS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Calculator, Menu, X } from "lucide-react";
+import { Calculator, Menu, X, Download } from "lucide-react";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -21,12 +21,18 @@ export function Sidebar() {
           </div>
           <span className="font-extrabold text-slate-800 text-lg">TopCalcBox</span>
         </Link>
-        <button 
-          onClick={() => setIsOpen(true)}
-          className="p-2 text-slate-600 hover:bg-slate-100 rounded-md"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+        <div className="flex items-center space-x-2">
+          <button className="flex items-center space-x-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
+            <Download className="w-3.5 h-3.5" />
+            <span>App</span>
+          </button>
+          <button 
+            onClick={() => setIsOpen(true)}
+            className="p-2 text-slate-600 hover:bg-slate-100 rounded-md"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
       </div>
 
       {/* Backdrop for mobile */}
@@ -114,6 +120,14 @@ export function Sidebar() {
             </Link>
           );
         })}
+      </div>
+      
+      {/* Sidebar Footer - Download App */}
+      <div className="p-4 border-t border-slate-100 bg-slate-50/50">
+        <button className="w-full flex items-center justify-center space-x-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 hover:shadow-md transition-all shadow-sm">
+          <Download className="w-4 h-4" />
+          <span>Download App</span>
+        </button>
       </div>
       </aside>
     </>
