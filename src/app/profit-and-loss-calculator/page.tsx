@@ -81,7 +81,7 @@ export default function ProfitLossPage() {
         </blockquote>
         <p><em>Example:</em> You buy a wholesale chair for $40 and sell it for $100. Your profit amount is $100 - $40 = $60. Your profit margin is (60 / 40) × 100 = 150%.</p>
 
-        <h3>2. Calculating Loss (When Cost Price > Selling Price)</h3>
+        <h3>2. Calculating Loss (When Cost Price &gt; Selling Price)</h3>
         <p>If you sell an item for less than it cost you, you have incurred a loss.</p>
         <blockquote>
           <strong>Loss Amount</strong> = Cost Price (CP) - Selling Price (SP) <br />
