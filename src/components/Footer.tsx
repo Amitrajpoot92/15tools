@@ -88,7 +88,6 @@ export function Footer() {
             <Link href="/privacy-policy" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Privacy Policy</Link>
             <Link href="/terms-and-conditions" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Terms and Conditions</Link>
             <Link href="/disclaimer" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Disclaimer</Link>
-            <Link href="/sitemap.xml" className="text-sm text-slate-500 hover:text-orange-600 font-medium transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>
