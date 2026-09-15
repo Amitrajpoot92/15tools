@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TOOLS } from "@/lib/constants";
@@ -10,19 +10,43 @@ import { Calculator, Menu, X, Download } from "lucide-react";
 export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setDeferredPrompt(null);
+      }
+    } else {
+      alert("App installation is already completed or not supported on this device.");
+    }
+  };
 
   return (
     <>
       {/* Mobile Header (Only visible on small screens) */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-40 shadow-sm">
         <Link href="/" className="flex items-center space-x-2">
-          <div className="p-1.5 bg-orange-500 rounded-md">
-            <Calculator className="w-5 h-5 text-white" />
-          </div>
+          <img src="/icon.png" alt="TopCalcBox Logo" className="w-8 h-8 rounded-[8px] shadow-sm" />
           <span className="font-extrabold text-slate-800 text-lg">TopCalcBox</span>
         </Link>
         <div className="flex items-center space-x-2">
-          <button className="flex items-center space-x-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
+          <button onClick={handleInstallClick} className="flex items-center space-x-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
             <Download className="w-3.5 h-3.5" />
             <span>App</span>
           </button>
@@ -52,10 +76,8 @@ export function Sidebar() {
       >
         <div className="p-6 border-b border-slate-100 bg-white flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-3 group" onClick={() => setIsOpen(false)}>
-          <div className="p-2 bg-orange-500 rounded-lg shadow-sm group-hover:scale-105 transition-transform duration-300">
-            <Calculator className="w-6 h-6 text-white" />
-          </div>
-          <span className="text-xl font-extrabold text-slate-800 tracking-tight">TopCalcBox</span>
+            <img src="/icon.png" alt="TopCalcBox Logo" className="w-10 h-10 rounded-xl shadow-sm group-hover:scale-105 transition-transform duration-300" />
+            <span className="text-xl font-extrabold text-slate-800 tracking-tight">TopCalcBox</span>
           </Link>
           <button 
             className="md:hidden p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-md"
@@ -124,7 +146,7 @@ export function Sidebar() {
       
       {/* Sidebar Footer - Download App */}
       <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-        <button className="w-full flex items-center justify-center space-x-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 hover:shadow-md transition-all shadow-sm">
+        <button onClick={handleInstallClick} className="w-full flex items-center justify-center space-x-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 hover:shadow-md transition-all shadow-sm">
           <Download className="w-4 h-4" />
           <span>Download App</span>
         </button>

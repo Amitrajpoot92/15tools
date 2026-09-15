@@ -10,7 +10,28 @@ export const metadata: Metadata = {
 
 export default function GSTCalculatorPage() {
   return (
-    <div className="pb-20">
+    <div className="pb-8">
+
+      {/* Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "GST Calculator",
+            "operatingSystem": "Any",
+            "applicationCategory": "BusinessApplication",
+            "browserRequirements": "Requires JavaScript",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          })
+        }}
+      />
+    
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
         <div className="p-4 bg-rose-50 rounded-full mb-4 border border-rose-100 shadow-sm">

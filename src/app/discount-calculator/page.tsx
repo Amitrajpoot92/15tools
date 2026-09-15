@@ -10,22 +10,50 @@ export const metadata: Metadata = {
 
 export default function DiscountCalculatorPage() {
   return (
-    <div className="pb-20">
-      {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
-        <div className="p-4 bg-amber-50 rounded-full mb-4 border border-amber-100 shadow-sm">
-          <Tag className="w-8 h-8 text-amber-600" />
+    <div className="pb-8">
+
+      {/* Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Discount Calculator",
+            "operatingSystem": "Any",
+            "applicationCategory": "BusinessApplication",
+            "browserRequirements": "Requires JavaScript",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          })
+        }}
+      />
+    
+      {/* Compact Premium Header */}
+      <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between bg-slate-900 rounded-[2rem] p-5 md:p-8 mb-6 mt-2 shadow-xl border border-slate-800 text-center md:text-left overflow-hidden relative">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-500/20 rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+        
+        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-center space-y-4 md:space-y-0 md:space-x-5 w-full">
+          <div className="p-3.5 bg-white/10 rounded-2xl border border-white/10 shadow-sm backdrop-blur-md">
+            <Tag className="w-7 h-7 text-orange-400" />
+          </div>
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1">
+              Discount Calculator
+            </h1>
+            <p className="text-slate-300 text-sm md:text-base max-w-xl font-medium">
+              Find out exactly how much you are saving and the final price you have to pay after a discount is applied.
+            </p>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Discount Calculator
-        </h1>
-        <p className="text-slate-500 max-w-2xl text-lg">
-          Find out exactly how much you are saving and the final price you have to pay after a discount is applied.
-        </p>
       </div>
 
       {/* Interactive Tool */}
-      <div className="max-w-4xl mx-auto mb-16">
+      <div className="max-w-4xl mx-auto mb-10">
         <DiscountCalculator />
       </div>
 

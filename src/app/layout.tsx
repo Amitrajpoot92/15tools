@@ -3,12 +3,30 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
+import { CookieConsent } from "@/components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "TopCalcBox - Fast & Accurate Online Calculators",
   description: "A premium suite of online calculators for everyday mathematics and finance.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "TopCalcBox",
+    title: "TopCalcBox - Fast & Accurate Online Calculators",
+    description: "A premium suite of online calculators for everyday mathematics and finance.",
+    images: [{ url: "https://topcalcbox.com/icon.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TopCalcBox - Fast & Accurate Online Calculators",
+    description: "A premium suite of online calculators for everyday mathematics and finance.",
+    images: ["https://topcalcbox.com/icon.png"],
+  },
 };
 
 export default function RootLayout({
@@ -20,6 +38,22 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-slate-50 text-slate-900 min-h-screen selection:bg-blue-500/20`}>
         <div className="flex h-screen overflow-hidden">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "TopCalcBox",
+                "url": "https://topcalcbox.com",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://topcalcbox.com/search?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              })
+            }}
+          />
           <Sidebar />
           <main className="flex-1 md:ml-64 h-full overflow-y-auto relative flex flex-col bg-white pt-16 md:pt-0">
             {/* Vibrant Colorful Background Glows */}
@@ -37,6 +71,9 @@ export default function RootLayout({
             <div className="relative z-10">
               <Footer />
             </div>
+            
+            {/* AdSense Compliance */}
+            <CookieConsent />
           </main>
         </div>
       </body>

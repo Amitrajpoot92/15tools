@@ -10,7 +10,28 @@ export const metadata: Metadata = {
 
 export default function FuelCostPage() {
   return (
-    <div className="pb-20">
+    <div className="pb-8">
+
+      {/* Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Fuel Cost Calculator",
+            "operatingSystem": "Any",
+            "applicationCategory": "BusinessApplication",
+            "browserRequirements": "Requires JavaScript",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          })
+        }}
+      />
+    
       <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
         <div className="p-4 bg-amber-50 rounded-full mb-4 border border-amber-100 shadow-sm">
           <Fuel className="w-8 h-8 text-amber-600" />

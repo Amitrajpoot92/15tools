@@ -24,7 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/marks-percentage-calculator',
     '/attendance-percentage-calculator',
     '/negative-marking-calculator',
-    '/subscription-cost-calculator'
+    '/subscription-cost-calculator',
+    '/bmi-calculator',
+    '/emi-calculator',
+    '/sip-calculator',
+    '/electricity-bill-calculator',
+    '/calorie-calculator'
   ]
 
   return routes.map((route) => ({

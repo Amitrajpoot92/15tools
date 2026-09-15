@@ -10,7 +10,28 @@ export const metadata: Metadata = {
 
 export default function ProfitLossPage() {
   return (
-    <div className="pb-20">
+    <div className="pb-8">
+
+      {/* Schema Markup for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Profit and Loss Calculator",
+            "operatingSystem": "Any",
+            "applicationCategory": "BusinessApplication",
+            "browserRequirements": "Requires JavaScript",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          })
+        }}
+      />
+    
       <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
         <div className="p-4 bg-orange-50 rounded-full mb-4 border border-orange-100 shadow-sm">
           <TrendingUp className="w-8 h-8 text-orange-600" />

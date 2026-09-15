@@ -1,0 +1,104 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Zap } from "lucide-react";
+
+export function ElectricityBillCalculator() {
+  const [power, setPower] = useState<string>("");
+  const [hours, setHours] = useState<string>("");
+  const [rate, setRate] = useState<string>("");
+
+  const calculateBill = () => {
+    const p = parseFloat(power);
+    const h = parseFloat(hours);
+    const r = parseFloat(rate);
+
+    if (!isNaN(p) && !isNaN(h) && !isNaN(r) && p > 0 && h > 0 && r > 0) {
+      // kWh per day
+      const dailyKwh = (p * h) / 1000;
+      // kWh per month (approx 30 days)
+      const monthlyKwh = dailyKwh * 30;
+      // Monthly Bill
+      const monthlyBill = monthlyKwh * r;
+
+      return {
+        dailyUnits: dailyKwh.toFixed(2),
+        monthlyUnits: monthlyKwh.toFixed(1),
+        monthlyBill: monthlyBill.toFixed(2)
+      };
+    }
+    return { dailyUnits: "0.00", monthlyUnits: "0.0", monthlyBill: "0.00" };
+  };
+
+  const results = calculateBill();
+
+  return (
+    <div className="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-2xl shadow-orange-900/5 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
+      
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700">Appliance Power (Watts)</label>
+            <input
+              type="number"
+              value={power}
+              onChange={(e) => setPower(e.target.value)}
+              placeholder="e.g. 1500 (for AC)"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700">Daily Usage (Hours)</label>
+            <input
+              type="number"
+              value={hours}
+              onChange={(e) => setHours(e.target.value)}
+              placeholder="e.g. 8"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700">Cost per Unit (₹/kWh)</label>
+            <input
+              type="number"
+              value={rate}
+              onChange={(e) => setRate(e.target.value)}
+              placeholder="e.g. 7.5"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl h-full shadow-lg shadow-orange-500/30 border border-orange-400/30 relative overflow-hidden">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          
+          <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
+            <Zap className="w-8 h-8 text-orange-600" />
+          </div>
+          <p className="text-sm text-orange-100 mb-1 uppercase tracking-widest font-bold">Estimated Monthly Bill</p>
+          <motion.div 
+            key={results.monthlyBill}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter drop-shadow-sm mb-6"
+          >
+            ₹{results.monthlyBill}
+          </motion.div>
+          
+          <div className="w-full space-y-3">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20 flex justify-between items-center">
+              <span className="text-orange-100 text-sm font-medium">Daily Consumption</span>
+              <span className="text-white font-bold">{results.dailyUnits} kWh</span>
+            </div>
+            <div className="bg-white/20 backdrop-blur-md rounded-xl p-3 border border-white/30 flex justify-between items-center">
+              <span className="text-orange-100 text-sm font-medium">Monthly Units</span>
+              <span className="text-white font-bold">{results.monthlyUnits} kWh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

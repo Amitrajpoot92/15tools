@@ -13,7 +13,12 @@ import {
   Fuel, 
   GraduationCap, 
   ClipboardCheck, 
-  PieChart 
+  PieChart,
+  Activity,
+  CreditCard,
+  LineChart,
+  Zap,
+  Flame
 } from "lucide-react";
 
 export type Tool = {
@@ -133,5 +138,40 @@ export const TOOLS: Tool[] = [
     description: "Add up all your monthly subscriptions to see your true annual costs.",
     icon: Calculator,
     color: "text-rose-500",
+  },
+  {
+    name: "BMI Calculator",
+    slug: "bmi-calculator",
+    description: "Calculate your Body Mass Index (BMI) to check your health and fitness level.",
+    icon: Activity,
+    color: "text-orange-500",
+  },
+  {
+    name: "EMI Calculator",
+    slug: "emi-calculator",
+    description: "Plan your loans by calculating Equated Monthly Installments and interest.",
+    icon: CreditCard,
+    color: "text-amber-500",
+  },
+  {
+    name: "SIP Calculator",
+    slug: "sip-calculator",
+    description: "Calculate your wealth growth and expected returns for Mutual Fund SIPs.",
+    icon: LineChart,
+    color: "text-rose-500",
+  },
+  {
+    name: "Electricity Bill",
+    slug: "electricity-bill-calculator",
+    description: "Estimate your monthly power consumption cost based on your appliances.",
+    icon: Zap,
+    color: "text-orange-500",
+  },
+  {
+    name: "Calorie Calculator",
+    slug: "calorie-calculator",
+    description: "Determine your daily calorie needs for weight loss, gain, or maintenance.",
+    icon: Flame,
+    color: "text-amber-500",
   },
 ];

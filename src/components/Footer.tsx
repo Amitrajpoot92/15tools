@@ -10,9 +10,7 @@ export function Footer() {
           {/* Brand & Description (4 cols) */}
           <div className="col-span-1 md:col-span-4">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="p-2 bg-orange-500 rounded-lg shadow-sm">
-                <Calculator className="w-6 h-6 text-white" />
-              </div>
+              <img src="/icon.png" alt="TopCalcBox Logo" className="w-10 h-10 rounded-[10px] shadow-sm" />
               <span className="text-2xl font-extrabold text-slate-800 tracking-tight">
                 TopCalcBox
               </span>

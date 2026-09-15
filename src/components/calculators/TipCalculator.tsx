@@ -32,10 +32,10 @@ export function TipCalculator() {
   const result = calculate();
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-10 shadow-2xl shadow-orange-900/5 relative overflow-hidden">
+    <div className="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-2xl shadow-orange-900/5 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Bill Amount ($)</label>
