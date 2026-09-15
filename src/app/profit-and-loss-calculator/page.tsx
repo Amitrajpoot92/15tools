@@ -73,7 +73,7 @@ export default function ProfitLossPage() {
           Understanding the mathematical principles behind profit and loss is fundamental to business literacy. Here are the standard formulas that our digital calculator uses to process your inputs:
         </p>
         
-        <h3>1. Calculating Profit (When Selling Price > Cost Price)</h3>
+        <h3>1. Calculating Profit (When Selling Price &gt; Cost Price)</h3>
         <p>If you sell an item for more than it cost you, you have generated a profit.</p>
         <blockquote>
           <strong>Profit Amount</strong> = Selling Price (SP) - Cost Price (CP) <br />
