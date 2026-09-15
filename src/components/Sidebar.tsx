@@ -1,35 +1,75 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TOOLS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Calculator } from "lucide-react";
+import { Calculator, Menu, X } from "lucide-react";
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <aside className="w-64 h-screen bg-white border-r border-slate-200 flex flex-col fixed left-0 top-0 shadow-sm z-50 overflow-hidden">
-      <div className="p-6 border-b border-slate-100 bg-white">
-        <Link href="/" className="flex items-center space-x-3 group">
+    <>
+      {/* Mobile Header (Only visible on small screens) */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-40 shadow-sm">
+        <Link href="/" className="flex items-center space-x-2">
+          <div className="p-1.5 bg-orange-500 rounded-md">
+            <Calculator className="w-5 h-5 text-white" />
+          </div>
+          <span className="font-extrabold text-slate-800 text-lg">TopCalcBox</span>
+        </Link>
+        <button 
+          onClick={() => setIsOpen(true)}
+          className="p-2 text-slate-600 hover:bg-slate-100 rounded-md"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Backdrop for mobile */}
+      {isOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-slate-900/50 z-40 backdrop-blur-sm" 
+          onClick={() => setIsOpen(false)} 
+        />
+      )}
+
+      {/* Sidebar (Always visible on md, slides in on mobile) */}
+      <aside 
+        className={cn(
+          "w-64 h-screen bg-white border-r border-slate-200 flex flex-col fixed left-0 top-0 shadow-sm z-50 overflow-hidden transition-transform duration-300 ease-in-out",
+          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        )}
+      >
+        <div className="p-6 border-b border-slate-100 bg-white flex justify-between items-center">
+          <Link href="/" className="flex items-center space-x-3 group" onClick={() => setIsOpen(false)}>
           <div className="p-2 bg-orange-500 rounded-lg shadow-sm group-hover:scale-105 transition-transform duration-300">
             <Calculator className="w-6 h-6 text-white" />
           </div>
           <span className="text-xl font-extrabold text-slate-800 tracking-tight">TopCalcBox</span>
-        </Link>
-      </div>
+          </Link>
+          <button 
+            className="md:hidden p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-md"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
       
       <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1 scrollbar-thin scrollbar-thumb-slate-200">
-        <Link
-          href="/"
-          className={cn(
-            "flex items-center px-3 py-2.5 rounded-xl text-sm font-bold transition-all duration-300",
-            pathname === "/"
-              ? "bg-gradient-to-r from-blue-50 to-indigo-50/50 text-blue-700 shadow-sm shadow-blue-900/5 border border-blue-100/50"
-              : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
-          )}
-        >
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className={cn(
+              "flex items-center px-3 py-2.5 rounded-xl text-sm font-bold transition-all duration-300",
+              pathname === "/"
+                ? "bg-gradient-to-r from-blue-50 to-indigo-50/50 text-blue-700 shadow-sm shadow-blue-900/5 border border-blue-100/50"
+                : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+            )}
+          >
           Dashboard
         </Link>
         <div className="pt-5 pb-2">
@@ -52,6 +92,7 @@ export function Sidebar() {
             <Link
               key={tool.slug}
               href={`/${tool.slug}`}
+              onClick={() => setIsOpen(false)}
               style={activeStyle}
               className={cn(
                 "flex items-center px-3 py-2.5 rounded-xl text-sm transition-all duration-300 group border",
@@ -74,6 +115,7 @@ export function Sidebar() {
           );
         })}
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
