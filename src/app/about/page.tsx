@@ -1,45 +1,43 @@
 import type { Metadata } from "next";
-import { SEOContent } from "@/components/SEOContent";
 
 export const metadata: Metadata = {
-  title: "About | TopCalcBox",
+  title: "About Us | TopCalcBox",
 };
 
 export default function Page() {
   return (
-    <div className="pb-8">
-      {/* Compact Premium Header */}
-      <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 mb-8 mt-2 shadow-xl border border-slate-800 text-center overflow-hidden relative">
+    <div className="pb-0 max-w-4xl mx-auto">
+      <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 mb-6 mt-2 shadow-xl border border-slate-800 text-center overflow-hidden relative">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-500/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
         <div className="relative z-10 flex flex-col items-center justify-center">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-            About
-          </h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">About Us</h1>
         </div>
       </div>
-      <SEOContent>
-
-        <h2>Our Mission</h2>
-        <p>
-          Welcome to <strong>TopCalcBox</strong>, your ultimate destination for fast, precise, and completely free online calculators. Our mission is simple: to make everyday mathematics, financial planning, and time calculations effortless for everyone. Whether you are a student solving percentage problems, a professional calculating profit margins, or a shopper figuring out discount rates, we have the perfect tool for you.
-        </p>
-        <p>
-          We realized that most online calculators are cluttered with ads, confusing to use, or require page reloads. We built TopCalcBox to provide a premium, modern, and lightning-fast experience where calculations happen instantly as you type.
-        </p>
-        <h2>Why Choose TopCalcBox?</h2>
-        <ul>
-          <li><strong>100% Free & Accessible:</strong> No subscriptions, no hidden fees, and no sign-ups required.</li>
-          <li><strong>Real-Time Results:</strong> Our calculators are built on modern web technologies ensuring that your answers appear instantly.</li>
-          <li><strong>Privacy First:</strong> Your calculations are performed entirely in your browser. We do not store or send your personal mathematical inputs to our servers.</li>
-          <li><strong>Mobile Optimized:</strong> Use our tools on any device, anywhere. Our responsive design ensures a seamless experience on smartphones, tablets, and desktop computers.</li>
+      <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm text-slate-600 space-y-5 text-sm md:text-base leading-relaxed mb-4">
+        <p>Welcome to <strong>TopCalcBox</strong>, a simple and easy-to-use online calculator website designed to make everyday calculations quick and hassle-free.</p>
+        <p>From managing money and checking percentages to calculating age, dates, marks, shopping costs, fuel expenses, electricity bills, and fitness-related numbers, TopCalcBox brings useful calculators together in one place.</p>
+        
+        <h2 className="text-lg md:text-xl font-bold text-slate-900 mt-6 mb-2">What We Offer</h2>
+        <p>TopCalcBox currently provides 25 practical calculators across different categories:</p>
+        <ul className="list-disc pl-5 space-y-1.5">
+          <li><strong>Finance & Money:</strong> Percentage, Discount, GST, Profit & Loss, Margin, EMI, SIP, and Subscription Cost Calculators</li>
+          <li><strong>Math & Education:</strong> Marks Percentage, Attendance Percentage, Negative Marking, Average, and BODMAS Calculators</li>
+          <li><strong>Date & Age:</strong> Age, Birthday Countdown, Age Difference, and Date Difference Calculators</li>
+          <li><strong>Shopping & Daily Life:</strong> Cost Per Item, Price per Kg, Tip, Fuel Cost, and Electricity Bill Calculators</li>
+          <li><strong>Health & Fitness:</strong> BMI and Calorie Calculators</li>
+          <li><strong>Fun & Lifestyle:</strong> Love Calculator</li>
         </ul>
-        <h2>Who Can Use Our Tools?</h2>
-        <p>
-          Our platform is designed for a diverse audience. Students can use our Marks Percentage and Attendance calculators to track academic progress. Business owners can rely on our Margin and Profit calculators to make informed financial decisions. Everyday users will find immense value in our Age, Date, and Discount calculators for daily tasks.
-        </p>
-
-      </SEOContent>
+        <p>Our goal is to keep every calculator simple, fast, clear, and easy to use, whether you're using a phone, tablet, or computer.</p>
+        
+        <h2 className="text-lg md:text-xl font-bold text-slate-900 mt-6 mb-2">Why TopCalcBox ?</h2>
+        <p>We believe that everyday calculations shouldn't require complicated formulas or lengthy steps. That's why our calculators are designed with a straightforward interface where you can enter your details and get the result quickly.</p>
+        <p>Whether you're a student checking marks or attendance, someone calculating a discount or GST, planning an EMI or SIP, comparing shopping prices, or simply checking your age or birthday countdown, TopCalcBox is built for everyday use.</p>
+        
+        <h2 className="text-lg md:text-xl font-bold text-slate-900 mt-6 mb-2">Our Goal</h2>
+        <p>Our goal is to build a reliable collection of useful online calculators that people can use whenever they need a quick calculation.</p>
+        <p>We are continuously working to improve TopCalcBox and add more helpful tools based on everyday needs.</p>
+        <p>Thank you for visiting TopCalcBox. We hope our calculators make your daily calculations a little easier.</p>
+      </div>
     </div>
   );
 }

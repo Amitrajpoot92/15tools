@@ -76,6 +76,22 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Features Badges */}
+      <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mt-6 mb-8 max-w-5xl mx-auto px-2">
+        {[
+          { icon: ShieldCheck, text: "100% Free to Use" },
+          { icon: MousePointer2, text: "No Sign-Up Required" },
+          { icon: Zap, text: "Lightning Fast" },
+          { icon: Smartphone, text: "Mobile-Friendly" },
+          { icon: CheckCircle2, text: "Easy to Understand" }
+        ].map((feature, idx) => (
+          <div key={idx} className="inline-flex items-center space-x-1.5 bg-white border border-slate-200 text-slate-600 px-3 py-1.5 md:px-4 rounded-full text-[10px] sm:text-xs font-extrabold uppercase tracking-widest shadow-sm hover:border-orange-200 hover:text-orange-600 hover:bg-orange-50 transition-all cursor-default">
+            <feature.icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            <span>{feature.text}</span>
+          </div>
+        ))}
+      </div>
+
       {/* Grid Section */}
       <div>
         <div className="flex items-center justify-between mb-8 px-2">
@@ -174,29 +190,9 @@ export default function Home() {
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
               Why Use TopCalcBox
             </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-4xl mb-8">
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-4xl mb-0">
               TopCalcBox is designed to make everyday calculations simple and convenient. With free calculators for finance, math, education, health, dates, and daily-life needs, you can find the right tool in one place. From percentages, GST, discounts, EMI and SIP to age, BMI and everyday calculations, TopCalcBox helps you get clear results quickly without complicated formulas. Our simple, mobile-friendly tools are easy to use whenever you need them.
             </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { icon: ShieldCheck, title: "100% Free to Use", desc: "No hidden fees, no subscriptions, and free access to all available calculators." },
-                { icon: Zap, title: "Lightning Fast", desc: "Get calculation results instantly as you enter your values." },
-                { icon: Smartphone, title: "Mobile-Friendly", desc: "Use TopCalcBox smoothly on smartphones, tablets, and desktop devices." },
-                { icon: CheckCircle2, title: "Easy to Understand", desc: "Simple, clean interfaces make every calculator easy to use." },
-                { icon: MousePointer2, title: "No Sign-Up Required", desc: "Start calculating instantly without creating an account or logging in." },
-              ].map((feature, idx) => (
-                <div key={idx} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="w-12 h-12 flex-shrink-0 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200 text-orange-500">
-                      <feature.icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-800 leading-tight">{feature.title}</h3>
-                  </div>
-                  <p className="text-sm text-slate-500 leading-relaxed">{feature.desc}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -258,10 +254,8 @@ export default function Home() {
                   { q: "2. Do I need to create an account to use the calculators?", a: "No. You can use the calculators without creating an account or signing in. Simply choose a calculator, enter your values, and get your result." },
                   { q: "3. Can I use TopCalcBox on my mobile phone?", a: "Yes. TopCalcBox is designed to work smoothly on smartphones, tablets, and desktop devices." },
                   { q: "4. How do I choose the right calculator?", a: "Choose a calculator from the relevant category, or use the search option to quickly find the tool you need." },
-                  { q: "5. Are the calculator results accurate?", a: "TopCalcBox uses standard mathematical formulas and calculation methods for its calculators. The result depends on the values and information entered by the user." },
-                  { q: "6. What types of calculators are available on TopCalcBox?", a: "TopCalcBox offers calculators for finance, math, education, date and age, health, and everyday calculations." },
-                  { q: "7. Is my information safe when I use a calculator?", a: "Yes. TopCalcBox is designed with user privacy in mind. Calculator inputs are processed directly in your browser and are not sent to our servers or stored by us. No account or personal information is required to use our calculators." },
-                  { q: "8. Can I install TopCalcBox on my device?", a: "Yes. If your device and browser support installation, you can use the “App” button in the header to install TopCalcBox on your device for quick access from your home screen." }
+                  { q: "5. Is my information safe when I use a calculator?", a: "Yes. TopCalcBox is designed with user privacy in mind. Calculator inputs are processed directly in your browser and are not sent to our servers or stored by us. No account or personal information is required to use our calculators." },
+                  { q: "6. Can I install TopCalcBox on my device?", a: "Yes. If your device and browser support installation, you can use the “App” button in the header to install TopCalcBox on your device for quick access from your home screen." }
                 ].map((faq, idx) => (
                   <div key={idx} className="pb-6 border-b border-slate-100 last:border-0 last:pb-0">
                     <h3 className="text-base font-bold text-slate-800 mb-2 flex items-start gap-2">

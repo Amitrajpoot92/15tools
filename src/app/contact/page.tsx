@@ -1,50 +1,80 @@
 import type { Metadata } from "next";
-import { SEOContent } from "@/components/SEOContent";
-import { Mail } from "lucide-react";
+import { Mail, MessageSquare } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us | TopCalcBox",
-  description: "Get in touch with the TopCalcBox team.",
 };
 
 export default function Page() {
   return (
-    <div className="pb-8">
-      {/* Compact Premium Header */}
-      <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 mb-8 mt-2 shadow-xl border border-slate-800 text-center overflow-hidden relative">
+    <div className="pb-0 max-w-4xl mx-auto">
+      <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 mb-6 mt-2 shadow-xl border border-slate-800 text-center overflow-hidden relative">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-500/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
         <div className="relative z-10 flex flex-col items-center justify-center">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-            Contact Us
-          </h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">Contact Us</h1>
+          <p className="text-orange-200 mt-2 font-medium">We’d Love to Hear From You</p>
         </div>
       </div>
-      <SEOContent>
 
-        <h2>We're Here to Help</h2>
-        <p>
-          At <strong>TopCalcBox</strong>, user satisfaction is our highest priority. Whether you have discovered a bug in one of our mathematical tools, have a suggestion for a brand new calculator, or are interested in a business partnership, we are always eager to hear from you.
-        </p>
-        <p>
-          Your feedback directly shapes the future of our platform. We read every single email and strive to respond to all inquiries within 24 to 48 hours.
-        </p>
-        <div className="mt-10 max-w-md mx-auto">
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 text-center flex flex-col items-center">
-            <div className="p-4 bg-orange-50 rounded-full mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-orange-600"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+        {/* Contact Info */}
+        <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm text-slate-600 flex flex-col">
+          <p className="mb-6 text-sm md:text-base leading-relaxed">Have a question, suggestion, or found something that needs to be fixed on TopCalcBox? Feel free to get in touch with us. Your feedback helps us improve our calculators and make the website more useful and easier to use.</p>
+          
+          <h2 className="text-lg font-bold text-slate-900 mb-3">GET IN TOUCH</h2>
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center gap-4 mb-6">
+            <div className="bg-white p-3 rounded-full text-orange-500 shadow-sm"><Mail className="w-5 h-5"/></div>
+            <div>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-0.5">Email Us</p>
+              <a href="mailto:help.rka@gmail.com" className="text-slate-800 font-bold hover:text-orange-600 transition-colors">help.rka@gmail.com</a>
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-2 !mt-0">Email Us Directly</h2>
-            <p className="text-slate-500 mb-6">
-              Drop us a line anytime. We usually respond within a business day.
-            </p>
-            <a href="mailto:help.rka@gmail.com" className="text-lg text-white font-bold bg-slate-900 px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-md w-full">
-              help.rka@gmail.com
-            </a>
+          </div>
+
+          <h2 className="text-lg font-bold text-slate-900 mb-3">WHAT CAN YOU CONTACT US ABOUT?</h2>
+          <ul className="list-disc pl-5 space-y-1.5 text-sm mb-6">
+            <li>Report a calculator error</li>
+            <li>Suggest a new calculator</li>
+            <li>Share feedback about the website</li>
+            <li>Report a technical problem</li>
+            <li>Ask a question about our calculators</li>
+            <li>Business or partnership enquiries</li>
+          </ul>
+
+          <div className="mt-auto bg-orange-50 p-4 rounded-xl border border-orange-100">
+            <h3 className="font-bold text-orange-800 mb-1">WE’RE HERE TO HELP</h3>
+            <p className="text-xs text-orange-700">We read every genuine message and will try our best to get back to you as soon as possible. Thank you for using TopCalcBox.</p>
           </div>
         </div>
 
-      </SEOContent>
+        {/* Contact Form */}
+        <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm">
+          <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <MessageSquare className="w-5 h-5 text-orange-500" />
+            SEND US A MESSAGE
+          </h2>
+          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Name</label>
+              <input type="text" placeholder="Enter your name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email Address</label>
+              <input type="email" placeholder="Enter your email address" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Subject</label>
+              <input type="text" placeholder="Enter your subject" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Message</label>
+              <textarea placeholder="Write your message here" rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-none"></textarea>
+            </div>
+            <button type="button" className="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-md mt-2">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
