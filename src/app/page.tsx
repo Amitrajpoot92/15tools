@@ -90,10 +90,12 @@ export default function Home() {
         {filteredTools.length > 0 ? (
           <div className="space-y-12">
             {[
-              "FINANCE & MONEY CALCULATORS",
-              "STUDENT & EDUCATION CALCULATORS",
-              "DATE & AGE CALCULATORS",
-              "DAILY LIFE CALCULATORS",
+              "FINANCE & MONEY",
+              "MATH & EDUCATION",
+              "DATE & AGE",
+              "SHOPPING & DAILY LIFE",
+              "HEALTH & FITNESS",
+              "FUN & LIFESTYLE"
             ].map((category) => {
               const categoryTools = filteredTools.filter(t => t.category === category);
               if (categoryTools.length === 0) return null;
@@ -118,10 +120,12 @@ export default function Home() {
             {/* Other categories fallback */}
             {(() => {
               const otherTools = filteredTools.filter(t => ![
-                "FINANCE & MONEY CALCULATORS",
-                "STUDENT & EDUCATION CALCULATORS",
-                "DATE & AGE CALCULATORS",
-                "DAILY LIFE CALCULATORS",
+                "FINANCE & MONEY",
+                "MATH & EDUCATION",
+                "DATE & AGE",
+                "SHOPPING & DAILY LIFE",
+                "HEALTH & FITNESS",
+                "FUN & LIFESTYLE"
               ].includes(t.category));
               if (otherTools.length === 0) return null;
               
@@ -171,22 +175,24 @@ export default function Home() {
               Why Use TopCalcBox?
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed max-w-4xl mb-10">
-              TopCalcBox provides free, fast, and highly accurate online calculators designed to simplify your everyday math and financial decisions. Whether you are calculating percentage changes, retail discounts, loan EMIs, age differences, or profit margins, our intuitive suite of tools delivers instant results without the need for complex formulas or spreadsheets.
+              TopCalcBox is designed to make everyday calculations simple and convenient. With free calculators for finance, math, education, health, dates, and daily-life needs, you can find the right tool in one place. From percentages, GST, discounts, EMI and SIP to age, BMI and everyday calculations, TopCalcBox helps you get clear results quickly without complicated formulas. Our simple, mobile-friendly tools are easy to use whenever you need them.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: ShieldCheck, title: "100% Free to Use", desc: "No hidden fees, no subscriptions, and completely unrestricted access to all features." },
-                { icon: Zap, title: "Lightning Fast", desc: "Client-side processing ensures your results appear instantly as you type." },
-                { icon: Smartphone, title: "Mobile-Friendly", desc: "Perfectly responsive on all smartphones, tablets, and desktop displays." },
-                { icon: CheckCircle2, title: "Easy to Understand", desc: "Clean, distraction-free interfaces built for absolute simplicity and ease of use." },
-                { icon: MousePointer2, title: "No Sign-up Required", desc: "Instant access with absolute privacy. We do not store or track your data." },
+                { icon: ShieldCheck, title: "100% Free to Use", desc: "No hidden fees, no subscriptions, and free access to all available calculators." },
+                { icon: Zap, title: "Lightning Fast", desc: "Get calculation results instantly as you enter your values." },
+                { icon: Smartphone, title: "Mobile-Friendly", desc: "Use TopCalcBox smoothly on smartphones, tablets, and desktop devices." },
+                { icon: CheckCircle2, title: "Easy to Understand", desc: "Simple, clean interfaces make every calculator easy to use." },
+                { icon: MousePointer2, title: "No Sign-Up Required", desc: "Start calculating instantly without creating an account or logging in." },
               ].map((feature, idx) => (
                 <div key={idx} className="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200 mb-4 text-orange-500">
-                    <feature.icon className="w-6 h-6" />
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-12 h-12 flex-shrink-0 bg-white rounded-xl flex items-center justify-center shadow-sm border border-slate-200 text-orange-500">
+                      <feature.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-800 leading-tight">{feature.title}</h3>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-800 mb-2">{feature.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{feature.desc}</p>
                 </div>
               ))}
@@ -207,17 +213,18 @@ export default function Home() {
                 <Calculator className="w-4 h-4" />
                 <span>Simple Process</span>
               </div>
-              <h2 className="text-3xl font-extrabold text-white tracking-tight mb-8">
+              <h2 className="text-3xl font-extrabold text-white tracking-tight mb-4">
                 How Our Calculators Work
               </h2>
+              <p className="text-slate-300 text-sm md:text-base mb-8 font-medium">
+                Calculate your results in just three simple steps.
+              </p>
               
               <div className="space-y-6">
                 {[
-                  { num: "1", title: "Select Your Tool", desc: "Browse our categorized dashboard or use the search bar to find the exact calculator you need." },
-                  { num: "2", title: "Enter Your Values", desc: "Type your numbers into the clearly labeled input fields." },
-                  { num: "3", title: "Choose Options", desc: "Adjust any required units, currencies, or parameters from the dropdown menus." },
-                  { num: "4", title: "Instant Processing", desc: "Our engine calculates the math in real-time as you type." },
-                  { num: "5", title: "Get Your Result", desc: "View your accurate, formatted answers immediately." }
+                  { num: "1", title: "Choose Your Calculator", desc: "Select the calculator that matches what you need to calculate." },
+                  { num: "2", title: "Enter Your Values", desc: "Enter your numbers and details in the clearly labeled fields." },
+                  { num: "3", title: "Get Your Result", desc: "Your result is calculated instantly and displayed in an easy-to-understand format." }
                 ].map((step, idx) => (
                   <div key={idx} className="flex gap-4">
                     <div className="flex-shrink-0 w-10 h-10 bg-blue-500/20 border border-blue-400/30 rounded-full flex items-center justify-center text-blue-300 font-extrabold">
@@ -247,11 +254,14 @@ export default function Home() {
               
               <div className="space-y-6">
                 {[
-                  { q: "Are the calculators completely free?", a: "Yes, all calculators on TopCalcBox are 100% free to use for both personal and commercial purposes." },
-                  { q: "Is my data private and secure?", a: "Absolutely. Our calculators run directly in your web browser. Your inputs are never sent to external servers or stored in any database." },
-                  { q: "Can I use TopCalcBox on my mobile phone?", a: "Yes, the entire platform is optimized as a Progressive Web App (PWA). You can even install it on your home screen for offline-like access." },
-                  { q: "How accurate are the financial calculations?", a: "Our financial tools, including the EMI, Margin, and SIP calculators, use industry-standard mathematical formulas to ensure high precision and accuracy up to multiple decimal points." },
-                  { q: "Do I need to create an account?", a: "No account creation or login is ever required. We believe in providing instant, frictionless utility to our users." }
+                  { q: "1. Are all TopCalcBox calculators free to use?", a: "Yes. All calculators available on TopCalcBox are free to use. No subscription or payment is required to use the available calculation tools." },
+                  { q: "2. Do I need to create an account to use the calculators?", a: "No. You can use the calculators without creating an account or signing in. Simply choose a calculator, enter your values, and get your result." },
+                  { q: "3. Can I use TopCalcBox on my mobile phone?", a: "Yes. TopCalcBox is designed to work smoothly on smartphones, tablets, and desktop devices." },
+                  { q: "4. How do I choose the right calculator?", a: "Choose a calculator from the relevant category, or use the search option to quickly find the tool you need." },
+                  { q: "5. Are the calculator results accurate?", a: "TopCalcBox uses standard mathematical formulas and calculation methods for its calculators. The result depends on the values and information entered by the user." },
+                  { q: "6. What types of calculators are available on TopCalcBox?", a: "TopCalcBox offers calculators for finance, math, education, date and age, health, and everyday calculations." },
+                  { q: "7. Is my information safe when I use a calculator?", a: "Yes. TopCalcBox is designed with user privacy in mind. Calculator inputs are processed directly in your browser and are not sent to our servers or stored by us. No account or personal information is required to use our calculators." },
+                  { q: "8. Can I install TopCalcBox on my device?", a: "Yes. If your device and browser support installation, you can use the “App” button in the header to install TopCalcBox on your device for quick access from your home screen." }
                 ].map((faq, idx) => (
                   <div key={idx} className="pb-6 border-b border-slate-100 last:border-0 last:pb-0">
                     <h3 className="text-base font-bold text-slate-800 mb-2 flex items-start gap-2">
