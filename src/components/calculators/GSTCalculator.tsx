@@ -1,121 +1,194 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Receipt } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Receipt, Copy, RotateCcw, Check } from "lucide-react";
+
+type GSTMode = "add" | "remove";
+type StateType = "intra" | "inter";
 
 export function GSTCalculator() {
-  const [amount, setAmount] = useState<string>("");
-  const [rate, setRate] = useState<string>("18");
-  const [gstType, setGstType] = useState<"exclusive" | "inclusive">("exclusive");
+  const [mode, setMode] = useState<GSTMode>("add");
+  const [amount, setAmount] = useState("1000");
+  const [rate, setRate] = useState("18");
+  const [stateType, setStateType] = useState<StateType>("intra");
+  const [copied, setCopied] = useState(false);
 
-  const calculateGST = () => {
-    const a = parseFloat(amount);
-    const r = parseFloat(rate);
-    
-    if (!isNaN(a) && !isNaN(r)) {
-      if (gstType === "exclusive") {
-        const gstAmount = (a * r) / 100;
-        const total = a + gstAmount;
-        return {
-          gst: gstAmount.toFixed(2),
-          total: total.toFixed(2),
-          net: a.toFixed(2),
-        };
-      } else {
-        const gstAmount = a - (a * (100 / (100 + r)));
-        const net = a - gstAmount;
-        return {
-          gst: gstAmount.toFixed(2),
-          total: a.toFixed(2),
-          net: net.toFixed(2),
-        };
-      }
+  const calculate = () => {
+    const a = parseFloat(amount) || 0;
+    const r = parseFloat(rate) || 0;
+
+    let net = 0;
+    let gst = 0;
+    let total = 0;
+
+    if (mode === "add") {
+      net = a;
+      gst = (a * r) / 100;
+      total = a + gst;
+    } else {
+      total = a;
+      gst = a - (a * (100 / (100 + r)));
+      net = a - gst;
     }
-    return { gst: "0.00", total: "0.00", net: "0.00" };
+
+    const cgst = gst / 2;
+    const sgst = gst / 2;
+    const igst = gst;
+
+    return {
+      net: net.toFixed(2).replace(/\.00$/, ''),
+      gst: gst.toFixed(2).replace(/\.00$/, ''),
+      total: total.toFixed(2).replace(/\.00$/, ''),
+      cgst: cgst.toFixed(2).replace(/\.00$/, ''),
+      sgst: sgst.toFixed(2).replace(/\.00$/, ''),
+      igst: igst.toFixed(2).replace(/\.00$/, ''),
+    };
   };
 
-  const result = calculateGST();
+  const res = calculate();
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const reset = () => {
+    setAmount("");
+    setRate("18");
+    setStateType("intra");
+    setMode("add");
+  };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-2xl shadow-rose-900/5 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
-      
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <div className="space-y-6">
-          
-          <div className="flex bg-slate-100/50 border border-slate-200 rounded-xl p-1 shadow-inner">
-            <button
-              onClick={() => setGstType("exclusive")}
-              className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${
-                gstType === "exclusive" ? "bg-white text-rose-700 shadow-sm border border-slate-200" : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              Add GST (Exclusive)
-            </button>
-            <button
-              onClick={() => setGstType("inclusive")}
-              className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${
-                gstType === "inclusive" ? "bg-white text-rose-700 shadow-sm border border-slate-200" : "text-slate-500 hover:text-slate-900"
-              }`}
-            >
-              Remove GST (Inclusive)
-            </button>
-          </div>
+    <div className="bg-white rounded-[2rem] p-4 md:p-8 shadow-sm border border-slate-200">
+      {/* Tabs */}
+      <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-2 gap-1 mb-8">
+        <button
+          onClick={() => setMode("add")}
+          className={`py-3 px-3 rounded-xl text-sm font-bold transition-all ${mode === "add" ? "bg-white text-violet-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+        >
+          Add GST (+)
+        </button>
+        <button
+          onClick={() => setMode("remove")}
+          className={`py-3 px-3 rounded-xl text-sm font-bold transition-all ${mode === "remove" ? "bg-white text-violet-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+        >
+          Remove GST (-)
+        </button>
+      </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700">Amount ($)</label>
-            <input
-              type="number"
-              value={amount}
+      <div className="space-y-6">
+        {/* Amount */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            {mode === "add" ? "Net Amount (₹)" : "Total Amount (₹)"}
+          </label>
+          <div className="relative">
+            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-xl text-slate-400 font-bold">₹</span>
+            <input 
+              type="number" 
+              value={amount} 
               onChange={(e) => setAmount(e.target.value)}
-              placeholder="e.g. 1000"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-inner"
+              className="w-full text-2xl font-bold bg-white border border-slate-200 rounded-2xl pl-12 pr-5 py-4 focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 transition-all"
             />
-          </div>
-          
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700">GST Rate (%)</label>
-            <select
-              value={rate}
-              onChange={(e) => setRate(e.target.value)}
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all appearance-none shadow-inner"
-            >
-              <option value="5">5%</option>
-              <option value="12">12%</option>
-              <option value="18">18%</option>
-              <option value="28">28%</option>
-            </select>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl h-full min-h-[200px] shadow-lg shadow-rose-500/30 border border-rose-400/30 relative overflow-hidden">
-          {/* Subtle top inner glow for a premium 3D bevel effect */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          
-          <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
-            <Receipt className="w-8 h-8 text-rose-600" />
+        {/* GST Rate */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">GST Rate (%)</label>
+          <div className="relative">
+            <input 
+              type="number" 
+              value={rate} 
+              onChange={(e) => setRate(e.target.value)}
+              className="w-full text-xl font-bold bg-white border border-slate-200 rounded-2xl px-5 py-3.5 focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 transition-all pr-12"
+            />
+            <span className="absolute right-5 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">%</span>
+          </div>
+          <div className="flex flex-wrap gap-2 pt-2">
+            {[5, 12, 18, 28].map(v => (
+              <button key={v} onClick={() => setRate(v.toString())} className="px-4 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-bold rounded-lg transition-colors">
+                {v}%
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* State Type Radio */}
+        <div className="pt-2">
+          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3">GST Type</label>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <label className="flex items-center gap-3 cursor-pointer group">
+              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${stateType === "intra" ? "border-violet-500" : "border-slate-300 group-hover:border-slate-400"}`}>
+                {stateType === "intra" && <div className="w-2.5 h-2.5 bg-violet-500 rounded-full" />}
+              </div>
+              <span className="text-slate-700 font-medium">Intra-State (CGST + SGST)</span>
+            </label>
+            <label className="flex items-center gap-3 cursor-pointer group">
+              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${stateType === "inter" ? "border-violet-500" : "border-slate-300 group-hover:border-slate-400"}`}>
+                {stateType === "inter" && <div className="w-2.5 h-2.5 bg-violet-500 rounded-full" />}
+              </div>
+              <span className="text-slate-700 font-medium">Inter-State (IGST)</span>
+            </label>
+          </div>
+        </div>
+
+        {/* Result Box */}
+        <div className="bg-[#f5f3ff] border border-violet-100 rounded-[2rem] p-6 md:p-8 mt-8 relative overflow-hidden">
+          <div className="flex items-center justify-between mb-6">
+            <span className="flex items-center gap-1.5 text-sm font-bold text-violet-900/60">
+              <Receipt className="w-4 h-4" />
+              {mode === "add" ? "Total Price (Incl. GST)" : "Net Price (Excl. GST)"}
+            </span>
+            <div className="flex items-center gap-2">
+              <button onClick={() => copyToClipboard(`₹${mode === "add" ? res.total : res.net}`)} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-violet-200 rounded-lg text-sm font-bold text-violet-700 hover:bg-violet-50 transition-colors shadow-sm">
+                {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                {copied ? "Copied" : "Copy"}
+              </button>
+              <button onClick={reset} className="p-1.5 text-violet-400 hover:text-violet-600 transition-colors">
+                <RotateCcw className="w-5 h-5" />
+              </button>
+            </div>
           </div>
           
-          <p className="text-sm text-rose-100 uppercase tracking-widest font-bold mb-1">Total Price</p>
-          <motion.div 
-            key={result.total}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-sm"
-          >
-            ${result.total}
-          </motion.div>
-
-          <div className="w-full border-t border-rose-400/50 my-2" />
-
-          <div className="w-full flex justify-between text-sm mt-2">
-            <span className="text-rose-100 font-medium">Net Amount:</span>
-            <span className="text-white font-bold">${result.net}</span>
+          <div className="flex items-baseline mb-8">
+            <span className="text-3xl font-bold text-violet-950 mr-1">₹</span>
+            <span className="text-5xl md:text-6xl font-extrabold tracking-tight text-violet-950">
+              {mode === "add" ? res.total : res.net}
+            </span>
           </div>
-          <div className="w-full flex justify-between text-sm mt-1">
-            <span className="text-rose-100 font-medium">GST Amount:</span>
-            <span className="text-white font-bold">+${result.gst}</span>
+          
+          <div className="space-y-3 pt-4 border-t border-violet-200/50">
+            <div className="flex justify-between items-center text-sm">
+              <span className="font-bold text-violet-900/60">Net Amount</span>
+              <span className="font-bold text-violet-900">₹{res.net}</span>
+            </div>
+            
+            {stateType === "intra" ? (
+              <>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-bold text-violet-900/60">CGST ({(parseFloat(rate)/2) || 0}%)</span>
+                  <span className="font-bold text-violet-900">+₹{res.cgst}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="font-bold text-violet-900/60">SGST ({(parseFloat(rate)/2) || 0}%)</span>
+                  <span className="font-bold text-violet-900">+₹{res.sgst}</span>
+                </div>
+              </>
+            ) : (
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-bold text-violet-900/60">IGST ({rate || 0}%)</span>
+                <span className="font-bold text-violet-900">+₹{res.igst}</span>
+              </div>
+            )}
+            
+            <div className="flex justify-between items-center text-sm pt-2 border-t border-violet-200/50">
+              <span className="font-bold text-violet-900/80">Total Amount</span>
+              <span className="font-bold text-violet-900">₹{res.total}</span>
+            </div>
           </div>
         </div>
       </div>
