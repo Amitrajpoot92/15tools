@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-slate-200 bg-slate-50 mt-20 pt-16 pb-8">
+    <footer className="w-full border-t border-slate-200 bg-slate-50 mt-0 pt-10 pb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="mb-16 max-w-2xl">
           {/* Brand & Description */}
