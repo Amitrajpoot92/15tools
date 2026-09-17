@@ -52,7 +52,7 @@ export default function Page() {
             <MessageSquare className="w-5 h-5 text-orange-500" />
             SEND US A MESSAGE
           </h2>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Name</label>
               <input type="text" placeholder="Enter your name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
