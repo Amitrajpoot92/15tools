@@ -34,7 +34,7 @@ export default function Home() {
             className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-1.5 rounded-full text-orange-200 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 md:mb-5 shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
-            <span>TopCalcBox Premium</span>
+            <span>FREE CALCULATOR TOOLS</span>
           </motion.div>
           
           <motion.h1 
