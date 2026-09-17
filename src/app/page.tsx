@@ -164,17 +164,17 @@ export default function Home() {
       <div className="mt-16 space-y-8 md:space-y-12">
         
         {/* Why Use TopCalcBox */}
-        <section className="bg-white rounded-[2rem] p-8 md:p-12 border border-slate-200 shadow-xl shadow-slate-200/40 relative overflow-hidden">
+        <section className="bg-white rounded-[2rem] p-6 md:p-8 border border-slate-200 shadow-xl shadow-slate-200/40 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
           <div className="relative z-10">
-            <div className="inline-flex items-center space-x-2 bg-orange-50 text-orange-600 px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-6 border border-orange-100">
+            <div className="inline-flex items-center space-x-2 bg-orange-50 text-orange-600 px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-4 border border-orange-100">
               <Sparkles className="w-4 h-4" />
               <span>Why Choose Us</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-6">
-              Why Use TopCalcBox?
+            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
+              Why Use TopCalcBox
             </h2>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-4xl mb-10">
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-4xl mb-8">
               TopCalcBox is designed to make everyday calculations simple and convenient. With free calculators for finance, math, education, health, dates, and daily-life needs, you can find the right tool in one place. From percentages, GST, discounts, EMI and SIP to age, BMI and everyday calculations, TopCalcBox helps you get clear results quickly without complicated formulas. Our simple, mobile-friendly tools are easy to use whenever you need them.
             </p>
             
