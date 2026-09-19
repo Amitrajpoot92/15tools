@@ -62,20 +62,20 @@ export function GSTCalculator() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200">
+    <div className="w-full">
       {/* Tabs */}
       <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-2 gap-1 mb-5">
         <button
           onClick={() => setMode("add")}
           className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "add" ? "bg-white text-violet-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
         >
-          Add GST (+)
+          Exclusive GST (Add GST)
         </button>
         <button
           onClick={() => setMode("remove")}
           className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "remove" ? "bg-white text-violet-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
         >
-          Remove GST (-)
+          Inclusive GST (Remove GST)
         </button>
       </div>
 

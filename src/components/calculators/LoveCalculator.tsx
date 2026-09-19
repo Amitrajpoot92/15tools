@@ -43,7 +43,7 @@ export function LoveCalculator() {
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-5 md:p-6 shadow-2xl shadow-rose-900/5 relative overflow-hidden">
+    <div className="w-full md: relative overflow-hidden">
       {/* Premium Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       

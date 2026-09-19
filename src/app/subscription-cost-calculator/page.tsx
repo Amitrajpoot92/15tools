@@ -31,24 +31,31 @@ export default function SubscriptionCostPage() {
           })
         }}
       />
+
     
-      <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
-        <div className="p-4 bg-rose-50 rounded-full mb-4 border border-rose-100 shadow-sm">
-          <Calculator className="w-8 h-8 text-rose-600" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-sky-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-sky-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-sky-600 rounded-2xl shadow-sm shadow-sky-600/20">
+            <Calculator className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-sky-600 uppercase tracking-wider mb-1">SUBSCRIPTION COST</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Subscription Cost Calculator
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Add up all your digital subscriptions to see your true monthly and yearly expenses.
+            </p>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Subscription Cost Calculator
-        </h1>
-        <p className="text-slate-500 max-w-2xl text-lg">
-          Add up all your digital subscriptions to see your true monthly and yearly expenses.
-        </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <SubscriptionCostCalculator />
+        </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-16">
-        <SubscriptionCostCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is a Subscription Cost Calculator?</h2>
         <p>

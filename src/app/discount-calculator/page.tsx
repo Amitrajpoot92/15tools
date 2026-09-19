@@ -31,29 +31,31 @@ export default function DiscountCalculatorPage() {
           })
         }}
       />
+
     
-      {/* Ultra Compact Header */}
-      <div className="flex items-center gap-4 md:gap-6 bg-blue-50/50 rounded-2xl p-4 md:p-6 mb-6 mt-2 border border-blue-100/50">
-        <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl shadow-sm shadow-blue-600/20">
-          <Tag className="w-8 h-8 text-white" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-emerald-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-emerald-600 rounded-2xl shadow-sm shadow-emerald-600/20">
+            <Tag className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">DISCOUNT</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Discount Calculator
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Find out exactly how much you are saving and the final price you have to pay after a discount is applied.
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">DISCOUNT CALCULATOR</h2>
-          <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-            Discount Calculator
-          </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Find out exactly how much you are saving and the final price you have to pay after a discount is applied.
-          </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <DiscountCalculator />
         </div>
       </div>
 
-      {/* Interactive Tool */}
-      <div className="max-w-4xl mx-auto mb-10">
-        <DiscountCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is a Discount Calculator?</h2>
         <p>
@@ -124,19 +126,34 @@ export default function DiscountCalculatorPage() {
         </p>
 
         <h3>5. How do I figure out the discount percentage if I only know the old and new price?</h3>
+        <h3>1. How do I calculate a discount?</h3>
+        <p>Multiply the original price by the discount percentage and divide by 100. Then subtract the discount amount from the original price to get the final price.</p>
+
+        <h3>2. Can I calculate a flat discount?</h3>
+        <p>Yes. You can calculate a fixed or flat discount by subtracting the discount amount from the original price.<br/>Example: ₹2,000 − ₹300 flat discount = ₹1,700.</p>
+
+        <h3>3. How much money will I save with a discount?</h3>
+        <p>Your savings depend on the discount percentage or flat discount you enter. The calculator shows the discount amount and final price, making it easy to see your total savings.</p>
+
+        <h3>4. Can I use a discount calculator for online shopping?</h3>
+        <p>Yes. You can use it to calculate sale prices, percentage discounts, flat discounts, coupon offers and final payable amounts before making a purchase.</p>
+
+        <h3>5. Is a 20% discount followed by a 10% discount equal to 30% off?</h3>
         <p>
-          If you know the item was $100 and is now $80, and you want to know what the percentage off is, you can use our standard Percentage Calculator tool. The formula is: ((Original Price - New Price) / Original Price) × 100.
+          No. Two discounts applied one after another are not equal to a 30% discount. The second discount is calculated on the price after the first discount.
+        </p>
+        <p>
+          For example, ₹1,000 after a 20% discount becomes ₹800. A further 10% discount on ₹800 is ₹80, making the final price ₹720. The total saving is ₹280, which is equal to a 28% discount.
         </p>
 
         <h2>Related Calculators</h2>
-        <p>
-          Maximize your financial literacy and shopping efficiency by checking out our other related calculators:
-        </p>
         <ul>
-          <li><a href="/percentage-calculator" className="text-amber-600 hover:underline">Percentage Calculator</a> - Solve any general percentage problem, find ratios, or calculate percentage increases and decreases.</li>
-          <li><a href="/gst-calculator" className="text-amber-600 hover:underline">GST Calculator</a> - Add or remove sales tax from your final discounted purchase price.</li>
-          <li><a href="/profit-and-loss-calculator" className="text-amber-600 hover:underline">Profit and Loss Calculator</a> - For business owners wanting to ensure their promotional discounts don't result in a net loss.</li>
-          <li><a href="/margin-calculator" className="text-amber-600 hover:underline">Margin Calculator</a> - Determine your exact retail margins before applying storewide discounts.</li>
+          <li><a href="/percentage-calculator" className="text-emerald-600 hover:underline">Percentage Calculator</a></li>
+          <li><a href="/margin-calculator" className="text-emerald-600 hover:underline">Margin Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-emerald-600 hover:underline">Profit & Loss Calculator</a></li>
+          <li><a href="/cost-per-item-calculator" className="text-emerald-600 hover:underline">Cost Per Item Calculator</a></li>
+          <li><a href="/gst-calculator" className="text-emerald-600 hover:underline">GST Calculator</a></li>
+          <li><a href="/emi-calculator" className="text-emerald-600 hover:underline">EMI Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

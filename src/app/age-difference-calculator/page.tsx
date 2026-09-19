@@ -31,24 +31,31 @@ export default function AgeDifferencePage() {
           })
         }}
       />
+
     
-      <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
-        <div className="p-4 bg-amber-50 rounded-full mb-4 border border-amber-100 shadow-sm">
-          <Clock className="w-8 h-8 text-amber-600" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-fuchsia-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-fuchsia-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-fuchsia-600 rounded-2xl shadow-sm shadow-fuchsia-600/20">
+            <Clock className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-fuchsia-600 uppercase tracking-wider mb-1">AGE DIFFERENCE</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Age Difference Calculator
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Easily calculate the exact age gap between two people in years, months, and days.
+            </p>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Age Difference Calculator
-        </h1>
-        <p className="text-slate-500 max-w-2xl text-lg">
-          Easily calculate the exact age gap between two people in years, months, and days.
-        </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <AgeDifferenceCalculator />
+        </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-16">
-        <AgeDifferenceCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is an Age Difference Calculator?</h2>
         <p>

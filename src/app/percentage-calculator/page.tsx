@@ -31,120 +31,130 @@ export default function PercentageCalculatorPage() {
           })
         }}
       />
+
     
-      {/* Ultra Compact Header */}
-      <div className="flex items-center gap-4 md:gap-6 bg-blue-50/50 rounded-2xl p-4 md:p-6 mb-6 mt-2 border border-blue-100/50">
-        <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl shadow-sm shadow-blue-600/20">
-          <Percent className="w-8 h-8 text-white" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-blue-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-blue-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl shadow-sm shadow-blue-600/20">
+            <Percent className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">PERCENTAGE</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Percentage Calculator
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Calculate a percentage of any number, find percentage increases or decreases, and work out the percentage difference between values.
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">PERCENTAGE CALCULATOR</h2>
-          <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-            Percentage Calculator
-          </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Calculate a percentage of any number, find percentage increases or decreases, and work out the percentage difference between values.
-          </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <PercentageCalculator />
         </div>
       </div>
 
-      {/* Interactive Tool */}
-      <div className="max-w-4xl mx-auto mb-10">
-        <PercentageCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
-        <h2>What is a Percentage Calculator?</h2>
+        <h2>What is Percentage Calculator?</h2>
         <p>
-          A <strong>percentage calculator</strong> is an essential, everyday mathematical tool designed to help you solve complex and straightforward percentage-related problems instantly. In mathematics, a percentage is a number or ratio expressed as a fraction of 100. The term "percent" is derived from the Latin word <em>per centum</em>, meaning "by a hundred." Whether you need to figure out what percentage one number is of another, calculate a percentage increase or decrease, or determine the final price after a store discount, our comprehensive tool provides fast, error-free, and highly accurate results right in your web browser.
+          Percentage Calculator is a simple online tool that helps you calculate percentages quickly and accurately. Whether you want to find what percentage of a number, calculate what percentage one number is of another, or check the percentage increase or decrease, this calculator can give you the result instantly.
         </p>
         <p>
-          At <strong>TopCalcBox</strong>, we have built this percentage calculator to be completely free, lightweight, and incredibly fast. You don't need to download any software or possess advanced mathematical knowledge. Our calculator bridges the gap between complex numerical analysis and everyday usability, making it perfect for students, teachers, business owners, and everyday shoppers who want to make informed financial decisions.
+          Percentage is used in many situations in daily life. Students use percentages to calculate exam marks, businesses use them to calculate discounts and profits, and shoppers use them to understand price reductions. Percentages are also useful for comparing numbers, calculating salary increases, checking expenses and understanding financial calculations.
         </p>
-        
-        <h2>How to Use the Percentage Calculator</h2>
         <p>
-          Using the TopCalcBox Percentage Calculator is intuitively simple. We have designed the user interface to deliver real-time results as you type, eliminating the need for clunky "Calculate" buttons or page refreshes. Follow these simple steps:
-        </p>
-        <ul>
-          <li><strong>Step 1: Identify your known values.</strong> Determine the partial value (the part) and the total value (the whole).</li>
-          <li><strong>Step 2: Enter the partial value.</strong> Type this number into the first input field labeled "Value."</li>
-          <li><strong>Step 3: Enter the total value.</strong> Type the whole amount into the second input field labeled "Total Value."</li>
-          <li><strong>Step 4: View your results instantly.</strong> The calculator will immediately process your inputs and display the exact percentage in large, easy-to-read text.</li>
-        </ul>
-        <p>
-          If you make a mistake or need to perform a new calculation, simply backspace and type your new numbers. The dynamic engine powering TopCalcBox will update the mathematical output in milliseconds.
+          With this online percentage calculator, you do not need to remember complicated calculations. Enter your numbers, choose the type of percentage calculation you need, and get the result instantly.
         </p>
 
-        <h2>Calculation Formula: The Math Behind the Magic</h2>
+        <h2>How to Use Percentage Calculator</h2>
         <p>
-          While our online percentage calculator does all the heavy lifting for you, it is always helpful to understand the underlying mathematics. The standard mathematical formula for calculating a percentage is remarkably straightforward:
-        </p>
-        <blockquote>
-          <strong>Percentage = (Part / Whole) × 100</strong>
-        </blockquote>
-        <p>
-          To break this down:
+          Using our Percentage Calculator is quick and easy. Choose the type of calculation, enter your values, and get the result instantly.
         </p>
         <ol>
-          <li>First, you divide the partial value (the part) by the total value (the whole). This division gives you a decimal representation of the fraction.</li>
-          <li>Second, you multiply that resulting decimal by 100. This converts the decimal into a recognizable percentage format.</li>
-          <li>Finally, you add the percent sign (%) to signify that the number is out of 100.</li>
+          <li><strong>Choose a calculation:</strong> Select from What is X% of Y?, X is what % of Y?, or % Change (Increase/Decrease).</li>
+          <li><strong>Enter the values:</strong> Add the numbers required for your selected calculation.</li>
+          <li><strong>Get your result:</strong> Your percentage is calculated and displayed instantly.</li>
+          <li><strong>Copy or reset:</strong> Copy the result or reset the calculator for a new calculation.</li>
         </ol>
         <p>
-          <strong>Example Calculation:</strong> Imagine you are a student who just received the results of a final examination. You scored 45 marks out of a total possible 60 marks. To find your percentage grade, you would divide 45 by 60, resulting in 0.75. Then, multiply 0.75 by 100, which gives you exactly 75. Therefore, you scored a <strong>75%</strong> on your examination.
+          Example: To calculate 15% of 100, enter 15 and 100. The answer is 15.
         </p>
 
-        <h2>Common Uses / Who Can Use It</h2>
+        <h2>Percentage Calculation Formula</h2>
         <p>
-          Percentages are the universal language of comparison, growth, and finance. Because they normalize data to a base of 100, they are incredibly versatile. Here are some of the most common applications for the TopCalcBox Percentage Calculator:
+          Our Percentage Calculator supports three common types of percentage calculations. Here are the formulas with simple examples:
+        </p>
+        
+        <h3>1. What is X% of Y?</h3>
+        <p>
+          <strong>Formula:</strong> Result = (X ÷ 100) × Y<br/>
+          <strong>Example:</strong> 20% of 500 = (20 ÷ 100) × 500 = 100
+        </p>
+
+        <h3>2. X is What % of Y?</h3>
+        <p>
+          <strong>Formula:</strong> Percentage = (X ÷ Y) × 100<br/>
+          <strong>Example:</strong> 50 is what % of 200? (50 ÷ 200) × 100 = 25%
+        </p>
+
+        <h3>3. Percentage Change (Increase/Decrease)</h3>
+        <p>
+          <strong>Formula:</strong> Percentage Change = [(New Value − Original Value) ÷ Original Value] × 100
+        </p>
+        <p>
+          <strong>Example:</strong><br/>
+          Original Value = 500<br/>
+          New Value = 600<br/>
+          [(600 − 500) ÷ 500] × 100 = 20% increase
+        </p>
+        <p>
+          These three formulas cover the most common percentage calculations used in everyday life.
+        </p>
+
+        <h2>Who Can Use a Percentage Calculator?</h2>
+        <p>
+          A Percentage Calculator is useful for many everyday calculations. Depending on the type of calculation, you can use it for:
         </p>
         <ul>
-          <li><strong>Students and Educators:</strong> Converting test scores, quiz marks, and final grades into standardized percentages for report cards and GPA calculations.</li>
-          <li><strong>Shoppers and Deal Hunters:</strong> Calculating the exact amount of money saved during seasonal sales, Black Friday events, or clearance discounts. (If a $150 jacket is 20% off, how much do you pay?)</li>
-          <li><strong>Business Owners and Entrepreneurs:</strong> Determining profit margins, calculating quarter-over-quarter revenue growth, or evaluating the percentage of market share captured by a new product.</li>
-          <li><strong>Finance and Banking:</strong> Calculating compound interest, determining the Annual Percentage Rate (APR) on credit cards, or understanding the exact monetary value of a mortgage interest rate.</li>
-          <li><strong>Chefs and Bakers:</strong> Utilizing baker's percentages to scale complex recipes up or down based on the weight of the flour.</li>
-          <li><strong>Health and Fitness Enthusiasts:</strong> Tracking body fat percentages, calculating target heart rate zones as a percentage of maximum heart rate, or measuring daily macronutrient intake.</li>
+          <li><strong>What is X% of Y?</strong> — Useful for calculating discounts, GST/tax amounts, tips, commissions, profits and a percentage of any number.</li>
+          <li><strong>X is What % of Y?</strong> — Useful for calculating exam marks, attendance, sales targets, completion rates and comparing one value with another.</li>
+          <li><strong>Percentage Change</strong> — Useful for checking price increases or decreases, salary changes, sales growth, expenses and other changes between two values.</li>
         </ul>
+        <p>
+          Whether you are a student, teacher, shopper, employee, business owner or general user, the calculator can help you solve percentage calculations quickly.
+        </p>
 
         <h2>Frequently Asked Questions (FAQ)</h2>
         
-        <h3>1. Are the calculations performed securely?</h3>
-        <p>
-          Yes, absolutely. The TopCalcBox Percentage Calculator is entirely client-side. This means that all mathematical calculations are performed directly within your web browser. We do not store, track, or send your numerical inputs to any external servers, ensuring complete privacy and immediate results.
-        </p>
+        <h3>1. What is a percentage calculator?</h3>
+        <p>A percentage calculator is an online tool that helps you quickly calculate percentages, find a percentage of a number, and calculate percentage increases or decreases.</p>
 
-        <h3>2. What is the difference between percentage increase and percentage decrease?</h3>
-        <p>
-          A percentage increase measures how much a value has grown compared to its original starting point (e.g., a stock price rising from $100 to $120 is a 20% increase). Conversely, a percentage decrease measures how much a value has shrunk (e.g., a car depreciating in value).
-        </p>
+        <h3>2. How do I calculate a percentage of a number?</h3>
+        <p>Use the formula (Percentage ÷ 100) × Number. For example, 20% of 500 is 100.</p>
 
-        <h3>3. Can this tool handle decimals and fractions?</h3>
-        <p>
-          Yes, our calculator is engineered to accept decimal inputs and will output highly precise decimal percentages (e.g., 33.33%). It can easily handle fractional values to give you granular accuracy.
-        </p>
+        <h3>3. How do I find what percentage one number is of another?</h3>
+        <p>Use (Part ÷ Total) × 100. For example, 50 is 25% of 200.</p>
 
-        <h3>4. How do I calculate a 15% tip at a restaurant?</h3>
-        <p>
-          To manually calculate a 15% tip, you multiply your total bill by 0.15. For example, on a $40 bill, you would multiply 40 by 0.15 to get a $6 tip. Alternatively, you can use our specialized Tip Calculator linked below.
-        </p>
+        <h3>4. How do I calculate percentage increase or decrease?</h3>
+        <p>Enter the original value and new value in the percentage change calculator. It will show the percentage increase or decrease.</p>
 
-        <h3>5. Is this percentage calculator free to use?</h3>
-        <p>
-          Yes, the TopCalcBox Percentage Calculator, along with our entire suite of financial and mathematical tools, is 100% free to use for both personal and commercial purposes.
-        </p>
+        <h3>5. Can I use this percentage calculator for exam marks?</h3>
+        <p>Yes. You can calculate your exam percentage by entering your obtained marks and total marks.</p>
+
+        <h3>6. Can I calculate discounts with a percentage calculator?</h3>
+        <p>Yes. You can use it to find the percentage amount of a product price, such as calculating 10%, 20%, or 50% of a price.</p>
 
         <h2>Related Calculators</h2>
-        <p>
-          If you found this tool useful, you might also benefit from exploring our other specialized calculators designed to make your life easier:
-        </p>
         <ul>
-          <li><a href="/discount-calculator" className="text-orange-600 hover:underline">Discount Calculator</a> - Quickly calculate the final price of an item after applying a sale percentage.</li>
-          <li><a href="/marks-percentage-calculator" className="text-orange-600 hover:underline">Marks Percentage Calculator</a> - Specifically tailored for students to find their exact academic grades.</li>
-          <li><a href="/margin-calculator" className="text-orange-600 hover:underline">Margin Calculator</a> - Determine the selling price, retail cost, and exact profit margin for your business products.</li>
-          <li><a href="/tip-calculator" className="text-orange-600 hover:underline">Tip Calculator</a> - Split the bill fairly and calculate the perfect gratuity percentage in seconds.</li>
+          <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
+          <li><a href="/marks-percentage-calculator" className="text-blue-600 hover:underline">Marks Percentage Calculator</a></li>
+          <li><a href="/margin-calculator" className="text-blue-600 hover:underline">Margin Calculator</a></li>
+          <li><a href="/tip-calculator" className="text-blue-600 hover:underline">Tip Calculator</a></li>
+          <li><a href="/gst-calculator" className="text-blue-600 hover:underline">GST Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit & Loss Calculator</a></li>
+          <li><a href="/attendance-percentage-calculator" className="text-blue-600 hover:underline">Attendance Percentage Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

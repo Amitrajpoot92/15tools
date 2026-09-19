@@ -31,24 +31,31 @@ export default function AttendancePage() {
           })
         }}
       />
+
     
-      <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
-        <div className="p-4 bg-orange-50 rounded-full mb-4 border border-orange-100 shadow-sm">
-          <ClipboardCheck className="w-8 h-8 text-orange-600" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-sky-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-sky-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-sky-600 rounded-2xl shadow-sm shadow-sky-600/20">
+            <ClipboardCheck className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-sky-600 uppercase tracking-wider mb-1">ATTENDANCE PERCENTAGE</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Attendance Percentage Calculator
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Calculate your current attendance percentage and see how many classes you need to attend or can afford to skip.
+            </p>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Attendance Percentage Calculator
-        </h1>
-        <p className="text-slate-500 max-w-2xl text-lg">
-          Calculate your current attendance percentage and see how many classes you need to attend or can afford to skip.
-        </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <AttendanceCalculator />
+        </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-16">
-        <AttendanceCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is an Attendance Percentage Calculator?</h2>
         <p>

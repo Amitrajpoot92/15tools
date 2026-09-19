@@ -4,8 +4,8 @@ import { SEOContent } from "@/components/SEOContent";
 import { PieChart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Margin Calculator - Calculate Retail Prices & Gross Profit | TopCalcBox",
-  description: "Free online margin calculator to find your selling price, gross profit, and markup based on your cost and desired margin.",
+  title: "Wholesale Price Calculator - Calculate Retail Prices & Gross Profit | TopCalcBox",
+  description: "Free online wholesale price calculator to find your selling price, gross profit, and markup based on your cost and desired margin.",
 };
 
 export default function MarginPage() {
@@ -19,7 +19,7 @@ export default function MarginPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Margin Calculator",
+            "name": "Wholesale Price Calculator",
             "operatingSystem": "Any",
             "applicationCategory": "BusinessApplication",
             "browserRequirements": "Requires JavaScript",
@@ -31,24 +31,31 @@ export default function MarginPage() {
           })
         }}
       />
+
     
-      <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
-        <div className="p-4 bg-amber-50 rounded-full mb-4 border border-amber-100 shadow-sm">
-          <PieChart className="w-8 h-8 text-amber-600" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-cyan-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-cyan-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-cyan-600 rounded-2xl shadow-sm shadow-cyan-600/20">
+            <PieChart className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-cyan-600 uppercase tracking-wider mb-1">WHOLESALE PRICE</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Wholesale Price Calculator
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Find out exactly what your selling price should be to achieve your desired profit margin.
+            </p>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Margin Calculator
-        </h1>
-        <p className="text-slate-500 max-w-2xl text-lg">
-          Find out exactly what your selling price should be to achieve your desired profit margin.
-        </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <MarginCalculator />
+        </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-16">
-        <MarginCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is a Margin Calculator?</h2>
         <p>

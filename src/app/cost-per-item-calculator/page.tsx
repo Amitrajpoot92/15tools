@@ -29,33 +29,31 @@ export default function CostPerItemCalculatorPage() {
           })
         }}
       />
+
     
-      {/* Compact Premium Header */}
-      <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between bg-slate-900 rounded-[2rem] p-5 md:p-8 mb-6 mt-2 shadow-xl border border-slate-800 text-center md:text-left overflow-hidden relative">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-rose-500/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
-        
-        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-center space-y-4 md:space-y-0 md:space-x-5 w-full">
-          <div className="p-3.5 bg-white/10 rounded-2xl border border-white/10 shadow-sm backdrop-blur-md">
-            <ShoppingCart className="w-7 h-7 text-rose-400" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-emerald-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-emerald-600 rounded-2xl shadow-sm shadow-emerald-600/20">
+            <ShoppingCart className="w-8 h-8 text-white" />
           </div>
-          <div className="flex-1">
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1">
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">COST PER ITEM</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
               Cost Per Item Calculator
             </h1>
-            <p className="text-slate-300 text-sm md:text-base max-w-xl font-medium">
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
               Calculate the true price of a single unit when buying in bulk or packs.
             </p>
           </div>
         </div>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <CostPerItemCalculator />
+        </div>
       </div>
 
-      {/* Interactive Tool */}
-      <div className="max-w-4xl mx-auto mb-10">
-        <CostPerItemCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is a Cost Per Item Calculator?</h2>
         <p>

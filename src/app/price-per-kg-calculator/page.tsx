@@ -29,33 +29,31 @@ export default function PricePerKgCalculatorPage() {
           })
         }}
       />
+
     
-      {/* Compact Premium Header */}
-      <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between bg-slate-900 rounded-[2rem] p-5 md:p-8 mb-6 mt-2 shadow-xl border border-slate-800 text-center md:text-left overflow-hidden relative">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-amber-500/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
-        
-        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-center space-y-4 md:space-y-0 md:space-x-5 w-full">
-          <div className="p-3.5 bg-white/10 rounded-2xl border border-white/10 shadow-sm backdrop-blur-md">
-            <Scale className="w-7 h-7 text-amber-400" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-green-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-green-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-green-600 rounded-2xl shadow-sm shadow-green-600/20">
+            <Scale className="w-8 h-8 text-white" />
           </div>
-          <div className="flex-1">
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1">
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-green-600 uppercase tracking-wider mb-1">PRICE PER KG</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
               Price per Kg Calculator
             </h1>
-            <p className="text-slate-300 text-sm md:text-base max-w-xl font-medium">
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
               Calculate the true cost of items per kilogram to make the smartest grocery shopping decisions.
             </p>
           </div>
         </div>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <PricePerKgCalculator />
+        </div>
       </div>
 
-      {/* Interactive Tool */}
-      <div className="max-w-4xl mx-auto mb-10">
-        <PricePerKgCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is a Price per Kg Calculator?</h2>
         <p>

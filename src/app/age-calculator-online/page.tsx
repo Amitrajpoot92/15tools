@@ -31,24 +31,31 @@ export default function AgeCalculatorPage() {
           })
         }}
       />
+
     
-      <div className="flex flex-col items-center justify-center text-center mb-10 mt-6">
-        <div className="p-4 bg-rose-50 rounded-full mb-4 border border-rose-100 shadow-sm">
-          <CalendarDays className="w-8 h-8 text-rose-600" />
+      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+        {/* Ultra Compact Header */}
+        <div className="flex items-center gap-4 md:gap-6 bg-purple-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-purple-100/50">
+          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-purple-600 rounded-2xl shadow-sm shadow-purple-600/20">
+            <CalendarDays className="w-8 h-8 text-white" />
+          </div>
+          <div>
+            <h2 className="text-[10px] md:text-xs font-bold text-purple-600 uppercase tracking-wider mb-1">AGE</h2>
+            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Age Calculator Online
+            </h1>
+            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+              Find your exact age in years, months, and days based on your date of birth.
+            </p>
+          </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Age Calculator Online
-        </h1>
-        <p className="text-slate-500 max-w-2xl text-lg">
-          Find your exact age in years, months, and days based on your date of birth.
-        </p>
+
+        {/* Interactive Tool */}
+        <div className="w-full">
+          <AgeCalculator />
+        </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-16">
-        <AgeCalculator />
-      </div>
-
-      {/* SEO Content Section */}
       <SEOContent>
         <h2>What is an Age Calculator Online?</h2>
         <p>

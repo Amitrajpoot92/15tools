@@ -80,7 +80,7 @@ export function PercentageCalculator() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200">
+    <div className="w-full">
       {/* Tabs */}
       <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-1 sm:grid-cols-3 gap-1 mb-5">
         <button
