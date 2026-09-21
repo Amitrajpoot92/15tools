@@ -35,12 +35,13 @@ export default function DiscountCalculatorPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-emerald-50 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-200">
-          <h1 className="text-xl md:text-2xl font-extrabold text-emerald-800 tracking-tight mb-2">
+        <div className="flex flex-col items-start text-left bg-[#f2fdf7] rounded-2xl p-4 md:p-6 mb-6 border border-[#e2f7ec]">
+          <h2 className="text-[10px] md:text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">DISCOUNT</h2>
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
             Discount Calculator
           </h1>
-          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Find out exactly how much you are saving and the final price you have to pay after a discount is applied.
+          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Calculate your savings and final price after applying a discount.
           </p>
         </div>
 
@@ -143,7 +144,7 @@ export default function DiscountCalculatorPage() {
         <h2>Related Calculators</h2>
         <ul>
           <li><a href="/percentage-calculator" className="text-emerald-600 hover:underline">Percentage Calculator</a></li>
-          <li><a href="/margin-calculator" className="text-emerald-600 hover:underline">Margin Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-emerald-600 hover:underline">Wholesale Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-emerald-600 hover:underline">Profit & Loss Calculator</a></li>
           <li><a href="/cost-per-item-calculator" className="text-emerald-600 hover:underline">Cost Per Item Calculator</a></li>
           <li><a href="/gst-calculator" className="text-emerald-600 hover:underline">GST Calculator</a></li>

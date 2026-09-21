@@ -2,13 +2,26 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, DollarSign, IndianRupee } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, IndianRupee, Copy, RotateCcw, Check } from "lucide-react";
 
 export function ProfitLossCalculator() {
   const [costPrice, setCostPrice] = useState<string>("");
   const [sellingPrice, setSellingPrice] = useState<string>("");
   const [expenses, setExpenses] = useState<string>("");
   const [currency, setCurrency] = useState<"₹" | "$">("₹");
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const reset = () => {
+    setCostPrice("");
+    setSellingPrice("");
+    setExpenses("");
+  };
 
   const calculate = () => {
     const cp = parseFloat(costPrice) || 0;
@@ -38,107 +51,135 @@ export function ProfitLossCalculator() {
       
       {/* Currency Toggle */}
       <div className="flex justify-end mb-4">
-        <div className="bg-slate-100 p-1 rounded-lg flex items-center">
-          <button 
-            onClick={() => setCurrency("₹")}
-            className={`p-1.5 rounded-md transition-all ${currency === "₹" ? "bg-white shadow-sm text-emerald-600" : "text-slate-900 hover:text-slate-700"}`}
-          >
-            <IndianRupee className="w-4 h-4" />
-          </button>
+        <div className="bg-slate-50 border border-slate-100 p-1 rounded-lg flex items-center shadow-sm">
           <button 
             onClick={() => setCurrency("$")}
-            className={`p-1.5 rounded-md transition-all ${currency === "$" ? "bg-white shadow-sm text-emerald-600" : "text-slate-900 hover:text-slate-700"}`}
+            className={`px-3 py-1.5 rounded-md transition-all font-bold text-sm ${currency === "$" ? "bg-white shadow-sm text-emerald-700" : "text-slate-500 hover:text-slate-700"}`}
           >
             <DollarSign className="w-4 h-4" />
+          </button>
+          <button 
+            onClick={() => setCurrency("₹")}
+            className={`px-3 py-1.5 rounded-md transition-all font-bold text-sm ${currency === "₹" ? "bg-white shadow-sm text-emerald-700" : "text-slate-500 hover:text-slate-700"}`}
+          >
+            <IndianRupee className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        <div className="space-y-4">
+      <div className="relative z-10 flex flex-col gap-6 items-start w-full">
+        <div className="w-full space-y-5">
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 flex justify-between">
+            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
               Cost Price (CP)
-              <span className="text-slate-800 font-medium">{currency}</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currency}</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">{currency}</span>
               <input
                 type="number"
                 value={costPrice}
                 onChange={(e) => setCostPrice(e.target.value)}
-                placeholder="e.g. 500"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
+                placeholder="500"
+                className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all text-xl font-bold"
               />
             </div>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 flex justify-between">
+            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
               Selling Price (SP)
-              <span className="text-slate-800 font-medium">{currency}</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currency}</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">{currency}</span>
               <input
                 type="number"
                 value={sellingPrice}
                 onChange={(e) => setSellingPrice(e.target.value)}
-                placeholder="e.g. 700"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
+                placeholder="600"
+                className={`w-full bg-white border rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all text-xl font-bold ${sellingPrice ? 'border-emerald-400' : 'border-slate-200'}`}
               />
             </div>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 flex justify-between">
-              Other Costs / Expenses
-              <span className="text-slate-800 font-medium">{currency}</span>
+            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+              Other Costs / Expenses <span className="text-slate-400 font-medium normal-case">(Optional)</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currency}</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">{currency}</span>
               <input
                 type="number"
                 value={expenses}
                 onChange={(e) => setExpenses(e.target.value)}
                 placeholder="e.g. 50"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
+                className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all text-xl font-bold"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-emerald-50 rounded-2xl h-full min-h-[250px] border border-emerald-200 relative overflow-hidden">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          
-          <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
-            {result.type === "loss" ? (
-              <TrendingDown className="w-8 h-8 text-rose-500" />
-            ) : (
-              <TrendingUp className="w-8 h-8 text-emerald-600" />
-            )}
+        <div className="w-full bg-white border border-[#e2f7ec] rounded-2xl p-5 md:p-6 mt-1 relative overflow-hidden h-full flex flex-col justify-between shadow-sm">
+          <div className="flex items-start justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className={`p-2.5 rounded-xl ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
+                {result.type === 'loss' ? <TrendingDown className="w-5 h-5" strokeWidth={3} /> : <Check className="w-5 h-5" strokeWidth={3} />}
+              </div>
+              <div>
+                <p className={`text-[13px] font-bold uppercase tracking-wider ${result.type === 'loss' ? 'text-rose-700' : 'text-emerald-700'}`}>
+                  {result.type === 'loss' ? 'Loss' : 'Profit'}
+                </p>
+                <p className="text-[11px] text-slate-500 font-medium mt-0.5">
+                  {result.type === 'loss' ? 'Your selling price is below total cost' : 'Your selling price is above total cost'}
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 ml-2">
+              <button onClick={() => copyToClipboard(`Total Cost: ${currency}${result.totalCost} | Selling Price: ${currency}${parseFloat(sellingPrice)||0} | ${result.type === 'loss' ? 'Total Loss' : 'Total Profit'}: ${currency}${result.amount}`)} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold text-emerald-700 hover:bg-emerald-50 transition-colors shadow-sm">
+                <span className="inline">Copy</span>
+              </button>
+              <button onClick={reset} className="p-1.5 bg-white border border-slate-200 rounded-lg text-emerald-700 hover:bg-emerald-50 transition-colors shadow-sm">
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
           
-          <p className="text-sm text-emerald-100 uppercase tracking-widest font-bold mb-1">
-            {result.type === "loss" ? "Total Loss" : "Total Profit"}
-          </p>
-          
-          <motion.div 
-            key={result.amount}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm flex items-center"
-          >
-            <span className="text-3xl opacity-80 mr-1">{currency}</span>
-            {result.amount}
-          </motion.div>
-
-          <div className="w-full grid grid-cols-2 gap-2 mt-2 pt-4 border-t border-emerald-400/50">
-            <div className="text-center">
-              <p className="text-[10px] text-emerald-200 uppercase tracking-wider mb-0.5">Total Cost</p>
-              <p className="text-sm text-slate-900 font-bold">{currency}{result.totalCost}</p>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                {result.type === 'loss' ? 'Total Loss' : 'Total Profit'}
+              </p>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-baseline">
+                  <span className="text-2xl font-bold text-[#064e3b] mr-1">{currency}</span>
+                  <span className="text-5xl font-extrabold text-[#064e3b] tracking-tight">{result.amount}</span>
+                </div>
+                {result.amount !== "0.00" && (
+                  <span className={`self-start px-3 py-1 rounded-md text-[11px] font-bold ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
+                    {result.type === 'loss' ? 'Loss' : 'Profit'}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="text-center border-l border-emerald-400/50">
-              <p className="text-[10px] text-emerald-200 uppercase tracking-wider mb-0.5">Margin</p>
-              <p className="text-sm text-slate-900 font-bold">{result.margin}%</p>
+            
+            <div className="text-right bg-[#f2fdf7] px-4 py-3 rounded-xl border border-[#e2f7ec]">
+              <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                {result.type === 'loss' ? 'Loss on Cost' : 'Profit on Cost'}
+              </p>
+              <p className="text-xl font-bold text-[#064e3b]">{result.margin}%</p>
+            </div>
+          </div>
+
+          <div className="space-y-3 pt-5 border-t border-slate-100">
+            <div className="flex justify-between items-center text-[13px]">
+              <span className="font-medium text-slate-500">Total Cost</span>
+              <span className="font-bold text-slate-800">{currency}{result.totalCost}</span>
+            </div>
+            <div className="flex justify-between items-center text-[13px]">
+              <span className="font-medium text-slate-500">Selling Price</span>
+              <span className="font-bold text-slate-800">{currency}{parseFloat(sellingPrice) || 0}</span>
+            </div>
+            <div className="flex justify-between items-center text-[13px]">
+              <span className="font-medium text-slate-500">Other Costs</span>
+              <span className="font-bold text-slate-800">{currency}{parseFloat(expenses) || 0}</span>
             </div>
           </div>
         </div>

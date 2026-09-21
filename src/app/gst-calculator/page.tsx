@@ -35,12 +35,13 @@ export default function GSTCalculatorPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-orange-50 rounded-2xl p-4 md:p-6 mb-6 border border-orange-200">
-          <h1 className="text-xl md:text-2xl font-extrabold text-orange-800 tracking-tight mb-2">
+        <div className="flex flex-col items-start text-left bg-[#fffdf5] rounded-2xl p-4 md:p-6 mb-6 border border-[#faedd6]">
+          <h2 className="text-[10px] md:text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">GST</h2>
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
             GST Calculator
           </h1>
-          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Add or remove GST from your prices instantly. See the net amount, GST amount, and total price broken down clearly.
+          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Add or remove GST from your price and see the GST amount and final price instantly.
           </p>
         </div>
 
@@ -141,7 +142,7 @@ export default function GSTCalculatorPage() {
         </p>
         <ul>
           <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a> - Determine your exact gross profit and net loss margins after tax deductions.</li>
-          <li><a href="/margin-calculator" className="text-rose-600 hover:underline">Margin Calculator</a> - Find out what your base selling price should be to maintain a healthy profit margin.</li>
+          <li><a href="/wholesale-calculator" className="text-rose-600 hover:underline">Wholesale Calculator</a> - Find out what your base selling price should be to maintain a healthy profit margin.</li>
           <li><a href="/percentage-calculator" className="text-rose-600 hover:underline">Percentage Calculator</a> - The standard tool for calculating general numerical ratios and growth metrics.</li>
           <li><a href="/discount-calculator" className="text-rose-600 hover:underline">Discount Calculator</a> - Calculate sale prices before applying the final GST to the customer's cart.</li>
         </ul>

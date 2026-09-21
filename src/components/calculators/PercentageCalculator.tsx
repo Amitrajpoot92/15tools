@@ -99,7 +99,7 @@ export function PercentageCalculator() {
           onClick={() => setMode("percentage_change")}
           className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "percentage_change" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
         >
-          % Change (Inc/Dec)
+          % Change
         </button>
       </div>
 
@@ -144,11 +144,11 @@ export function PercentageCalculator() {
           {mode === "percentage_change" && (
             <motion.div key="change" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Initial Value (From)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Original Value</label>
                 <input type="number" value={changeX} onChange={(e)=>setChangeX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Final Value (To)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">New Value</label>
                 <input type="number" value={changeY} onChange={(e)=>setChangeY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>

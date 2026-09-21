@@ -35,12 +35,13 @@ export default function ProfitLossPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-emerald-50 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-200">
-          <h1 className="text-xl md:text-2xl font-extrabold text-emerald-800 tracking-tight mb-2">
+        <div className="flex flex-col items-start text-left bg-[#f2fdf7] rounded-2xl p-4 md:p-6 mb-6 border border-[#e2f7ec]">
+          <h2 className="text-[10px] md:text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">PROFIT AND LOSS</h2>
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
             Profit & Loss Calculator
           </h1>
-          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Determine your profit margins, gross profit, and total loss instantly. Enter your cost and selling prices below.
+          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Calculate your profit or loss, total cost, and profit on cost from your selling price.
           </p>
         </div>
 
@@ -134,7 +135,7 @@ export default function ProfitLossPage() {
           To gain a holistic view of your business's financial health, we highly recommend utilizing our other enterprise-grade calculators:
         </p>
         <ul>
-          <li><a href="/margin-calculator" className="text-orange-600 hover:underline">Margin Calculator</a> - specifically tailored for retail markups, helping you set the perfect selling price based on your desired percentage margin.</li>
+          <li><a href="/wholesale-calculator" className="text-orange-600 hover:underline">Wholesale Calculator</a> - specifically tailored for retail markups, helping you set the perfect selling price based on your desired percentage margin.</li>
           <li><a href="/discount-calculator" className="text-orange-600 hover:underline">Discount Calculator</a> - Calculate how running a storewide sale will impact your final selling price (and subsequently, your profit).</li>
           <li><a href="/gst-calculator" className="text-orange-600 hover:underline">GST Calculator</a> - Accurately extract sales tax from your gross revenue to find your true net sales.</li>
           <li><a href="/percentage-calculator" className="text-orange-600 hover:underline">Percentage Calculator</a> - Measure your month-over-month or year-over-year business growth as a percentage.</li>

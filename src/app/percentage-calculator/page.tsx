@@ -144,7 +144,7 @@ export default function PercentageCalculatorPage() {
         <ul>
           <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/marks-percentage-calculator" className="text-blue-600 hover:underline">Marks Percentage Calculator</a></li>
-          <li><a href="/margin-calculator" className="text-blue-600 hover:underline">Margin Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-blue-600 hover:underline">Wholesale Calculator</a></li>
           <li><a href="/tip-calculator" className="text-blue-600 hover:underline">Tip Calculator</a></li>
           <li><a href="/gst-calculator" className="text-blue-600 hover:underline">GST Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit & Loss Calculator</a></li>
