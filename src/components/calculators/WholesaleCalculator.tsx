@@ -133,7 +133,7 @@ export function WholesaleCalculator() {
           </div>
         </div>
         
-        <div className="bg-amber-200/60 rounded-xl p-4 md:p-5 border border-amber-300 mb-5">
+        <div className="bg-amber-200 rounded-xl p-4 md:p-5 border border-amber-300 mb-5">
           <p className="text-[10px] uppercase font-bold text-[#b45309] mb-1 tracking-wider">Wholesale Price Per Unit</p>
           <div className="flex items-baseline mb-5">
             <span className="text-2xl font-bold text-[#78350f] mr-1">{currency}</span>

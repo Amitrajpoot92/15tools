@@ -156,7 +156,7 @@ export function PercentageCalculator() {
         </AnimatePresence>
 
         {/* Result Box */}
-        <div className="bg-blue-200/60 border border-blue-300 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden">
+        <div className="bg-blue-100 border border-blue-300 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold text-slate-900">{result.text}</span>
             <div className="flex items-center gap-1.5">

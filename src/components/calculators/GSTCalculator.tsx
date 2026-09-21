@@ -155,7 +155,7 @@ export function GSTCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="bg-[#f7f5fb] border border-[#eee8f7] rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden">
+        <div className="bg-purple-100 border border-purple-300 rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
             <span className="flex items-center gap-2 text-[13px] font-bold text-purple-700">
               <Receipt className="w-4 h-4 text-emerald-400/80" />
@@ -178,12 +178,12 @@ export function GSTCalculator() {
                 ₹{mode === "add" ? res.total : res.net}
               </span>
             </div>
-            <div className="px-2.5 py-1 bg-[#f3e8ff] border border-purple-100 rounded-md font-bold text-[10px] text-purple-700 tracking-wider">
+            <div className="px-2.5 py-1 bg-purple-200 border border-purple-300 rounded-md font-bold text-[10px] text-purple-800 tracking-wider">
               {rate}% GST {mode === "add" ? "Included" : "Excluded"}
             </div>
           </div>
           
-          <div className="space-y-3 pt-4 border-t border-[#eee8f7]">
+          <div className="space-y-3 pt-4 border-t border-purple-300">
             <div className="flex justify-between items-center text-xs">
               <span className="text-purple-700/80">Net Amount</span>
               <span className="font-bold text-purple-700">₹{res.net}</span>

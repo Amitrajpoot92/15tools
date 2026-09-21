@@ -35,7 +35,7 @@ export default function PercentageCalculatorPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-blue-100/60 rounded-2xl p-4 md:p-6 mb-6 border border-blue-200">
+        <div className="flex flex-col items-center text-center bg-blue-100 rounded-2xl p-4 md:p-6 mb-6 border border-blue-300">
           <h1 className="text-xl md:text-2xl font-extrabold text-blue-900 tracking-tight mb-2">
             Percentage Calculator
           </h1>

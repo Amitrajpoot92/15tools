@@ -168,7 +168,7 @@ export function DiscountCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="bg-[#f0fbf4] border border-[#d1f4df] rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden">
+        <div className="bg-emerald-100 border border-emerald-300 rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
             <span className="flex items-center gap-1.5 text-[13px] font-bold text-emerald-700">
               <Tag className="w-4 h-4 text-emerald-600/70" />
@@ -192,13 +192,13 @@ export function DiscountCalculator() {
               </span>
             </div>
             {parseFloat(res.savePercent) > 0 && (
-              <div className="px-2.5 py-1 bg-[#c5f2d6] text-[#065f46] rounded-md font-bold text-xs">
+              <div className="px-2.5 py-1 bg-emerald-200 text-emerald-800 rounded-md font-bold text-xs">
                 Save {res.savePercent}%
               </div>
             )}
           </div>
           
-          <div className="flex justify-between items-center pt-4 border-t border-[#d1f4df]">
+          <div className="flex justify-between items-center pt-4 border-t border-emerald-300">
             <div>
               <p className="text-[10px] font-bold text-slate-500 mb-0.5 uppercase tracking-wider">Original Price</p>
               <p className="text-sm font-bold text-[#064e3b]">{currency}{res.price}</p>
