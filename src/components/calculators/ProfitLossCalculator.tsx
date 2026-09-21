@@ -8,7 +8,7 @@ export function ProfitLossCalculator() {
   const [costPrice, setCostPrice] = useState<string>("");
   const [sellingPrice, setSellingPrice] = useState<string>("");
   const [expenses, setExpenses] = useState<string>("");
-  const [currency, setCurrency] = useState<"$" | "₹">("$");
+  const [currency, setCurrency] = useState<"₹" | "$">("₹");
 
   const calculate = () => {
     const cp = parseFloat(costPrice) || 0;
@@ -40,16 +40,16 @@ export function ProfitLossCalculator() {
       <div className="flex justify-end mb-4">
         <div className="bg-slate-100 p-1 rounded-lg flex items-center">
           <button 
-            onClick={() => setCurrency("$")}
-            className={`p-1.5 rounded-md transition-all ${currency === "$" ? "bg-white shadow-sm text-emerald-600" : "text-slate-500 hover:text-slate-700"}`}
-          >
-            <DollarSign className="w-4 h-4" />
-          </button>
-          <button 
             onClick={() => setCurrency("₹")}
-            className={`p-1.5 rounded-md transition-all ${currency === "₹" ? "bg-white shadow-sm text-emerald-600" : "text-slate-500 hover:text-slate-700"}`}
+            className={`p-1.5 rounded-md transition-all ${currency === "₹" ? "bg-white shadow-sm text-emerald-600" : "text-slate-900 hover:text-slate-700"}`}
           >
             <IndianRupee className="w-4 h-4" />
+          </button>
+          <button 
+            onClick={() => setCurrency("$")}
+            className={`p-1.5 rounded-md transition-all ${currency === "$" ? "bg-white shadow-sm text-emerald-600" : "text-slate-900 hover:text-slate-700"}`}
+          >
+            <DollarSign className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -59,54 +59,54 @@ export function ProfitLossCalculator() {
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 flex justify-between">
               Cost Price (CP)
-              <span className="text-slate-400 font-medium">{currency}</span>
+              <span className="text-slate-800 font-medium">{currency}</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">{currency}</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currency}</span>
               <input
                 type="number"
                 value={costPrice}
                 onChange={(e) => setCostPrice(e.target.value)}
                 placeholder="e.g. 500"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700 flex justify-between">
-              Other Costs / Expenses
-              <span className="text-slate-400 font-medium">{currency}</span>
-            </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">{currency}</span>
-              <input
-                type="number"
-                value={expenses}
-                onChange={(e) => setExpenses(e.target.value)}
-                placeholder="e.g. 50"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
               />
             </div>
           </div>
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 flex justify-between">
               Selling Price (SP)
-              <span className="text-slate-400 font-medium">{currency}</span>
+              <span className="text-slate-800 font-medium">{currency}</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">{currency}</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currency}</span>
               <input
                 type="number"
                 value={sellingPrice}
                 onChange={(e) => setSellingPrice(e.target.value)}
                 placeholder="e.g. 700"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700 flex justify-between">
+              Other Costs / Expenses
+              <span className="text-slate-800 font-medium">{currency}</span>
+            </label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currency}</span>
+              <input
+                type="number"
+                value={expenses}
+                onChange={(e) => setExpenses(e.target.value)}
+                placeholder="e.g. 50"
+                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 placeholder:text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all shadow-inner"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl h-full min-h-[250px] shadow-lg shadow-emerald-500/30 border border-emerald-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-emerald-50 rounded-2xl h-full min-h-[250px] border border-emerald-200 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
@@ -125,7 +125,7 @@ export function ProfitLossCalculator() {
             key={result.amount}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-sm flex items-center"
+            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm flex items-center"
           >
             <span className="text-3xl opacity-80 mr-1">{currency}</span>
             {result.amount}
@@ -134,11 +134,11 @@ export function ProfitLossCalculator() {
           <div className="w-full grid grid-cols-2 gap-2 mt-2 pt-4 border-t border-emerald-400/50">
             <div className="text-center">
               <p className="text-[10px] text-emerald-200 uppercase tracking-wider mb-0.5">Total Cost</p>
-              <p className="text-sm text-white font-bold">{currency}{result.totalCost}</p>
+              <p className="text-sm text-slate-900 font-bold">{currency}{result.totalCost}</p>
             </div>
             <div className="text-center border-l border-emerald-400/50">
               <p className="text-[10px] text-emerald-200 uppercase tracking-wider mb-0.5">Margin</p>
-              <p className="text-sm text-white font-bold">{result.margin}%</p>
+              <p className="text-sm text-slate-900 font-bold">{result.margin}%</p>
             </div>
           </div>
         </div>

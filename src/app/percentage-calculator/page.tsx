@@ -35,19 +35,13 @@ export default function PercentageCalculatorPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex items-center gap-4 md:gap-6 bg-blue-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-blue-100/50">
-          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl shadow-sm shadow-blue-600/20">
-            <Percent className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h2 className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">PERCENTAGE</h2>
-            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-              Percentage Calculator
-            </h1>
-            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-              Calculate a percentage of any number, find percentage increases or decreases, and work out the percentage difference between values.
-            </p>
-          </div>
+        <div className="flex flex-col items-center text-center bg-blue-50 rounded-2xl p-4 md:p-6 mb-6 border border-blue-200">
+          <h1 className="text-xl md:text-2xl font-extrabold text-blue-800 tracking-tight mb-2">
+            Percentage Calculator
+          </h1>
+          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Calculate a percentage of any number, find percentage increases or decreases, and work out the percentage difference between values.
+          </p>
         </div>
 
         {/* Interactive Tool */}

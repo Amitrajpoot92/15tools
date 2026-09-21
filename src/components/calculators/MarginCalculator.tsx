@@ -44,7 +44,7 @@ export function MarginCalculator() {
     <div className="w-full relative">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Cost to produce/buy ($)</label>
+          <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Cost to produce/buy ($)</label>
           <input
             type="number"
             value={cost}
@@ -54,7 +54,7 @@ export function MarginCalculator() {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Desired Gross Margin (%)</label>
+          <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Desired Gross Margin (%)</label>
           <input
             type="number"
             value={margin}
@@ -66,7 +66,7 @@ export function MarginCalculator() {
       </div>
 
       {/* Result Box */}
-      <div className="bg-[#f8f9fc] border border-slate-100 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden">
+      <div className="bg-cyan-50 border border-cyan-200 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden">
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs font-bold text-cyan-900/60">WHOLESALE SELLING PRICE</span>
           <div className="flex items-center gap-1.5">
@@ -74,7 +74,7 @@ export function MarginCalculator() {
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
               {copied ? "Copied" : "Copy"}
             </button>
-            <button onClick={reset} className="p-1.5 text-slate-400 hover:text-slate-600 transition-colors">
+            <button onClick={reset} className="p-1.5 text-slate-800 hover:text-slate-900 transition-colors">
               <RotateCcw className="w-4 h-4" />
             </button>
           </div>
@@ -88,11 +88,11 @@ export function MarginCalculator() {
         
         <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-200/60">
           <div>
-            <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Gross Profit</div>
+            <div className="text-[10px] uppercase font-bold text-slate-800 mb-1">Gross Profit</div>
             <div className="text-lg font-bold text-emerald-600">${result.profit}</div>
           </div>
           <div>
-            <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Markup</div>
+            <div className="text-[10px] uppercase font-bold text-slate-800 mb-1">Markup</div>
             <div className="text-lg font-bold text-cyan-600">{result.markup}%</div>
           </div>
         </div>

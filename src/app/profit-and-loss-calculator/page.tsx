@@ -35,19 +35,13 @@ export default function ProfitLossPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex items-center gap-4 md:gap-6 bg-emerald-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-100/50">
-          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-emerald-600 rounded-2xl shadow-sm shadow-emerald-600/20">
-            <TrendingUp className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h2 className="text-[10px] md:text-xs font-bold text-emerald-600 uppercase tracking-wider mb-1">PROFIT AND LOSS</h2>
-            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-              Profit & Loss Calculator
-            </h1>
-            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-              Determine your profit margins, gross profit, and total loss instantly. Enter your cost and selling prices below.
-            </p>
-          </div>
+        <div className="flex flex-col items-center text-center bg-emerald-50 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-200">
+          <h1 className="text-xl md:text-2xl font-extrabold text-emerald-800 tracking-tight mb-2">
+            Profit & Loss Calculator
+          </h1>
+          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Determine your profit margins, gross profit, and total loss instantly. Enter your cost and selling prices below.
+          </p>
         </div>
 
         {/* Interactive Tool */}

@@ -67,13 +67,13 @@ export function GSTCalculator() {
       <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-2 gap-1 mb-5">
         <button
           onClick={() => setMode("add")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "add" ? "bg-white text-violet-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "add" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
         >
           Exclusive GST (Add GST)
         </button>
         <button
           onClick={() => setMode("remove")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "remove" ? "bg-white text-violet-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "remove" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
         >
           Inclusive GST (Remove GST)
         </button>
@@ -83,11 +83,11 @@ export function GSTCalculator() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Amount */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">
               {mode === "add" ? "Net Amount (₹)" : "Total Amount (₹)"}
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">₹</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">₹</span>
               <input 
                 type="number" 
                 value={amount} 
@@ -99,7 +99,7 @@ export function GSTCalculator() {
 
           {/* GST Rate */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">GST Rate (%)</label>
+            <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">GST Rate (%)</label>
             <div className="relative">
               <input 
                 type="number" 
@@ -107,11 +107,11 @@ export function GSTCalculator() {
                 onChange={(e) => setRate(e.target.value)}
                 className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/10 transition-all pr-10"
               />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-base text-slate-400 font-bold">%</span>
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-base text-slate-800 font-bold">%</span>
             </div>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {[5, 12, 18, 28].map(v => (
-                <button key={v} onClick={() => setRate(v.toString())} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 text-[11px] font-bold rounded-md transition-colors">
+                <button key={v} onClick={() => setRate(v.toString())} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-900 text-[11px] font-bold rounded-md transition-colors">
                   {v}%
                 </button>
               ))}
@@ -121,15 +121,15 @@ export function GSTCalculator() {
 
         {/* State Type Radio */}
         <div>
-          <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-2">GST Type</label>
+          <label className="text-[10px] font-bold text-slate-900 uppercase tracking-wider block mb-2">GST Type</label>
           <div className="flex flex-col sm:flex-row gap-3">
-            <label className="flex items-center gap-2 cursor-pointer group">
+            <label onClick={() => setStateType("intra")} className="flex items-center gap-2 cursor-pointer group">
               <div className={`w-4 h-4 rounded-full border-[1.5px] flex items-center justify-center transition-colors ${stateType === "intra" ? "border-violet-500" : "border-slate-300 group-hover:border-slate-400"}`}>
                 {stateType === "intra" && <div className="w-2 h-2 bg-violet-500 rounded-full" />}
               </div>
               <span className="text-slate-700 text-sm font-medium">Intra-State (CGST + SGST)</span>
             </label>
-            <label className="flex items-center gap-2 cursor-pointer group">
+            <label onClick={() => setStateType("inter")} className="flex items-center gap-2 cursor-pointer group">
               <div className={`w-4 h-4 rounded-full border-[1.5px] flex items-center justify-center transition-colors ${stateType === "inter" ? "border-violet-500" : "border-slate-300 group-hover:border-slate-400"}`}>
                 {stateType === "inter" && <div className="w-2 h-2 bg-violet-500 rounded-full" />}
               </div>
@@ -139,9 +139,9 @@ export function GSTCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="bg-[#f5f3ff] border border-violet-100 rounded-2xl p-5 md:p-6 mt-5 relative overflow-hidden">
+        <div className="bg-orange-50 border border-orange-200 rounded-2xl p-5 md:p-6 mt-5 relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
-            <span className="flex items-center gap-1.5 text-xs font-bold text-violet-900/60">
+            <span className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
               <Receipt className="w-3.5 h-3.5" />
               {mode === "add" ? "Total Price (Incl. GST)" : "Net Price (Excl. GST)"}
             </span>
@@ -150,7 +150,7 @@ export function GSTCalculator() {
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>
-              <button onClick={reset} className="p-1.5 text-violet-400 hover:text-violet-600 transition-colors">
+              <button onClick={reset} className="p-1.5 text-violet-400 hover:text-slate-900 transition-colors">
                 <RotateCcw className="w-4 h-4" />
               </button>
             </div>
@@ -165,31 +165,31 @@ export function GSTCalculator() {
           
           <div className="space-y-2 pt-3 border-t border-violet-200/50">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-bold text-violet-900/60">Net Amount</span>
-              <span className="font-bold text-violet-900">₹{res.net}</span>
+              <span className="font-bold text-slate-900">Net Amount</span>
+              <span className="font-bold text-slate-900">₹{res.net}</span>
             </div>
             
             {stateType === "intra" ? (
               <>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-violet-900/60">CGST ({(parseFloat(rate)/2) || 0}%)</span>
-                  <span className="font-bold text-violet-900">+₹{res.cgst}</span>
+                  <span className="font-bold text-slate-900">CGST ({(parseFloat(rate)/2) || 0}%)</span>
+                  <span className="font-bold text-slate-900">+₹{res.cgst}</span>
                 </div>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-violet-900/60">SGST ({(parseFloat(rate)/2) || 0}%)</span>
-                  <span className="font-bold text-violet-900">+₹{res.sgst}</span>
+                  <span className="font-bold text-slate-900">SGST ({(parseFloat(rate)/2) || 0}%)</span>
+                  <span className="font-bold text-slate-900">+₹{res.sgst}</span>
                 </div>
               </>
             ) : (
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-violet-900/60">IGST ({rate || 0}%)</span>
-                <span className="font-bold text-violet-900">+₹{res.igst}</span>
+                <span className="font-bold text-slate-900">IGST ({rate || 0}%)</span>
+                <span className="font-bold text-slate-900">+₹{res.igst}</span>
               </div>
             )}
             
             <div className="flex justify-between items-center text-xs pt-2 border-t border-violet-200/50">
-              <span className="font-bold text-violet-900/80">Total Amount</span>
-              <span className="font-bold text-violet-900">₹{res.total}</span>
+              <span className="font-bold text-slate-900/80">Total Amount</span>
+              <span className="font-bold text-slate-900">₹{res.total}</span>
             </div>
           </div>
         </div>

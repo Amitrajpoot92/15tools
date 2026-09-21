@@ -85,19 +85,19 @@ export function PercentageCalculator() {
       <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-1 sm:grid-cols-3 gap-1 mb-5">
         <button
           onClick={() => setMode("what_is_x_percent_of_y")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "what_is_x_percent_of_y" ? "bg-white text-indigo-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "what_is_x_percent_of_y" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
         >
           What is X% of Y?
         </button>
         <button
           onClick={() => setMode("x_is_what_percent_of_y")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "x_is_what_percent_of_y" ? "bg-white text-indigo-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "x_is_what_percent_of_y" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
         >
           X is what % of Y?
         </button>
         <button
           onClick={() => setMode("percentage_change")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "percentage_change" ? "bg-white text-indigo-600 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "percentage_change" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
         >
           % Change (Inc/Dec)
         </button>
@@ -108,21 +108,21 @@ export function PercentageCalculator() {
           {mode === "what_is_x_percent_of_y" && (
             <motion.div key="what" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Percentage (%)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Percentage (%)</label>
                 <div className="relative">
                   <input type="number" value={percX} onChange={(e)=>setPercX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all pr-10" />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">%</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">%</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {[5, 10, 15, 20, 25, 50].map(v => (
-                    <button key={v} onClick={() => setPercX(v.toString())} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 text-[11px] font-bold rounded-md transition-colors">
+                    <button key={v} onClick={() => setPercX(v.toString())} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-900 text-[11px] font-bold rounded-md transition-colors">
                       {v}%
                     </button>
                   ))}
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Value (Of Y)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Total Value (Of Y)</label>
                 <input type="number" value={percY} onChange={(e)=>setPercY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>
@@ -131,11 +131,11 @@ export function PercentageCalculator() {
           {mode === "x_is_what_percent_of_y" && (
             <motion.div key="x_is" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Value (X)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Value (X)</label>
                 <input type="number" value={whatX} onChange={(e)=>setWhatX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Value (Of Y)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Total Value (Of Y)</label>
                 <input type="number" value={whatY} onChange={(e)=>setWhatY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>
@@ -144,11 +144,11 @@ export function PercentageCalculator() {
           {mode === "percentage_change" && (
             <motion.div key="change" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Initial Value (From)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Initial Value (From)</label>
                 <input type="number" value={changeX} onChange={(e)=>setChangeX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Final Value (To)</label>
+                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Final Value (To)</label>
                 <input type="number" value={changeY} onChange={(e)=>setChangeY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>
@@ -156,15 +156,15 @@ export function PercentageCalculator() {
         </AnimatePresence>
 
         {/* Result Box */}
-        <div className="bg-[#f8f9fc] border border-slate-100 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden">
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-indigo-900/60">{result.text}</span>
+            <span className="text-xs font-bold text-slate-900">{result.text}</span>
             <div className="flex items-center gap-1.5">
-              <button onClick={() => copyToClipboard(`${result.text} = ${result.value}${result.symbol ? result.symbol : ""}`)} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-indigo-600 hover:bg-indigo-50 transition-colors shadow-sm">
+              <button onClick={() => copyToClipboard(`${result.text} = ${result.value}${result.symbol ? result.symbol : ""}`)} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>
-              <button onClick={reset} className="p-1.5 text-slate-400 hover:text-slate-600 transition-colors">
+              <button onClick={reset} className="p-1.5 text-slate-800 hover:text-slate-900 transition-colors">
                 <RotateCcw className="w-4 h-4" />
               </button>
             </div>
@@ -175,7 +175,7 @@ export function PercentageCalculator() {
               {result.value}
             </span>
             {result.symbol && (
-              <span className={`text-2xl font-bold ml-1 ${result.color ? result.color : 'text-indigo-600'}`}>{result.symbol}</span>
+              <span className={`text-2xl font-bold ml-1 ${result.color ? result.color : 'text-slate-900'}`}>{result.symbol}</span>
             )}
           </div>
           
