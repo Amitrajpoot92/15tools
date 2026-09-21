@@ -107,7 +107,7 @@ export function WholesaleCalculator() {
       </div>
 
       {/* Result Box */}
-      <div className="bg-white border border-[#f8ebd0] rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden shadow-sm">
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden shadow-sm">
         <div className="flex items-start justify-between mb-5">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#fff7e6] flex items-center justify-center text-[#d97706]">
@@ -124,16 +124,16 @@ export function WholesaleCalculator() {
           </div>
           
           <div className="flex items-center gap-2 ml-2">
-            <button onClick={() => copyToClipboard(`Wholesale Price: ${currency}${result.wholesalePricePerUnit}`)} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-[#f8ebd0] rounded-lg text-[11px] font-bold text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
+            <button onClick={() => copyToClipboard(`Wholesale Price: ${currency}${result.wholesalePricePerUnit}`)} className="flex items-center gap-1 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg text-[11px] font-bold text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
               <span className="inline">Copy</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white border border-[#f8ebd0] rounded-lg text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-amber-50 border border-amber-200 rounded-lg text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
         
-        <div className="bg-[#fffcf2] rounded-xl p-4 md:p-5 border border-[#f8ebd0] mb-5">
+        <div className="bg-amber-100 rounded-xl p-4 md:p-5 border border-amber-200 mb-5">
           <p className="text-[10px] uppercase font-bold text-[#b45309] mb-1 tracking-wider">Wholesale Price Per Unit</p>
           <div className="flex items-baseline mb-5">
             <span className="text-2xl font-bold text-[#78350f] mr-1">{currency}</span>

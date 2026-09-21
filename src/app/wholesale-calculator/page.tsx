@@ -35,8 +35,7 @@ export default function WholesalePage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-start text-left bg-[#fffcf2] rounded-2xl p-4 md:p-6 mb-6 border border-[#f8ebd0]">
-          <h2 className="text-[10px] md:text-xs font-bold text-[#d97706] uppercase tracking-wider mb-1">WHOLESALE PRICING</h2>
+        <div className="flex flex-col items-center text-center bg-amber-50 rounded-2xl p-4 md:p-6 mb-6 border border-amber-200">
           <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
             Wholesale Price Calculator
           </h1>
