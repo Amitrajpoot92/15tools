@@ -116,7 +116,7 @@ export function ProfitLossCalculator() {
           </div>
         </div>
 
-        <div className="w-full bg-emerald-50 border border-emerald-200 rounded-2xl p-5 md:p-6 mt-1 relative overflow-hidden h-full flex flex-col justify-between shadow-sm">
+        <div className="w-full bg-emerald-100 border border-emerald-300 rounded-2xl p-5 md:p-6 mt-1 relative overflow-hidden h-full flex flex-col justify-between shadow-sm">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className={`p-2.5 rounded-xl ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
@@ -160,7 +160,7 @@ export function ProfitLossCalculator() {
               </div>
             </div>
             
-            <div className="text-right bg-emerald-100 px-4 py-3 rounded-xl border border-emerald-200">
+            <div className="text-right bg-emerald-200 px-4 py-3 rounded-xl border border-emerald-300">
               <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                 {result.type === 'loss' ? 'Loss on Cost' : 'Profit on Cost'}
               </p>
