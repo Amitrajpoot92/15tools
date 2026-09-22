@@ -51,99 +51,105 @@ export default function GSTCalculatorPage() {
       </div>
 
       <SEOContent>
-        <h2>What is a GST Calculator?</h2>
-        <p>
-          A <strong>GST (Goods and Services Tax) Calculator</strong> is a specialized financial utility utilized by business owners, freelancers, accountants, and everyday consumers to accurately compute the amount of tax applied to a specific product or service. Introduced in various countries as a comprehensive, multi-stage, destination-based tax, GST has simplified indirect taxation by replacing multiple cascading taxes. However, calculating the exact amount of GST to add to an invoice or extracting the exact GST component from a final inclusive price can still be mathematically tedious and prone to human error.
-        </p>
-        <p>
-          The <strong>TopCalcBox GST Calculator</strong> is designed to completely eliminate this friction. It allows you to perform both "Exclusive" and "Inclusive" GST calculations with a single click. By instantly providing you with the Net Price, the GST Amount, and the Total Gross Price, our tool ensures that your invoices are legally compliant and mathematically flawless.
-        </p>
-        
+        <h2>What is GST Calculator</h2>
+        <p>GST (Goods and Services Tax) Calculator is an online tool that helps you quickly calculate the GST amount, total price including GST, and original price excluding GST. It makes GST calculations simple and saves you from doing the calculations manually. Just enter the amount and applicable GST rate to get the result instantly.</p>
+        <p>You can use the calculator to add GST to a price or remove GST from a GST-inclusive amount. It can also show the applicable tax breakup, such as CGST + SGST for intra-state transactions or IGST for inter-state transactions. For example, if the price before GST is ₹1,000 and the GST rate is 18%, the GST amount is ₹180 and the final price is ₹1,180.</p>
+
         <h2>How to Use the GST Calculator</h2>
+        <p>Using the GST Calculator is simple. Choose the type of calculation, enter the required details, and get the GST amount and final price instantly.</p>
+        <ol>
+          <li><strong>Select the calculation type:</strong> Choose Exclusive GST (Add GST) to add GST to an amount, or Inclusive GST (Remove GST) to find the amount before GST.</li>
+          <li><strong>Enter the amount:</strong> Enter the product, service, or invoice amount you want to calculate GST on.</li>
+          <li><strong>Select the GST rate %:</strong> Choose the applicable GST rate for your calculation.</li>
+          <li><strong>Choose the GST type:</strong> Select Intra-State (CGST + SGST) or Inter-State (IGST) where applicable.</li>
+          <li><strong>View the result:</strong> The calculator shows the GST amount, tax breakup, and final amount automatically.</li>
+        </ol>
+        <p>Use Copy to save the calculation or Reset to start a new one.</p>
+
+        <h2>GST Calculation Formula</h2>
+        <p>The GST Calculator uses different formulas depending on whether you want to add GST to an amount or remove GST from a GST-inclusive price.</p>
+
+        <h3>1. Add GST — Exclusive GST</h3>
         <p>
-          Using our GST tool is incredibly straightforward. It has been built with an intuitive interface that caters to both seasoned accountants and small business owners generating their very first invoice.
+          <strong>GST Amount</strong> = Net Amount × GST Rate (%) ÷ 100<br/>
+          <strong>Total Amount</strong> = Net Amount + GST Amount
         </p>
+        <p>
+          <strong>Example:</strong><br/>
+          ₹1,000 at 18% GST<br/>
+          GST = ₹1,000 × 18 ÷ 100 = ₹180<br/>
+          Total = ₹1,000 + ₹180 = ₹1,180
+        </p>
+
+        <h3>2. Remove GST — Inclusive GST</h3>
+        <p>
+          <strong>GST Amount</strong> = Inclusive Amount × GST Rate ÷ (100 + GST Rate)<br/>
+          <strong>Net Amount</strong> = Inclusive Amount − GST Amount
+        </p>
+        <p>
+          <strong>Example:</strong><br/>
+          ₹1,180 including 18% GST<br/>
+          GST = ₹1,180 × 18 ÷ 118 = ₹180<br/>
+          Net Amount = ₹1,180 − ₹180 = ₹1,000
+        </p>
+
+        <h3>3. CGST + SGST</h3>
+        <p>For an applicable Intra-State transaction, GST can be divided equally between CGST and SGST.</p>
+        <p>
+          <strong>CGST</strong> = Total GST ÷ 2<br/>
+          <strong>SGST</strong> = Total GST ÷ 2
+        </p>
+        <p>
+          <strong>Example:</strong> 18% GST on ₹1,000 = ₹180 GST<br/>
+          CGST = ₹90 + SGST = ₹90
+        </p>
+
+        <h3>4. IGST</h3>
+        <p>For an applicable Inter-State transaction:</p>
+        <p>
+          <strong>IGST</strong> = Net Amount × GST Rate ÷ 100
+        </p>
+        <p>
+          <strong>Example:</strong> ₹1,000 at 18% GST = ₹180 IGST.
+        </p>
+
+        <h2>Who Can Use a GST Calculator</h2>
+        <p>A GST Calculator can be useful for anyone who needs to calculate GST quickly and understand the actual tax amount or final price.</p>
         <ul>
-          <li><strong>Step 1: Enter the Base Amount.</strong> Type the numerical value of your product or service into the "Initial Amount" input field.</li>
-          <li><strong>Step 2: Select the GST Rate.</strong> Choose the appropriate tax slab for your industry or product category. We provide quick-select buttons for the most common global GST rates (5%, 12%, 18%, and 28%). You can also manually enter a custom percentage if your regional tax laws dictate a different rate.</li>
-          <li><strong>Step 3: Choose 'Add' or 'Remove'.</strong> 
-            <ul>
-              <li>Click <strong>Add GST (+GST)</strong> if your initial amount is the base price and you need to calculate the tax to add on top of it.</li>
-              <li>Click <strong>Remove GST (-GST)</strong> if your initial amount is the final price paid by a customer, and you need to reverse-calculate to find out how much of that total was tax.</li>
-            </ul>
-          </li>
-          <li><strong>Step 4: Review Your Breakdown.</strong> The calculator will instantly display a detailed receipt-style breakdown showing the Net Amount (price before tax), the exact GST Amount (tax collected), and the Gross Amount (final price).</li>
+          <li><strong>Business Owners & Shopkeepers:</strong> Calculate GST on products, services, sales, and purchases.</li>
+          <li><strong>Sellers & Online Businesses:</strong> Find GST amounts and calculate GST-inclusive selling prices.</li>
+          <li><strong>Freelancers & Service Providers:</strong> Calculate applicable GST amounts when preparing invoices.</li>
+          <li><strong>Customers & Shoppers:</strong> Check how much GST is included in a product or service price.</li>
+          <li><strong>Accountants & Finance Professionals:</strong> Quickly verify GST amounts and tax breakups.</li>
+          <li><strong>Students & Learners:</strong> Understand GST calculations and practice real-world examples.</li>
         </ul>
+        <p>Whether you need to add GST, remove GST, calculate CGST + SGST, or calculate IGST, the calculator makes the calculation quick and easy.</p>
 
-        <h2>Calculation Formula</h2>
-        <p>
-          If you ever need to manually calculate Goods and Services Tax without access to our digital tool, you can use the standard accounting formulas below. Let's break down the math for both scenarios:
-        </p>
+        <h3>Frequently Asked Questions (FAQ)</h3>
         
-        <h3>Adding GST (Exclusive Calculation)</h3>
-        <p>Use this formula when you have a base price and need to charge tax on top of it.</p>
-        <blockquote>
-          <strong>GST Amount</strong> = (Original Cost × GST Rate) / 100 <br />
-          <strong>Net Price</strong> = Original Cost + GST Amount
-        </blockquote>
-        <p><em>Example:</em> You sell a consulting service for $1,000 and must charge 18% GST. The GST amount is (1000 × 18) / 100 = $180. Your final invoice amount will be $1,180.</p>
+        <h4>1. What is the difference between GST inclusive and GST exclusive?</h4>
+        <p>GST exclusive means GST is not included in the displayed price and needs to be added. GST inclusive means the displayed price already includes GST.</p>
 
-        <h3>Removing GST (Inclusive Calculation)</h3>
-        <p>Use this formula when you have a final receipt total and need to extract the tax portion to record your actual revenue.</p>
-        <blockquote>
-          <strong>GST Amount</strong> = Total Cost - [Total Cost × (100 / (100 + GST Rate))] <br />
-          <strong>Net Price</strong> = Total Cost - GST Amount
-        </blockquote>
-        <p><em>Example:</em> A customer pays you a total of $1,180 which already includes an 18% GST. The GST amount is 1180 - [1180 × (100 / 118)] = 1180 - [1180 × 0.8474] = $180. Your actual net revenue is $1,000.</p>
+        <h4>2. How are CGST and SGST calculated?</h4>
+        <p>For an applicable intra-state transaction, the total GST is divided between CGST and SGST. For example, an 18% GST rate can be 9% CGST + 9% SGST.</p>
 
-        <h2>Common Uses / Who Can Use It</h2>
-        <p>
-          The TopCalcBox GST Calculator is a daily driver for millions of professionals across the globe. Here are the most common scenarios where this tool is indispensable:
-        </p>
-        <ul>
-          <li><strong>Small Business Owners & Freelancers:</strong> When generating monthly invoices for clients, business owners must accurately calculate the GST component to ensure they collect the right amount of tax to remit to the government.</li>
-          <li><strong>Accountants and Bookkeepers:</strong> During tax season or month-end reconciliations, accountants frequently need to extract the GST from hundreds of inclusive receipts (like restaurant bills or office supplies) to claim input tax credits.</li>
-          <li><strong>E-commerce Sellers:</strong> Online sellers need to configure their store pricing. If you want to sell a product for exactly $99 including tax, this tool helps you reverse-calculate what the base price in your database should be.</li>
-          <li><strong>Consumers & Shoppers:</strong> When making large purchases like electronics or vehicles, consumers often want to know exactly how much of their hard-earned money is going toward taxes versus the actual product value.</li>
-          <li><strong>Procurement Managers:</strong> When comparing quotes from different vendors where some have quoted inclusive prices and others exclusive, this tool helps normalize the data for a fair comparison.</li>
-        </ul>
+        <h4>3. Can I calculate GST on a product price?</h4>
+        <p>Yes. Enter the applicable product amount and select the relevant GST rate (%) to calculate the GST amount and final price.</p>
 
-        <h2>Frequently Asked Questions (FAQ)</h2>
-        
-        <h3>1. What is the difference between GST, VAT, and Sales Tax?</h3>
-        <p>
-          While the terminology differs by country, the mathematical calculation is identical. GST (Goods and Services Tax) and VAT (Value Added Tax) are both multi-stage destination-based taxes applied at every point of sale. Standard Sales Tax is usually a single-stage tax collected only at the final point of purchase by the end consumer. You can use this calculator for all three.
-        </p>
+        <h4>4. Which GST Rate Should I Use?</h4>
+        <p>Choose the GST rate applicable to your product or service. Select the correct rate, such as 5%, 12%, 18%, or 28%, to get the right calculation.</p>
 
-        <h3>2. What are the standard GST slabs?</h3>
-        <p>
-          While rates vary globally, countries that utilize a multi-tiered GST system (like India) typically use four main slabs: 5% (essential goods), 12% (standard goods), 18% (standard services and most products), and 28% (luxury items and "sin" goods).
-        </p>
-
-        <h3>3. Does this calculator work for CGST and SGST splits?</h3>
-        <p>
-          Yes. In federal systems where GST is split equally between the central government (CGST) and state government (SGST), you simply take the final GST Amount provided by our calculator and divide it by 2. For example, an 18% GST consists of 9% CGST and 9% SGST.
-        </p>
-
-        <h3>4. How do I claim an Input Tax Credit (ITC)?</h3>
-        <p>
-          When you purchase supplies for your business, the inclusive receipts contain GST that you have paid. You use the "Remove GST" function on our calculator to determine exactly how much tax was in that receipt, which you can then claim back as an Input Tax Credit when filing your returns.
-        </p>
-
-        <h3>5. Can I enter a custom decimal GST rate?</h3>
-        <p>
-          Absolutely. If your local municipality has a highly specific tax rate (e.g., 7.25%), simply type that exact decimal into the custom rate field, and the calculator will process it with pinpoint accuracy.
-        </p>
+        <h4>5. Can I remove GST from a product price?</h4>
+        <p>Yes. Select Inclusive GST (Remove GST) and enter the GST-inclusive price. The calculator will show the GST amount and original price before GST.</p>
 
         <h2>Related Calculators</h2>
-        <p>
-          Managing your business finances requires more than just tax calculations. Explore our other financial tools below:
-        </p>
         <ul>
-          <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a> - Determine your exact gross profit and net loss margins after tax deductions.</li>
-          <li><a href="/wholesale-calculator" className="text-rose-600 hover:underline">Wholesale Calculator</a> - Find out what your base selling price should be to maintain a healthy profit margin.</li>
-          <li><a href="/percentage-calculator" className="text-rose-600 hover:underline">Percentage Calculator</a> - The standard tool for calculating general numerical ratios and growth metrics.</li>
-          <li><a href="/discount-calculator" className="text-rose-600 hover:underline">Discount Calculator</a> - Calculate sale prices before applying the final GST to the customer's cart.</li>
+          <li><a href="/percentage-calculator" className="text-rose-600 hover:underline">Percentage Calculator</a></li>
+          <li><a href="/discount-calculator" className="text-rose-600 hover:underline">Discount Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a></li>
+          <li><a href="/emi-calculator" className="text-rose-600 hover:underline">EMI Calculator</a></li>
+          <li><a href="/sip-calculator" className="text-rose-600 hover:underline">SIP Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

@@ -45,7 +45,7 @@ export function CalorieCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -110,30 +110,30 @@ export function CalorieCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl h-full shadow-lg shadow-amber-500/30 border border-amber-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-amber-100 border border-amber-300 rounded-2xl shadow-sm  relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Flame className="w-8 h-8 text-orange-600" />
           </div>
-          <p className="text-sm text-orange-100 mb-1 uppercase tracking-widest font-bold">Maintain Weight</p>
+          <p className="text-sm text-orange-800/70 mb-1 uppercase tracking-widest font-bold">Maintain Weight</p>
           <motion.div 
             key={results.maintenance}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter drop-shadow-sm mb-6 text-center"
+            className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter drop-shadow-sm mb-6 text-center"
           >
-            {results.maintenance.toLocaleString()} <span className="text-2xl text-orange-200">kcal/day</span>
+            {results.maintenance.toLocaleString()} <span className="text-2xl text-orange-700">kcal/day</span>
           </motion.div>
           
           <div className="w-full space-y-3">
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20 flex justify-between items-center">
-              <span className="text-orange-100 text-sm font-medium">Mild Weight Loss</span>
-              <span className="text-white font-bold">{results.mildLoss.toLocaleString()} kcal</span>
+            <div className="bg-white shadow-sm backdrop-blur-md rounded-xl p-3 border border-slate-200 flex justify-between items-center">
+              <span className="text-orange-800/70 text-sm font-medium">Mild Weight Loss</span>
+              <span className="text-slate-900 font-bold">{results.mildLoss.toLocaleString()} kcal</span>
             </div>
-            <div className="bg-white/20 backdrop-blur-md rounded-xl p-3 border border-white/30 flex justify-between items-center">
-              <span className="text-orange-100 text-sm font-medium">Weight Loss (-0.5kg/wk)</span>
-              <span className="text-white font-bold">{results.weightLoss.toLocaleString()} kcal</span>
+            <div className="bg-white shadow-sm backdrop-blur-md rounded-xl p-3 border border-slate-200 flex justify-between items-center">
+              <span className="text-orange-800/70 text-sm font-medium">Weight Loss (-0.5kg/wk)</span>
+              <span className="text-slate-900 font-bold">{results.weightLoss.toLocaleString()} kcal</span>
             </div>
           </div>
         </div>

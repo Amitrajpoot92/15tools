@@ -51,93 +51,80 @@ export default function ProfitLossPage() {
       </div>
 
       <SEOContent>
-        <h2>What is a Profit and Loss Calculator?</h2>
-        <p>
-          A <strong>Profit and Loss Calculator</strong> is an indispensable financial tool built for business owners, e-commerce sellers, retail managers, and independent entrepreneurs. At its core, business is about generating value, and that value is measured through profit. This specialized calculator allows you to instantly determine the financial success or failure of a specific product, service, or overall business operation by calculating the exact difference between your Cost Price (what you paid) and your Selling Price (what you charged).
-        </p>
-        <p>
-          With the <strong>TopCalcBox Profit and Loss Calculator</strong>, you no longer need to rely on complex Excel spreadsheets or manual arithmetic. Simply input two numbers, and our dynamic algorithm will immediately display your gross profit, total loss, and most importantly, your profit margin percentage. Tracking these metrics accurately is the first and most crucial step toward building a sustainable and highly lucrative business.
-        </p>
-        
-        <h2>How to Use the Profit and Loss Calculator</h2>
-        <p>
-          We have streamlined the interface of our calculator to ensure it is user-friendly for both seasoned accountants and first-time entrepreneurs. Follow these simple steps to analyze your financial metrics:
-        </p>
+        <h2>Profit and Loss Calculator</h2>
+        <p>A Profit and Loss Calculator helps you quickly calculate your profit or loss, total cost, selling price, and profit or loss percentage. It is useful for checking how much you earn or lose after considering the cost of a product and any additional expenses.</p>
+        <p>You can enter the Cost Price (CP), Selling Price (SP), and Other Costs/Expenses to get a clear breakdown of your actual profit or loss. The calculator can be used for individual products, small businesses, reselling, retail, and everyday buying and selling calculations.</p>
+        <p>For example, if the Cost Price is ₹500, Selling Price is ₹600, and there are no additional expenses, your profit is ₹100. If you have ₹50 in other expenses, your total cost becomes ₹550 and your actual profit becomes ₹50.</p>
+
+        <h2>How to Use Profit and Loss Calculator</h2>
+        <p>Using the Profit and Loss Calculator is simple. Enter your costs and selling price to find your actual profit or loss.</p>
+        <ol>
+          <li><strong>Enter the Cost Price:</strong> Add the amount you paid to buy or produce the item.</li>
+          <li><strong>Enter the Selling Price:</strong> Add the price at which you sold or plan to sell the item.</li>
+          <li><strong>Add Other Costs/Expenses:</strong> Enter additional costs such as delivery, packaging, commission, or other expenses, if any.</li>
+          <li><strong>Get your result:</strong> The calculator instantly shows the Total Cost, Profit or Loss, and Profit/Loss Percentage.</li>
+        </ol>
+        <p>Use Copy to save the result or Reset to start a new calculation.</p>
+
+        <h2>Profit and Loss Calculation Formula</h2>
+        <p>The Profit and Loss Calculator uses the following formulas to calculate your total cost, profit or loss, and percentage:</p>
         <ul>
-          <li><strong>Step 1: Determine your Cost Price (CP).</strong> This is the total amount of money you spent to acquire, manufacture, or produce the item. Ensure you include all related expenses like shipping, materials, and labor if you want an accurate net profit calculation. Enter this number in the "Cost Price" field.</li>
-          <li><strong>Step 2: Determine your Selling Price (SP).</strong> This is the final amount of money the customer pays you for the product or service. Enter this number in the "Selling Price" field.</li>
-          <li><strong>Step 3: Analyze the Output.</strong> As soon as you type the numbers, the TopCalcBox calculator will process the data in real-time. The results panel will clearly state whether you have made a <strong>Profit</strong> (highlighted in green) or incurred a <strong>Loss</strong> (highlighted in red). It will display the exact monetary amount of the profit/loss, as well as the percentage margin.</li>
+          <li><strong>Total Cost</strong> = Cost Price + Other Costs/Expenses</li>
+          <li><strong>Profit</strong> = Selling Price − Total Cost</li>
+          <li><strong>Loss</strong> = Total Cost − Selling Price</li>
+          <li><strong>Profit %</strong> = (Profit ÷ Total Cost) × 100</li>
+          <li><strong>Loss %</strong> = (Loss ÷ Total Cost) × 100</li>
         </ul>
-
-        <h2>Calculation Formula</h2>
         <p>
-          Understanding the mathematical principles behind profit and loss is fundamental to business literacy. Here are the standard formulas that our digital calculator uses to process your inputs:
+          <strong>Example:</strong><br/>
+          Cost Price = ₹1,000<br/>
+          Other Expenses = ₹100<br/>
+          Selling Price = ₹1,320<br/>
+          <br/>
+          Total Cost = ₹1,000 + ₹100 = ₹1,100<br/>
+          Profit = ₹1,320 − ₹1,100 = ₹220<br/>
+          Profit % = (₹220 ÷ ₹1,100) × 100 = 20%
         </p>
-        
-        <h3>1. Calculating Profit (When Selling Price &gt; Cost Price)</h3>
-        <p>If you sell an item for more than it cost you, you have generated a profit.</p>
-        <blockquote>
-          <strong>Profit Amount</strong> = Selling Price (SP) - Cost Price (CP) <br />
-          <strong>Profit Margin (%)</strong> = (Profit Amount / Cost Price) × 100
-        </blockquote>
-        <p><em>Example:</em> You buy a wholesale chair for $40 and sell it for $100. Your profit amount is $100 - $40 = $60. Your profit margin is (60 / 40) × 100 = 150%.</p>
+        <p>So, the profit is ₹220 and profit percentage is 20%.</p>
 
-        <h3>2. Calculating Loss (When Cost Price &gt; Selling Price)</h3>
-        <p>If you sell an item for less than it cost you, you have incurred a loss.</p>
-        <blockquote>
-          <strong>Loss Amount</strong> = Cost Price (CP) - Selling Price (SP) <br />
-          <strong>Loss Margin (%)</strong> = (Loss Amount / Cost Price) × 100
-        </blockquote>
-        <p><em>Example:</em> You buy a stock for $200, but its value drops and you are forced to sell it for $150. Your loss amount is $200 - $150 = $50. Your loss margin is (50 / 200) × 100 = 25% loss.</p>
-
-        <h2>Common Uses / Who Can Use It</h2>
-        <p>
-          The TopCalcBox Profit and Loss Calculator is utilized daily by thousands of professionals across various industries:
-        </p>
+        <h2>Who Can Use a Profit & Loss Calculator</h2>
+        <p>A Profit & Loss Calculator is useful for anyone who buys and sells products or provides services and wants to know how much they are actually earning after costs and expenses.</p>
         <ul>
-          <li><strong>E-commerce Sellers & Dropshippers:</strong> If you are selling on Amazon, Shopify, or eBay, you need to constantly monitor your margins. You must ensure that your selling price covers the product cost, shipping fees, platform fees, and advertising spend while still leaving a healthy profit.</li>
-          <li><strong>Day Traders & Investors:</strong> Stock market traders and cryptocurrency investors use this tool to calculate their exact percentage gains or losses on specific trades to analyze their portfolio performance over time.</li>
-          <li><strong>Retail Store Owners:</strong> When deciding how to price new inventory, store managers can use this tool to test different selling prices and immediately see what the resulting profit margin would be.</li>
-          <li><strong>Freelancers & Consultants:</strong> Service providers use this calculator by entering their operational costs (software subscriptions, hourly rate base) as the Cost Price to determine how much profit they make on a specific client contract.</li>
-          <li><strong>Accounting Students:</strong> A fantastic educational resource for students learning the fundamentals of corporate finance, accounting principles, and business administration.</li>
+          <li><strong>Shopkeepers:</strong> Quickly check the profit on each product after considering the buying price and other expenses.</li>
+          <li><strong>Small Business Owners:</strong> Understand whether a product, order, or sale is giving a profit or causing a loss.</li>
+          <li><strong>Online Sellers:</strong> Include costs such as packaging, delivery, platform charges, or commission to get a more realistic profit figure.</li>
+          <li><strong>Resellers:</strong> Find out the actual earning after buying a product and spending money on shipping or other related costs.</li>
+          <li><strong>Wholesalers & Retailers:</strong> Compare purchase and selling prices and check the profit percentage on their sales.</li>
+          <li><strong>Freelancers & Service Providers:</strong> Calculate how much is left after deducting the expenses involved in completing a project or service.</li>
+          <li><strong>Students:</strong> Learn profit, loss, and percentage calculations with simple real-life examples.</li>
         </ul>
+        <p>It is especially helpful when the selling price alone doesn't show the complete picture. By adding other costs and expenses, you can get a clearer idea of your actual profit or loss.</p>
 
-        <h2>Frequently Asked Questions (FAQ)</h2>
+        <h3>Frequently Asked Questions (FAQ)</h3>
         
-        <h3>1. What is the difference between Gross Profit and Net Profit?</h3>
-        <p>
-          Gross Profit is calculated by subtracting only the direct costs of goods sold (COGS) from your revenue. Net Profit goes a step further by subtracting all other operating expenses, such as rent, marketing, taxes, and payroll. You can use our calculator for both; simply adjust your "Cost Price" input to include either just COGS or all operating expenses.
-        </p>
+        <h4>1. What is a Profit and Loss Calculator?</h4>
+        <p>A Profit and Loss Calculator is an online tool that calculates your profit or loss by comparing the selling price with the total cost.</p>
 
-        <h3>2. What is a "good" profit margin?</h3>
-        <p>
-          A "good" profit margin varies drastically by industry. A grocery store might operate successfully on a 2% to 3% net profit margin due to massive volume, whereas a software-as-a-service (SaaS) company might expect margins of 70% to 80%. Generally, a 10% net profit margin is considered average, 20% is high, and 5% is low across most retail sectors.
-        </p>
+        <h4>2. What is the difference between cost price and selling price?</h4>
+        <p>Cost Price (CP) is the amount paid to buy or produce an item, while Selling Price (SP) is the amount received when the item is sold.</p>
 
-        <h3>3. Does this calculator account for sales tax or GST?</h3>
-        <p>
-          No, this specific tool strictly calculates the difference between Cost Price and Selling Price. If your Selling Price includes collected taxes that you must remit to the government, you should first extract those taxes using our GST Calculator to find your true Net Selling Price before calculating your profit.
-        </p>
+        <h4>3. How do I calculate profit?</h4>
+        <p>Profit is calculated by subtracting the total cost from the selling price.<br/>Profit = Selling Price - Total Cost</p>
 
-        <h3>4. Why is my Profit Margin over 100%? Is that possible?</h3>
-        <p>
-          Yes, a profit margin over 100% (when calculated as a Markup on Cost) is entirely possible and quite common. If you buy a product for $10 and sell it for $30, your profit is $20. (20 / 10) × 100 = a 200% profit margin based on cost.
-        </p>
+        <h4>4. Can I calculate profit after expenses?</h4>
+        <p>Yes. Enter the Cost Price, Selling Price, and Other Costs/Expenses to calculate the actual profit after expenses.</p>
 
-        <h3>5. Is my financial data kept private?</h3>
-        <p>
-          Absolutely. TopCalcBox processes all mathematical operations locally within your own browser. We do not transmit, save, or store your Cost Prices or Selling Prices on any external servers. Your business metrics remain strictly confidential.
-        </p>
+        <h4>5. Can I use this calculator for business?</h4>
+        <p>Yes. It can be used for retail, wholesale, reselling, online selling, and small businesses to quickly check profit or loss.</p>
 
         <h2>Related Calculators</h2>
-        <p>
-          To gain a holistic view of your business's financial health, we highly recommend utilizing our other enterprise-grade calculators:
-        </p>
         <ul>
-          <li><a href="/wholesale-calculator" className="text-orange-600 hover:underline">Wholesale Calculator</a> - specifically tailored for retail markups, helping you set the perfect selling price based on your desired percentage margin.</li>
-          <li><a href="/discount-calculator" className="text-orange-600 hover:underline">Discount Calculator</a> - Calculate how running a storewide sale will impact your final selling price (and subsequently, your profit).</li>
-          <li><a href="/gst-calculator" className="text-orange-600 hover:underline">GST Calculator</a> - Accurately extract sales tax from your gross revenue to find your true net sales.</li>
-          <li><a href="/percentage-calculator" className="text-orange-600 hover:underline">Percentage Calculator</a> - Measure your month-over-month or year-over-year business growth as a percentage.</li>
+          <li><a href="/percentage-calculator" className="text-orange-600 hover:underline">Percentage Calculator</a></li>
+          <li><a href="/discount-calculator" className="text-orange-600 hover:underline">Discount Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-orange-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/gst-calculator" className="text-orange-600 hover:underline">GST Calculator</a></li>
+          <li><a href="/emi-calculator" className="text-orange-600 hover:underline">EMI Calculator</a></li>
+          <li><a href="/sip-calculator" className="text-orange-600 hover:underline">SIP Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

@@ -45,7 +45,7 @@ export function BirthdayCountdown() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">When is your next birthday?</label>
@@ -61,39 +61,39 @@ export function BirthdayCountdown() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl h-full min-h-[250px] shadow-lg shadow-orange-500/30 border border-orange-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Timer className="w-8 h-8 text-orange-600" />
           </div>
           
-          <p className="text-sm text-orange-100 uppercase tracking-widest font-bold mb-4">
+          <p className="text-sm text-orange-800/70 uppercase tracking-widest font-bold mb-4">
             Countdown
           </p>
           
           <div className="w-full max-w-sm">
             {timeLeft ? (
-              <div className="grid grid-cols-4 gap-2 text-center text-white">
+              <div className="grid grid-cols-4 gap-2 text-center text-slate-900">
                 <div className="flex flex-col items-center p-2 bg-black/10 rounded-xl backdrop-blur-sm">
                   <span className="text-2xl md:text-3xl font-extrabold">{timeLeft.days}</span>
-                  <span className="text-xs text-orange-100 font-medium uppercase tracking-wider mt-1">Days</span>
+                  <span className="text-xs text-orange-800/70 font-medium uppercase tracking-wider mt-1">Days</span>
                 </div>
                 <div className="flex flex-col items-center p-2 bg-black/10 rounded-xl backdrop-blur-sm">
                   <span className="text-2xl md:text-3xl font-extrabold">{timeLeft.hours}</span>
-                  <span className="text-xs text-orange-100 font-medium uppercase tracking-wider mt-1">Hrs</span>
+                  <span className="text-xs text-orange-800/70 font-medium uppercase tracking-wider mt-1">Hrs</span>
                 </div>
                 <div className="flex flex-col items-center p-2 bg-black/10 rounded-xl backdrop-blur-sm">
                   <span className="text-2xl md:text-3xl font-extrabold">{timeLeft.minutes}</span>
-                  <span className="text-xs text-orange-100 font-medium uppercase tracking-wider mt-1">Min</span>
+                  <span className="text-xs text-orange-800/70 font-medium uppercase tracking-wider mt-1">Min</span>
                 </div>
                 <div className="flex flex-col items-center p-2 bg-black/10 rounded-xl backdrop-blur-sm">
                   <span className="text-2xl md:text-3xl font-extrabold">{timeLeft.seconds}</span>
-                  <span className="text-xs text-orange-100 font-medium uppercase tracking-wider mt-1">Sec</span>
+                  <span className="text-xs text-orange-800/70 font-medium uppercase tracking-wider mt-1">Sec</span>
                 </div>
               </div>
             ) : (
-              <div className="text-center text-orange-200 font-medium opacity-80 py-4">
+              <div className="text-center text-orange-700 font-medium opacity-80 py-4">
                 Select a date to start the countdown
               </div>
             )}

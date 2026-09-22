@@ -45,7 +45,7 @@ export function AgeCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Date of Birth</label>
@@ -67,14 +67,14 @@ export function AgeCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl h-full min-h-[200px] shadow-lg shadow-rose-500/30 border border-rose-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl shadow-sm border border-rose-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <CalendarDays className="w-8 h-8 text-rose-600" />
           </div>
           
-          <p className="text-sm text-rose-100 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-rose-800/70 uppercase tracking-widest font-bold mb-1">
             Exact Age
           </p>
           
@@ -84,25 +84,25 @@ export function AgeCalculator() {
                 key={`${age.years}-${age.months}-${age.days}`}
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="flex flex-wrap justify-center gap-4 text-white"
+                className="flex flex-wrap justify-center gap-4 text-slate-900"
               >
                 <div className="flex flex-col items-center">
                   <span className="text-4xl md:text-5xl font-extrabold tracking-tighter drop-shadow-sm">{age.years}</span>
-                  <span className="text-sm text-rose-100 font-medium">Years</span>
+                  <span className="text-sm text-rose-800/70 font-medium">Years</span>
                 </div>
                 <div className="text-3xl font-light mt-1 opacity-50">/</div>
                 <div className="flex flex-col items-center">
                   <span className="text-4xl md:text-5xl font-extrabold tracking-tighter drop-shadow-sm">{age.months}</span>
-                  <span className="text-sm text-rose-100 font-medium">Months</span>
+                  <span className="text-sm text-rose-800/70 font-medium">Months</span>
                 </div>
                 <div className="text-3xl font-light mt-1 opacity-50">/</div>
                 <div className="flex flex-col items-center">
                   <span className="text-4xl md:text-5xl font-extrabold tracking-tighter drop-shadow-sm">{age.days}</span>
-                  <span className="text-sm text-rose-100 font-medium">Days</span>
+                  <span className="text-sm text-rose-800/70 font-medium">Days</span>
                 </div>
               </motion.div>
             ) : (
-              <div className="text-xl text-rose-200 font-medium opacity-80 mt-2">
+              <div className="text-xl text-rose-700 font-medium opacity-80 mt-2">
                 Enter your Date of Birth
               </div>
             )}

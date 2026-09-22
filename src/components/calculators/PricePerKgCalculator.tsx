@@ -26,7 +26,7 @@ export function PricePerKgCalculator() {
       {/* Premium Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Price</label>
@@ -64,20 +64,20 @@ export function PricePerKgCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl h-full min-h-[200px] shadow-lg shadow-amber-500/30 border border-amber-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-amber-100 rounded-2xl shadow-sm border border-amber-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Scale className="w-8 h-8 text-amber-600" />
           </div>
-          <p className="text-sm text-amber-100 mb-2 uppercase tracking-widest font-bold">Price per Kg</p>
+          <p className="text-sm text-amber-800/70 mb-2 uppercase tracking-widest font-bold">Price per Kg</p>
           <motion.div 
             key={calculatePricePerKg()}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-4xl md:text-5xl font-extrabold text-white tracking-tighter drop-shadow-sm flex items-end gap-1"
+            className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter drop-shadow-sm flex items-end gap-1"
           >
-            {calculatePricePerKg()} <span className="text-amber-200 text-2xl mb-1 font-medium">/kg</span>
+            {calculatePricePerKg()} <span className="text-amber-700 text-2xl mb-1 font-medium">/kg</span>
           </motion.div>
         </div>
       </div>

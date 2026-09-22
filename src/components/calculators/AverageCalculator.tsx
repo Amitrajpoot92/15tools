@@ -40,7 +40,7 @@ export function AverageCalculator() {
       {/* Premium Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Enter Numbers (separated by commas or spaces)</label>
@@ -54,34 +54,34 @@ export function AverageCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl h-full shadow-lg shadow-orange-500/30 border border-orange-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="w-full grid grid-cols-2 gap-3 mt-2">
-            <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-200 uppercase tracking-wider font-bold mb-1">Average (Mean)</p>
-              <motion.div key={`mean-${stats.mean}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-white">
+            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
+              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Average (Mean)</p>
+              <motion.div key={`mean-${stats.mean}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
                 {stats.mean}
               </motion.div>
             </div>
             
-            <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-200 uppercase tracking-wider font-bold mb-1">Median</p>
-              <motion.div key={`median-${stats.median}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-white">
+            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
+              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Median</p>
+              <motion.div key={`median-${stats.median}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
                 {stats.median}
               </motion.div>
             </div>
             
-            <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-200 uppercase tracking-wider font-bold mb-1">Sum</p>
-              <motion.div key={`sum-${stats.sum}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-white">
+            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
+              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Sum</p>
+              <motion.div key={`sum-${stats.sum}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
                 {stats.sum}
               </motion.div>
             </div>
             
-            <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-200 uppercase tracking-wider font-bold mb-1">Count</p>
-              <motion.div key={`count-${stats.count}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-white">
+            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
+              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Count</p>
+              <motion.div key={`count-${stats.count}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
                 {stats.count}
               </motion.div>
             </div>

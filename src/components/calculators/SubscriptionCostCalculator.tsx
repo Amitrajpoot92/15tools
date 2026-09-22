@@ -121,14 +121,14 @@ export function SubscriptionCostCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl h-full min-h-[300px] shadow-lg shadow-rose-500/30 border border-rose-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl h-full min-h-[300px] shadow-sm border border-rose-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Calculator className="w-8 h-8 text-rose-600" />
           </div>
           
-          <p className="text-sm text-rose-100 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-rose-800/70 uppercase tracking-widest font-bold mb-1">
             Total Monthly Cost
           </p>
           
@@ -136,16 +136,16 @@ export function SubscriptionCostCalculator() {
             key={result.monthly}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-sm"
+            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm"
           >
             ${result.monthly}
           </motion.div>
 
-          <div className="w-full border-t border-rose-400/50 my-3" />
+          <div className="w-full border-t border-rose-300 my-3" />
 
-          <div className="w-full flex justify-between items-center mt-2 px-4 py-3 bg-white/10 rounded-xl border border-white/10 backdrop-blur-sm">
-            <span className="text-rose-100 font-medium">Total Yearly Cost:</span>
-            <span className="text-white font-bold text-xl">${result.yearly}</span>
+          <div className="w-full flex justify-between items-center mt-2 px-4 py-3 bg-white shadow-sm rounded-xl border border-white/10 backdrop-blur-sm">
+            <span className="text-rose-800/70 font-medium">Total Yearly Cost:</span>
+            <span className="text-slate-900 font-bold text-xl">${result.yearly}</span>
           </div>
         </div>
       </div>

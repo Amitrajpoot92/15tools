@@ -38,7 +38,7 @@ export function EMICalculator() {
     <div className="w-full relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Loan Amount (Principal)</label>
@@ -99,7 +99,7 @@ export function EMICalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-indigo-50 rounded-2xl h-full border border-indigo-200 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-indigo-100 rounded-2xl border border-indigo-300 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">

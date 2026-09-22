@@ -51,7 +51,7 @@ export function AttendanceCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Classes Held (Total)</label>
@@ -87,14 +87,14 @@ export function AttendanceCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl h-full min-h-[300px] shadow-lg shadow-orange-500/30 border border-orange-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <ClipboardCheck className="w-8 h-8 text-orange-600" />
           </div>
           
-          <p className="text-sm text-orange-100 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-orange-800/70 uppercase tracking-widest font-bold mb-1">
             Current Attendance
           </p>
           
@@ -102,15 +102,15 @@ export function AttendanceCalculator() {
             key={result.percentage}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-sm"
+            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm"
           >
-            {result.percentage}<span className="text-3xl font-medium text-orange-200 ml-1">%</span>
+            {result.percentage}<span className="text-3xl font-medium text-orange-700 ml-1">%</span>
           </motion.div>
 
-          <div className="w-full border-t border-orange-400/50 my-3" />
+          <div className="w-full border-t border-orange-300 my-3" />
 
-          <div className="w-full flex justify-center text-center text-sm mt-2 min-h-[40px]">
-            <span className="text-white font-medium">{result.status}</span>
+          <div className="w-full flex justify-center text-center text-sm mt-2">
+            <span className="text-slate-900 font-medium">{result.status}</span>
           </div>
         </div>
       </div>

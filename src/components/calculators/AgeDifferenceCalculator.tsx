@@ -41,7 +41,7 @@ export function AgeDifferenceCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">First Person's DOB</label>
@@ -63,14 +63,14 @@ export function AgeDifferenceCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl h-full min-h-[250px] shadow-lg shadow-amber-500/30 border border-amber-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-amber-100 rounded-2xl shadow-sm border border-amber-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Clock className="w-8 h-8 text-amber-600" />
           </div>
           
-          <p className="text-sm text-amber-100 uppercase tracking-widest font-bold mb-2">
+          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-bold mb-2">
             Exact Difference
           </p>
           
@@ -80,7 +80,7 @@ export function AgeDifferenceCalculator() {
                 key={`${diff.years}-${diff.months}-${diff.days}`}
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="flex flex-col items-center gap-1 text-white"
+                className="flex flex-col items-center gap-1 text-slate-900"
               >
                 <div className="text-4xl md:text-5xl font-extrabold tracking-tighter drop-shadow-sm">
                   {diff.years} <span className="text-2xl opacity-80">yrs</span>
@@ -91,7 +91,7 @@ export function AgeDifferenceCalculator() {
                 </div>
               </motion.div>
             ) : (
-              <div className="text-center text-amber-200 font-medium opacity-80 py-4">
+              <div className="text-center text-amber-700 font-medium opacity-80 py-4">
                 Select both dates to compare
               </div>
             )}

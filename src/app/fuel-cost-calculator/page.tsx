@@ -35,19 +35,14 @@ export default function FuelCostPage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex items-center gap-4 md:gap-6 bg-lime-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-lime-100/50">
-          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-lime-600 rounded-2xl shadow-sm shadow-lime-600/20">
-            <Fuel className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h2 className="text-[10px] md:text-xs font-bold text-lime-600 uppercase tracking-wider mb-1">FUEL COST</h2>
-            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-              Fuel Cost Calculator
-            </h1>
-            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-              Estimate the fuel cost for your upcoming road trip based on distance, efficiency, and gas prices.
-            </p>
-          </div>
+        {/* Ultra Compact Header */}
+        <div className="flex flex-col items-center text-center bg-lime-100 rounded-2xl p-4 md:p-6 mb-6 border border-lime-300">
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+            Fuel Cost Calculator
+          </h1>
+          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Estimate the fuel cost for your upcoming road trip based on distance, efficiency, and gas prices.
+          </p>
         </div>
 
         {/* Interactive Tool */}

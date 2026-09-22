@@ -30,7 +30,7 @@ export function DateDifferenceCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Start Date</label>
@@ -52,18 +52,18 @@ export function DateDifferenceCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl h-full min-h-[250px] shadow-lg shadow-rose-500/30 border border-rose-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl shadow-sm border border-rose-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <CalendarRange className="w-8 h-8 text-rose-600" />
           </div>
           
-          <p className="text-sm text-rose-100 uppercase tracking-widest font-bold mb-4">
+          <p className="text-sm text-rose-800/70 uppercase tracking-widest font-bold mb-4">
             Duration Between Dates
           </p>
           
-          <div className="w-full text-center text-white">
+          <div className="w-full text-center text-slate-900">
             {diff ? (
               <motion.div 
                 key={diff.diffDays}
@@ -74,23 +74,23 @@ export function DateDifferenceCalculator() {
                 <div className="text-5xl md:text-6xl font-extrabold tracking-tighter drop-shadow-sm">
                   {diff.diffDays} <span className="text-2xl font-medium opacity-80">Days</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-rose-400/50">
+                <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-rose-300">
                   <div className="flex flex-col">
                     <span className="font-bold text-lg">{diff.diffWeeks}</span>
-                    <span className="text-xs text-rose-200">Weeks</span>
+                    <span className="text-xs text-rose-700">Weeks</span>
                   </div>
-                  <div className="flex flex-col border-l border-r border-rose-400/50">
+                  <div className="flex flex-col border-l border-r border-rose-300">
                     <span className="font-bold text-lg">{diff.diffMonths}</span>
-                    <span className="text-xs text-rose-200">Months</span>
+                    <span className="text-xs text-rose-700">Months</span>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-bold text-lg">{diff.diffYears}</span>
-                    <span className="text-xs text-rose-200">Years</span>
+                    <span className="text-xs text-rose-700">Years</span>
                   </div>
                 </div>
               </motion.div>
             ) : (
-              <div className="text-rose-200 font-medium opacity-80 py-4">
+              <div className="text-rose-700 font-medium opacity-80 py-4">
                 Select start and end dates
               </div>
             )}

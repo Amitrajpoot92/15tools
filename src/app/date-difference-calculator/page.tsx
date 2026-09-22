@@ -35,19 +35,14 @@ export default function DateDifferencePage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex items-center gap-4 md:gap-6 bg-teal-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-teal-100/50">
-          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-teal-600 rounded-2xl shadow-sm shadow-teal-600/20">
-            <CalendarRange className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h2 className="text-[10px] md:text-xs font-bold text-teal-600 uppercase tracking-wider mb-1">DATE DIFFERENCE</h2>
-            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-              Date Difference Calculator
-            </h1>
-            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-              Calculate the exact number of days, weeks, months, and years between any two calendar dates.
-            </p>
-          </div>
+        {/* Ultra Compact Header */}
+        <div className="flex flex-col items-center text-center bg-teal-100 rounded-2xl p-4 md:p-6 mb-6 border border-teal-300">
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+            Date Difference Calculator
+          </h1>
+          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Calculate the exact number of days, weeks, months, and years between any two calendar dates.
+          </p>
         </div>
 
         {/* Interactive Tool */}

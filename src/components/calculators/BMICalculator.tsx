@@ -36,7 +36,7 @@ export function BMICalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Weight (kg)</label>
@@ -60,23 +60,23 @@ export function BMICalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl h-full min-h-[200px] shadow-lg shadow-orange-500/30 border border-orange-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Activity className="w-8 h-8 text-orange-600" />
           </div>
-          <p className="text-sm text-orange-100 mb-1 uppercase tracking-widest font-bold">Your BMI</p>
+          <p className="text-sm text-orange-800/70 mb-1 uppercase tracking-widest font-bold">Your BMI</p>
           <motion.div 
             key={bmiResult}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter drop-shadow-sm mb-2"
+            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter drop-shadow-sm mb-2"
           >
             {bmiResult}
           </motion.div>
-          <div className="bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full border border-white/20">
-            <p className="text-white font-bold text-sm">{category}</p>
+          <div className="bg-white shadow-sm backdrop-blur-sm px-4 py-1.5 rounded-full border border-slate-200">
+            <p className="text-slate-900 font-bold text-sm">{category}</p>
           </div>
         </div>
       </div>

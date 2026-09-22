@@ -35,7 +35,7 @@ export function TipCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Bill Amount ($)</label>
@@ -56,7 +56,7 @@ export function TipCalculator() {
                   key={preset}
                   onClick={() => setTipPercent(preset.toString())}
                   className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${
-                    tipPercent === preset.toString() ? "bg-orange-500 text-white shadow-md" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    tipPercent === preset.toString() ? "bg-orange-500 text-slate-900 shadow-md" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   {preset}%
@@ -84,14 +84,14 @@ export function TipCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl h-full min-h-[300px] shadow-lg shadow-orange-500/30 border border-orange-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Banknote className="w-8 h-8 text-orange-600" />
           </div>
           
-          <p className="text-sm text-orange-100 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-orange-800/70 uppercase tracking-widest font-bold mb-1">
             Total Per Person
           </p>
           
@@ -99,20 +99,20 @@ export function TipCalculator() {
             key={result.split}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter mb-4 drop-shadow-sm"
+            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm"
           >
             ${result.split}
           </motion.div>
 
-          <div className="w-full border-t border-orange-400/50 my-3" />
+          <div className="w-full border-t border-orange-300 my-3" />
 
           <div className="w-full flex justify-between text-sm mt-2">
-            <span className="text-orange-100 font-medium">Total Tip:</span>
-            <span className="text-white font-bold">${result.tip}</span>
+            <span className="text-orange-800/70 font-medium">Total Tip:</span>
+            <span className="text-slate-900 font-bold">${result.tip}</span>
           </div>
           <div className="w-full flex justify-between text-sm mt-1">
-            <span className="text-orange-100 font-medium">Total Bill + Tip:</span>
-            <span className="text-white font-bold">${result.total}</span>
+            <span className="text-orange-800/70 font-medium">Total Bill + Tip:</span>
+            <span className="text-slate-900 font-bold">${result.total}</span>
           </div>
         </div>
       </div>

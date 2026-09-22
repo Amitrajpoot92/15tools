@@ -51,7 +51,7 @@ export default function PercentageCalculatorPage() {
       </div>
 
       <SEOContent>
-        <h2>What is Percentage Calculator?</h2>
+        <h2>What is Percentage Calculator</h2>
         <p>
           Percentage Calculator is a simple online tool that helps you calculate percentages quickly and accurately. Whether you want to find what percentage of a number, calculate what percentage one number is of another, or check the percentage increase or decrease, this calculator can give you the result instantly.
         </p>
@@ -120,35 +120,35 @@ export default function PercentageCalculatorPage() {
           Whether you are a student, teacher, shopper, employee, business owner or general user, the calculator can help you solve percentage calculations quickly.
         </p>
 
-        <h2>Frequently Asked Questions (FAQ)</h2>
+        <h3>Frequently Asked Questions (FAQ)</h3>
         
-        <h3>1. What is a percentage calculator?</h3>
+        <h4>1. What is a percentage calculator?</h4>
         <p>A percentage calculator is an online tool that helps you quickly calculate percentages, find a percentage of a number, and calculate percentage increases or decreases.</p>
 
-        <h3>2. How do I calculate a percentage of a number?</h3>
+        <h4>2. How do I calculate a percentage of a number?</h4>
         <p>Use the formula (Percentage ÷ 100) × Number. For example, 20% of 500 is 100.</p>
 
-        <h3>3. How do I find what percentage one number is of another?</h3>
+        <h4>3. How do I find what percentage one number is of another?</h4>
         <p>Use (Part ÷ Total) × 100. For example, 50 is 25% of 200.</p>
 
-        <h3>4. How do I calculate percentage increase or decrease?</h3>
+        <h4>4. How do I calculate percentage increase or decrease?</h4>
         <p>Enter the original value and new value in the percentage change calculator. It will show the percentage increase or decrease.</p>
 
-        <h3>5. Can I use this percentage calculator for exam marks?</h3>
+        <h4>5. Can I use this percentage calculator for exam marks?</h4>
         <p>Yes. You can calculate your exam percentage by entering your obtained marks and total marks.</p>
 
-        <h3>6. Can I calculate discounts with a percentage calculator?</h3>
+        <h4>6. Can I calculate discounts with a percentage calculator?</h4>
         <p>Yes. You can use it to find the percentage amount of a product price, such as calculating 10%, 20%, or 50% of a price.</p>
 
         <h2>Related Calculators</h2>
         <ul>
           <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
-          <li><a href="/marks-percentage-calculator" className="text-blue-600 hover:underline">Marks Percentage Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-blue-600 hover:underline">Wholesale Calculator</a></li>
-          <li><a href="/tip-calculator" className="text-blue-600 hover:underline">Tip Calculator</a></li>
           <li><a href="/gst-calculator" className="text-blue-600 hover:underline">GST Calculator</a></li>
-          <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit & Loss Calculator</a></li>
-          <li><a href="/attendance-percentage-calculator" className="text-blue-600 hover:underline">Attendance Percentage Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/emi-calculator" className="text-blue-600 hover:underline">EMI Calculator</a></li>
+          <li><a href="/sip-calculator" className="text-blue-600 hover:underline">SIP Calculator</a></li>
+          <li><a href="/subscription-cost-calculator" className="text-blue-600 hover:underline">Subscription Cost Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

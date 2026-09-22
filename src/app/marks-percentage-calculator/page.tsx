@@ -35,19 +35,14 @@ export default function MarksPercentagePage() {
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex items-center gap-4 md:gap-6 bg-blue-50/50 rounded-2xl p-4 md:p-6 mb-6 border border-blue-100/50">
-          <div className="hidden sm:flex flex-shrink-0 items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl shadow-sm shadow-blue-600/20">
-            <GraduationCap className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <h2 className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">MARKS PERCENTAGE</h2>
-            <h1 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
-              Marks Percentage Calculator
-            </h1>
-            <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-              Convert your exam scores into an exact percentage and find out your estimated letter grade.
-            </p>
-          </div>
+        {/* Ultra Compact Header */}
+        <div className="flex flex-col items-center text-center bg-blue-100 rounded-2xl p-4 md:p-6 mb-6 border border-blue-300">
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+            Marks Percentage Calculator
+          </h1>
+          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+            Convert your exam scores into an exact percentage and find out your estimated letter grade.
+          </p>
         </div>
 
         {/* Interactive Tool */}

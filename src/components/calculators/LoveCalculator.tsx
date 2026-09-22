@@ -47,7 +47,7 @@ export function LoveCalculator() {
       {/* Premium Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div className="relative z-10 space-y-6">
         <div className="space-y-6">
           <div className="space-y-4">
             <div className="space-y-2">
@@ -88,11 +88,11 @@ export function LoveCalculator() {
           </button>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl h-full min-h-[250px] shadow-lg shadow-rose-500/30 border border-rose-400/30 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 border border-rose-300 rounded-2xl shadow-sm  relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
-          <div className="p-3 bg-white/20 rounded-2xl shadow-sm mb-4 backdrop-blur-md">
-            <Heart className={`w-10 h-10 text-white ${isCalculating ? 'animate-ping' : 'fill-white'}`} />
+          <div className="p-3 bg-white shadow-sm rounded-2xl shadow-sm mb-4 backdrop-blur-md">
+            <Heart className={`w-10 h-10 text-slate-900 ${isCalculating ? 'animate-ping' : 'fill-white'}`} />
           </div>
           
           <AnimatePresence mode="wait">
@@ -104,10 +104,10 @@ export function LoveCalculator() {
                 exit={{ scale: 0.5, opacity: 0 }}
                 className="text-center"
               >
-                <div className="text-5xl md:text-6xl font-extrabold text-white tracking-tighter drop-shadow-sm mb-2">
+                <div className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter drop-shadow-sm mb-2">
                   {result}%
                 </div>
-                <p className="text-rose-100 font-bold text-sm md:text-base px-2 text-center">
+                <p className="text-rose-800/70 font-bold text-sm md:text-base px-2 text-center">
                   {getMessage(result)}
                 </p>
               </motion.div>
@@ -119,7 +119,7 @@ export function LoveCalculator() {
                 exit={{ opacity: 0 }}
                 className="text-center"
               >
-                <p className="text-sm text-rose-100 uppercase tracking-widest font-bold">
+                <p className="text-sm text-rose-800/70 uppercase tracking-widest font-bold">
                   {isCalculating ? "Analyzing Destiny..." : "Awaiting Names"}
                 </p>
               </motion.div>

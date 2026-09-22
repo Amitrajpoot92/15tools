@@ -51,116 +51,84 @@ export default function WholesalePage() {
       </div>
 
       <SEOContent>
-        <h2>What is a Wholesale Calculator?</h2>
-        <p>
-          A <strong>Wholesale Calculator</strong> is an essential, professional-grade financial utility used by retail store managers, e-commerce sellers, manufacturers, and corporate accountants. Its primary function is to determine the exact selling price you must charge for a product in order to achieve a specific, predetermined profit Wholesale. By simply inputting your raw cost of goods and the percentage of profit you wish to make, the calculator instantly outputs the required retail price.
-        </p>
-        <p>
-          Pricing strategy is often the deciding factor between a business thriving or facing bankruptcy. If you price your products too low, your gross Wholesale will not be sufficient to cover your overhead operating costs (such as employee salaries, rent, and marketing). If you price them too high without justification, you will lose sales to competitors. The <strong>TopCalcBox Wholesale Calculator</strong> removes the mathematical guesswork from this delicate balancing act. It ensures that every product on your shelf or website is priced mathematically to guarantee your business remains profitable.
-        </p>
-        
-        <h2>How to Use the Wholesale Calculator</h2>
-        <p>
-          We have designed the interface to be intuitive and fast, allowing business owners to price hundreds of inventory items efficiently. Here is how you use the tool:
-        </p>
-        <ul>
-          <li><strong>Step 1: Enter the Cost Price.</strong> In the first input field, type the total cost you incurred to acquire or manufacture the product. For the most accurate Wholesale calculation, this number should include the wholesale price of the item plus any direct costs associated with acquiring it (such as freight, shipping, or raw materials). This is known as your Cost of Goods Sold (COGS).</li>
-          <li><strong>Step 2: Enter Your Desired Wholesale.</strong> In the second field, type the Gross Wholesale Percentage you want to achieve on this specific sale. (For example, if you want 40% of the final sale price to be pure profit, type "40").</li>
-          <li><strong>Step 3: Analyze the Results.</strong> The calculator will process the inputs instantly. The results panel will clearly display three critical numbers:
-            <ul>
-              <li><strong>Selling Price:</strong> The exact dollar amount you must charge the customer.</li>
-              <li><strong>Gross Profit:</strong> The actual monetary amount you will earn on the sale.</li>
-              <li><strong>Markup Percentage:</strong> The percentage by which the cost was increased to reach the selling price.</li>
-            </ul>
-          </li>
-        </ul>
+        <h2>What is Wholesale Price Calculator</h2>
+        <p>A Wholesale Price Calculator is an online tool that helps you work out the right wholesale selling price for products sold in bulk. It uses your total cost, target profit percentage, and quantity to calculate how much you should charge while keeping your desired profit.</p>
+        <p>It is useful for wholesalers, manufacturers, distributors, retailers, resellers, and small business owners who need to set prices for bulk orders. The calculator can show the wholesale price per unit, profit per unit, total profit, and total revenue, making pricing decisions easier.</p>
+        <p><strong>Example:</strong> Suppose your Total Cost Price is ₹1,000, your Target Profit is 10%, and you have 10 units. Your target profit is ₹100, making the required revenue ₹1,100. The wholesale price would be ₹110 per unit, giving you a ₹100 total profit.</p>
 
-        <h2>Wholesale vs. Markup: Understanding the Crucial Difference</h2>
-        <p>
-          One of the most common and devastating mistakes new entrepreneurs make is confusing Wholesale with Markup. While both deal with profit, they measure that profit from two entirely different baselines. If you confuse the two, you will end up pricing your products much lower than intended, severely damaging your cash flow.
-        </p>
-        
-        <h3>1. Wholesale (Gross Wholesale)</h3>
-        <p>
-          <strong>Wholesale</strong> is your profit expressed as a percentage of the <strong>Selling Price</strong> (Revenue). It answers the question: <em>"For every dollar of revenue I make, how much of it is profit?"</em>
-        </p>
-        <ul>
-          <li><em>Formula:</em> Wholesale = (Gross Profit / Selling Price) × 100</li>
-          <li><em>Example:</em> You buy a shirt for $50 and sell it for $100. Your profit is $50. Your Wholesale is ($50 / $100) × 100 = <strong>50%</strong>. Half of your revenue is profit.</li>
-        </ul>
-
-        <h3>2. Markup</h3>
-        <p>
-          <strong>Markup</strong> is your profit expressed as a percentage of the <strong>Cost</strong>. It answers the question: <em>"By what percentage did I increase the cost price to arrive at the selling price?"</em>
-        </p>
-        <ul>
-          <li><em>Formula:</em> Markup = (Gross Profit / Cost) × 100</li>
-          <li><em>Example:</em> You buy a shirt for $50 and sell it for $100. Your profit is $50. Your Markup is ($50 / $50) × 100 = <strong>100%</strong>. You marked up the cost by 100%.</li>
-        </ul>
-        <p>
-          <strong>The Golden Rule:</strong> Markup is always a higher percentage number than Wholesale. If you want a 50% Wholesale, you must apply a 100% Markup!
-        </p>
-
-        <h2>Calculation Formula: How the Tool Finds Your Price</h2>
-        <p>
-          If you need to calculate your selling price manually on a calculator or in an Excel spreadsheet, you cannot simply multiply the cost by the Wholesale percentage. That is calculating a markup. To find the correct selling price based on a desired Wholesale, you must divide the cost by the inverse of the Wholesale. Here is the exact formula our digital tool uses:
-        </p>
-        
-        <blockquote>
-          <strong>Selling Price</strong> = Cost / [1 - (Desired Wholesale % / 100)]
-        </blockquote>
-        
-        <p><strong>Let's break down an example:</strong></p>
-        <p>You own a tech store. You purchase a batch of headphones from a wholesale distributor for $60 each (Cost). Your business model requires a 40% gross Wholesale on electronics to cover store rent and employee wages. What should the selling price be?</p>
+        <h2>How to Use Wholesale Price Calculator</h2>
+        <p>Using the Wholesale Price Calculator is simple. Enter your cost, target profit, and quantity to get the recommended wholesale price.</p>
         <ol>
-          <li>Convert the Wholesale to a decimal: 40 / 100 = 0.40</li>
-          <li>Subtract the Wholesale decimal from 1: 1 - 0.40 = 0.60</li>
-          <li>Divide the cost by that number: $60 / 0.60 = <strong>$100.00</strong></li>
+          <li><strong>Enter the Total Cost Price:</strong> Add the complete cost of all the products.</li>
+          <li><strong>Enter the Target Profit (%):</strong> Enter the profit percentage you want to earn.</li>
+          <li><strong>Enter the Quantity:</strong> Add the total number of units in the order.</li>
+          <li><strong>Get your result:</strong> The calculator instantly shows the wholesale price per unit, profit per unit, total profit, and total revenue.</li>
         </ol>
-        <p>You must sell the headphones for $100. (Your profit is $40, which is exactly 40% of the $100 selling price. Perfect!).</p>
+        <p>Use Copy to save the result or Reset to start a new calculation.</p>
 
-        <h2>Common Uses / Who Can Use It</h2>
+        <h2>Wholesale Price Calculation Formula</h2>
+        <p>The Wholesale Price Calculator uses your total cost, target profit, and quantity to work out the selling price you should charge per unit.</p>
+        
         <p>
-          The TopCalcBox Wholesale Calculator is an everyday driver for professionals across the commercial spectrum:
+          <strong>Target Profit</strong> = Total Cost × Target Profit % ÷ 100<br/>
+          <strong>Example:</strong> ₹1,000 × 10 ÷ 100 = ₹100
         </p>
+        <p>
+          <strong>Total Revenue</strong> = Total Cost + Target Profit<br/>
+          <strong>Example:</strong> ₹1,000 + ₹100 = ₹1,100
+        </p>
+        <p>
+          <strong>Wholesale Price Per Unit</strong> = Total Revenue ÷ Quantity<br/>
+          <strong>Example:</strong> ₹1,100 ÷ 10 = ₹110 per unit
+        </p>
+        <p>
+          <strong>Profit Per Unit</strong> = Wholesale Price Per Unit − Cost Per Unit<br/>
+          <strong>Example:</strong> ₹110 − ₹100 = ₹10 profit per unit
+        </p>
+        <p>
+          <strong>Final Result:</strong> ₹110 wholesale price per unit | ₹10 profit per unit | ₹100 total profit
+        </p>
+
+        <h2>Who Can Use a Wholesale Price Calculator</h2>
+        <p>A Wholesale Price Calculator is useful for anyone who sells products in bulk and wants to set a price that covers the total cost while keeping a target profit.</p>
         <ul>
-          <li><strong>Retail Managers & Boutique Owners:</strong> Setting the "sticker price" for new seasonal inventory shipments to ensure the store maintains its target 50% gross Wholesale ("Keystone Pricing").</li>
-          <li><strong>E-commerce Sellers (Shopify, Amazon):</strong> Dropshippers and Amazon FBA sellers use this tool to calculate their base selling price before factoring in complex platform fees and shipping costs.</li>
-          <li><strong>Wholesalers & Manufacturers:</strong> Manufacturers who sell B2B (Business to Business) use this calculator to generate their price sheets for distributors, often operating on thinner Wholesales like 15% or 20%.</li>
-          <li><strong>Freelancers & Agencies:</strong> Service-based businesses use Wholesale calculations to determine their hourly billing rates. If a graphic designer wants a 60% Wholesale on a project that costs them $200 in software and asset fees, they use this tool to calculate the client's final invoice.</li>
+          <li><strong>Wholesalers:</strong> Set profitable prices for bulk orders and large quantities.</li>
+          <li><strong>Manufacturers:</strong> Calculate selling prices based on production and other costs.</li>
+          <li><strong>Distributors:</strong> Work out suitable prices when supplying products to retailers.</li>
+          <li><strong>Retailers:</strong> Compare wholesale costs and calculate expected earnings on bulk purchases.</li>
+          <li><strong>Resellers:</strong> Set a selling price after considering purchase costs and desired profit.</li>
+          <li><strong>Online Sellers:</strong> Calculate prices for bulk enquiries and wholesale orders.</li>
+          <li><strong>Small Business Owners:</strong> Quickly work out per-unit pricing, total revenue, and expected profit.</li>
         </ul>
 
-        <h2>Frequently Asked Questions (FAQ)</h2>
+        <h3>Frequently Asked Questions (FAQ)</h3>
         
-        <h3>1. What is a "good" profit Wholesale?</h3>
-        <p>
-          A "good" Wholesale is entirely dependent on your industry and sales volume. Grocery stores operate on massive volume and can survive on razor-thin net Wholesales of 1% to 3%. A high-end jewelry store might sell fewer items but requires gross Wholesales of 60% to 80% to survive. Software (SaaS) companies often boast Wholesales exceeding 80% because the cost of replicating digital goods is essentially zero.
-        </p>
+        <h4>1. What is a wholesale price?</h4>
+        <p>A wholesale price is the amount charged when products are sold in bulk, usually at a lower per-unit price than the retail price.</p>
 
-        <h3>2. What is "Keystone Pricing"?</h3>
-        <p>
-          Keystone pricing is a historic retail standard where a merchant simply doubles the wholesale cost of a product to determine the retail price. Doubling the cost is a 100% Markup, which equates to exactly a 50% Gross Wholesale.
-        </p>
+        <h4>2. How much profit should I add to a wholesale price?</h4>
+        <p>The profit percentage depends on your product, costs, market conditions, competition, and business goals. Use your target profit percentage to calculate the required wholesale price.</p>
 
-        <h3>3. Does this tool calculate Net Profit Wholesale?</h3>
-        <p>
-          No, this tool calculates Gross Wholesale (Revenue minus Cost of Goods Sold). Net Profit Wholesale is a much more complex calculation that involves deducting all operating expenses (taxes, interest, rent, payroll, marketing) from your gross profit.
-        </p>
+        <h4>3. What is the difference between wholesale price and retail price?</h4>
+        <p>Wholesale price is generally used for bulk sales, while retail price is the amount charged to individual customers. Retail prices are usually higher because they may include additional selling and operating costs.</p>
 
-        <h3>4. Can my Wholesale be 100%?</h3>
-        <p>
-          Mathematically, a 100% gross Wholesale is only possible if your Cost of Goods Sold is exactly $0.00 (which is virtually impossible for physical goods, but sometimes applicable in specific digital or consulting scenarios). If you pay $1 for an item and sell it for $1,000,000, your Wholesale approaches 99.9%, but it never quite reaches 100%. (However, your Markup can easily be 100%, 200%, or 1000%!).
-        </p>
+        <h4>4. Does wholesale price include other expenses?</h4>
+        <p>It can. Costs such as packaging, transportation, production, platform fees, or other business expenses should be included in the total cost if they apply to the order.</p>
+
+        <h4>5. Can I use a wholesale price calculator for reselling?</h4>
+        <p>Yes. Resellers can include their purchase cost, additional expenses, quantity, and target profit to work out a suitable wholesale selling price.</p>
+
+        <h4>6. Can I use a wholesale price calculator for small businesses?</h4>
+        <p>Yes. Small business owners can use it to quickly calculate per-unit prices, expected profit, total revenue, and pricing for bulk orders.</p>
 
         <h2>Related Calculators</h2>
-        <p>
-          Mastering your business finances requires looking at your numbers from multiple angles. We highly recommend using these related calculators alongside the Wholesale tool:
-        </p>
         <ul>
-          <li><a href="/profit-and-loss-calculator" className="text-amber-600 hover:underline">Profit and Loss Calculator</a> - Enter your final selling price and cost to get a detailed breakdown of your profit or loss amounts.</li>
-          <li><a href="/discount-calculator" className="text-amber-600 hover:underline">Discount Calculator</a> - Planning a Black Friday sale? Calculate your discounted selling price to see how it will affect your Wholesales.</li>
-          <li><a href="/gst-calculator" className="text-amber-600 hover:underline">GST Calculator</a> - Ensure you extract sales tax from your revenue before calculating your true Wholesales.</li>
-          <li><a href="/percentage-calculator" className="text-amber-600 hover:underline">Percentage Calculator</a> - A standard math utility for calculating general percentage increases and decreases in your operating expenses.</li>
+          <li><a href="/percentage-calculator" className="text-amber-600 hover:underline">Percentage Calculator</a></li>
+          <li><a href="/discount-calculator" className="text-amber-600 hover:underline">Discount Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-amber-600 hover:underline">Profit and Loss Calculator</a></li>
+          <li><a href="/gst-calculator" className="text-amber-600 hover:underline">GST Calculator</a></li>
+          <li><a href="/emi-calculator" className="text-amber-600 hover:underline">EMI Calculator</a></li>
+          <li><a href="/sip-calculator" className="text-amber-600 hover:underline">SIP Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

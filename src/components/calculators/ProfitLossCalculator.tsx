@@ -116,7 +116,7 @@ export function ProfitLossCalculator() {
           </div>
         </div>
 
-        <div className="w-full bg-emerald-100 border border-emerald-300 rounded-2xl p-5 md:p-6 mt-1 relative overflow-hidden h-full flex flex-col justify-between shadow-sm">
+        <div className={`w-full ${result.type === 'loss' ? 'bg-rose-100 border-rose-300' : 'bg-emerald-100 border-emerald-300'} rounded-2xl p-5 md:p-6 mt-1 relative overflow-hidden h-full flex flex-col justify-between shadow-sm`}>
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className={`p-2.5 rounded-xl ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
@@ -133,10 +133,10 @@ export function ProfitLossCalculator() {
             </div>
             
             <div className="flex items-center gap-2 ml-2">
-              <button onClick={() => copyToClipboard(`Total Cost: ${currency}${result.totalCost} | Selling Price: ${currency}${parseFloat(sellingPrice)||0} | ${result.type === 'loss' ? 'Total Loss' : 'Total Profit'}: ${currency}${result.amount}`)} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold text-emerald-700 hover:bg-emerald-50 transition-colors shadow-sm">
+              <button onClick={() => copyToClipboard(`Total Cost: ${currency}${result.totalCost} | Selling Price: ${currency}${parseFloat(sellingPrice)||0} | ${result.type === 'loss' ? 'Total Loss' : 'Total Profit'}: ${currency}${result.amount}`)} className={`flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
                 <span className="inline">Copy</span>
               </button>
-              <button onClick={reset} className="p-1.5 bg-white border border-slate-200 rounded-lg text-emerald-700 hover:bg-emerald-50 transition-colors shadow-sm">
+              <button onClick={reset} className={`p-1.5 bg-white border border-slate-200 rounded-lg transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -149,8 +149,8 @@ export function ProfitLossCalculator() {
               </p>
               <div className="flex flex-col gap-2">
                 <div className="flex items-baseline">
-                  <span className="text-2xl font-bold text-[#064e3b] mr-1">{currency}</span>
-                  <span className="text-5xl font-extrabold text-[#064e3b] tracking-tight">{result.amount}</span>
+                  <span className={`text-2xl font-bold mr-1 ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{currency}</span>
+                  <span className={`text-5xl font-extrabold tracking-tight ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{result.amount}</span>
                 </div>
                 {result.amount !== "0.00" && (
                   <span className={`self-start px-3 py-1 rounded-md text-[11px] font-bold ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
@@ -160,11 +160,11 @@ export function ProfitLossCalculator() {
               </div>
             </div>
             
-            <div className="text-right bg-emerald-200 px-4 py-3 rounded-xl border border-emerald-300">
+            <div className={`text-right px-4 py-3 rounded-xl border ${result.type === 'loss' ? 'bg-rose-200 border-rose-300' : 'bg-emerald-200 border-emerald-300'}`}>
               <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                 {result.type === 'loss' ? 'Loss on Cost' : 'Profit on Cost'}
               </p>
-              <p className="text-xl font-bold text-[#064e3b]">{result.margin}%</p>
+              <p className={`text-xl font-bold ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{result.margin}%</p>
             </div>
           </div>
 
@@ -176,10 +176,6 @@ export function ProfitLossCalculator() {
             <div className="flex justify-between items-center text-[13px]">
               <span className="font-medium text-slate-500">Selling Price</span>
               <span className="font-bold text-slate-800">{currency}{parseFloat(sellingPrice) || 0}</span>
-            </div>
-            <div className="flex justify-between items-center text-[13px]">
-              <span className="font-medium text-slate-500">Other Costs</span>
-              <span className="font-bold text-slate-800">{currency}{parseFloat(expenses) || 0}</span>
             </div>
           </div>
         </div>
