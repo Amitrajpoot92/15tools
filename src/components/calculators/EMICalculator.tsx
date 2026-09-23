@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CreditCard, Copy, Check } from "lucide-react";
+import { CreditCard, Copy, Check, RotateCcw } from "lucide-react";
 
 export function EMICalculator() {
   const [principal, setPrincipal] = useState<string>("");
@@ -15,6 +15,13 @@ export function EMICalculator() {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const reset = () => {
+    setPrincipal("");
+    setRate("");
+    setTenure("");
+    setTenureType("years");
   };
 
   const calculateEMI = () => {
@@ -109,20 +116,25 @@ export function EMICalculator() {
         <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-indigo-100 rounded-2xl border border-indigo-300 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
-          <button onClick={() => {
-            const text = `EMI Calculator
+          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+            <button onClick={() => {
+              const text = `EMI Calculator
 Loan Amount: ₹${principal || 0}
 Interest Rate: ${rate || 0}%
 Loan Tenure: ${tenure || 0} ${tenureType === 'years' ? 'Years' : 'Months'}
 Monthly EMI: ₹${Number(results.emi).toLocaleString()}
 Total Interest: ₹${Number(results.totalInterest).toLocaleString()}
-Total Payment: ₹${Number(results.totalAmount).toLocaleString()}
+Total Payable: ₹${Number(results.totalAmount).toLocaleString()}
 
 Calculate Online: https://topcalcbox.com/emi-calculator/`;
-            copyToClipboard(text);
-          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-indigo-200 rounded-lg text-[11px] font-bold text-indigo-700 hover:bg-indigo-50 transition-colors shadow-sm z-10">
-            <span className="inline">{copied ? "Copied" : "Copy"}</span>
-          </button>
+              copyToClipboard(text);
+            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-indigo-200 rounded-lg text-[11px] font-bold text-indigo-700 hover:bg-indigo-50 transition-colors shadow-sm">
+              <span className="inline">{copied ? "Copied" : "Copy"}</span>
+            </button>
+            <button onClick={reset} className="p-1.5 bg-white border border-indigo-200 rounded-lg text-indigo-700 hover:bg-indigo-50 transition-colors shadow-sm">
+              <RotateCcw className="w-3.5 h-3.5" />
+            </button>
+          </div>
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <CreditCard className="w-8 h-8 text-indigo-600" />

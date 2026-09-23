@@ -36,7 +36,7 @@ export default function Page() {
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-purple-100 rounded-2xl p-4 md:p-6 mb-6 border border-purple-300">
+        <div className="flex flex-col items-center text-center bg-rose-50 rounded-2xl p-4 md:p-6 mb-6 border border-rose-200">
           <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
             SIP Calculator
           </h1>
@@ -52,48 +52,79 @@ export default function Page() {
       </div>
 
       <SEOContent>
-        <h2>What is a SIP?</h2>
-        <p>
-          <strong>SIP (Systematic Investment Plan)</strong> is a popular investment strategy offered by Mutual Funds. It allows individuals to invest a fixed amount of money at regular intervals (such as monthly or quarterly) rather than making a single lump-sum investment. SIPs encourage disciplined investing and help in building wealth over the long term through the power of compounding.
-        </p>
-        
+        <h2>What is a SIP Calculator</h2>
+        <p>A SIP Calculator is an online tool that helps you estimate how your regular monthly investment may grow over time. It calculates the total invested amount, estimated returns, and total expected amount based on your monthly SIP, expected annual return rate, and investment period.</p>
+        <p>It is useful for mutual fund investors and anyone planning long-term investments. By changing the monthly investment, expected return, or time period, you can compare different SIP investment scenarios easily.</p>
+        <p><strong>Note:</strong> SIP returns are market-linked and the actual returns may be higher or lower than the estimated amount.</p>
+
         <h2>How to Use the SIP Calculator</h2>
-        <p>
-          Our SIP Calculator is built to help you project the future value of your investments. Here is how you can use it:
-        </p>
+        <p>Using the SIP Calculator is simple. Enter your investment details to estimate how your regular monthly investment may grow over time.</p>
+        <ol>
+          <li><strong>Enter Monthly Investment:</strong> Enter the amount you plan to invest every month.</li>
+          <li><strong>Enter Expected Return Rate:</strong> Enter the expected annual return rate, such as 12% per year.</li>
+          <li><strong>Enter Time Period:</strong> Enter how many years you plan to continue your SIP investment.</li>
+          <li><strong>Get Your Result:</strong> The calculator shows the Total Expected Amount, Invested Amount, and Wealth Gained.</li>
+          <li><strong>Copy or Reset:</strong> Use Copy to save or share the calculation, or Reset to clear the details and calculate again.</li>
+        </ol>
+
+        <h2>SIP Calculation Formula</h2>
+        <p>The SIP maturity amount is calculated using the standard future value formula for monthly investments:</p>
+        <p><strong>FV = P × [((1 + r)ⁿ − 1) ÷ r] × (1 + r)</strong></p>
+        <p>Where:</p>
         <ul>
-          <li><strong>Step 1: Enter your Monthly Investment.</strong> This is the amount you plan to invest every single month.</li>
-          <li><strong>Step 2: Enter the Expected Return Rate.</strong> This is the annual percentage rate (p.a.) you expect your mutual fund to grow. Historically, equity mutual funds often project between 10% to 15%.</li>
-          <li><strong>Step 3: Enter the Time Period.</strong> This is the number of years you plan to continue investing.</li>
-          <li><strong>Step 4: View the Results.</strong> The calculator immediately displays the Total Expected Amount (maturity value), the total amount you invested out of pocket, and the Wealth Gained (your pure profit from compounding).</li>
+          <li><strong>FV</strong> = Total Expected Amount</li>
+          <li><strong>P</strong> = Monthly Investment</li>
+          <li><strong>r</strong> = Monthly Return Rate = Annual Return Rate ÷ 12 ÷ 100</li>
+          <li><strong>n</strong> = Total Number of Monthly Investments = Total Months</li>
+        </ul>
+        <p>Total Invested Amount = Monthly Investment × Total Months</p>
+        <p>Wealth Gained = Total Expected Amount − Total Invested Amount</p>
+        
+        <h3>Example</h3>
+        <p>
+          Monthly SIP = ₹5,000<br/>
+          Expected Return = 12% p.a.<br/>
+          Period = 10 years<br/>
+          <br/>
+          Total Invested = ₹6,00,000<br/>
+          Wealth Gained ≈ ₹5,61,695<br/>
+          Total Expected Amount ≈ ₹11,61,695
+        </p>
+        <p>Actual returns may vary because SIP returns are market-linked.</p>
+
+        <h2>Who Can Use a SIP Calculator</h2>
+        <p>A SIP Calculator is useful for anyone who wants to estimate the potential growth of regular monthly investments.</p>
+        <ul>
+          <li><strong>New Investors:</strong> Understand how SIP investments may grow over time.</li>
+          <li><strong>Mutual Fund Investors:</strong> Estimate the future value of monthly SIP investments.</li>
+          <li><strong>Long-Term Investors:</strong> Plan investments for future financial goals.</li>
+          <li><strong>Goal Planners:</strong> Estimate the investment needed for goals like education, home, or retirement.</li>
+          <li><strong>Working Professionals:</strong> Plan regular monthly investments based on their budget.</li>
+          <li><strong>Students & Learners:</strong> Understand SIP, compounding, and investment calculations.</li>
         </ul>
 
-        <h2>The Power of Compounding</h2>
-        <p>
-          The secret behind the success of SIPs is the power of compounding. Compounding happens when the returns on your investments start generating their own returns. The longer you stay invested, the more pronounced this effect becomes. This is why financial experts always recommend starting your SIPs as early in life as possible.
-        </p>
+        <h3>Frequently Asked Questions (FAQ)</h3>
+        <h4>1. What is a SIP Calculator?</h4>
+        <p>A SIP Calculator is an online tool that estimates the potential value of regular monthly investments based on the investment amount, expected return rate, and investment period.</p>
 
-        <h2>The Mathematical Formula for SIP Calculation</h2>
-        <p>
-          The future value of a SIP is calculated using the following mathematical formula:
-        </p>
-        <blockquote>
-          <strong>M = P × ([(1 + i)^n - 1] / i) × (1 + i)</strong>
-        </blockquote>
-        <p>
-          Where:
-        </p>
+        <h4>2. How is SIP return calculated?</h4>
+        <p>SIP returns are estimated using the monthly investment amount, expected annual return rate, and total number of investment months.</p>
+
+        <h4>3. How much should I invest in SIP every month?</h4>
+        <p>The monthly SIP amount depends on your income, budget, financial goals, and investment period. A SIP Calculator can help you estimate different monthly investment amounts.</p>
+
+        <h4>4. Can I calculate SIP for 5, 10, or 20 years?</h4>
+        <p>Yes. You can enter different investment periods to compare how the duration may affect the estimated total amount.</p>
+
+        <h4>5. Is the SIP Calculator result guaranteed?</h4>
+        <p>No. The result is an estimate based on the expected return rate. Mutual fund returns are market-linked and actual returns can be higher or lower.</p>
+
+        <h2>Related Calculators</h2>
         <ul>
-          <li><strong>M</strong> is the maturity amount you receive at the end of the tenure.</li>
-          <li><strong>P</strong> is the fixed amount you invest regularly.</li>
-          <li><strong>n</strong> is the total number of payments you make (Years × 12).</li>
-          <li><strong>i</strong> is the periodic rate of interest (Annual Rate / 12 / 100).</li>
+          <li><a href="/percentage-calculator" className="text-rose-600 hover:underline">Percentage Calculator</a></li>
+          <li><a href="/emi-calculator" className="text-rose-600 hover:underline">EMI Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a></li>
         </ul>
-
-        <h2>Why Use the TopCalcBox SIP Calculator?</h2>
-        <p>
-          Our calculator is 100% free, fast, and does not require you to sign up. It provides real-time updates as you adjust your monthly investment amounts or time periods, allowing you to easily experiment with different financial goals. Plan your retirement, a child's education, or a dream vacation by visualizing your financial future today!
-        </p>
       </SEOContent>
     </div>
   );

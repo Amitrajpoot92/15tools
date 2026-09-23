@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sigma, Copy, Check } from "lucide-react";
+import { Sigma, Copy, Check, RotateCcw } from "lucide-react";
 
 export function AverageCalculator() {
   const [input, setInput] = useState<string>("");
@@ -12,6 +12,17 @@ export function AverageCalculator() {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const reset = () => {
+    setInput("");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let val = e.target.value;
+    // Add space after comma if not already there
+    val = val.replace(/,([^\s])/g, ', $1');
+    setInput(val);
   };
 
   const calculateStats = () => {
@@ -53,7 +64,7 @@ export function AverageCalculator() {
             <label className="text-sm font-bold text-slate-700">Enter Numbers (separated by commas or spaces)</label>
             <textarea
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={handleChange}
               placeholder="e.g. 10, 20, 30, 40"
               rows={4}
               className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner resize-none"
@@ -63,8 +74,9 @@ export function AverageCalculator() {
 
         <div className="flex flex-col items-center justify-center p-6 bg-orange-100 rounded-2xl shadow-sm border border-orange-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <button onClick={() => {
-            const text = `Average Calculator
+          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+            <button onClick={() => {
+              const text = `Average Calculator
 Numbers: ${input}
 Average (Mean): ${stats.mean}
 Median: ${stats.median}
@@ -72,10 +84,14 @@ Sum: ${stats.sum}
 Count: ${stats.count}
 
 Calculate Online: https://topcalcbox.com/average-calculator/`;
-            copyToClipboard(text);
-          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm z-10">
-            <span className="inline">{copied ? "Copied" : "Copy"}</span>
-          </button>
+              copyToClipboard(text);
+            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm">
+              <span className="inline">{copied ? "Copied" : "Copy"}</span>
+            </button>
+            <button onClick={reset} className="p-1.5 bg-white border border-orange-200 rounded-lg text-orange-700 hover:bg-orange-50 transition-colors shadow-sm">
+              <RotateCcw className="w-3.5 h-3.5" />
+            </button>
+          </div>
           
           <div className="w-full grid grid-cols-2 gap-3 mt-2">
             <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">

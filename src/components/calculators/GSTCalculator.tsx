@@ -167,7 +167,7 @@ export function GSTCalculator() {
 Amount: ₹${amount}
 GST Rate: ${rate}%
 GST Amount: ₹${res.gst}
-Final Amount: ₹${res.total}
+${mode === 'add' ? 'Final Amount: ₹' + res.total : 'Net Amount: ₹' + res.net}
 
 Calculate Online: https://topcalcbox.com/gst-calculator/`;
                 copyToClipboard(text);

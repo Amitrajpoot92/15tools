@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { LineChart, Copy, Check } from "lucide-react";
+import { LineChart, Copy, Check, RotateCcw } from "lucide-react";
 
 export function SIPCalculator() {
   const [investment, setInvestment] = useState<string>("");
@@ -14,6 +14,12 @@ export function SIPCalculator() {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const reset = () => {
+    setInvestment("");
+    setRate("");
+    setYears("");
   };
 
   const calculateSIP = () => {
@@ -80,20 +86,25 @@ export function SIPCalculator() {
         <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-rose-100 rounded-2xl shadow-sm border border-rose-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
-          <button onClick={() => {
-            const text = `SIP Calculator
+          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+            <button onClick={() => {
+              const text = `SIP Calculator
 Monthly Investment: ₹${investment || 0}
 Expected Return: ${rate || 0}%
 Investment Period: ${years || 0} Years
 Total Investment: ₹${Number(results.totalInvested).toLocaleString()}
-Estimated Returns: ₹${Number(results.wealthGained).toLocaleString()}
-Maturity Value: ₹${Number(results.expectedAmount).toLocaleString()}
+Wealth Gained: ₹${Number(results.wealthGained).toLocaleString()}
+Total Expected Amount: ₹${Number(results.expectedAmount).toLocaleString()}
 
 Calculate Online: https://topcalcbox.com/sip-calculator/`;
-            copyToClipboard(text);
-          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-rose-200 rounded-lg text-[11px] font-bold text-rose-700 hover:bg-rose-50 transition-colors shadow-sm z-10">
-            <span className="inline">{copied ? "Copied" : "Copy"}</span>
-          </button>
+              copyToClipboard(text);
+            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-rose-200 rounded-lg text-[11px] font-bold text-rose-700 hover:bg-rose-50 transition-colors shadow-sm">
+              <span className="inline">{copied ? "Copied" : "Copy"}</span>
+            </button>
+            <button onClick={reset} className="p-1.5 bg-white border border-rose-200 rounded-lg text-rose-700 hover:bg-rose-50 transition-colors shadow-sm">
+              <RotateCcw className="w-3.5 h-3.5" />
+            </button>
+          </div>
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <LineChart className="w-8 h-8 text-rose-600" />

@@ -130,8 +130,8 @@ Total Cost Price: ${currency}${cost || 0}
 Profit Target: ${profitPercent || 0}%
 Quantity: ${quantity || 0} Units
 Wholesale Price Per Unit: ${currency}${result.wholesalePricePerUnit}
-Profit Amount: ${currency}${result.totalProfit}
-Wholesale Price: ${currency}${result.totalRevenue}
+Total Profit: ${currency}${result.totalProfit}
+Total Revenue: ${currency}${result.totalRevenue}
 
 Calculate Online: https://topcalcbox.com/wholesale-price-calculator/`;
               copyToClipboard(text);

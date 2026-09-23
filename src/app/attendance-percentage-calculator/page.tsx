@@ -36,7 +36,7 @@ export default function AttendancePage() {
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-sky-100 rounded-2xl p-4 md:p-6 mb-6 border border-sky-300">
+        <div className="flex flex-col items-center text-center bg-orange-50 rounded-2xl p-4 md:p-6 mb-6 border border-orange-200">
           <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
             Attendance Percentage Calculator
           </h1>

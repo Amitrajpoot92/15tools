@@ -137,7 +137,7 @@ export function ProfitLossCalculator() {
                 const text = `Profit and Loss Calculator
 Cost Price: ${currency}${costPrice || 0}
 Selling Price: ${currency}${sellingPrice || 0}
-${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${result.amount}
+${expenses ? `Other Costs / Expenses: ${currency}${expenses}\n` : ''}${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${result.amount}
 ${result.type === 'loss' ? 'Loss' : 'Profit'} Percentage: ${result.margin}%
 
 Calculate Online: https://topcalcbox.com/profit-loss-calculator/`;

@@ -113,9 +113,9 @@ export function PercentageCalculator() {
                   <input type="number" value={percX} onChange={(e)=>setPercX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all pr-10" />
                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">%</span>
                 </div>
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex gap-1 pt-1 w-full">
                   {[5, 10, 15, 20, 25, 50].map(v => (
-                    <button key={v} onClick={() => setPercX(v.toString())} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-900 text-[11px] font-bold rounded-md transition-colors">
+                    <button key={v} onClick={() => setPercX(v.toString())} className="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors">
                       {v}%
                     </button>
                   ))}
