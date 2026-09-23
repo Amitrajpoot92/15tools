@@ -68,7 +68,7 @@ export function ProfitLossCalculator() {
       </div>
 
       <div className="relative z-10 flex flex-col gap-6 items-start w-full">
-        <div className="w-full space-y-5">
+        <div className="w-full space-y-5 bg-emerald-50/50 border border-emerald-100/50 p-5 rounded-2xl">
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
               Cost Price (CP)
@@ -133,8 +133,17 @@ export function ProfitLossCalculator() {
             </div>
             
             <div className="flex items-center gap-2 ml-2">
-              <button onClick={() => copyToClipboard(`Total Cost: ${currency}${result.totalCost} | Selling Price: ${currency}${parseFloat(sellingPrice)||0} | ${result.type === 'loss' ? 'Total Loss' : 'Total Profit'}: ${currency}${result.amount}`)} className={`flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
-                <span className="inline">Copy</span>
+              <button onClick={() => {
+                const text = `Profit and Loss Calculator
+Cost Price: ${currency}${costPrice || 0}
+Selling Price: ${currency}${sellingPrice || 0}
+${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${result.amount}
+${result.type === 'loss' ? 'Loss' : 'Profit'} Percentage: ${result.margin}%
+
+Calculate Online: https://topcalcbox.com/profit-loss-calculator/`;
+                copyToClipboard(text);
+              }} className={`flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
+                <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
               <button onClick={reset} className={`p-1.5 bg-white border border-slate-200 rounded-lg transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
                 <RotateCcw className="w-3.5 h-3.5" />

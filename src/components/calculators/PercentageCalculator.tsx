@@ -103,7 +103,7 @@ export function PercentageCalculator() {
         </button>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-5 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
         <AnimatePresence mode="wait">
           {mode === "what_is_x_percent_of_y" && (
             <motion.div key="what" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -160,7 +160,13 @@ export function PercentageCalculator() {
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold text-slate-900">{result.text}</span>
             <div className="flex items-center gap-1.5">
-              <button onClick={() => copyToClipboard(`${result.text} = ${result.value}${result.symbol ? result.symbol : ""}`)} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
+              <button onClick={() => {
+                const text = `Percentage Calculator
+Result: ${result.text} = ${result.value}${result.symbol ? result.symbol : ""}
+
+Calculate Online: https://topcalcbox.com/percentage-calculator/`;
+                copyToClipboard(text);
+              }} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>

@@ -65,7 +65,7 @@ export function WholesaleCalculator() {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 bg-cyan-50/50 border border-cyan-100/50 p-5 md:p-6 rounded-2xl">
         <div className="space-y-2">
           <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Total Cost Price</label>
           <div className="relative">
@@ -124,8 +124,19 @@ export function WholesaleCalculator() {
           </div>
           
           <div className="flex items-center gap-2 ml-2">
-            <button onClick={() => copyToClipboard(`Wholesale Price: ${currency}${result.wholesalePricePerUnit}`)} className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 border border-amber-300 rounded-lg text-[11px] font-bold text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
-              <span className="inline">Copy</span>
+            <button onClick={() => {
+              const text = `Wholesale Price Calculator
+Total Cost Price: ${currency}${cost || 0}
+Profit Target: ${profitPercent || 0}%
+Quantity: ${quantity || 0} Units
+Wholesale Price Per Unit: ${currency}${result.wholesalePricePerUnit}
+Profit Amount: ${currency}${result.totalProfit}
+Wholesale Price: ${currency}${result.totalRevenue}
+
+Calculate Online: https://topcalcbox.com/wholesale-price-calculator/`;
+              copyToClipboard(text);
+            }} className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 border border-amber-300 rounded-lg text-[11px] font-bold text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
+              <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
             <button onClick={reset} className="p-1.5 bg-amber-100 border border-amber-300 rounded-lg text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />

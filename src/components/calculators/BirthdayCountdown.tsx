@@ -2,11 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Timer } from "lucide-react";
+import { Timer, Copy, Check } from "lucide-react";
 
 export function BirthdayCountdown() {
   const [targetDate, setTargetDate] = useState<string>("");
   const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     if (!targetDate) {
@@ -46,7 +53,7 @@ export function BirthdayCountdown() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6">
+        <div className="space-y-6 bg-orange-50/50 border border-orange-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">When is your next birthday?</label>
             <input
@@ -61,8 +68,18 @@ export function BirthdayCountdown() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
+        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <button onClick={() => {
+            const text = `Birthday Countdown
+Target Date: ${targetDate}
+Time Left: ${timeLeft ? `${timeLeft.days} Days, ${timeLeft.hours} Hrs, ${timeLeft.minutes} Min, ${timeLeft.seconds} Sec` : 'N/A'}
+
+Calculate Online: https://topcalcbox.com/birthday-countdown/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Timer className="w-8 h-8 text-orange-600" />

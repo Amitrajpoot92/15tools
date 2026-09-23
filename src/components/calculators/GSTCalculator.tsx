@@ -81,7 +81,7 @@ export function GSTCalculator() {
         </button>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-5 bg-purple-50/50 border border-purple-100/50 p-5 md:p-6 rounded-2xl">
         <div className="flex flex-col gap-5">
           {/* Amount */}
           <div className="space-y-2">
@@ -162,7 +162,16 @@ export function GSTCalculator() {
               {mode === "add" ? "Total Price (Incl. GST)" : "Net Price (Excl. GST)"}
             </span>
             <div className="flex items-center gap-1.5">
-              <button onClick={() => copyToClipboard(mode === "add" ? `Net Amount: ₹${res.net} | GST: ₹${res.gst} | Total Price: ₹${res.total}` : `Total Amount: ₹${res.total} | GST: ₹${res.gst} | Net Price: ₹${res.net}`)} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-purple-200/50 rounded-lg text-[11px] font-bold text-purple-700 hover:bg-purple-50 transition-colors shadow-sm">
+              <button onClick={() => {
+                const text = `GST Calculator
+Amount: ₹${amount}
+GST Rate: ${rate}%
+GST Amount: ₹${res.gst}
+Final Amount: ₹${res.total}
+
+Calculate Online: https://topcalcbox.com/gst-calculator/`;
+                copyToClipboard(text);
+              }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-purple-200/50 rounded-lg text-[11px] font-bold text-purple-700 hover:bg-purple-50 transition-colors shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>

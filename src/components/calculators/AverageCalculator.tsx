@@ -2,10 +2,17 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sigma } from "lucide-react";
+import { Sigma, Copy, Check } from "lucide-react";
 
 export function AverageCalculator() {
   const [input, setInput] = useState<string>("");
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const calculateStats = () => {
     // Parse input string to array of numbers
@@ -41,7 +48,7 @@ export function AverageCalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6">
+        <div className="space-y-6 bg-orange-50/50 border border-orange-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Enter Numbers (separated by commas or spaces)</label>
             <textarea
@@ -54,8 +61,21 @@ export function AverageCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
+        <div className="flex flex-col items-center justify-center p-6 bg-orange-100 rounded-2xl shadow-sm border border-orange-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <button onClick={() => {
+            const text = `Average Calculator
+Numbers: ${input}
+Average (Mean): ${stats.mean}
+Median: ${stats.median}
+Sum: ${stats.sum}
+Count: ${stats.count}
+
+Calculate Online: https://topcalcbox.com/average-calculator/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
           
           <div className="w-full grid grid-cols-2 gap-3 mt-2">
             <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">

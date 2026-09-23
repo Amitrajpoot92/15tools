@@ -2,13 +2,20 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart } from "lucide-react";
+import { Heart, Copy, Check } from "lucide-react";
 
 export function LoveCalculator() {
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
   const [result, setResult] = useState<number | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const calculateLove = () => {
     if (!name1.trim() || !name2.trim()) return;
@@ -48,7 +55,7 @@ export function LoveCalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6">
+        <div className="space-y-6 bg-rose-50/50 border border-rose-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-bold text-slate-700">Your Name</label>
@@ -90,6 +97,18 @@ export function LoveCalculator() {
 
         <div className="flex flex-col items-center justify-center p-8 bg-rose-100 border border-rose-300 rounded-2xl shadow-sm  relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <button onClick={() => {
+            const text = `Love Calculator
+Your Name: ${name1}
+Crush's Name: ${name2}
+Love %: ${result !== null ? result + '%' : 'N/A'}
+Message: ${result !== null ? getMessage(result) : 'N/A'}
+
+Calculate Online: https://topcalcbox.com/love-calculator/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-rose-200 rounded-lg text-[11px] font-bold text-rose-700 hover:bg-rose-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
           
           <div className="p-3 bg-white shadow-sm rounded-2xl shadow-sm mb-4 backdrop-blur-md">
             <Heart className={`w-10 h-10 text-slate-900 ${isCalculating ? 'animate-ping' : 'fill-white'}`} />

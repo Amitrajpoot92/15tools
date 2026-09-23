@@ -2,12 +2,19 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Scale } from "lucide-react";
+import { Scale, Copy, Check } from "lucide-react";
 
 export function PricePerKgCalculator() {
   const [price, setPrice] = useState<string>("");
   const [weight, setWeight] = useState<string>("");
   const [unit, setUnit] = useState<string>("g"); // default to grams
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const calculatePricePerKg = () => {
     const p = parseFloat(price);
@@ -27,7 +34,7 @@ export function PricePerKgCalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6">
+        <div className="space-y-6 bg-amber-50/50 border border-amber-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Price</label>
             <input
@@ -64,8 +71,19 @@ export function PricePerKgCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-amber-100 rounded-2xl shadow-sm border border-amber-300">
+        <div className="flex flex-col items-center justify-center p-8 bg-amber-100 rounded-2xl shadow-sm border border-amber-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <button onClick={() => {
+            const text = `Price Per Kg Calculator
+Price: ${price || 0}
+Weight: ${weight || 0} ${unit}
+Price per Kg: ${calculatePricePerKg()}/kg
+
+Calculate Online: https://topcalcbox.com/price-per-kg-calculator/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[11px] font-bold text-amber-700 hover:bg-amber-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Scale className="w-8 h-8 text-amber-600" />

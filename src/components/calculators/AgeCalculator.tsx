@@ -2,11 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Copy, Check } from "lucide-react";
 
 export function AgeCalculator() {
   const [dob, setDob] = useState<string>("");
   const [today, setToday] = useState<string>("");
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     const todayDate = new Date().toISOString().split("T")[0];
@@ -46,7 +53,7 @@ export function AgeCalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6">
+        <div className="space-y-6 bg-rose-50/50 border border-rose-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Date of Birth</label>
             <input
@@ -67,8 +74,19 @@ export function AgeCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl shadow-sm border border-rose-300">
+        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl shadow-sm border border-rose-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <button onClick={() => {
+            const text = `Age Calculator
+Date of Birth: ${dob}
+Age at Date: ${today}
+Exact Age: ${age ? `${age.years} Years / ${age.months} Months / ${age.days} Days` : ''}
+
+Calculate Online: https://topcalcbox.com/age-calculator-online/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-rose-200 rounded-lg text-[11px] font-bold text-rose-700 hover:bg-rose-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <CalendarDays className="w-8 h-8 text-rose-600" />

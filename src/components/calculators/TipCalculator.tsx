@@ -2,12 +2,19 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Banknote } from "lucide-react";
+import { Banknote, Copy, Check } from "lucide-react";
 
 export function TipCalculator() {
   const [bill, setBill] = useState<string>("");
   const [tipPercent, setTipPercent] = useState<string>("15");
   const [people, setPeople] = useState<string>("1");
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const calculate = () => {
     const b = parseFloat(bill);
@@ -36,7 +43,7 @@ export function TipCalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6">
+        <div className="space-y-6 bg-orange-50/50 border border-orange-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Bill Amount ($)</label>
             <input
@@ -84,8 +91,22 @@ export function TipCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300">
+        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <button onClick={() => {
+            const text = `Tip Calculator
+Bill Amount: $${bill || 0}
+Tip Percentage: ${tipPercent || 0}%
+Number of People: ${people || 0}
+Total Tip: $${result.tip}
+Total Bill + Tip: $${result.total}
+Total Per Person: $${result.split}
+
+Calculate Online: https://topcalcbox.com/tip-calculator/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
           
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <Banknote className="w-8 h-8 text-orange-600" />

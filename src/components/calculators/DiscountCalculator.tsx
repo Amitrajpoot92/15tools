@@ -82,7 +82,7 @@ export function DiscountCalculator() {
         </div>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-5 bg-emerald-50/50 border border-emerald-100/50 p-5 md:p-6 rounded-2xl">
         <div className="flex flex-col gap-5">
           {/* Original Price */}
           <div className="space-y-2">
@@ -175,7 +175,15 @@ export function DiscountCalculator() {
               Final Payable Price
             </span>
             <div className="flex items-center gap-2">
-              <button onClick={() => copyToClipboard(`Original Price: ${currency}${res.price} | Discount: ${currency}${res.totalSaved} | Final Payable Price: ${currency}${res.finalPrice}`)} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-emerald-200/70 rounded-lg text-[11px] font-bold text-emerald-700 hover:bg-emerald-50 transition-colors shadow-sm">
+              <button onClick={() => {
+                const text = `Discount Calculator
+Original Price: ${currency}${res.price}
+Total Savings: ${currency}${res.totalSaved}
+Final Payable Price: ${currency}${res.finalPrice}
+
+Calculate Online: https://topcalcbox.com/discount-calculator/`;
+                copyToClipboard(text);
+              }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-emerald-200/70 rounded-lg text-[11px] font-bold text-emerald-700 hover:bg-emerald-50 transition-colors shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-emerald-600" />}
                 {copied ? "Copied" : "Copy"}
               </button>

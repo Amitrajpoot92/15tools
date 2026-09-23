@@ -2,13 +2,20 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CreditCard } from "lucide-react";
+import { CreditCard, Copy, Check } from "lucide-react";
 
 export function EMICalculator() {
   const [principal, setPrincipal] = useState<string>("");
   const [rate, setRate] = useState<string>("");
   const [tenure, setTenure] = useState<string>("");
   const [tenureType, setTenureType] = useState<"years" | "months">("years");
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const calculateEMI = () => {
     const p = parseFloat(principal);
@@ -39,7 +46,7 @@ export function EMICalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-4">
+        <div className="space-y-4 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Loan Amount (Principal)</label>
             <div className="relative">
@@ -102,6 +109,21 @@ export function EMICalculator() {
         <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-indigo-100 rounded-2xl border border-indigo-300 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
+          <button onClick={() => {
+            const text = `EMI Calculator
+Loan Amount: ₹${principal || 0}
+Interest Rate: ${rate || 0}%
+Loan Tenure: ${tenure || 0} ${tenureType === 'years' ? 'Years' : 'Months'}
+Monthly EMI: ₹${Number(results.emi).toLocaleString()}
+Total Interest: ₹${Number(results.totalInterest).toLocaleString()}
+Total Payment: ₹${Number(results.totalAmount).toLocaleString()}
+
+Calculate Online: https://topcalcbox.com/emi-calculator/`;
+            copyToClipboard(text);
+          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-indigo-200 rounded-lg text-[11px] font-bold text-indigo-700 hover:bg-indigo-50 transition-colors shadow-sm z-10">
+            <span className="inline">{copied ? "Copied" : "Copy"}</span>
+          </button>
+          
           <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
             <CreditCard className="w-8 h-8 text-indigo-600" />
           </div>
@@ -126,6 +148,10 @@ export function EMICalculator() {
               <span className="text-slate-900 font-bold">₹{Number(results.totalAmount).toLocaleString()}</span>
             </div>
           </div>
+        </div>
+
+        <div className="mt-4 p-4 bg-indigo-50/50 rounded-xl border border-indigo-100/80 text-[11px] text-indigo-800/70 text-center font-medium">
+          Disclaimer: EMI results are estimates based on the information provided. Actual EMI, interest rates, fees and other charges may vary depending on the lender and loan terms.
         </div>
       </div>
     </div>
