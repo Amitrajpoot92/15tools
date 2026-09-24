@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calculator, Plus, Trash2, Copy, Check, RotateCcw, IndianRupee, DollarSign } from "lucide-react";
 
@@ -8,16 +8,37 @@ type Subscription = {
   id: string;
   name: string;
   cost: string;
-  frequency: "weekly" | "monthly" | "yearly";
+  frequency: "monthly" | "yearly";
 };
 
+const defaultSubs: Subscription[] = [
+  { id: "1", name: "Netflix", cost: "15.99", frequency: "monthly" },
+  { id: "2", name: "Spotify", cost: "10.99", frequency: "monthly" },
+];
+
 export function SubscriptionCostCalculator() {
-  const [subs, setSubs] = useState<Subscription[]>([
-    { id: "1", name: "Netflix", cost: "15.99", frequency: "monthly" },
-    { id: "2", name: "Spotify", cost: "10.99", frequency: "monthly" },
-  ]);
+  const [subs, setSubs] = useState<Subscription[]>(defaultSubs);
   const [currency, setCurrency] = useState<"₹" | "$">("₹");
   const [copied, setCopied] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("subscription-calculator-data");
+    if (saved) {
+      try {
+        setSubs(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse saved subscriptions");
+      }
+    }
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("subscription-calculator-data", JSON.stringify(subs));
+    }
+  }, [subs, isLoaded]);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -26,10 +47,8 @@ export function SubscriptionCostCalculator() {
   };
 
   const reset = () => {
-    setSubs([
-      { id: "1", name: "Netflix", cost: "15.99", frequency: "monthly" },
-      { id: "2", name: "Spotify", cost: "10.99", frequency: "monthly" },
-    ]);
+    setSubs(defaultSubs);
+    localStorage.setItem("subscription-calculator-data", JSON.stringify(defaultSubs));
   };
 
   const addSub = () => {
@@ -53,10 +72,7 @@ export function SubscriptionCostCalculator() {
     subs.forEach(sub => {
       const c = parseFloat(sub.cost);
       if (!isNaN(c) && c > 0) {
-        if (sub.frequency === "weekly") {
-          monthly += c * 4.33;
-          yearly += c * 52;
-        } else if (sub.frequency === "monthly") {
+        if (sub.frequency === "monthly") {
           monthly += c;
           yearly += c * 12;
         } else if (sub.frequency === "yearly") {
@@ -137,7 +153,6 @@ export function SubscriptionCostCalculator() {
                     onChange={(e) => updateSub(sub.id, "frequency", e.target.value)}
                     className="w-[100px] bg-white border border-slate-200 rounded-lg px-2 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 appearance-none"
                   >
-                    <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                     <option value="yearly">Yearly</option>
                   </select>

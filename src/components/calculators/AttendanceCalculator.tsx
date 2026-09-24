@@ -47,7 +47,7 @@ export function AttendanceCalculator() {
                <div className="font-bold text-center text-slate-800">
                   You need to attend {needed} more classes to attain<br/>{targetPercent}% attendance
                </div>
-               <div className="bg-white p-3 md:p-4 rounded-xl shadow-sm border border-orange-200 text-left">
+               <div className="bg-orange-50/80 p-3 md:p-4 rounded-xl border border-orange-200/60 text-left">
                   <div className="flex justify-between items-center text-xs md:text-sm mb-2 text-slate-600">
                     <span>Current Attendance:</span>
                     <span className="font-bold text-slate-900">{a}/{t} {currentPercent.toFixed(2)}%</span>
@@ -72,7 +72,7 @@ export function AttendanceCalculator() {
                <div className="font-bold text-center text-slate-800">
                   You can bunk for {canSkip} more days.
                </div>
-               <div className="bg-white p-3 md:p-4 rounded-xl shadow-sm border border-orange-200 text-left">
+               <div className="bg-orange-50/80 p-3 md:p-4 rounded-xl border border-orange-200/60 text-left">
                   <div className="flex justify-between items-center text-xs md:text-sm mb-2 text-slate-600">
                     <span>Current Attendance:</span>
                     <span className="font-bold text-slate-900">{a}/{t} {currentPercent.toFixed(2)}%</span>
@@ -141,9 +141,11 @@ export function AttendanceCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-orange-100 rounded-2xl shadow-sm border border-orange-300 relative">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-orange-50 to-orange-100/80 rounded-3xl shadow-[0_8px_30px_rgb(249,115,22,0.15)] border border-orange-200/60 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f9731610_1px,transparent_1px),linear-gradient(to_bottom,#f9731610_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
+
+          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
             <button onClick={() => {
               const text = `Attendance Percentage Calculator
 Classes Held (Total): ${total || 0}
@@ -155,19 +157,23 @@ ${result.statusString}
 
 Calculate Online: https://topcalcbox.com/attendance-percentage-calculator/`;
               copyToClipboard(text);
-            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm">
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-orange-200 rounded-xl text-[11px] font-bold text-orange-700 hover:bg-white transition-all shadow-sm">
+              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white border border-orange-200 rounded-lg text-orange-700 hover:bg-orange-50 transition-colors shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-orange-200 rounded-xl text-orange-700 hover:bg-white transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
           
-          <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
-            <ClipboardCheck className="w-8 h-8 text-orange-600" />
+          <div className="relative mb-6 mt-4 z-10">
+            <div className="absolute inset-0 bg-orange-500/30 blur-xl rounded-full" />
+            <div className="p-4 bg-white rounded-2xl shadow-xl shadow-orange-500/10 border border-orange-100 relative z-10 transform transition-transform hover:scale-105 duration-300">
+              <ClipboardCheck className="w-8 h-8 text-orange-600" />
+            </div>
           </div>
           
-          <p className="text-sm text-orange-800/70 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-orange-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
             Current Attendance
           </p>
           
@@ -175,35 +181,38 @@ Calculate Online: https://topcalcbox.com/attendance-percentage-calculator/`;
             key={result.percentage}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm"
+            className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tighter mb-6 drop-shadow-sm flex items-end z-10"
           >
-            {result.percentage}<span className="text-3xl font-medium text-orange-700 ml-1">%</span>
+            {result.percentage}<span className="text-3xl font-bold text-orange-600 ml-1 mb-1.5 opacity-90">%</span>
           </motion.div>
 
-          <div className="w-full border-t border-orange-300 my-3" />
+          <div className="w-full max-w-sm border-t-2 border-orange-200/60 my-2 z-10" />
 
           {result.statusNode ? (
-             <div className="w-full flex flex-col items-center mt-2">
-                {result.statusNode}
+             <div className="w-full flex flex-col items-center mt-4 z-10">
+                <div className="w-full bg-white/70 backdrop-blur-md p-5 rounded-2xl border border-orange-200/60 shadow-sm relative overflow-hidden">
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-orange-400" />
+                  {result.statusNode}
+                </div>
                 
                 {result.alert === "shortage" && (
-                  <div className="flex justify-center mt-4 mb-1">
-                    <div className="flex items-center gap-2 px-4 py-2 bg-rose-100 text-rose-800 font-bold rounded-full text-sm shadow-sm">
+                  <div className="flex justify-center mt-5 mb-1">
+                    <div className="flex items-center gap-2 px-5 py-2.5 bg-rose-500 text-white font-bold rounded-full text-sm shadow-md shadow-rose-500/20">
                       <AlertTriangle className="w-4 h-4" /> Shortage Alert
                     </div>
                   </div>
                 )}
                 {result.alert === "met" && (
-                  <div className="flex justify-center mt-4 mb-1">
-                    <div className="flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-800 font-bold rounded-full text-sm shadow-sm">
+                  <div className="flex justify-center mt-5 mb-1">
+                    <div className="flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white font-bold rounded-full text-sm shadow-md shadow-emerald-500/20">
                       <CheckCircle2 className="w-4 h-4" /> Criteria Met
                     </div>
                   </div>
                 )}
              </div>
           ) : (
-            <div className="w-full flex justify-center text-center text-sm mt-2">
-              <span className="text-slate-900 font-medium">Enter your attendance details</span>
+            <div className="w-full flex justify-center text-center text-sm mt-4 z-10 bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-orange-200/50">
+              <span className="text-slate-700 font-bold">Enter your attendance details above</span>
             </div>
           )}
         </div>

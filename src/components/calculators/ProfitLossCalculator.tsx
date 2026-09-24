@@ -140,7 +140,7 @@ Selling Price: ${currency}${sellingPrice || 0}
 ${expenses ? `Other Costs / Expenses: ${currency}${expenses}\n` : ''}${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${result.amount}
 ${result.type === 'loss' ? 'Loss' : 'Profit'} Percentage: ${result.margin}%
 
-Calculate Online: https://topcalcbox.com/profit-loss-calculator/`;
+Calculate Online: https://topcalcbox.com/profit-and-loss-calculator/`;
                 copyToClipboard(text);
               }} className={`flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
                 <span className="inline">{copied ? "Copied" : "Copy"}</span>

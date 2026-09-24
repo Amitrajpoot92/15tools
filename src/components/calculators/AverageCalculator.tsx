@@ -20,8 +20,18 @@ export function AverageCalculator() {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     let val = e.target.value;
-    // Add space after comma if not already there
-    val = val.replace(/,([^\s])/g, ', $1');
+    
+    if (val.length > input.length) {
+      if (val.endsWith(' ') && /[0-9]$/.test(val.slice(0, -1))) {
+         val = val.slice(0, -1) + ', ';
+      } else if (val.endsWith(',') && /[0-9]$/.test(val.slice(0, -1))) {
+         val = val + ' ';
+      }
+      
+      val = val.replace(/([0-9])\s+([0-9])/g, '$1, $2');
+      val = val.replace(/([0-9]),([0-9])/g, '$1, $2');
+    }
+    
     setInput(val);
   };
 
@@ -72,11 +82,20 @@ export function AverageCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 bg-orange-100 rounded-2xl shadow-sm border border-orange-300 relative">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
-            <button onClick={() => {
-              const text = `Average Calculator
+        <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-b from-orange-50 to-orange-100/80 rounded-3xl shadow-[0_8px_30px_rgb(249,115,22,0.15)] border border-orange-200/60 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f9731610_1px,transparent_1px),linear-gradient(to_bottom,#f9731610_1px,transparent_1px)] bg-[size:24px_24px]" />
+          
+          <div className="w-full flex justify-between items-center z-10 mb-4">
+            <div className="flex items-center gap-2">
+               <div className="p-2 bg-white rounded-xl shadow-sm border border-orange-200/50">
+                  <Sigma className="w-5 h-5 text-orange-600" />
+               </div>
+               <span className="text-sm font-extrabold text-orange-800/80 uppercase tracking-widest">Results</span>
+            </div>
+            
+            <div className="flex items-center gap-1.5">
+              <button onClick={() => {
+                const text = `Average Calculator
 Numbers: ${input}
 Average (Mean): ${stats.mean}
 Median: ${stats.median}
@@ -84,40 +103,42 @@ Sum: ${stats.sum}
 Count: ${stats.count}
 
 Calculate Online: https://topcalcbox.com/average-calculator/`;
-              copyToClipboard(text);
-            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-orange-200 rounded-lg text-[11px] font-bold text-orange-700 hover:bg-orange-50 transition-colors shadow-sm">
-              <span className="inline">{copied ? "Copied" : "Copy"}</span>
-            </button>
-            <button onClick={reset} className="p-1.5 bg-white border border-orange-200 rounded-lg text-orange-700 hover:bg-orange-50 transition-colors shadow-sm">
-              <RotateCcw className="w-3.5 h-3.5" />
-            </button>
+                copyToClipboard(text);
+              }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-orange-200 rounded-xl text-[11px] font-bold text-orange-700 hover:bg-white transition-all shadow-sm">
+                {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                <span className="inline">{copied ? "Copied" : "Copy"}</span>
+              </button>
+              <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-orange-200 rounded-xl text-orange-700 hover:bg-white transition-all shadow-sm">
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
           
-          <div className="w-full grid grid-cols-2 gap-3 mt-2">
-            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Average (Mean)</p>
-              <motion.div key={`mean-${stats.mean}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
+          <div className="w-full grid grid-cols-2 gap-4 mt-2 z-10">
+            <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center text-center">
+              <p className="text-[11px] text-orange-800/70 uppercase tracking-wider font-bold mb-1">Average (Mean)</p>
+              <motion.div key={`mean-${stats.mean}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-3xl font-extrabold text-slate-900 drop-shadow-sm">
                 {stats.mean}
               </motion.div>
             </div>
             
-            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Median</p>
-              <motion.div key={`median-${stats.median}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
+            <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center text-center">
+              <p className="text-[11px] text-orange-800/70 uppercase tracking-wider font-bold mb-1">Median</p>
+              <motion.div key={`median-${stats.median}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-3xl font-extrabold text-slate-900 drop-shadow-sm">
                 {stats.median}
               </motion.div>
             </div>
             
-            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Sum</p>
-              <motion.div key={`sum-${stats.sum}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
+            <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center text-center">
+              <p className="text-[11px] text-orange-800/70 uppercase tracking-wider font-bold mb-1">Sum</p>
+              <motion.div key={`sum-${stats.sum}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-3xl font-extrabold text-slate-900 drop-shadow-sm">
                 {stats.sum}
               </motion.div>
             </div>
             
-            <div className="bg-white shadow-sm border border-slate-200 rounded-xl p-3 flex flex-col items-center">
-              <p className="text-xs text-orange-700 uppercase tracking-wider font-bold mb-1">Count</p>
-              <motion.div key={`count-${stats.count}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-2xl font-bold text-slate-900">
+            <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center text-center">
+              <p className="text-[11px] text-orange-800/70 uppercase tracking-wider font-bold mb-1">Count</p>
+              <motion.div key={`count-${stats.count}`} initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-3xl font-extrabold text-slate-900 drop-shadow-sm">
                 {stats.count}
               </motion.div>
             </div>

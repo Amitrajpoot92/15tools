@@ -116,9 +116,11 @@ export function NegativeMarkingCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-amber-100 rounded-2xl shadow-sm border border-amber-300 relative">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-amber-50 to-amber-100/80 rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border border-amber-200/60 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b10_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b10_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
+          
+          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
             <button onClick={() => {
               const text = `Negative Marking Calculator
 Total Questions in Exam: ${totalQuestions || 0}
@@ -134,19 +136,23 @@ Accuracy: ${result.accuracy}%
 
 Calculate Online: https://topcalcbox.com/negative-marking-calculator/`;
               copyToClipboard(text);
-            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[11px] font-bold text-amber-700 hover:bg-amber-50 transition-colors shadow-sm">
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm">
+              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white border border-amber-200 rounded-lg text-amber-700 hover:bg-amber-50 transition-colors shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-amber-700 hover:bg-white transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
           
-          <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
-            <TrendingDown className="w-8 h-8 text-amber-600" />
+          <div className="relative mb-6 mt-4 z-10">
+            <div className="absolute inset-0 bg-amber-500/30 blur-xl rounded-full" />
+            <div className="p-4 bg-white rounded-2xl shadow-xl shadow-amber-500/10 border border-amber-100 relative z-10 transform transition-transform hover:scale-105 duration-300">
+              <TrendingDown className="w-8 h-8 text-amber-600" />
+            </div>
           </div>
           
-          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
             Final Score
           </p>
           
@@ -154,29 +160,29 @@ Calculate Online: https://topcalcbox.com/negative-marking-calculator/`;
             key={result.score}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm flex items-end"
+            className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tighter mb-6 drop-shadow-sm flex items-end z-10"
           >
-            {result.score} <span className="text-2xl text-amber-700 ml-2 mb-2 font-medium opacity-80">/ {result.maxPossible}</span>
+            {result.score} <span className="text-2xl text-amber-600 ml-2 mb-2.5 font-bold opacity-90">/ {result.maxPossible}</span>
           </motion.div>
 
-          <div className="w-full border-t border-amber-300 my-3" />
+          <div className="w-full max-w-sm border-t-2 border-amber-200/60 my-2 z-10" />
 
-          <div className="w-full grid grid-cols-2 gap-y-4 text-center text-sm mt-3">
-            <div className="flex flex-col">
-              <span className="text-amber-800/70 font-medium">Wrong Answers</span>
-              <span className="text-slate-900 font-bold text-lg">{result.wrong}</span>
+          <div className="w-full grid grid-cols-2 gap-4 text-center text-sm mt-4 z-10">
+            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
+              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Wrong Answers</span>
+              <span className="text-slate-900 font-extrabold text-xl">{result.wrong}</span>
             </div>
-            <div className="flex flex-col border-l border-amber-300/50">
-              <span className="text-amber-800/70 font-medium">Accuracy</span>
-              <span className="text-slate-900 font-bold text-lg">{result.accuracy}%</span>
+            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
+              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Accuracy</span>
+              <span className="text-slate-900 font-extrabold text-xl">{result.accuracy}%</span>
             </div>
-            <div className="flex flex-col border-t border-amber-300/50 pt-3">
-              <span className="text-amber-800/70 font-medium">Unattempted</span>
-              <span className="text-slate-900 font-bold text-lg">{result.unattempted}</span>
+            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
+              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Unattempted</span>
+              <span className="text-slate-900 font-extrabold text-xl">{result.unattempted}</span>
             </div>
-            <div className="flex flex-col border-t border-l border-amber-300/50 pt-3">
-              <span className="text-amber-800/70 font-medium">Penalty Deducted</span>
-              <span className="text-slate-900 font-bold text-lg text-rose-600">-{result.penalty}</span>
+            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
+              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Penalty Deducted</span>
+              <span className="text-rose-600 font-extrabold text-xl">-{result.penalty}</span>
             </div>
           </div>
         </div>

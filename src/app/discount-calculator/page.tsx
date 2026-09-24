@@ -150,11 +150,12 @@ export default function DiscountCalculatorPage() {
         <h2>Related Calculators</h2>
         <ul>
           <li><a href="/percentage-calculator" className="text-emerald-600 hover:underline">Percentage Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-emerald-600 hover:underline">Wholesale Price Calculator</a></li>
-          <li><a href="/profit-and-loss-calculator" className="text-emerald-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/cost-per-item-calculator" className="text-emerald-600 hover:underline">Cost Per Item Calculator</a></li>
           <li><a href="/gst-calculator" className="text-emerald-600 hover:underline">GST Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-emerald-600 hover:underline">Profit and Loss Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-emerald-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/emi-calculator" className="text-emerald-600 hover:underline">EMI Calculator</a></li>
+          <li><a href="/sip-calculator" className="text-emerald-600 hover:underline">SIP Calculator</a></li>
+          <li><a href="/subscription-cost-calculator" className="text-emerald-600 hover:underline">Subscription Cost Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

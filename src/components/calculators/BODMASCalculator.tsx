@@ -189,43 +189,42 @@ export function BODMASCalculator() {
             />
             {error && <p className="text-xs font-bold text-red-500 mt-1">{error}</p>}
           </div>
-          
-          <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-            <h4 className="text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-2">BODMAS Rule:</h4>
-            <ul className="text-xs text-slate-600 space-y-1 font-medium">
-              <li><strong>B</strong> - Brackets ()</li>
-              <li><strong>O</strong> - Orders / Of</li>
-              <li><strong>D</strong> - Division /</li>
-              <li><strong>M</strong> - Multiplication *</li>
-              <li><strong>A</strong> - Addition +</li>
-              <li><strong>S</strong> - Subtraction -</li>
-            </ul>
-          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-amber-100 rounded-2xl shadow-sm border border-amber-300 relative">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-amber-50 to-amber-100/80 rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border border-amber-200/60 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b10_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b10_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
+          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
             <button onClick={() => {
               const finalRes = steps.length > 0 ? steps[steps.length - 1].replace(/@@/g, "") : "0";
+              
+              let stepsText = "";
+              if (steps.length > 1) {
+                stepsText = "\nStep-by-Step Solution:\n" + steps.map((step, index) => {
+                  const cleanStep = step.replace(/@@/g, "").replace(/\*/g, "×").replace(/\//g, "÷");
+                  return `${index === 0 ? "  " : "= "}${cleanStep}`;
+                }).join("\n") + "\n\n";
+              }
+
               const text = `BODMAS Calculator
 Math Expression: ${expression}
-Result: ${finalRes}
+${stepsText}Result: ${finalRes}
 
 Calculate Online: https://topcalcbox.com/bodmas-calculator/`;
               copyToClipboard(text);
-            }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[11px] font-bold text-amber-700 hover:bg-amber-50 transition-colors shadow-sm">
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm">
+              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white border border-amber-200 rounded-lg text-amber-700 hover:bg-amber-50 transition-colors shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-amber-700 hover:bg-white transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
           
           {steps.length > 0 && (
-            <div className="w-full bg-white rounded-xl shadow-sm border border-amber-200 p-4 mb-4 text-left">
-              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Step-by-Step Solution</h4>
-              <div className="space-y-2 font-mono text-base md:text-lg text-slate-700 overflow-x-auto pb-2">
+            <div className="w-full bg-white/70 backdrop-blur-md rounded-2xl shadow-sm border border-amber-200/60 p-5 mb-6 text-left relative z-10">
+              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Step-by-Step Solution</h4>
+              <div className="space-y-2.5 font-mono text-base md:text-lg text-slate-700 overflow-x-auto pb-2">
                 {steps.map((step, index) => (
                    <div key={index} className="flex items-center gap-3 min-w-max">
                      <span className="text-amber-500 font-bold w-4 text-right">{index > 0 ? "=" : ""}</span>
@@ -236,15 +235,20 @@ Calculate Online: https://topcalcbox.com/bodmas-calculator/`;
             </div>
           )}
 
-          <div className="p-3 bg-white rounded-xl shadow-sm mb-4 mt-2">
-            <Calculator className="w-8 h-8 text-amber-600" />
+          <div className="relative mb-6 mt-2 z-10">
+            <div className="absolute inset-0 bg-amber-500/30 blur-xl rounded-full" />
+            <div className="p-4 bg-white rounded-2xl shadow-xl shadow-amber-500/10 border border-amber-100 relative z-10 transform transition-transform hover:scale-105 duration-300">
+              <Calculator className="w-8 h-8 text-amber-600" />
+            </div>
           </div>
-          <p className="text-sm text-amber-800/70 mb-2 uppercase tracking-widest font-bold">Final Result</p>
+          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
+            Final Result
+          </p>
           <motion.div 
             key={steps.length > 0 ? steps[steps.length - 1] : "0"}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className={`text-4xl md:text-5xl font-extrabold tracking-tighter drop-shadow-sm flex items-end gap-1 ${error ? 'text-red-700' : 'text-slate-900'}`}
+            className={`text-6xl md:text-7xl font-extrabold tracking-tighter drop-shadow-sm flex items-end gap-1 z-10 ${error ? 'text-red-700' : 'text-slate-900'}`}
           >
             {error ? "Error" : (steps.length > 0 ? steps[steps.length - 1].replace(/@@/g, "") : "0")}
           </motion.div>

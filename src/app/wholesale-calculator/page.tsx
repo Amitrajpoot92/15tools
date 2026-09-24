@@ -125,10 +125,11 @@ export default function WholesalePage() {
         <ul>
           <li><a href="/percentage-calculator" className="text-amber-600 hover:underline">Percentage Calculator</a></li>
           <li><a href="/discount-calculator" className="text-amber-600 hover:underline">Discount Calculator</a></li>
-          <li><a href="/profit-and-loss-calculator" className="text-amber-600 hover:underline">Profit and Loss Calculator</a></li>
           <li><a href="/gst-calculator" className="text-amber-600 hover:underline">GST Calculator</a></li>
+          <li><a href="/profit-and-loss-calculator" className="text-amber-600 hover:underline">Profit and Loss Calculator</a></li>
           <li><a href="/emi-calculator" className="text-amber-600 hover:underline">EMI Calculator</a></li>
           <li><a href="/sip-calculator" className="text-amber-600 hover:underline">SIP Calculator</a></li>
+          <li><a href="/subscription-cost-calculator" className="text-amber-600 hover:underline">Subscription Cost Calculator</a></li>
         </ul>
       </SEOContent>
     </div>
