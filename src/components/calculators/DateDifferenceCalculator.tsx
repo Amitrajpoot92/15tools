@@ -96,9 +96,12 @@ export function DateDifferenceCalculator() {
               className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
             />
             {d1Date && (
-               <p className="text-xs text-indigo-600 font-medium ml-1">
-                 {formatFriendlyDate(d1Date)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(d1Date)}
+                 </p>
+              </motion.div>
             )}
           </div>
           <div className="space-y-2">
@@ -112,9 +115,12 @@ export function DateDifferenceCalculator() {
               className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
             />
             {d2Date && (
-               <p className="text-xs text-indigo-600 font-medium ml-1">
-                 {formatFriendlyDate(d2Date)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(d2Date)}
+                 </p>
+              </motion.div>
             )}
           </div>
         </div>
@@ -152,37 +158,37 @@ Calculate Online: https://topcalcbox.com/date-difference-calculator/`;
                 key={diff.totalDays}
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="w-full space-y-5"
+                className="w-full space-y-3"
               >
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-6 text-left">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-5xl md:text-6xl font-extrabold text-slate-900">{diff.totalDays.toLocaleString()}</span>
-                    <span className="text-2xl md:text-3xl font-bold text-indigo-700">Days</span>
-                    {diff.totalDays > 0 && (
-                      <span className="text-sm font-medium text-slate-500 md:ml-2">
-                         ({diff.totalWeeks} {diff.totalWeeks === 1 ? 'week' : 'weeks'} & {diff.remainingDays} {diff.remainingDays === 1 ? 'day' : 'days'})
-                      </span>
-                    )}
+                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2">
+                  <div className="flex items-baseline justify-center sm:justify-start gap-2">
+                    <span className="text-4xl md:text-5xl font-extrabold text-slate-900">{diff.totalDays.toLocaleString()}</span>
+                    <span className="text-xl md:text-2xl font-bold text-indigo-700">Days</span>
                   </div>
+                  {diff.totalDays > 0 && (
+                    <div className="text-xs md:text-sm font-bold text-indigo-800 bg-indigo-100/50 px-3 py-1.5 rounded-lg border border-indigo-200">
+                       {diff.totalWeeks} {diff.totalWeeks === 1 ? 'week' : 'weeks'} & {diff.remainingDays} {diff.remainingDays === 1 ? 'day' : 'days'}
+                    </div>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-5 flex flex-col items-start">
-                    <div className="flex items-center gap-2 text-slate-600 mb-3">
-                      <Briefcase className="w-4 h-4 text-indigo-600" />
-                      <span className="font-medium text-sm">Working Days <span className="hidden lg:inline">(Mon-Fri)</span></span>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
+                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider text-indigo-800/80">Working Days</span>
                     </div>
-                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{diff.workingDays.toLocaleString()}</span>
-                    <span className="text-xs text-slate-400 mt-2 font-medium">Excludes Sat & Sun</span>
+                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">{diff.workingDays.toLocaleString()}</span>
+                    <span className="text-[10px] text-slate-400 mt-1 font-medium">Mon-Fri</span>
                   </div>
 
-                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-5 flex flex-col items-start">
-                    <div className="flex items-center gap-2 text-slate-600 mb-3">
-                      <Calendar className="w-4 h-4 text-amber-500" />
-                      <span className="font-medium text-sm">Weekend Days</span>
+                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Calendar className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider text-indigo-800/80">Weekend Days</span>
                     </div>
-                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{diff.weekendDays.toLocaleString()}</span>
-                    <span className="text-xs text-slate-400 mt-2 font-medium">Saturdays & Sundays</span>
+                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">{diff.weekendDays.toLocaleString()}</span>
+                    <span className="text-[10px] text-slate-400 mt-1 font-medium">Sat & Sun</span>
                   </div>
                 </div>
               </motion.div>

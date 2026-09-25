@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Timer, Copy, Check, RotateCcw, PartyPopper } from "lucide-react";
+import { Timer, Copy, Check, RotateCcw, PartyPopper, Calendar } from "lucide-react";
 
 const ConfettiPiece = ({ delay, x, y }: { delay: number; x: number; y: number }) => {
   const emojis = ["🎉", "🎊", "🎈", "🎂", "✨", "🎁"];
@@ -163,9 +163,12 @@ export function BirthdayCountdown() {
               className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500/50 transition-all shadow-inner"
             />
             {dobDateObj && (
-               <p className="text-xs text-fuchsia-600 font-medium ml-1">
-                 {formatFriendlyDate(dobDateObj)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-fuchsia-100/70 border border-fuchsia-200 text-fuchsia-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(dobDateObj)}
+                 </p>
+              </motion.div>
             )}
           </div>
         </div>
@@ -243,21 +246,21 @@ Calculate Online: https://topcalcbox.com/birthday-countdown/`;
               </motion.div>
             ) : timeLeft ? (
               <div className="grid grid-cols-4 gap-3 text-center text-slate-900">
-                <div className="flex flex-col items-center p-3 bg-white/60 border border-fuchsia-200/50 rounded-2xl backdrop-blur-sm shadow-sm">
-                  <span className="text-3xl md:text-4xl font-extrabold">{String(timeLeft.days).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/70 font-bold uppercase tracking-wider mt-1">Days</span>
+                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                  <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Days</span>
                 </div>
-                <div className="flex flex-col items-center p-3 bg-white/60 border border-fuchsia-200/50 rounded-2xl backdrop-blur-sm shadow-sm">
-                  <span className="text-3xl md:text-4xl font-extrabold">{String(timeLeft.hours).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/70 font-bold uppercase tracking-wider mt-1">Hrs</span>
+                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                  <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Hrs</span>
                 </div>
-                <div className="flex flex-col items-center p-3 bg-white/60 border border-fuchsia-200/50 rounded-2xl backdrop-blur-sm shadow-sm">
-                  <span className="text-3xl md:text-4xl font-extrabold">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/70 font-bold uppercase tracking-wider mt-1">Mins</span>
+                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                  <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Mins</span>
                 </div>
-                <div className="flex flex-col items-center p-3 bg-white/60 border border-fuchsia-200/50 rounded-2xl backdrop-blur-sm shadow-sm">
+                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
                   <span className="text-3xl md:text-4xl font-extrabold text-fuchsia-600">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/70 font-bold uppercase tracking-wider mt-1">Secs</span>
+                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Secs</span>
                 </div>
               </div>
             ) : (

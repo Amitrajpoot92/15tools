@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CalendarDays, Copy, Check, RotateCcw } from "lucide-react";
+import { CalendarDays, Copy, Check, RotateCcw, Calendar } from "lucide-react";
 
 export function AgeCalculator() {
   const [dobInput, setDobInput] = useState<string>("");
@@ -110,10 +110,10 @@ export function AgeCalculator() {
 
   return (
     <div className="w-full md: relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="relative z-10 space-y-6">
-        <div className="space-y-6 bg-rose-50/50 border border-rose-100/50 p-5 md:p-6 rounded-2xl">
+        <div className="space-y-6 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700">Date of Birth</label>
             <input
@@ -122,12 +122,15 @@ export function AgeCalculator() {
               value={dobInput}
               onChange={(e) => setDobInput(formatInputDate(e.target.value))}
               placeholder="DD/MM/YYYY"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-inner"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
             />
             {dobDate && (
-               <p className="text-xs text-rose-600 font-medium ml-1">
-                 {formatFriendlyDate(dobDate)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(dobDate)}
+                 </p>
+              </motion.div>
             )}
           </div>
           <div className="space-y-2">
@@ -138,103 +141,93 @@ export function AgeCalculator() {
               value={todayInput}
               onChange={(e) => setTodayInput(formatInputDate(e.target.value))}
               placeholder="DD/MM/YYYY"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-inner"
+              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
             />
             {todayDate && (
-               <p className="text-xs text-rose-600 font-medium ml-1">
-                 {formatFriendlyDate(todayDate)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(todayDate)}
+                 </p>
+              </motion.div>
             )}
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-rose-50 to-rose-100/80 rounded-3xl shadow-[0_8px_30px_rgb(225,29,72,0.15)] border border-rose-200/60 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e11d4810_1px,transparent_1px),linear-gradient(to_bottom,#e11d4810_1px,transparent_1px)] bg-[size:24px_24px]" />
-          <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
+        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-indigo-50/40 rounded-3xl shadow-[0_8px_30px_rgb(79,70,229,0.12)] border border-indigo-200/60 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e508_1px,transparent_1px),linear-gradient(to_bottom,#4f46e508_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-            <button onClick={() => {
-              const text = `Age Calculator
-Date of Birth: ${dobInput} ${dobDate ? `(${formatFriendlyDate(dobDate)})` : ''}
-Age at Date: ${todayInput} ${todayDate ? `(${formatFriendlyDate(todayDate)})` : ''}
-Exact Age: ${age ? `${age.years} Years / ${age.months} Months / ${age.days} Days` : ''}${extraInfo ? `\nDay of Birth: ${extraInfo.dayOfBirth}\nTotal Months Lived: ${extraInfo.totalMonths}\nTotal Days Lived: ${extraInfo.totalDays}\nNext Birthday: ${extraInfo.daysToNext === 0 ? "Today!" : `in ${extraInfo.daysToNext} days`}` : ''}
+          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+            <div className="flex items-center gap-2 text-indigo-800">
+               <h3 className="font-bold text-sm md:text-base">Age Overview</h3>
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              <button onClick={() => {
+                const text = \`Age Calculator
+Date of Birth: \${dobInput} \${dobDate ? \`(\${formatFriendlyDate(dobDate)})\` : ''}
+Age at Date: \${todayInput} \${todayDate ? \`(\${formatFriendlyDate(todayDate)})\` : ''}
+Exact Age: \${age ? \`\${age.years} Years, \${age.months} Months, \${age.days} Days\` : ''}\${extraInfo ? \`\\nDay of Birth: \${extraInfo.dayOfBirth}\\nTotal Months Lived: \${extraInfo.totalMonths}\\nTotal Days Lived: \${extraInfo.totalDays}\\nNext Birthday: \${extraInfo.daysToNext === 0 ? "Today!" : \`in \${extraInfo.daysToNext} days\`}\` : ''}
 
-Calculate Online: https://topcalcbox.com/age-calculator-online/`;
-              copyToClipboard(text);
-            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-rose-200 rounded-xl text-[11px] font-bold text-rose-700 hover:bg-white transition-all shadow-sm">
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              <span className="inline">{copied ? "Copied" : "Copy"}</span>
-            </button>
-            <button onClick={() => { setDobInput(""); setTodayInput(""); }} className="p-1.5 bg-white/80 backdrop-blur-md border border-rose-200 rounded-xl text-rose-700 hover:bg-white transition-all shadow-sm">
-              <RotateCcw className="w-3.5 h-3.5" />
-            </button>
-          </div>
-          
-          <div className="relative mb-6 mt-4 z-10">
-            <div className="absolute inset-0 bg-rose-500/30 blur-xl rounded-full" />
-            <div className="p-4 bg-white rounded-2xl shadow-xl shadow-rose-500/10 border border-rose-100 relative z-10 transform transition-transform hover:scale-105 duration-300">
-              <CalendarDays className="w-8 h-8 text-rose-600" />
+Calculate Online: https://topcalcbox.com/age-calculator-online/\`;
+                copyToClipboard(text);
+              }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-indigo-200 rounded-xl text-[11px] font-bold text-indigo-700 hover:bg-white transition-all shadow-sm">
+                {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                <span className="inline">{copied ? "Copied" : "Copy"}</span>
+              </button>
+              <button onClick={() => { setDobInput(""); setTodayInput(""); }} className="p-1.5 bg-white/80 backdrop-blur-md border border-indigo-200 rounded-xl text-indigo-700 hover:bg-white transition-all shadow-sm">
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
           
-          <p className="text-sm text-rose-800/70 uppercase tracking-widest font-extrabold mb-1 z-10">
-            Exact Age
-          </p>
-          
-          <div className="text-center mt-2 z-10 w-full">
+          <div className="w-full z-10">
             {age ? (
               <motion.div 
-                key={`${age.years}-${age.months}-${age.days}`}
-                initial={{ scale: 0.8, opacity: 0 }}
+                key={\`\${age.years}-\${age.months}-\${age.days}\`}
+                initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="flex flex-wrap justify-center gap-4 text-slate-900"
+                className="w-full space-y-4"
               >
-                <div className="flex flex-col items-center">
-                  <span className="text-5xl md:text-6xl font-extrabold tracking-tighter drop-shadow-sm">{age.years}</span>
-                  <span className="text-sm text-rose-800/70 font-bold uppercase tracking-wider mt-1">Years</span>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center">
+                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{age.years}</span>
+                    <span className="text-[10px] text-indigo-800/70 font-bold uppercase tracking-wider mt-1">Years</span>
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center">
+                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{age.months}</span>
+                    <span className="text-[10px] text-indigo-800/70 font-bold uppercase tracking-wider mt-1">Months</span>
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center">
+                    <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{age.days}</span>
+                    <span className="text-[10px] text-indigo-800/70 font-bold uppercase tracking-wider mt-1">Days</span>
+                  </div>
                 </div>
-                <div className="text-3xl font-light mt-2 opacity-30 text-rose-900">/</div>
-                <div className="flex flex-col items-center">
-                  <span className="text-5xl md:text-6xl font-extrabold tracking-tighter drop-shadow-sm">{age.months}</span>
-                  <span className="text-sm text-rose-800/70 font-bold uppercase tracking-wider mt-1">Months</span>
-                </div>
-                <div className="text-3xl font-light mt-2 opacity-30 text-rose-900">/</div>
-                <div className="flex flex-col items-center">
-                  <span className="text-5xl md:text-6xl font-extrabold tracking-tighter drop-shadow-sm">{age.days}</span>
-                  <span className="text-sm text-rose-800/70 font-bold uppercase tracking-wider mt-1">Days</span>
-                </div>
+
+                {extraInfo && (
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-start text-left">
+                      <p className="text-[10px] md:text-[11px] text-slate-500 font-bold mb-1 uppercase tracking-wider">Day of Birth</p>
+                      <p className="text-sm font-extrabold text-slate-900">{extraInfo.dayOfBirth}</p>
+                    </div>
+                    <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-start text-left">
+                      <p className="text-[10px] md:text-[11px] text-slate-500 font-bold mb-1 uppercase tracking-wider">Next Birthday</p>
+                      <p className="text-sm font-extrabold text-indigo-600">{extraInfo.daysToNext === 0 ? "Today!" : \`in \${extraInfo.daysToNext} days\`}</p>
+                    </div>
+                    <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-start text-left">
+                      <p className="text-[10px] md:text-[11px] text-slate-500 font-bold mb-1 uppercase tracking-wider">Total Months</p>
+                      <p className="text-sm font-extrabold text-slate-900">{extraInfo.totalMonths}</p>
+                    </div>
+                    <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-start text-left">
+                      <p className="text-[10px] md:text-[11px] text-slate-500 font-bold mb-1 uppercase tracking-wider">Total Days</p>
+                      <p className="text-sm font-extrabold text-slate-900">{extraInfo.totalDays}</p>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             ) : (
-              <div className="text-lg text-rose-700/70 font-bold mt-4 bg-white/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-rose-200/50 inline-block">
+              <div className="text-center text-lg text-indigo-700/70 font-bold mt-4 bg-white/50 backdrop-blur-sm px-6 py-8 rounded-xl border border-indigo-200/50">
                 Enter your Date of Birth
               </div>
-            )}
-            
-            {extraInfo && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="w-full mt-6 pt-6 border-t-2 border-rose-200/50"
-              >
-                <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
-                  <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-4 flex flex-col items-start justify-center text-left">
-                    <p className="text-[11px] text-slate-500 font-bold mb-1">Day of Birth</p>
-                    <p className="text-sm font-extrabold text-slate-900">{extraInfo.dayOfBirth}</p>
-                  </div>
-                  <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-4 flex flex-col items-start justify-center text-left">
-                    <p className="text-[11px] text-slate-500 font-bold mb-1">Total Months Lived</p>
-                    <p className="text-sm font-extrabold text-slate-900">{extraInfo.totalMonths}</p>
-                  </div>
-                  <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-4 flex flex-col items-start justify-center text-left">
-                    <p className="text-[11px] text-slate-500 font-bold mb-1">Next Birthday</p>
-                    <p className="text-sm font-extrabold text-rose-600">{extraInfo.daysToNext === 0 ? "Today!" : `in ${extraInfo.daysToNext} days`}</p>
-                  </div>
-                  <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-4 flex flex-col items-start justify-center text-left">
-                    <p className="text-[11px] text-slate-500 font-bold mb-1">Total Days Lived</p>
-                    <p className="text-sm font-extrabold text-slate-900">{extraInfo.totalDays}</p>
-                  </div>
-                </div>
-              </motion.div>
             )}
           </div>
         </div>

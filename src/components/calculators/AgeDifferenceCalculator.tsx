@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Copy, Check, RotateCcw, ArrowRight } from "lucide-react";
+import { Users, Copy, Check, RotateCcw, ArrowRight, Calendar } from "lucide-react";
 
 export function AgeDifferenceCalculator() {
   const [date1Input, setDate1Input] = useState<string>("");
@@ -95,9 +95,12 @@ export function AgeDifferenceCalculator() {
               className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
             />
             {d1Date && (
-               <p className="text-xs text-indigo-600 font-medium ml-1">
-                 {formatFriendlyDate(d1Date)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(d1Date)}
+                 </p>
+              </motion.div>
             )}
           </div>
           <div className="space-y-2">
@@ -111,9 +114,12 @@ export function AgeDifferenceCalculator() {
               className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
             />
             {d2Date && (
-               <p className="text-xs text-indigo-600 font-medium ml-1">
-                 {formatFriendlyDate(d2Date)}
-               </p>
+              <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
+                 <Calendar className="w-3.5 h-3.5" />
+                 <p className="text-xs md:text-sm font-bold">
+                   {formatFriendlyDate(d2Date)}
+                 </p>
+              </motion.div>
             )}
           </div>
         </div>

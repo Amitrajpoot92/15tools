@@ -36,11 +36,11 @@ export default function AgeDifferencePage() {
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-fuchsia-100 rounded-2xl p-4 md:p-6 mb-6 border border-fuchsia-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+        <div className="flex flex-col items-center text-center bg-indigo-50 rounded-2xl p-4 md:p-6 mb-6 border border-indigo-200">
+          <h1 className="text-xl md:text-2xl font-extrabold text-indigo-950 tracking-tight mb-1">
             Age Difference Calculator
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-indigo-800/70 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Easily calculate the exact age gap between two people in years, months, and days.
           </p>
         </div>

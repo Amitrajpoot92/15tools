@@ -166,12 +166,7 @@ Calculate Online: https://topcalcbox.com/attendance-percentage-calculator/`;
             </button>
           </div>
           
-          <div className="relative mb-6 mt-4 z-10">
-            <div className="absolute inset-0 bg-orange-500/30 blur-xl rounded-full" />
-            <div className="p-4 bg-white rounded-2xl shadow-xl shadow-orange-500/10 border border-orange-100 relative z-10 transform transition-transform hover:scale-105 duration-300">
-              <ClipboardCheck className="w-8 h-8 text-orange-600" />
-            </div>
-          </div>
+
           
           <p className="text-sm text-orange-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
             Current Attendance

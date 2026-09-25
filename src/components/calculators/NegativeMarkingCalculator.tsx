@@ -145,12 +145,7 @@ Calculate Online: https://topcalcbox.com/negative-marking-calculator/`;
             </button>
           </div>
           
-          <div className="relative mb-6 mt-4 z-10">
-            <div className="absolute inset-0 bg-amber-500/30 blur-xl rounded-full" />
-            <div className="p-4 bg-white rounded-2xl shadow-xl shadow-amber-500/10 border border-amber-100 relative z-10 transform transition-transform hover:scale-105 duration-300">
-              <TrendingDown className="w-8 h-8 text-amber-600" />
-            </div>
-          </div>
+
           
           <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
             Final Score
