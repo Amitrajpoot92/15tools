@@ -2,14 +2,21 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Flame, Copy, Check } from "lucide-react";
+import { Copy, RotateCcw } from "lucide-react";
 
 export function CalorieCalculator() {
-  const [age, setAge] = useState<string>("");
+  const [unitSystem, setUnitSystem] = useState<"metric" | "us">("metric");
   const [gender, setGender] = useState<"male" | "female">("male");
-  const [weight, setWeight] = useState<string>(""); // kg
-  const [height, setHeight] = useState<string>(""); // cm
-  const [activity, setActivity] = useState<string>("1.2");
+  const [age, setAge] = useState<string>("");
+  
+  const [weightKg, setWeightKg] = useState<string>("");
+  const [heightCm, setHeightCm] = useState<string>("");
+  
+  const [weightLb, setWeightLb] = useState<string>("");
+  const [heightFt, setHeightFt] = useState<string>("");
+  const [heightIn, setHeightIn] = useState<string>("");
+
+  const [activity, setActivity] = useState<string>("1.55");
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = (text: string) => {
@@ -18,13 +25,25 @@ export function CalorieCalculator() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const calculateCalories = () => {
-    const a = parseFloat(age);
-    const w = parseFloat(weight);
-    const h = parseFloat(height);
-    const act = parseFloat(activity);
+  const calculate = () => {
+    let w = 0; // kg
+    let h = 0; // cm
+    const a = parseFloat(age) || 0;
+    const act = parseFloat(activity) || 1.2;
 
-    if (!isNaN(a) && !isNaN(w) && !isNaN(h) && a > 0 && w > 0 && h > 0) {
+    if (unitSystem === "metric") {
+      w = parseFloat(weightKg);
+      h = parseFloat(heightCm);
+    } else {
+      const lbs = parseFloat(weightLb);
+      w = lbs * 0.453592; // lbs to kg
+      const ft = parseFloat(heightFt) || 0;
+      const inch = parseFloat(heightIn) || 0;
+      const totalInches = (ft * 12) + inch;
+      h = totalInches * 2.54; // inches to cm
+    }
+
+    if (!isNaN(w) && !isNaN(h) && w > 0 && h > 0 && a > 0) {
       // Mifflin-St Jeor Equation
       let bmr = (10 * w) + (6.25 * h) - (5 * a);
       if (gender === "male") {
@@ -34,129 +53,245 @@ export function CalorieCalculator() {
       }
 
       const maintenance = bmr * act;
-      const mildLoss = maintenance - 250;
       const weightLoss = maintenance - 500;
+      const weightGain = maintenance + 500;
 
       return {
         maintenance: Math.round(maintenance),
-        mildLoss: Math.round(mildLoss),
-        weightLoss: Math.round(weightLoss)
+        weightLoss: Math.round(weightLoss),
+        weightGain: Math.round(weightGain),
+        hasValues: true
       };
     }
-    return { maintenance: 0, mildLoss: 0, weightLoss: 0 };
+    return { maintenance: 0, weightLoss: 0, weightGain: 0, hasValues: false };
   };
 
-  const results = calculateCalories();
+  const { maintenance, weightLoss, weightGain, hasValues } = calculate();
+
+  const reset = () => {
+    setAge("");
+    setWeightKg("");
+    setHeightCm("");
+    setWeightLb("");
+    setHeightFt("");
+    setHeightIn("");
+  };
 
   return (
-    <div className="w-full md: relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
-      
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-4 bg-amber-50/50 border border-amber-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Age</label>
-              <input
-                type="number"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                placeholder="Years"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Gender</label>
-              <select
-                value={gender}
-                onChange={(e) => setGender(e.target.value as "male" | "female")}
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
-              >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
-          </div>
+    <div className="w-full space-y-4">
+      {/* Input Section */}
+      <div className="bg-[#e2faec] border border-[#bbf2d7] rounded-3xl p-5 md:p-6 relative">
+        
+        {/* Unit System Toggle */}
+        <div className="mb-4 flex gap-2">
+          <button
+            onClick={() => setUnitSystem("metric")}
+            className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
+              unitSystem === "metric" 
+                ? "bg-[#10b981] text-white border-[#10b981]" 
+                : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+            }`}
+          >
+            Metric (kg / cm)
+          </button>
+          <button
+            onClick={() => setUnitSystem("us")}
+            className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
+              unitSystem === "us" 
+                ? "bg-[#10b981] text-white border-[#10b981]" 
+                : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+            }`}
+          >
+            US / Imperial (lb / ft)
+          </button>
+        </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Weight (kg)</label>
-              <input
-                type="number"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-                placeholder="kg"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Height (cm)</label>
-              <input
-                type="number"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-                placeholder="cm"
-                className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700">Activity Level</label>
-            <select
-              value={activity}
-              onChange={(e) => setActivity(e.target.value)}
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all"
+        {/* Gender Toggle */}
+        <div className="space-y-2 mb-6">
+          <label className="text-sm font-black text-slate-800 uppercase tracking-wide">Sex</label>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setGender("male")}
+              className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
+                gender === "male" 
+                  ? "bg-[#10b981] text-white border-[#10b981]" 
+                  : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+              }`}
             >
-              <option value="1.2">Sedentary (Little or no exercise)</option>
-              <option value="1.375">Lightly active (Exercise 1-3 days/week)</option>
-              <option value="1.55">Moderately active (Exercise 3-5 days/week)</option>
-              <option value="1.725">Very active (Exercise 6-7 days/week)</option>
-              <option value="1.9">Super active (Very hard exercise/job)</option>
-            </select>
+              Male
+            </button>
+            <button
+              onClick={() => setGender("female")}
+              className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
+                gender === "female" 
+                  ? "bg-[#10b981] text-white border-[#10b981]" 
+                  : "bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-50"
+              }`}
+            >
+              Female
+            </button>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-amber-100 border border-amber-300 rounded-2xl shadow-sm  relative overflow-hidden">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <button onClick={() => {
-            const text = `Calorie Calculator
-Age: ${age || 0}
-Gender: ${gender}
-Weight: ${weight || 0} kg
-Height: ${height || 0} cm
-Maintain Weight: ${results.maintenance.toLocaleString()} kcal/day
-Mild Weight Loss: ${results.mildLoss.toLocaleString()} kcal/day
-Weight Loss: ${results.weightLoss.toLocaleString()} kcal/day
-
-Calculate Online: https://topcalcbox.com/calorie-calculator/`;
-            copyToClipboard(text);
-          }} className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[11px] font-bold text-amber-700 hover:bg-amber-50 transition-colors shadow-sm z-10">
-            <span className="inline">{copied ? "Copied" : "Copy"}</span>
-          </button>
-          
-          <div className="p-3 bg-white rounded-xl shadow-sm mb-4">
-            <Flame className="w-8 h-8 text-orange-600" />
+        <div className="space-y-6">
+          {/* Age */}
+          <div className="space-y-2">
+            <label className="text-sm font-black text-slate-800 uppercase tracking-wide">Age (years)</label>
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              placeholder="Example: 30"
+              className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+            />
           </div>
-          <p className="text-sm text-orange-800/70 mb-1 uppercase tracking-widest font-bold">Maintain Weight</p>
-          <motion.div 
-            key={results.maintenance}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter drop-shadow-sm mb-6 text-center"
-          >
-            {results.maintenance.toLocaleString()} <span className="text-2xl text-orange-700">kcal/day</span>
-          </motion.div>
-          
-          <div className="w-full space-y-3">
-            <div className="bg-white shadow-sm backdrop-blur-md rounded-xl p-3 border border-slate-200 flex justify-between items-center">
-              <span className="text-orange-800/70 text-sm font-medium">Mild Weight Loss</span>
-              <span className="text-slate-900 font-bold">{results.mildLoss.toLocaleString()} kcal</span>
+
+          {unitSystem === "metric" ? (
+            <>
+              {/* Metric Inputs */}
+              <div className="space-y-2">
+                <label className="text-sm font-black text-slate-800 uppercase tracking-wide">WEIGHT — Kilograms (kg)</label>
+                <input
+                  type="number"
+                  value={weightKg}
+                  onChange={(e) => setWeightKg(e.target.value)}
+                  placeholder="Example: 70"
+                  className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-black text-slate-800 uppercase tracking-wide">HEIGHT — Centimeters (cm)</label>
+                <input
+                  type="number"
+                  value={heightCm}
+                  onChange={(e) => setHeightCm(e.target.value)}
+                  placeholder="Example: 175"
+                  className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {/* US Inputs */}
+              <div className="space-y-2">
+                <label className="text-sm font-black text-slate-800 uppercase tracking-wide">WEIGHT — Pounds (lb)</label>
+                <input
+                  type="number"
+                  value={weightLb}
+                  onChange={(e) => setWeightLb(e.target.value)}
+                  placeholder="Example: 154"
+                  className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-black text-slate-800 uppercase tracking-wide">HEIGHT — Feet (ft) / Inches (in)</label>
+                <div className="flex gap-4">
+                  <input
+                    type="number"
+                    value={heightFt}
+                    onChange={(e) => setHeightFt(e.target.value)}
+                    placeholder="Feet (ft)"
+                    className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+                  />
+                  <input
+                    type="number"
+                    value={heightIn}
+                    onChange={(e) => setHeightIn(e.target.value)}
+                    placeholder="Inches (in)"
+                    className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Activity Level */}
+          <div className="space-y-2">
+            <label className="text-sm font-black text-slate-800 uppercase tracking-wide">Activity Level</label>
+            <select
+              value={activity}
+              onChange={(e) => setActivity(e.target.value)}
+              className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-3 text-lg text-slate-900 font-bold focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm appearance-none cursor-pointer"
+            >
+              <option value="1.2">Sedentary — Little or no exercise</option>
+              <option value="1.375">Lightly Active — Exercise 1-3 days/week</option>
+              <option value="1.55">Moderately Active — Exercise 3-5 days/week</option>
+              <option value="1.725">Very Active — Exercise 6-7 days/week</option>
+              <option value="1.9">Extra Active — Very hard exercise/job</option>
+            </select>
+          </div>
+
+          {/* Result Box */}
+          <div className="bg-[#b3f2d6] rounded-3xl p-6 relative shadow-sm border border-[#96e3c2] mt-8">
+            <div className="absolute top-4 right-4 flex gap-2">
+              <button 
+                onClick={() => {
+                  const text = `Calorie Calculator
+${unitSystem === 'metric' ? `Weight: ${weightKg} kg\nHeight: ${heightCm} cm` : `Weight: ${weightLb} lbs\nHeight: ${heightFt} ft ${heightIn} in`}
+Age: ${age}
+Gender: ${gender}
+Maintain Weight: ${maintenance} kcal/day
+Weight Loss: ${weightLoss} kcal/day
+Weight Gain: ${weightGain} kcal/day
+
+Calculate Online: https://topcalcbox.com/calorie-calculator`;
+                  copyToClipboard(text);
+                }} 
+                className="flex items-center justify-center px-4 py-2 bg-white rounded-xl text-sm font-bold text-emerald-800 hover:bg-emerald-50 transition-colors shadow-sm"
+              >
+                {copied ? "Copied" : "Copy"}
+              </button>
+              <button 
+                onClick={reset}
+                className="flex items-center justify-center w-10 h-10 bg-white rounded-xl text-emerald-800 hover:bg-emerald-50 transition-colors shadow-sm"
+              >
+                <RotateCcw className="w-5 h-5" />
+              </button>
             </div>
-            <div className="bg-white shadow-sm backdrop-blur-md rounded-xl p-3 border border-slate-200 flex justify-between items-center">
-              <span className="text-orange-800/70 text-sm font-medium">Weight Loss (-0.5kg/wk)</span>
-              <span className="text-slate-900 font-bold">{results.weightLoss.toLocaleString()} kcal</span>
+            
+            <div className="flex flex-col items-center mt-10 mb-6 text-center">
+              <p className="text-emerald-950 text-sm font-black uppercase tracking-[0.2em] mb-2 drop-shadow-sm">
+                Daily Calorie Needs
+              </p>
+              <motion.div 
+                key={maintenance}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="text-4xl md:text-5xl font-black text-emerald-950 tracking-tight mb-2 drop-shadow-sm"
+              >
+                {maintenance.toLocaleString()} <span className="text-2xl md:text-3xl">kcal/day</span>
+              </motion.div>
+              <p className="text-emerald-950 font-bold text-sm drop-shadow-sm">
+                Estimated calories to maintain your current weight
+              </p>
             </div>
+
+            {/* Target Cards */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-5 shadow-sm border border-emerald-100">
+              <h3 className="text-sm font-black text-slate-800 text-center mb-4 uppercase tracking-wide">Estimated Daily Calorie Targets</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <span className="text-slate-700 font-bold">Weight Loss</span>
+                  <span className="text-emerald-800 font-black">{weightLoss.toLocaleString()} kcal/day</span>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <span className="text-slate-700 font-bold">Maintain Weight</span>
+                  <span className="text-emerald-800 font-black">{maintenance.toLocaleString()} kcal/day</span>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <span className="text-slate-700 font-bold">Weight Gain</span>
+                  <span className="text-emerald-800 font-black">{weightGain.toLocaleString()} kcal/day</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 mt-4">
+            <p className="text-xs text-slate-500 text-center leading-relaxed">
+              <strong className="text-slate-700">Disclaimer:</strong> This calorie calculator provides an estimate for general informational purposes and is not medical advice. Actual calorie needs can vary based on body composition, health, lifestyle and other factors. Consult a qualified healthcare professional or registered dietitian for personalized advice.
+            </p>
           </div>
         </div>
       </div>
