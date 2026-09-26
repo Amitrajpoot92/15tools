@@ -163,12 +163,12 @@ export function AgeCalculator() {
             </div>
             <div className="flex items-center gap-2 ml-auto">
               <button onClick={() => {
-                const text = \`Age Calculator
-Date of Birth: \${dobInput} \${dobDate ? \`(\${formatFriendlyDate(dobDate)})\` : ''}
-Age at Date: \${todayInput} \${todayDate ? \`(\${formatFriendlyDate(todayDate)})\` : ''}
-Exact Age: \${age ? \`\${age.years} Years, \${age.months} Months, \${age.days} Days\` : ''}\${extraInfo ? \`\\nDay of Birth: \${extraInfo.dayOfBirth}\\nTotal Months Lived: \${extraInfo.totalMonths}\\nTotal Days Lived: \${extraInfo.totalDays}\\nNext Birthday: \${extraInfo.daysToNext === 0 ? "Today!" : \`in \${extraInfo.daysToNext} days\`}\` : ''}
+                const text = `Age Calculator
+Date of Birth: ${dobInput} ${dobDate ? `(${formatFriendlyDate(dobDate)})` : ''}
+Age at Date: ${todayInput} ${todayDate ? `(${formatFriendlyDate(todayDate)})` : ''}
+Exact Age: ${age ? `${age.years} Years, ${age.months} Months, ${age.days} Days` : ''}${extraInfo ? `\nDay of Birth: ${extraInfo.dayOfBirth}\nTotal Months Lived: ${extraInfo.totalMonths}\nTotal Days Lived: ${extraInfo.totalDays}\nNext Birthday: ${extraInfo.daysToNext === 0 ? "Today!" : `in ${extraInfo.daysToNext} days`}` : ''}
 
-Calculate Online: https://topcalcbox.com/age-calculator-online/\`;
+Calculate Online: https://topcalcbox.com/age-calculator-online/`;
                 copyToClipboard(text);
               }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-indigo-200 rounded-xl text-[11px] font-bold text-indigo-700 hover:bg-white transition-all shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -183,7 +183,7 @@ Calculate Online: https://topcalcbox.com/age-calculator-online/\`;
           <div className="w-full z-10">
             {age ? (
               <motion.div 
-                key={\`\${age.years}-\${age.months}-\${age.days}\`}
+                key={`${age.years}-${age.months}-${age.days}`}
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 className="w-full space-y-4"
@@ -211,7 +211,7 @@ Calculate Online: https://topcalcbox.com/age-calculator-online/\`;
                     </div>
                     <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-start text-left">
                       <p className="text-[10px] md:text-[11px] text-slate-500 font-bold mb-1 uppercase tracking-wider">Next Birthday</p>
-                      <p className="text-sm font-extrabold text-indigo-600">{extraInfo.daysToNext === 0 ? "Today!" : \`in \${extraInfo.daysToNext} days\`}</p>
+                      <p className="text-sm font-extrabold text-indigo-600">{extraInfo.daysToNext === 0 ? "Today!" : `in ${extraInfo.daysToNext} days`}</p>
                     </div>
                     <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-start text-left">
                       <p className="text-[10px] md:text-[11px] text-slate-500 font-bold mb-1 uppercase tracking-wider">Total Months</p>
