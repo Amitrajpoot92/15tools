@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/price-per-kg-calculator',
     '/tip-calculator',
     '/fuel-cost-calculator',
-    '/electricity-bill-calculator',
+    '/grocery-bill-calculator',
     '/bmi-calculator',
     '/calorie-calculator',
     '/love-calculator',

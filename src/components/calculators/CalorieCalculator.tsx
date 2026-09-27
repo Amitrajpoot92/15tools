@@ -299,7 +299,6 @@ export function CalorieCalculator() {
             <strong className="text-slate-700">Disclaimer:</strong> This calorie calculator provides an estimate for general informational purposes and is not medical advice. Actual calorie needs can vary based on body composition, health, lifestyle and other factors. Consult a qualified healthcare professional or registered dietitian for personalized advice.
           </p>
         </div>
-        </div>
       </div>
     </div>
   );

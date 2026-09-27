@@ -68,7 +68,6 @@ export function BMICalculator() {
   };
 
   return (
-  return (
     <div className="w-full relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
       

@@ -64,7 +64,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Utility costs are rising globally, and for many households, the monthly electricity bill is a massive source of financial stress. However, by understanding how your appliances draw power, you can make minor lifestyle adjustments that result in massive savings.</p>
 
       <h2>1. Identify the "Energy Hogs"</h2>
-      <p>Heating and cooling appliances consume the vast majority of residential electricity. Air conditioners, water heaters, and electric space heaters draw incredible amounts of wattage. Use our <a href="/electricity-bill-calculator">Electricity Bill Calculator</a> to input the wattage of these devices and see exactly how much they are costing you per month.</p>
+      <p>Heating and cooling appliances consume the vast majority of residential electricity. Air conditioners, water heaters, and electric space heaters draw incredible amounts of wattage. Calculate the wattage of these devices to see exactly how much they are costing you per month.</p>
 
       <h2>2. Upgrade to LED Lighting</h2>
       <p>If you are still using incandescent or older fluorescent bulbs, you are literally burning money. LED bulbs use up to 90% less energy and last 25 times longer. The upfront cost is slightly higher, but they pay for themselves within months.</p>
