@@ -223,10 +223,10 @@ export const TOOLS: Tool[] = [
     category: "SHOPPING & DAILY LIFE"
   },
   {
-    name: "Electricity Bill Calculator",
-    slug: "electricity-bill-calculator",
-    description: "Estimate your monthly power consumption cost based on your appliances.",
-    icon: Zap,
+    name: "Grocery Bill Calculator",
+    slug: "grocery-bill-calculator",
+    description: "Easily estimate your total grocery bill by summing up all your items before checkout.",
+    icon: ShoppingCart,
     color: "text-orange-500",
     category: "SHOPPING & DAILY LIFE"
   },

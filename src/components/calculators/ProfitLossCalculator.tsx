@@ -33,17 +33,23 @@ export function ProfitLossCalculator() {
       if (sp >= totalCost) {
         const profit = sp - totalCost;
         const margin = totalCost > 0 ? (profit / totalCost) * 100 : 0;
-        return { type: "profit", amount: profit.toFixed(2), margin: margin.toFixed(2), totalCost: totalCost.toFixed(2) };
+        return { type: "profit", amount: profit, margin: margin, totalCost: totalCost };
       } else {
         const loss = totalCost - sp;
         const lossMargin = totalCost > 0 ? (loss / totalCost) * 100 : 0;
-        return { type: "loss", amount: loss.toFixed(2), margin: lossMargin.toFixed(2), totalCost: totalCost.toFixed(2) };
+        return { type: "loss", amount: loss, margin: lossMargin, totalCost: totalCost };
       }
     }
-    return { type: "none", amount: "0.00", margin: "0.00", totalCost: "0.00" };
+    return { type: "none", amount: 0, margin: 0, totalCost: 0 };
   };
 
   const result = calculate();
+
+  const formatNumber = (num: number, maxDigits = 2) => {
+    return num.toLocaleString(currency === '₹' ? 'en-IN' : 'en-US', {
+      maximumFractionDigits: maxDigits,
+    });
+  };
 
   return (
     <div className="w-full relative overflow-hidden">
@@ -137,8 +143,8 @@ export function ProfitLossCalculator() {
                 const text = `Profit and Loss Calculator
 Cost Price: ${currency}${costPrice || 0}
 Selling Price: ${currency}${sellingPrice || 0}
-${expenses ? `Other Costs / Expenses: ${currency}${expenses}\n` : ''}${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${result.amount}
-${result.type === 'loss' ? 'Loss' : 'Profit'} Percentage: ${result.margin}%
+${expenses ? `Other Costs / Expenses: ${currency}${expenses}\n` : ''}${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${formatNumber(result.amount)}
+${result.type === 'loss' ? 'Loss' : 'Profit'} Percentage: ${formatNumber(result.margin)}%
 
 Calculate Online: https://topcalcbox.com/profit-and-loss-calculator/`;
                 copyToClipboard(text);
@@ -151,17 +157,22 @@ Calculate Online: https://topcalcbox.com/profit-and-loss-calculator/`;
             </div>
           </div>
           
-          <div className="flex items-end justify-between mb-8">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 md:mb-8">
+            <div className="flex-1 min-w-0">
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                 {result.type === 'loss' ? 'Total Loss' : 'Total Profit'}
               </p>
               <div className="flex flex-col gap-2">
-                <div className="flex items-baseline">
+                <div className="flex items-baseline overflow-hidden">
                   <span className={`text-2xl font-bold mr-1 ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{currency}</span>
-                  <span className={`text-5xl font-extrabold tracking-tight ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{result.amount}</span>
+                  <span 
+                    className={`text-4xl md:text-5xl font-extrabold tracking-tight truncate ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}
+                    title={formatNumber(result.amount)}
+                  >
+                    {formatNumber(result.amount)}
+                  </span>
                 </div>
-                {result.amount !== "0.00" && (
+                {result.amount !== 0 && (
                   <span className={`self-start px-3 py-1 rounded-md text-[11px] font-bold ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
                     {result.type === 'loss' ? 'Loss' : 'Profit'}
                   </span>
@@ -169,22 +180,22 @@ Calculate Online: https://topcalcbox.com/profit-and-loss-calculator/`;
               </div>
             </div>
             
-            <div className={`text-right px-4 py-3 rounded-xl border ${result.type === 'loss' ? 'bg-rose-200 border-rose-300' : 'bg-emerald-200 border-emerald-300'}`}>
+            <div className={`flex-shrink-0 text-right px-3 py-2 md:px-4 md:py-3 rounded-xl border ${result.type === 'loss' ? 'bg-rose-200 border-rose-300' : 'bg-emerald-200 border-emerald-300'}`}>
               <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                 {result.type === 'loss' ? 'Loss on Cost' : 'Profit on Cost'}
               </p>
-              <p className={`text-xl font-bold ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{result.margin}%</p>
+              <p className={`text-lg md:text-xl font-bold ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{formatNumber(result.margin)}%</p>
             </div>
           </div>
 
           <div className="space-y-3 pt-5 border-t border-slate-100">
             <div className="flex justify-between items-center text-[13px]">
-              <span className="font-medium text-slate-500">Total Cost</span>
-              <span className="font-bold text-slate-800">{currency}{result.totalCost}</span>
+              <span className="font-medium text-slate-500 truncate mr-2">Total Cost</span>
+              <span className="font-bold text-slate-800 truncate" title={formatNumber(result.totalCost)}>{currency}{formatNumber(result.totalCost)}</span>
             </div>
             <div className="flex justify-between items-center text-[13px]">
-              <span className="font-medium text-slate-500">Selling Price</span>
-              <span className="font-bold text-slate-800">{currency}{parseFloat(sellingPrice) || 0}</span>
+              <span className="font-medium text-slate-500 truncate mr-2">Selling Price</span>
+              <span className="font-bold text-slate-800 truncate" title={formatNumber(parseFloat(sellingPrice) || 0)}>{currency}{formatNumber(parseFloat(sellingPrice) || 0)}</span>
             </div>
           </div>
         </div>

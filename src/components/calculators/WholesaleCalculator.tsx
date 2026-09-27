@@ -22,16 +22,22 @@ export function WholesaleCalculator() {
       const profitPerUnit = totalProfit / q;
 
       return {
-        wholesalePricePerUnit: wholesalePricePerUnit.toFixed(0),
-        profitPerUnit: profitPerUnit.toFixed(0),
-        totalProfit: totalProfit.toFixed(0),
-        totalRevenue: totalRevenue.toLocaleString("en-IN", { maximumFractionDigits: 0 }),
+        wholesalePricePerUnit: wholesalePricePerUnit,
+        profitPerUnit: profitPerUnit,
+        totalProfit: totalProfit,
+        totalRevenue: totalRevenue,
       };
     }
-    return { wholesalePricePerUnit: "0", profitPerUnit: "0", totalProfit: "0", totalRevenue: "0" };
+    return { wholesalePricePerUnit: 0, profitPerUnit: 0, totalProfit: 0, totalRevenue: 0 };
   };
 
   const result = calculate();
+
+  const formatNumber = (num: number, maxDigits = 0) => {
+    return num.toLocaleString(currency === '₹' ? 'en-IN' : 'en-US', {
+      maximumFractionDigits: maxDigits,
+    });
+  };
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -129,9 +135,9 @@ export function WholesaleCalculator() {
 Total Cost Price: ${currency}${cost || 0}
 Profit Target: ${profitPercent || 0}%
 Quantity: ${quantity || 0} Units
-Wholesale Price Per Unit: ${currency}${result.wholesalePricePerUnit}
-Total Profit: ${currency}${result.totalProfit}
-Total Revenue: ${currency}${result.totalRevenue}
+Wholesale Price Per Unit: ${currency}${formatNumber(result.wholesalePricePerUnit)}
+Total Profit: ${currency}${formatNumber(result.totalProfit)}
+Total Revenue: ${currency}${formatNumber(result.totalRevenue)}
 
 Calculate Online: https://topcalcbox.com/wholesale-price-calculator/`;
               copyToClipboard(text);
@@ -146,28 +152,37 @@ Calculate Online: https://topcalcbox.com/wholesale-price-calculator/`;
         
         <div className="bg-amber-200 rounded-xl p-4 md:p-5 border border-amber-300 mb-5">
           <p className="text-[10px] uppercase font-bold text-[#b45309] mb-1 tracking-wider">Wholesale Price Per Unit</p>
-          <div className="flex items-baseline mb-5">
+          <div className="flex items-baseline mb-5 overflow-hidden">
             <span className="text-2xl font-bold text-[#78350f] mr-1">{currency}</span>
-            <span className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#78350f]">
-              {result.wholesalePricePerUnit}
+            <span 
+              className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#78350f] truncate"
+              title={formatNumber(result.wholesalePricePerUnit)}
+            >
+              {formatNumber(result.wholesalePricePerUnit)}
             </span>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-white rounded-lg p-3 border border-[#f8ebd0]">
-              <p className="text-[10px] uppercase font-bold text-slate-500 mb-1">Profit Per Unit</p>
-              <p className="text-sm font-bold text-slate-800">{currency}{result.profitPerUnit}</p>
+            <div className="bg-white rounded-lg p-3 border border-[#f8ebd0] overflow-hidden">
+              <p className="text-[10px] uppercase font-bold text-slate-500 mb-1 truncate">Profit Per Unit</p>
+              <p className="text-sm font-bold text-slate-800 truncate" title={formatNumber(result.profitPerUnit)}>
+                {currency}{formatNumber(result.profitPerUnit)}
+              </p>
             </div>
-            <div className="bg-white rounded-lg p-3 border border-[#f8ebd0]">
-              <p className="text-[10px] uppercase font-bold text-slate-500 mb-1">Total Profit</p>
-              <p className="text-sm font-bold text-slate-800">{currency}{result.totalProfit}</p>
+            <div className="bg-white rounded-lg p-3 border border-[#f8ebd0] overflow-hidden">
+              <p className="text-[10px] uppercase font-bold text-slate-500 mb-1 truncate">Total Profit</p>
+              <p className="text-sm font-bold text-slate-800 truncate" title={formatNumber(result.totalProfit)}>
+                {currency}{formatNumber(result.totalProfit)}
+              </p>
             </div>
           </div>
         </div>
 
         <div className="flex justify-between items-center text-[13px] pt-4 border-t border-slate-100">
-          <span className="font-medium text-slate-500">Total Revenue</span>
-          <span className="font-bold text-slate-800">{currency}{result.totalRevenue}</span>
+          <span className="font-medium text-slate-500 truncate mr-2">Total Revenue</span>
+          <span className="font-bold text-slate-800 truncate" title={formatNumber(result.totalRevenue)}>
+            {currency}{formatNumber(result.totalRevenue)}
+          </span>
         </div>
       </div>
     </div>

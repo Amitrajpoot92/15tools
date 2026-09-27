@@ -37,7 +37,7 @@ export function LoveCalculator() {
       
       setResult(finalPercentage > 100 ? 100 : finalPercentage);
       setIsCalculating(false);
-    }, 800);
+    }, 2500);
   };
 
   const reset = () => {
@@ -57,112 +57,149 @@ export function LoveCalculator() {
   const resultData = result !== null ? getMessageAndStars(result) : null;
 
   return (
-    <div className="w-full space-y-4">
-      {/* Input Section */}
-      <div className="bg-[#fff1f2] border border-rose-100 rounded-3xl p-5 md:p-6 relative">
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-base font-bold text-[#1f2937]">YOUR FULL NAME</label>
-            <input
-              type="text"
-              value={name1}
-              onChange={(e) => setName1(e.target.value)}
-              placeholder="Rupesh"
-              className="w-full bg-white border border-slate-100 rounded-2xl px-4 py-3.5 text-lg text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition-all shadow-sm"
-            />
+    <div className="w-full relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 rounded-full blur-[80px] pointer-events-none" />
+      
+      <div className="relative z-10 space-y-6">
+        {/* Input Section */}
+        <div className="bg-rose-50/50 border border-rose-100/50 rounded-2xl p-5 md:p-6 relative">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700">Your Full Name</label>
+              <input
+                type="text"
+                value={name1}
+                onChange={(e) => setName1(e.target.value)}
+                placeholder="Romeo"
+                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-sm"
+              />
+            </div>
+            
+            <div className="flex justify-center -my-3 relative z-10">
+              <div className="bg-white p-3 rounded-full shadow-sm border border-rose-100 flex items-center justify-center">
+                <Heart className="w-5 h-5 text-rose-500 fill-rose-500" />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-slate-700">Crush or Partner's Name</label>
+              <input
+                type="text"
+                value={name2}
+                onChange={(e) => setName2(e.target.value)}
+                placeholder="Juliet"
+                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-sm"
+              />
+            </div>
+
+            <button
+              onClick={calculateLove}
+              disabled={!name1.trim() || !name2.trim() || isCalculating}
+              className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-lg rounded-xl py-3.5 shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/30 hover:from-rose-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+            >
+              {isCalculating ? "Calculating Destiny..." : "Calculate Love %"}
+            </button>
           </div>
+        </div>
+
+        {/* Result Section */}
+        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-pink-50/40 rounded-3xl shadow-[0_8px_30px_rgb(236,72,153,0.12)] border border-pink-200/60 relative overflow-hidden min-h-[350px]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ec489908_1px,transparent_1px),linear-gradient(to_bottom,#ec489908_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="bg-white p-3 rounded-full shadow-sm flex items-center justify-center">
-              <Heart className="w-6 h-6 text-[#ff007f] fill-[#ff007f]" />
+          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+            <div className="flex items-center gap-2 text-rose-800">
+               <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">Love Result</h3>
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              <button onClick={() => {
+                const text = `Love Calculator\nYour Name: ${name1}\nCrush's Name: ${name2}\nLove %: ${result !== null ? result + '%' : 'N/A'}\nMessage: ${resultData?.msg || 'N/A'}\n\nCalculate Online: https://topcalcbox.com/love-calculator`;
+                copyToClipboard(text);
+              }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-rose-200 rounded-xl text-[11px] font-bold text-rose-700 hover:bg-white transition-all shadow-sm">
+                <span className="inline">{copied ? "Copied" : "Copy"}</span>
+              </button>
+              <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-rose-200 rounded-xl text-rose-700 hover:bg-white transition-all shadow-sm">
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
+          
+          <div className="w-full z-10 flex flex-col items-center justify-center relative">
+            <AnimatePresence mode="wait">
+              {isCalculating ? (
+                <motion.div
+                  key="calculating"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col items-center justify-center my-8"
+                >
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.4, 1.1, 1.4, 1],
+                      rotate: [0, 5, -5, 5, 0]
+                    }}
+                    transition={{ 
+                      duration: 1, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="mb-4"
+                  >
+                    <Heart className="w-24 h-24 text-rose-500 fill-rose-500 drop-shadow-xl" />
+                  </motion.div>
+                  <motion.div
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <p className="text-sm text-rose-800/80 uppercase tracking-widest font-bold">
+                      Reading the Stars...
+                    </p>
+                  </motion.div>
+                </motion.div>
+              ) : result !== null && resultData ? (
+                <motion.div 
+                  key="result"
+                  initial={{ scale: 0.5, opacity: 0, y: 20 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  transition={{ type: "spring", damping: 15 }}
+                  className="text-center w-full bg-white/80 backdrop-blur-sm border border-rose-200/50 rounded-3xl p-8 shadow-sm"
+                >
+                  <div className="text-7xl md:text-8xl font-black text-rose-600 tracking-tighter mb-6 drop-shadow-sm">
+                    {result}%
+                  </div>
+                  
+                  <div className="flex justify-center gap-2 mb-4">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star 
+                        key={star} 
+                        className={`w-8 h-8 ${star <= resultData.stars ? 'text-amber-400 fill-amber-400' : 'text-slate-200 fill-slate-200'}`} 
+                      />
+                    ))}
+                  </div>
 
-          <div className="space-y-2">
-            <label className="text-base font-bold text-[#1f2937]">CRUSH OR PARTNER'S NAME</label>
-            <input
-              type="text"
-              value={name2}
-              onChange={(e) => setName2(e.target.value)}
-              placeholder="Kamni"
-              className="w-full bg-white border border-slate-100 rounded-2xl px-4 py-3.5 text-lg text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition-all shadow-sm"
-            />
+                  <p className="text-rose-900 font-extrabold text-xl md:text-2xl mt-4">
+                    {resultData.msg}
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="placeholder"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-center my-12"
+                >
+                  <div className="bg-rose-100 p-4 rounded-full inline-block mb-4">
+                    <Heart className="w-12 h-12 text-rose-300" strokeWidth={2} />
+                  </div>
+                  <p className="text-sm text-rose-800/50 uppercase tracking-widest font-bold">
+                    Awaiting Names
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-
-          <button
-            onClick={calculateLove}
-            disabled={!name1.trim() || !name2.trim() || isCalculating}
-            className="w-full bg-[#ff007f] text-white font-bold text-lg rounded-2xl py-4 shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-          >
-            {isCalculating ? "Calculating..." : "Calculate Love %"}
-          </button>
         </div>
-      </div>
-
-      {/* Result Section */}
-      <div className="bg-[#fce7f3] border border-pink-200 rounded-3xl p-6 md:p-8 relative shadow-sm mt-6 min-h-[260px] flex flex-col items-center justify-center">
-        <div className="absolute top-4 right-4 flex gap-2">
-          <button 
-            onClick={() => {
-              const text = `Love Calculator\nYour Name: ${name1}\nCrush's Name: ${name2}\nLove %: ${result !== null ? result + '%' : 'N/A'}\nMessage: ${resultData?.msg || 'N/A'}\n\nCalculate Online: https://topcalcbox.com/love-calculator`;
-              copyToClipboard(text);
-            }} 
-            className="flex items-center justify-center px-4 py-2 bg-white rounded-xl text-sm font-bold text-[#ff007f] hover:bg-pink-50 transition-colors shadow-sm"
-          >
-            {copied ? "Copied" : "Copy"}
-          </button>
-          <button 
-            onClick={reset}
-            className="flex items-center justify-center w-10 h-10 bg-white rounded-xl text-[#ff007f] hover:bg-pink-50 transition-colors shadow-sm"
-          >
-            <RotateCcw className="w-5 h-5" />
-          </button>
-        </div>
-        
-        <div className="p-4 bg-white shadow-sm rounded-3xl mb-6">
-          <Heart className={`w-12 h-12 text-[#111827] ${isCalculating ? 'animate-ping text-[#ff007f] fill-[#ff007f]' : ''}`} strokeWidth={2.5} />
-        </div>
-        
-        <AnimatePresence mode="wait">
-          {result !== null && !isCalculating && resultData ? (
-            <motion.div 
-              key="result"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              className="text-center w-full"
-            >
-              <div className="text-6xl md:text-7xl font-extrabold text-[#111827] tracking-tighter mb-4">
-                {result}%
-              </div>
-              
-              <div className="flex justify-center gap-1 mb-3">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star 
-                    key={star} 
-                    className={`w-6 h-6 ${star <= resultData.stars ? 'text-amber-400 fill-amber-400' : 'text-slate-300 fill-slate-300'}`} 
-                  />
-                ))}
-              </div>
-
-              <p className="text-[#e11d48] font-bold text-lg md:text-xl">
-                {resultData.msg}
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div 
-              key="placeholder"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center"
-            >
-              <p className="text-sm text-pink-800/60 uppercase tracking-widest font-bold">
-                {isCalculating ? "Calculating Destiny..." : "Awaiting Names"}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 mt-4">

@@ -37,16 +37,22 @@ export function GSTCalculator() {
     const igst = gst;
 
     return {
-      net: net.toFixed(2).replace(/\.00$/, ''),
-      gst: gst.toFixed(2).replace(/\.00$/, ''),
-      total: total.toFixed(2).replace(/\.00$/, ''),
-      cgst: cgst.toFixed(2).replace(/\.00$/, ''),
-      sgst: sgst.toFixed(2).replace(/\.00$/, ''),
-      igst: igst.toFixed(2).replace(/\.00$/, ''),
+      net: net,
+      gst: gst,
+      total: total,
+      cgst: cgst,
+      sgst: sgst,
+      igst: igst,
     };
   };
 
   const res = calculate();
+
+  const formatNumber = (num: number | string) => {
+    const val = typeof num === 'string' ? parseFloat(num) : num;
+    if (isNaN(val)) return "0";
+    return val.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+  };
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -166,8 +172,8 @@ export function GSTCalculator() {
                 const text = `GST Calculator
 Amount: ₹${amount}
 GST Rate: ${rate}%
-GST Amount: ₹${res.gst}
-${mode === 'add' ? 'Final Amount: ₹' + res.total : 'Net Amount: ₹' + res.net}
+GST Amount: ₹${formatNumber(res.gst)}
+${mode === 'add' ? 'Final Amount: ₹' + formatNumber(res.total) : 'Net Amount: ₹' + formatNumber(res.net)}
 
 Calculate Online: https://topcalcbox.com/gst-calculator/`;
                 copyToClipboard(text);
@@ -181,10 +187,13 @@ Calculate Online: https://topcalcbox.com/gst-calculator/`;
             </div>
           </div>
           
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <div className="flex items-baseline">
-              <span className="text-5xl font-extrabold tracking-tight text-[#3b0764]">
-                ₹{mode === "add" ? res.total : res.net}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6 overflow-hidden">
+            <div className="flex items-baseline overflow-hidden w-full sm:w-auto">
+              <span 
+                className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#3b0764] truncate"
+                title={`₹${formatNumber(mode === "add" ? res.total : res.net)}`}
+              >
+                ₹{formatNumber(mode === "add" ? res.total : res.net)}
               </span>
             </div>
             <div className="px-2.5 py-1 bg-purple-200 border border-purple-300 rounded-md font-bold text-[10px] text-purple-800 tracking-wider">
@@ -194,31 +203,31 @@ Calculate Online: https://topcalcbox.com/gst-calculator/`;
           
           <div className="space-y-3 pt-4 border-t border-purple-300">
             <div className="flex justify-between items-center text-xs">
-              <span className="text-purple-700/80">Net Amount</span>
-              <span className="font-bold text-purple-700">₹{res.net}</span>
+              <span className="text-purple-700/80 truncate mr-2">Net Amount</span>
+              <span className="font-bold text-purple-700 truncate">₹{formatNumber(res.net)}</span>
             </div>
             
             {stateType === "intra" ? (
               <>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-purple-700/80">CGST ({(parseFloat(rate)/2) || 0}%)</span>
-                  <span className="font-bold text-purple-700">+₹{res.cgst}</span>
+                  <span className="text-purple-700/80 truncate mr-2">CGST ({(parseFloat(rate)/2) || 0}%)</span>
+                  <span className="font-bold text-purple-700 truncate">+₹{formatNumber(res.cgst)}</span>
                 </div>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="text-purple-700/80">SGST ({(parseFloat(rate)/2) || 0}%)</span>
-                  <span className="font-bold text-purple-700">+₹{res.sgst}</span>
+                  <span className="text-purple-700/80 truncate mr-2">SGST ({(parseFloat(rate)/2) || 0}%)</span>
+                  <span className="font-bold text-purple-700 truncate">+₹{formatNumber(res.sgst)}</span>
                 </div>
               </>
             ) : (
               <div className="flex justify-between items-center text-xs">
-                <span className="text-purple-700/80">IGST ({rate || 0}%)</span>
-                <span className="font-bold text-purple-700">+₹{res.igst}</span>
+                <span className="text-purple-700/80 truncate mr-2">IGST ({rate || 0}%)</span>
+                <span className="font-bold text-purple-700 truncate">+₹{formatNumber(res.igst)}</span>
               </div>
             )}
             
             <div className="flex justify-between items-center text-sm pt-2">
-              <span className="font-bold text-purple-700">Total Amount</span>
-              <span className="font-bold text-purple-700">₹{res.total}</span>
+              <span className="font-bold text-purple-700 truncate mr-2">Total Amount</span>
+              <span className="font-bold text-purple-700 truncate">₹{formatNumber(res.total)}</span>
             </div>
           </div>
         </div>
