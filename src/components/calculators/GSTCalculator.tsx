@@ -87,8 +87,8 @@ export function GSTCalculator() {
         </button>
       </div>
 
-      <div className="space-y-5 bg-purple-50/50 border border-purple-100/50 p-5 md:p-6 rounded-2xl">
-        <div className="flex flex-col gap-5">
+      <div className="space-y-4 bg-purple-50/50 border border-purple-100/50 p-4 md:p-5 rounded-2xl">
+        <div className="flex flex-col gap-4">
           {/* Amount */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
@@ -161,7 +161,7 @@ export function GSTCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-purple-50/40 rounded-3xl shadow-[0_8px_30px_rgb(168,85,247,0.12)] border border-purple-200/60 relative overflow-hidden mt-6">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-purple-50/40 rounded-3xl shadow-[0_8px_30px_rgb(168,85,247,0.12)] border border-purple-200/60 relative overflow-hidden mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#a855f708_1px,transparent_1px),linear-gradient(to_bottom,#a855f708_1px,transparent_1px)] bg-[size:24px_24px]" />
           
           <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
@@ -201,43 +201,43 @@ Calculate Online: https://topcalcbox.com/gst-calculator/`;
               animate={{ scale: 1, opacity: 1 }}
               className="w-full space-y-4"
             >
-              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-                <p className="text-[10px] text-purple-800/70 font-bold uppercase tracking-widest mb-2">Final Amount</p>
-                <div className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter mb-3 drop-shadow-sm truncate px-2 w-full">
-                  <span className="text-2xl md:text-3xl font-bold text-slate-400 mr-1">₹</span>{formatNumber(mode === "add" ? res.total : res.net)}
+              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <p className="text-[10px] text-purple-800/70 font-bold uppercase tracking-widest mb-1">Final Amount</p>
+                <div className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tighter mb-2 drop-shadow-sm w-full break-all px-2">
+                  <span className="text-xl md:text-3xl font-bold text-slate-400 mr-1">₹</span>{formatNumber(mode === "add" ? res.total : res.net)}
                 </div>
-                <div className="bg-purple-100/50 border border-purple-200 text-purple-800 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                <div className="bg-purple-100/50 border border-purple-200 text-purple-800 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                   {rate}% GST {mode === "add" ? "Included" : "Excluded"}
                 </div>
               </div>
 
               {/* Target Cards */}
-              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-5">
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                    <span className="text-slate-600 font-bold">Net Amount</span>
-                    <span className="text-slate-900 font-black truncate max-w-[50%]">₹{formatNumber(res.net)}</span>
+              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50/80 border border-slate-100 gap-2">
+                    <span className="text-slate-600 font-bold text-xs sm:text-sm shrink-0">Net Amount</span>
+                    <span className="text-slate-900 font-black text-sm sm:text-base break-all text-right">₹{formatNumber(res.net)}</span>
                   </div>
                   {stateType === "intra" ? (
                     <>
-                      <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                        <span className="text-slate-600 font-bold">CGST ({(parseFloat(rate)/2) || 0}%)</span>
-                        <span className="text-purple-700 font-black truncate max-w-[50%]">+₹{formatNumber(res.cgst)}</span>
+                      <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50/80 border border-slate-100 gap-2">
+                        <span className="text-slate-600 font-bold text-xs sm:text-sm shrink-0">CGST ({(parseFloat(rate)/2) || 0}%)</span>
+                        <span className="text-purple-700 font-black text-sm sm:text-base break-all text-right">+₹{formatNumber(res.cgst)}</span>
                       </div>
-                      <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                        <span className="text-slate-600 font-bold">SGST ({(parseFloat(rate)/2) || 0}%)</span>
-                        <span className="text-purple-700 font-black truncate max-w-[50%]">+₹{formatNumber(res.sgst)}</span>
+                      <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50/80 border border-slate-100 gap-2">
+                        <span className="text-slate-600 font-bold text-xs sm:text-sm shrink-0">SGST ({(parseFloat(rate)/2) || 0}%)</span>
+                        <span className="text-purple-700 font-black text-sm sm:text-base break-all text-right">+₹{formatNumber(res.sgst)}</span>
                       </div>
                     </>
                   ) : (
-                    <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                      <span className="text-slate-600 font-bold">IGST ({rate || 0}%)</span>
-                      <span className="text-purple-700 font-black truncate max-w-[50%]">+₹{formatNumber(res.igst)}</span>
+                    <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50/80 border border-slate-100 gap-2">
+                      <span className="text-slate-600 font-bold text-xs sm:text-sm shrink-0">IGST ({rate || 0}%)</span>
+                      <span className="text-purple-700 font-black text-sm sm:text-base break-all text-right">+₹{formatNumber(res.igst)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between items-center p-3 rounded-xl bg-purple-50 border border-purple-100 mt-2">
-                    <span className="text-purple-900 font-black">Total Amount</span>
-                    <span className="text-purple-900 font-black truncate max-w-[50%]">₹{formatNumber(res.total)}</span>
+                  <div className="flex justify-between items-center p-2.5 rounded-xl bg-purple-50 border border-purple-100 mt-2 gap-2">
+                    <span className="text-purple-900 font-black text-xs sm:text-sm shrink-0">Total Amount</span>
+                    <span className="text-purple-900 font-black text-sm sm:text-base break-all text-right">₹{formatNumber(res.total)}</span>
                   </div>
                 </div>
               </div>
