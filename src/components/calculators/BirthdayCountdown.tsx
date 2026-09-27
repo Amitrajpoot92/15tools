@@ -173,7 +173,7 @@ export function BirthdayCountdown() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-fuchsia-50 to-fuchsia-100/80 rounded-3xl shadow-[0_8px_30px_rgb(217,70,239,0.15)] border border-fuchsia-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-14 bg-gradient-to-b from-fuchsia-50 to-fuchsia-100/80 rounded-3xl shadow-[0_8px_30px_rgb(217,70,239,0.15)] border border-fuchsia-200/60 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#d946ef10_1px,transparent_1px),linear-gradient(to_bottom,#d946ef10_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           
@@ -202,12 +202,7 @@ export function BirthdayCountdown() {
             
             <button onClick={() => {
               const bdayText = isBirthday ? `Happy Birthday ${name}! You are exactly ${turningAge} years old today! 🎉` : `Next milestone celebration: Turning ${turningAge} years old!`;
-              const text = `Birthday Countdown${name ? ` for ${name}` : ''}
-Date of Birth: ${dobInput} ${dobDateObj ? `(${formatFriendlyDate(dobDateObj)})` : ''}
-${dobDateObj ? bdayText : ''}
-Time Left: ${timeLeft && !isBirthday ? `${timeLeft.days} Days, ${timeLeft.hours} Hrs, ${timeLeft.minutes} Min, ${timeLeft.seconds} Sec` : (isBirthday ? 'Today!' : 'N/A')}
-
-Calculate Online: https://topcalcbox.com/birthday-countdown/`;
+              const text = `Birthday Countdown${name ? ` for ${name}` : ''}\nDate of Birth: ${dobInput} ${dobDateObj ? `(${formatFriendlyDate(dobDateObj)})` : ''}\n${dobDateObj ? bdayText : ''}\nTime Left: ${timeLeft && !isBirthday ? `${timeLeft.days} Days, ${timeLeft.hours} Hrs, ${timeLeft.minutes} Min, ${timeLeft.seconds} Sec` : (isBirthday ? 'Today!' : 'N/A')}\n\nCalculate Online: https://topcalcbox.com/birthday-countdown/`;
               copyToClipboard(text);
             }} className="flex items-center gap-1.5 px-3 py-1.5 bg-fuchsia-600 text-white rounded-xl text-[11px] font-bold hover:bg-fuchsia-700 transition-all shadow-sm">
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -218,15 +213,15 @@ Calculate Online: https://topcalcbox.com/birthday-countdown/`;
             </button>
           </div>
           
-          <div className="flex flex-col items-center text-center mt-8 sm:mt-12 mb-6 z-10">
-            <h3 className="text-lg md:text-xl font-extrabold text-slate-800 flex items-center gap-2">
-              <span className="text-fuchsia-600">🎉</span>
-              {name ? `${name}'s Next Birthday` : "Your Next Birthday"}
+          <div className="flex flex-col items-center text-center mt-2 mb-4 z-10">
+            <h3 className="text-lg md:text-xl font-extrabold text-fuchsia-700 flex items-center gap-2">
+              <span className="text-fuchsia-500">🎉</span>
+              {name ? `${name.trim()}'s Next Birthday` : "Your Next Birthday"}
             </h3>
             {turningAge !== null && (
               <p className="text-sm font-medium text-slate-600 mt-2">
                 {isBirthday ? (
-                  <span className="text-fuchsia-600 font-bold text-lg">Happy Birthday! You are exactly {turningAge} years old today! 🎂</span>
+                  <span className="text-fuchsia-600 font-bold text-[15px] md:text-base">Happy Birthday! You are exactly {turningAge} years old today!</span>
                 ) : (
                   <>Next milestone celebration: Turning <span className="text-fuchsia-600 font-bold text-lg">{turningAge}</span> years old!</>
                 )}
@@ -239,10 +234,16 @@ Calculate Online: https://topcalcbox.com/birthday-countdown/`;
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="p-8 bg-white/60 border border-fuchsia-200/50 rounded-2xl backdrop-blur-sm shadow-sm text-center transform transition-transform hover:scale-105 duration-300"
+                className="p-5 md:p-6 bg-white/70 border border-fuchsia-200/60 rounded-2xl backdrop-blur-sm shadow-sm text-center flex flex-col items-center justify-center gap-3"
               >
-                <div className="text-5xl mb-4">🥳🎁🎈</div>
-                <h2 className="text-2xl font-extrabold text-fuchsia-600 uppercase tracking-widest">Time to Celebrate!</h2>
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ repeat: Infinity, duration: 0.8, ease: "easeInOut" }}
+                  className="text-6xl drop-shadow-md"
+                >
+                  🎂
+                </motion.div>
+                <h2 className="text-xl md:text-2xl font-extrabold text-fuchsia-600 uppercase tracking-widest mt-1">Time to Celebrate!</h2>
               </motion.div>
             ) : timeLeft ? (
               <div className="grid grid-cols-4 gap-3 text-center text-slate-900">
