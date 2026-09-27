@@ -117,7 +117,7 @@ export default function BODMASCalculatorPage() {
           <li><strong>Everyday Users:</strong> Quickly solve complex calculations without doing them manually.</li>
         </ul>
 
-        <h2>Frequently Asked Questions</h2>
+        <h3>Frequently Asked Questions</h3>
         
         <h3>1. What is a BODMAS Calculator?</h3>
         <p>A BODMAS Calculator is an online tool that solves mathematical expressions according to the correct order of operations: Brackets, Orders, Division, Multiplication, Addition, and Subtraction.</p>

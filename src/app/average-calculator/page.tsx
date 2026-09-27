@@ -109,7 +109,7 @@ export default function AverageCalculatorPage() {
           <li><strong>Everyday Users:</strong> Calculate average expenses, ratings, prices, or other values.</li>
         </ul>
 
-        <h2>Frequently Asked Questions</h2>
+        <h3>Frequently Asked Questions</h3>
         
         <h3>1. What is an Average Calculator?</h3>
         <p>An Average Calculator is an online tool that calculates the average (mean) of a set of numbers. It can also show the median, sum, and count.</p>

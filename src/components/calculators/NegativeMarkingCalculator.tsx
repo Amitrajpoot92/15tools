@@ -116,25 +116,13 @@ export function NegativeMarkingCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-amber-50 to-amber-100/80 rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border border-amber-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-12 bg-gradient-to-b from-amber-50 to-amber-100/80 rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border border-amber-200/60 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b10_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b10_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           
           <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
             <button onClick={() => {
-              const text = `Negative Marking Calculator
-Total Questions in Exam: ${totalQuestions || 0}
-Questions Attempted: ${attempted || 0}
-Correct Answers: ${correct || 0}
-Marks per Correct: ${marksPerCorrect || 0}
-Penalty per Wrong: ${penaltyPerWrong || 0}
-Final Score: ${result.score} / ${result.maxPossible}
-Wrong Answers: ${result.wrong}
-Penalty Deducted: ${result.penalty}
-Unattempted: ${result.unattempted}
-Accuracy: ${result.accuracy}%
-
-Calculate Online: https://topcalcbox.com/negative-marking-calculator/`;
+              const text = `Negative Marking Calculator\nTotal Questions in Exam: ${totalQuestions || 0}\nQuestions Attempted: ${attempted || 0}\nCorrect Answers: ${correct || 0}\nMarks per Correct: ${marksPerCorrect || 0}\nPenalty per Wrong: ${penaltyPerWrong || 0}\nFinal Score: ${result.score} / ${result.maxPossible}\nWrong Answers: ${result.wrong}\nPenalty Deducted: ${result.penalty}\nUnattempted: ${result.unattempted}\nAccuracy: ${result.accuracy}%\n\nCalculate Online: https://topcalcbox.com/negative-marking-calculator/`;
               copyToClipboard(text);
             }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm">
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -145,9 +133,7 @@ Calculate Online: https://topcalcbox.com/negative-marking-calculator/`;
             </button>
           </div>
           
-
-          
-          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
+          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-1 z-10">
             Final Score
           </p>
           
@@ -155,29 +141,27 @@ Calculate Online: https://topcalcbox.com/negative-marking-calculator/`;
             key={result.score}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tighter mb-6 drop-shadow-sm flex items-end z-10"
+            className="text-6xl md:text-7xl font-extrabold text-slate-900 tracking-tighter mb-4 drop-shadow-sm flex items-end z-10"
           >
             {result.score} <span className="text-2xl text-amber-600 ml-2 mb-2.5 font-bold opacity-90">/ {result.maxPossible}</span>
           </motion.div>
 
-          <div className="w-full max-w-sm border-t-2 border-amber-200/60 my-2 z-10" />
-
-          <div className="w-full grid grid-cols-2 gap-4 text-center text-sm mt-4 z-10">
+          <div className="w-full grid grid-cols-2 gap-3 text-center text-sm z-10 mt-1 max-w-sm">
             <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Wrong Answers</span>
-              <span className="text-slate-900 font-extrabold text-xl">{result.wrong}</span>
+              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Wrong Answers</span>
+              <span className="text-slate-900 font-extrabold text-xl md:text-2xl">{result.wrong}</span>
             </div>
             <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Accuracy</span>
-              <span className="text-slate-900 font-extrabold text-xl">{result.accuracy}%</span>
+              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Accuracy</span>
+              <span className="text-slate-900 font-extrabold text-xl md:text-2xl">{result.accuracy}%</span>
             </div>
             <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Unattempted</span>
-              <span className="text-slate-900 font-extrabold text-xl">{result.unattempted}</span>
+              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Unattempted</span>
+              <span className="text-slate-900 font-extrabold text-xl md:text-2xl">{result.unattempted}</span>
             </div>
             <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-1 text-[11px] uppercase tracking-wider">Penalty Deducted</span>
-              <span className="text-rose-600 font-extrabold text-xl">-{result.penalty}</span>
+              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Penalty Deducted</span>
+              <span className="text-rose-600 font-extrabold text-xl md:text-2xl">-{result.penalty}</span>
             </div>
           </div>
         </div>

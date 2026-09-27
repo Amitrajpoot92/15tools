@@ -113,7 +113,7 @@ export default function AttendancePage() {
           <li><strong>Students Planning Leave:</strong> Check how missing upcoming classes may affect attendance.</li>
         </ul>
 
-        <h2>Frequently Asked Questions</h2>
+        <h3>Frequently Asked Questions</h3>
         
         <h3>1. What is the attendance percentage formula?</h3>
         <p>Attendance Percentage = (Classes Attended ÷ Total Classes) × 100.</p>

@@ -127,7 +127,7 @@ export default function MarksPercentagePage() {
           <li><strong>Students Applying for Courses:</strong> Check their percentage against admission or eligibility requirements.</li>
         </ul>
 
-        <h2>Frequently Asked Questions</h2>
+        <h3>Frequently Asked Questions</h3>
         
         <h3>1. How do I calculate percentage from marks?</h3>
         <p>Divide the marks obtained by the total marks and multiply the result by 100.</p>

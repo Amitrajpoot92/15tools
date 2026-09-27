@@ -112,7 +112,7 @@ export default function NegativeMarkingPage() {
           <li><strong>Students Comparing Attempts:</strong> Understand how incorrect answers affect the final score.</li>
         </ul>
 
-        <h2>Frequently Asked Questions</h2>
+        <h3>Frequently Asked Questions</h3>
         
         <h3>1. What is a Negative Marking Calculator?</h3>
         <p>It is an online tool that calculates your final exam score after adding marks for correct answers and deducting marks for incorrect answers.</p>
