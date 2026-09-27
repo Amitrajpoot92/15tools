@@ -122,81 +122,74 @@ export function ProfitLossCalculator() {
           </div>
         </div>
 
-        <div className={`w-full ${result.type === 'loss' ? 'bg-rose-100 border-rose-300' : 'bg-emerald-100 border-emerald-300'} rounded-2xl p-5 md:p-6 mt-1 relative overflow-hidden h-full flex flex-col justify-between shadow-sm`}>
-          <div className="flex items-start justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className={`p-2.5 rounded-xl ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
-                {result.type === 'loss' ? <TrendingDown className="w-5 h-5" strokeWidth={3} /> : <Check className="w-5 h-5" strokeWidth={3} />}
-              </div>
-              <div>
-                <p className={`text-[13px] font-bold uppercase tracking-wider ${result.type === 'loss' ? 'text-rose-700' : 'text-emerald-700'}`}>
-                  {result.type === 'loss' ? 'Loss' : 'Profit'}
-                </p>
-                <p className="text-[11px] text-slate-500 font-medium mt-0.5">
-                  {result.type === 'loss' ? 'Your selling price is below total cost' : 'Your selling price is above total cost'}
-                </p>
-              </div>
+        <div className={`flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 ${result.type === 'loss' ? 'to-rose-50/40' : 'to-emerald-50/40'} rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border ${result.type === 'loss' ? 'border-rose-200/60' : 'border-emerald-200/60'} relative overflow-hidden mt-6 w-full`}>
+          <div className={`absolute inset-0 bg-[linear-gradient(to_right,${result.type === 'loss' ? '#e11d4808' : '#10b98108'}_1px,transparent_1px),linear-gradient(to_bottom,${result.type === 'loss' ? '#e11d4808' : '#10b98108'}_1px,transparent_1px)] bg-[size:24px_24px]`} />
+          
+          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+            <div className={`flex items-center gap-2 ${result.type === 'loss' ? 'text-rose-800' : 'text-emerald-800'}`}>
+               {result.type === 'loss' ? <TrendingDown className="w-4 h-4" /> : <TrendingUp className="w-4 h-4" />}
+               <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">{result.type === 'loss' ? 'Loss Result' : 'Profit Result'}</h3>
             </div>
-            
-            <div className="flex items-center gap-2 ml-2">
-              <button onClick={() => {
-                const text = `Profit and Loss Calculator
+            <div className="flex items-center gap-2 ml-auto">
+              <button 
+                onClick={() => {
+                  const text = `Profit and Loss Calculator
 Cost Price: ${currency}${costPrice || 0}
 Selling Price: ${currency}${sellingPrice || 0}
 ${expenses ? `Other Costs / Expenses: ${currency}${expenses}\n` : ''}${result.type === 'loss' ? 'Loss' : 'Profit'}: ${currency}${formatNumber(result.amount)}
 ${result.type === 'loss' ? 'Loss' : 'Profit'} Percentage: ${formatNumber(result.margin)}%
 
 Calculate Online: https://topcalcbox.com/profit-and-loss-calculator/`;
-                copyToClipboard(text);
-              }} className={`flex items-center gap-1 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
+                  copyToClipboard(text);
+                }} 
+                className={`flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border rounded-xl text-[11px] font-bold hover:bg-white transition-all shadow-sm ${result.type === 'loss' ? 'border-rose-200 text-rose-700' : 'border-emerald-200 text-emerald-700'}`}
+              >
                 <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
-              <button onClick={reset} className={`p-1.5 bg-white border border-slate-200 rounded-lg transition-colors shadow-sm ${result.type === 'loss' ? 'text-rose-700 hover:bg-rose-50' : 'text-emerald-700 hover:bg-emerald-50'}`}>
+              <button 
+                onClick={reset}
+                className={`p-1.5 bg-white/80 backdrop-blur-md border rounded-xl hover:bg-white transition-all shadow-sm ${result.type === 'loss' ? 'border-rose-200 text-rose-700' : 'border-emerald-200 text-emerald-700'}`}
+              >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 md:mb-8">
-            <div className="flex-1 min-w-0">
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-                {result.type === 'loss' ? 'Total Loss' : 'Total Profit'}
-              </p>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-baseline overflow-hidden">
-                  <span className={`text-2xl font-bold mr-1 ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{currency}</span>
-                  <span 
-                    className={`text-4xl md:text-5xl font-extrabold tracking-tight truncate ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}
-                    title={formatNumber(result.amount)}
-                  >
-                    {formatNumber(result.amount)}
-                  </span>
+          <div className="w-full z-10">
+            <motion.div 
+              key={`${result.type}-${result.amount}`}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="w-full space-y-4"
+            >
+              <div className={`bg-white/80 backdrop-blur-sm shadow-sm border rounded-2xl p-6 flex flex-col items-center justify-center text-center ${result.type === 'loss' ? 'border-rose-200/50' : 'border-emerald-200/50'}`}>
+                <p className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${result.type === 'loss' ? 'text-rose-800/70' : 'text-emerald-800/70'}`}>
+                  {result.type === 'loss' ? 'Total Loss' : 'Total Profit'}
+                </p>
+                <div className={`text-4xl md:text-5xl font-extrabold tracking-tighter mb-3 drop-shadow-sm truncate px-2 w-full ${result.type === 'loss' ? 'text-rose-600' : 'text-emerald-600'}`}>
+                  <span className="text-2xl md:text-3xl font-bold text-slate-400 mr-1">{currency}</span>{formatNumber(result.amount)}
                 </div>
                 {result.amount !== 0 && (
-                  <span className={`self-start px-3 py-1 rounded-md text-[11px] font-bold ${result.type === 'loss' ? 'bg-[#fde8e8] text-[#c81e1e]' : 'bg-[#e2f7ec] text-[#064e3b]'}`}>
-                    {result.type === 'loss' ? 'Loss' : 'Profit'}
-                  </span>
+                  <div className={`px-4 py-1.5 rounded-full text-xs font-bold border ${result.type === 'loss' ? 'bg-rose-100/50 border-rose-200 text-rose-800' : 'bg-emerald-100/50 border-emerald-200 text-emerald-800'}`}>
+                    {formatNumber(result.margin)}% {result.type === 'loss' ? 'Loss on Cost' : 'Profit on Cost'}
+                  </div>
                 )}
               </div>
-            </div>
-            
-            <div className={`flex-shrink-0 text-right px-3 py-2 md:px-4 md:py-3 rounded-xl border ${result.type === 'loss' ? 'bg-rose-200 border-rose-300' : 'bg-emerald-200 border-emerald-300'}`}>
-              <p className="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-                {result.type === 'loss' ? 'Loss on Cost' : 'Profit on Cost'}
-              </p>
-              <p className={`text-lg md:text-xl font-bold ${result.type === 'loss' ? 'text-rose-900' : 'text-[#064e3b]'}`}>{formatNumber(result.margin)}%</p>
-            </div>
-          </div>
 
-          <div className="space-y-3 pt-5 border-t border-slate-100">
-            <div className="flex justify-between items-center text-[13px]">
-              <span className="font-medium text-slate-500 truncate mr-2">Total Cost</span>
-              <span className="font-bold text-slate-800 truncate" title={formatNumber(result.totalCost)}>{currency}{formatNumber(result.totalCost)}</span>
-            </div>
-            <div className="flex justify-between items-center text-[13px]">
-              <span className="font-medium text-slate-500 truncate mr-2">Selling Price</span>
-              <span className="font-bold text-slate-800 truncate" title={formatNumber(parseFloat(sellingPrice) || 0)}>{currency}{formatNumber(parseFloat(sellingPrice) || 0)}</span>
-            </div>
+              {/* Target Cards */}
+              <div className={`bg-white/80 backdrop-blur-sm shadow-sm border rounded-2xl p-5 ${result.type === 'loss' ? 'border-rose-200/50' : 'border-emerald-200/50'}`}>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
+                    <span className="text-slate-600 font-bold">Total Cost</span>
+                    <span className="text-slate-900 font-black truncate max-w-[50%]">{currency}{formatNumber(result.totalCost)}</span>
+                  </div>
+                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
+                    <span className="text-slate-600 font-bold">Selling Price</span>
+                    <span className="text-slate-900 font-black truncate max-w-[50%]">{currency}{formatNumber(parseFloat(sellingPrice) || 0)}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

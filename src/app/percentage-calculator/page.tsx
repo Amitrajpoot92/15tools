@@ -51,7 +51,7 @@ export default function PercentageCalculatorPage() {
       </div>
 
       <SEOContent>
-        <h2>What is Percentage Calculator</h2>
+        <h2>What is a Percentage Calculator?</h2>
         <p>
           Percentage Calculator is a simple online tool that helps you calculate percentages quickly and accurately. Whether you want to find what percentage of a number, calculate what percentage one number is of another, or check the percentage increase or decrease, this calculator can give you the result instantly.
         </p>

@@ -113,25 +113,20 @@ export function WholesaleCalculator() {
       </div>
 
       {/* Result Box */}
-      <div className="bg-amber-100 border border-amber-300 rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden shadow-sm">
-        <div className="flex items-start justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#fff7e6] flex items-center justify-center text-[#d97706]">
-              {currency === "₹" ? <IndianRupee className="w-5 h-5" /> : <DollarSign className="w-5 h-5" />}
-            </div>
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#d97706]">
-                Wholesale Price
-              </p>
-              <p className="text-[10px] text-slate-400 mt-0.5">
-                Based on your target profit
-              </p>
-            </div>
+      <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-amber-50/40 rounded-3xl shadow-[0_8px_30px_rgb(217,119,6,0.12)] border border-amber-200/60 relative overflow-hidden mt-6 w-full">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#d9770608_1px,transparent_1px),linear-gradient(to_bottom,#d9770608_1px,transparent_1px)] bg-[size:24px_24px]" />
+        
+        <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+          <div className="flex items-center gap-2 text-amber-800">
+             <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+               {currency === "₹" ? <IndianRupee className="w-3.5 h-3.5" /> : <DollarSign className="w-3.5 h-3.5" />}
+             </div>
+             <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">Wholesale Details</h3>
           </div>
-          
-          <div className="flex items-center gap-2 ml-2">
-            <button onClick={() => {
-              const text = `Wholesale Price Calculator
+          <div className="flex items-center gap-2 ml-auto">
+            <button 
+              onClick={() => {
+                const text = `Wholesale Price Calculator
 Total Cost Price: ${currency}${cost || 0}
 Profit Target: ${profitPercent || 0}%
 Quantity: ${quantity || 0} Units
@@ -140,49 +135,49 @@ Total Profit: ${currency}${formatNumber(result.totalProfit)}
 Total Revenue: ${currency}${formatNumber(result.totalRevenue)}
 
 Calculate Online: https://topcalcbox.com/wholesale-price-calculator/`;
-              copyToClipboard(text);
-            }} className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 border border-amber-300 rounded-lg text-[11px] font-bold text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
+                copyToClipboard(text);
+              }} 
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm"
+            >
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-amber-100 border border-amber-300 rounded-lg text-[#d97706] hover:bg-[#fff7e6] transition-colors shadow-sm">
+            <button 
+              onClick={reset}
+              className="p-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-amber-700 hover:bg-white transition-all shadow-sm"
+            >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
         
-        <div className="bg-amber-200 rounded-xl p-4 md:p-5 border border-amber-300 mb-5">
-          <p className="text-[10px] uppercase font-bold text-[#b45309] mb-1 tracking-wider">Wholesale Price Per Unit</p>
-          <div className="flex items-baseline mb-5 overflow-hidden">
-            <span className="text-2xl font-bold text-[#78350f] mr-1">{currency}</span>
-            <span 
-              className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#78350f] truncate"
-              title={formatNumber(result.wholesalePricePerUnit)}
-            >
-              {formatNumber(result.wholesalePricePerUnit)}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-white rounded-lg p-3 border border-[#f8ebd0] overflow-hidden">
-              <p className="text-[10px] uppercase font-bold text-slate-500 mb-1 truncate">Profit Per Unit</p>
-              <p className="text-sm font-bold text-slate-800 truncate" title={formatNumber(result.profitPerUnit)}>
-                {currency}{formatNumber(result.profitPerUnit)}
-              </p>
+        <div className="w-full z-10">
+          <div className="w-full space-y-4">
+            <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-amber-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+              <p className="text-[10px] text-amber-800/70 font-bold uppercase tracking-widest mb-2">Wholesale Price Per Unit</p>
+              <div className="text-4xl md:text-5xl font-extrabold text-amber-700 tracking-tighter mb-3 drop-shadow-sm truncate px-2 w-full">
+                <span className="text-2xl md:text-3xl font-bold text-slate-400 mr-1">{currency}</span>{formatNumber(result.wholesalePricePerUnit)}
+              </div>
             </div>
-            <div className="bg-white rounded-lg p-3 border border-[#f8ebd0] overflow-hidden">
-              <p className="text-[10px] uppercase font-bold text-slate-500 mb-1 truncate">Total Profit</p>
-              <p className="text-sm font-bold text-slate-800 truncate" title={formatNumber(result.totalProfit)}>
-                {currency}{formatNumber(result.totalProfit)}
-              </p>
+
+            {/* Target Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-amber-200/50 rounded-2xl p-4 flex flex-col justify-center text-center">
+                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Profit Per Unit</span>
+                <span className="text-xl text-slate-900 font-black truncate">{currency}{formatNumber(result.profitPerUnit)}</span>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-amber-200/50 rounded-2xl p-4 flex flex-col justify-center text-center">
+                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Total Profit</span>
+                <span className="text-xl text-slate-900 font-black truncate">{currency}{formatNumber(result.totalProfit)}</span>
+              </div>
+            </div>
+            
+            <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-amber-200/50 rounded-2xl p-4 mt-2">
+              <div className="flex justify-between items-center">
+                <span className="text-slate-600 font-bold">Total Revenue</span>
+                <span className="text-amber-700 font-black text-xl truncate max-w-[50%]">{currency}{formatNumber(result.totalRevenue)}</span>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex justify-between items-center text-[13px] pt-4 border-t border-slate-100">
-          <span className="font-medium text-slate-500 truncate mr-2">Total Revenue</span>
-          <span className="font-bold text-slate-800 truncate" title={formatNumber(result.totalRevenue)}>
-            {currency}{formatNumber(result.totalRevenue)}
-          </span>
         </div>
       </div>
     </div>

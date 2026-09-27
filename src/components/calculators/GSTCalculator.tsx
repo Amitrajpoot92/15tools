@@ -161,76 +161,90 @@ export function GSTCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="bg-purple-100 border border-purple-300 rounded-2xl p-5 md:p-6 mt-6 relative overflow-hidden">
-          <div className="flex items-center justify-between mb-4">
-            <span className="flex items-center gap-2 text-[13px] font-bold text-purple-700">
-              <Receipt className="w-4 h-4 text-emerald-400/80" />
-              {mode === "add" ? "Total Price (Incl. GST)" : "Net Price (Excl. GST)"}
-            </span>
-            <div className="flex items-center gap-1.5">
-              <button onClick={() => {
-                const text = `GST Calculator
+        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-purple-50/40 rounded-3xl shadow-[0_8px_30px_rgb(168,85,247,0.12)] border border-purple-200/60 relative overflow-hidden mt-6">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#a855f708_1px,transparent_1px),linear-gradient(to_bottom,#a855f708_1px,transparent_1px)] bg-[size:24px_24px]" />
+          
+          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+            <div className="flex items-center gap-2 text-purple-800">
+               <Receipt className="w-4 h-4 text-purple-500" />
+               <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">{mode === "add" ? "Total Price (Incl. GST)" : "Net Price (Excl. GST)"}</h3>
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              <button 
+                onClick={() => {
+                  const text = `GST Calculator
 Amount: ₹${amount}
 GST Rate: ${rate}%
 GST Amount: ₹${formatNumber(res.gst)}
 ${mode === 'add' ? 'Final Amount: ₹' + formatNumber(res.total) : 'Net Amount: ₹' + formatNumber(res.net)}
 
 Calculate Online: https://topcalcbox.com/gst-calculator/`;
-                copyToClipboard(text);
-              }} className="flex items-center gap-1 px-3 py-1.5 bg-white border border-purple-200/50 rounded-lg text-[11px] font-bold text-purple-700 hover:bg-purple-50 transition-colors shadow-sm">
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? "Copied" : "Copy"}
+                  copyToClipboard(text);
+                }} 
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-purple-200 rounded-xl text-[11px] font-bold text-purple-700 hover:bg-white transition-all shadow-sm"
+              >
+                <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
-              <button onClick={reset} className="p-1.5 bg-white border border-purple-200/50 rounded-lg text-purple-700 hover:bg-purple-50 transition-colors shadow-sm">
+              <button 
+                onClick={reset}
+                className="p-1.5 bg-white/80 backdrop-blur-md border border-purple-200 rounded-xl text-purple-700 hover:bg-white transition-all shadow-sm"
+              >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6 overflow-hidden">
-            <div className="flex items-baseline overflow-hidden w-full sm:w-auto">
-              <span 
-                className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#3b0764] truncate"
-                title={`₹${formatNumber(mode === "add" ? res.total : res.net)}`}
-              >
-                ₹{formatNumber(mode === "add" ? res.total : res.net)}
-              </span>
-            </div>
-            <div className="px-2.5 py-1 bg-purple-200 border border-purple-300 rounded-md font-bold text-[10px] text-purple-800 tracking-wider">
-              {rate}% GST {mode === "add" ? "Included" : "Excluded"}
-            </div>
-          </div>
-          
-          <div className="space-y-3 pt-4 border-t border-purple-300">
-            <div className="flex justify-between items-center text-xs">
-              <span className="text-purple-700/80 truncate mr-2">Net Amount</span>
-              <span className="font-bold text-purple-700 truncate">₹{formatNumber(res.net)}</span>
-            </div>
-            
-            {stateType === "intra" ? (
-              <>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-purple-700/80 truncate mr-2">CGST ({(parseFloat(rate)/2) || 0}%)</span>
-                  <span className="font-bold text-purple-700 truncate">+₹{formatNumber(res.cgst)}</span>
+          <div className="w-full z-10">
+            <motion.div 
+              key={`${amount}-${rate}-${mode}`}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="w-full space-y-4"
+            >
+              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+                <p className="text-[10px] text-purple-800/70 font-bold uppercase tracking-widest mb-2">Final Amount</p>
+                <div className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter mb-3 drop-shadow-sm truncate px-2 w-full">
+                  <span className="text-2xl md:text-3xl font-bold text-slate-400 mr-1">₹</span>{formatNumber(mode === "add" ? res.total : res.net)}
                 </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-purple-700/80 truncate mr-2">SGST ({(parseFloat(rate)/2) || 0}%)</span>
-                  <span className="font-bold text-purple-700 truncate">+₹{formatNumber(res.sgst)}</span>
+                <div className="bg-purple-100/50 border border-purple-200 text-purple-800 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                  {rate}% GST {mode === "add" ? "Included" : "Excluded"}
                 </div>
-              </>
-            ) : (
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-purple-700/80 truncate mr-2">IGST ({rate || 0}%)</span>
-                <span className="font-bold text-purple-700 truncate">+₹{formatNumber(res.igst)}</span>
               </div>
-            )}
-            
-            <div className="flex justify-between items-center text-sm pt-2">
-              <span className="font-bold text-purple-700 truncate mr-2">Total Amount</span>
-              <span className="font-bold text-purple-700 truncate">₹{formatNumber(res.total)}</span>
-            </div>
+
+              {/* Target Cards */}
+              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-5">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
+                    <span className="text-slate-600 font-bold">Net Amount</span>
+                    <span className="text-slate-900 font-black truncate max-w-[50%]">₹{formatNumber(res.net)}</span>
+                  </div>
+                  {stateType === "intra" ? (
+                    <>
+                      <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
+                        <span className="text-slate-600 font-bold">CGST ({(parseFloat(rate)/2) || 0}%)</span>
+                        <span className="text-purple-700 font-black truncate max-w-[50%]">+₹{formatNumber(res.cgst)}</span>
+                      </div>
+                      <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
+                        <span className="text-slate-600 font-bold">SGST ({(parseFloat(rate)/2) || 0}%)</span>
+                        <span className="text-purple-700 font-black truncate max-w-[50%]">+₹{formatNumber(res.sgst)}</span>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
+                      <span className="text-slate-600 font-bold">IGST ({rate || 0}%)</span>
+                      <span className="text-purple-700 font-black truncate max-w-[50%]">+₹{formatNumber(res.igst)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center p-3 rounded-xl bg-purple-50 border border-purple-100 mt-2">
+                    <span className="text-purple-900 font-black">Total Amount</span>
+                    <span className="text-purple-900 font-black truncate max-w-[50%]">₹{formatNumber(res.total)}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
+
       </div>
     </div>
   );
