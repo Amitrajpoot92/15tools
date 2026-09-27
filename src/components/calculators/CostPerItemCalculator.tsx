@@ -36,7 +36,7 @@ export function CostPerItemCalculator() {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: currency === '₹' ? 'INR' : 'USD',
-      minimumFractionDigits: 2,
+      minimumFractionDigits: amount % 1 !== 0 ? 2 : 0,
       maximumFractionDigits: 2
     }).format(amount).replace('INR', '₹').replace('USD', '$');
   };
@@ -133,20 +133,20 @@ Calculate Online: https://topcalcbox.com/cost-per-item-calculator`;
             >
               <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
                 <span className="text-[10px] text-rose-800/70 font-bold uppercase tracking-widest mb-2">Cost per Item</span>
-                <span className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 truncate max-w-full px-2" title={formatCurrency(costPerItem)}>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 w-full break-all px-2" title={formatCurrency(costPerItem)}>
                   {formatCurrency(costPerItem)}
                 </span>
               </div>
               
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <span className="text-xl md:text-2xl font-extrabold text-slate-800 truncate max-w-full" title={formatCurrency(costPerItem * 10)}>
+                  <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-slate-800 w-full break-all" title={formatCurrency(costPerItem * 10)}>
                     {formatCurrency(costPerItem * 10)}
                   </span>
                   <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">For 10 Items</span>
                 </div>
                 <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-rose-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <span className="text-xl md:text-2xl font-extrabold text-slate-800 truncate max-w-full" title={formatCurrency(costPerItem * 100)}>
+                  <span className="text-lg sm:text-xl md:text-2xl font-extrabold text-slate-800 w-full break-all" title={formatCurrency(costPerItem * 100)}>
                     {formatCurrency(costPerItem * 100)}
                   </span>
                   <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">For 100 Items</span>

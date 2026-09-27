@@ -34,11 +34,11 @@ export default function CostPerItemCalculatorPage() {
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-emerald-100 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+        <div className="flex flex-col items-center text-center bg-rose-100 rounded-2xl p-4 md:p-6 mb-6 border border-rose-300">
+          <h1 className="text-xl md:text-2xl font-extrabold text-rose-900 tracking-tight mb-1">
             Cost Per Item Calculator
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-slate-800 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Calculate the true price of a single unit when buying in bulk or packs.
           </p>
         </div>
