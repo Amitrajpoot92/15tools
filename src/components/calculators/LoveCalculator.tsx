@@ -47,11 +47,13 @@ export function LoveCalculator() {
   };
 
   const getMessageAndStars = (score: number) => {
-    if (score > 85) return { msg: "A Match Made in Heaven! 💖", stars: 5 };
-    if (score > 70) return { msg: "Very Strong Connection! 💘", stars: 4 };
-    if (score > 50) return { msg: "There's definitely a spark! ✨", stars: 3 };
-    if (score > 30) return { msg: "Could work with some effort. 🤔", stars: 2 };
-    return { msg: "Maybe just stay friends. 🤝", stars: 1 };
+    if (score >= 95) return { msg: "Soulmates! Pure perfection! 💘🔥", stars: 5 };
+    if (score >= 85) return { msg: "A Match Made in Heaven! 😍✨", stars: 5 };
+    if (score >= 70) return { msg: "Very Strong Connection! 💕🚀", stars: 4 };
+    if (score >= 50) return { msg: "There's definitely a spark! 😚💫", stars: 3 };
+    if (score >= 30) return { msg: "Could work with some effort. 🤔🌱", stars: 2 };
+    if (score >= 15) return { msg: "Maybe just stay friends. 🤝😅", stars: 1 };
+    return { msg: "Run away! Total disaster! 🚩🏃‍♂️", stars: 0 };
   };
 
   const resultData = result !== null ? getMessageAndStars(result) : null;
@@ -75,7 +77,7 @@ export function LoveCalculator() {
               />
             </div>
             
-            <div className="flex justify-center -my-3 relative z-10">
+            <div className="flex justify-center my-0 relative z-10">
               <div className="bg-white p-3 rounded-full shadow-sm border border-rose-100 flex items-center justify-center">
                 <Heart className="w-5 h-5 text-rose-500 fill-rose-500" />
               </div>

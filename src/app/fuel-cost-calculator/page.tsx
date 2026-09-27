@@ -33,10 +33,9 @@ export default function FuelCostPage() {
       />
 
     
-      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+      <div className="max-w-4xl mx-auto mb-6 bg-white rounded-3xl p-3 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-[#c3f6e1] rounded-2xl p-4 md:p-6 mb-6 border border-emerald-300">
+        <div className="flex flex-col items-center text-center bg-[#c3f6e1] rounded-2xl p-4 md:p-6 mb-4 border border-emerald-300">
           <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
             Fuel Cost Calculator
           </h1>

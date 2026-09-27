@@ -85,54 +85,60 @@ export function CalorieCalculator() {
         {/* Input Section */}
         <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-5 md:p-6 relative">
           
-          {/* Unit System Toggle */}
-          <div className="mb-4 flex gap-2">
-            <button
-              onClick={() => setUnitSystem("metric")}
-              className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
-                unitSystem === "metric" 
-                  ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                  : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
-              }`}
-            >
-              Metric (kg / cm)
-            </button>
-            <button
-              onClick={() => setUnitSystem("us")}
-              className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
-                unitSystem === "us" 
-                  ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                  : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
-              }`}
-            >
-              US / Imperial (lb / ft)
-            </button>
-          </div>
+          {/* Toggles Container */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {/* Unit System Toggle */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Unit System</label>
+              <div className="flex bg-white/80 p-1.5 rounded-2xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+                <button
+                  onClick={() => setUnitSystem("metric")}
+                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                    unitSystem === "metric" 
+                      ? "bg-emerald-100 text-emerald-800 shadow-sm" 
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  Metric
+                </button>
+                <button
+                  onClick={() => setUnitSystem("us")}
+                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                    unitSystem === "us" 
+                      ? "bg-emerald-100 text-emerald-800 shadow-sm" 
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  US / Imperial
+                </button>
+              </div>
+            </div>
 
-          {/* Gender Toggle */}
-          <div className="space-y-2 mb-6">
-            <label className="text-sm font-bold text-slate-700">Sex</label>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setGender("male")}
-                className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
-                  gender === "male" 
-                    ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                    : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
-                }`}
-              >
-                Male
-              </button>
-              <button
-                onClick={() => setGender("female")}
-                className={`flex-1 py-3 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
-                  gender === "female" 
-                    ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                    : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
-                }`}
-              >
-                Female
-              </button>
+            {/* Gender Toggle */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Sex</label>
+              <div className="flex bg-white/80 p-1.5 rounded-2xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+                <button
+                  onClick={() => setGender("male")}
+                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                    gender === "male" 
+                      ? "bg-emerald-100 text-emerald-800 shadow-sm" 
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  Male
+                </button>
+                <button
+                  onClick={() => setGender("female")}
+                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                    gender === "female" 
+                      ? "bg-emerald-100 text-emerald-800 shadow-sm" 
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  Female
+                </button>
+              </div>
             </div>
           </div>
 
@@ -263,31 +269,30 @@ export function CalorieCalculator() {
               className="w-full space-y-4"
             >
               <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-                <p className="text-[10px] text-emerald-800/70 font-bold uppercase tracking-widest mb-2">Daily Calorie Needs</p>
-                <div className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-3 drop-shadow-sm truncate px-2">
-                  {maintenance.toLocaleString('en-IN')} <span className="text-2xl md:text-3xl font-bold text-slate-400">kcal/day</span>
+                <p className="text-[10px] text-emerald-800/70 font-bold uppercase tracking-widest mb-2">Maintain Weight</p>
+                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-1 drop-shadow-sm w-full break-all px-2">
+                  {maintenance.toLocaleString('en-IN')} <span className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-600/80">kcal</span>
                 </div>
-                <div className="bg-emerald-100/50 border border-emerald-200 text-emerald-800 px-4 py-1.5 rounded-full text-sm font-bold">
-                  Maintain Current Weight
+                <div className="bg-emerald-100/50 border border-emerald-200 text-emerald-800 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mt-2 shadow-sm">
+                  Daily Calorie Target
                 </div>
               </div>
 
               {/* Target Cards */}
-              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-5">
-                <h3 className="text-xs font-bold text-slate-500 text-center mb-4 uppercase tracking-wider">Estimated Daily Calorie Targets</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                    <span className="text-slate-600 font-bold">Weight Loss</span>
-                    <span className="text-emerald-700 font-black">{weightLoss.toLocaleString('en-IN')} kcal/day</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                    <span className="text-slate-600 font-bold">Maintain Weight</span>
-                    <span className="text-emerald-700 font-black">{maintenance.toLocaleString('en-IN')} kcal/day</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50/80 border border-slate-100">
-                    <span className="text-slate-600 font-bold">Weight Gain</span>
-                    <span className="text-emerald-700 font-black">{weightGain.toLocaleString('en-IN')} kcal/day</span>
-                  </div>
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                  <span className="text-lg md:text-xl font-extrabold text-slate-800 w-full break-all">
+                    {weightLoss.toLocaleString('en-IN')}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Weight Loss</span>
+                  <span className="text-[9px] text-slate-400 font-medium leading-tight mt-1">(-0.5kg/week)</span>
+                </div>
+                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                  <span className="text-lg md:text-xl font-extrabold text-slate-800 w-full break-all">
+                    {weightGain.toLocaleString('en-IN')}
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Weight Gain</span>
+                  <span className="text-[9px] text-slate-400 font-medium leading-tight mt-1">(+0.5kg/week)</span>
                 </div>
               </div>
             </motion.div>
