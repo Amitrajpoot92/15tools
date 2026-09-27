@@ -168,74 +168,55 @@ export function DiscountCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col p-6 md:p-8 bg-gradient-to-b from-emerald-50 to-emerald-100/80 rounded-3xl shadow-[0_8px_30px_rgb(5,150,105,0.15)] border border-emerald-200/60 mt-6 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-12 bg-gradient-to-b from-emerald-50 to-emerald-100/80 rounded-3xl shadow-[0_8px_30px_rgb(5,150,105,0.15)] border border-emerald-200/60 mt-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#05966910_1px,transparent_1px),linear-gradient(to_bottom,#05966910_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           
-          <div className="w-full flex justify-between items-center z-10 mb-6">
-            <div className="flex items-center gap-2">
-               <div className="p-2 bg-white rounded-xl shadow-sm border border-emerald-200/50">
-                  <Tag className="w-5 h-5 text-emerald-600" />
-               </div>
-               <span className="text-sm font-extrabold text-emerald-800/80 uppercase tracking-widest">Results</span>
-            </div>
-            
-            <div className="flex items-center gap-1.5">
-              <button onClick={() => {
-                const discountInfo = discountType === 'percent' ? `${discount}%` : `${currency}${discount}`;
-                const text = `Discount Calculator
-Original Price: ${currency}${res.price}
-Discount: ${discountInfo}${coupon ? `\nAdditional Coupon: ${coupon}%` : ''}
-Total Savings: ${currency}${res.totalSaved}
-Final Payable Price: ${currency}${res.finalPrice}
+          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+            <button onClick={() => {
+              const discountInfo = discountType === 'percent' ? `${discount}%` : `${currency}${discount}`;
+              const text = `Discount Calculator\nOriginal Price: ${currency}${res.price}\nDiscount: ${discountInfo}${coupon ? `\nAdditional Coupon: ${coupon}%` : ''}\nTotal Savings: ${currency}${res.totalSaved}\nFinal Payable Price: ${currency}${res.finalPrice}\n\nCalculate Online: https://topcalcbox.com/discount-calculator/`;
+              copyToClipboard(text);
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-[11px] font-bold text-emerald-700 hover:bg-white transition-all shadow-sm">
+              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              <span className="inline">{copied ? "Copied" : "Copy"}</span>
+            </button>
+            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-emerald-700 hover:bg-white transition-all shadow-sm">
+              <RotateCcw className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          
+          <p className="text-[11px] md:text-xs text-emerald-800/70 uppercase tracking-widest font-extrabold mb-1 z-10">Final Payable Price</p>
+          
+          <div className="flex items-baseline drop-shadow-sm mb-3 z-10">
+            <span className="text-3xl font-bold text-emerald-800 mr-1">{currency}</span>
+            <span className="text-6xl md:text-7xl font-extrabold tracking-tighter text-slate-900">
+              {res.finalPrice}
+            </span>
+          </div>
 
-Calculate Online: https://topcalcbox.com/discount-calculator/`;
-                copyToClipboard(text);
-              }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-[11px] font-bold text-emerald-700 hover:bg-white transition-all shadow-sm">
-                {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                <span className="inline">{copied ? "Copied" : "Copy"}</span>
-              </button>
-              <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-emerald-700 hover:bg-white transition-all shadow-sm">
-                <RotateCcw className="w-3.5 h-3.5" />
-              </button>
+          {parseFloat(res.savePercent) > 0 && (
+            <div className="px-4 py-1.5 bg-emerald-500 text-white rounded-full font-bold text-[13px] md:text-sm shadow-md shadow-emerald-500/20 z-10 mb-2">
+              You Save {res.savePercent}%
             </div>
-          </div>
+          )}
           
-          <div className="w-full flex flex-col items-center mb-6 z-10">
-            <p className="text-[11px] text-emerald-800/70 uppercase tracking-wider font-extrabold mb-1">Final Payable Price</p>
-            <div className="flex items-center gap-3">
-              <div className="flex items-baseline drop-shadow-sm">
-                <span className="text-3xl font-bold text-emerald-800 mr-1">{currency}</span>
-                <span className="text-6xl md:text-7xl font-extrabold tracking-tighter text-slate-900">
-                  {res.finalPrice}
-                </span>
-              </div>
-            </div>
-            {parseFloat(res.savePercent) > 0 && (
-              <div className="mt-3 px-4 py-1.5 bg-emerald-500 text-white rounded-full font-bold text-sm shadow-md shadow-emerald-500/20">
-                You Save {res.savePercent}%
-              </div>
-            )}
-          </div>
-          
-          <div className="w-full max-w-sm mx-auto border-t-2 border-emerald-200/60 my-2 z-10" />
-          
-          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 z-10">
+          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 z-10 max-w-xl">
             <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-3 flex flex-col items-center text-center">
-              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-1">Original</p>
-              <p className="text-xl font-extrabold text-slate-900">{currency}{res.price}</p>
+              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-0.5">Original</p>
+              <p className="text-xl md:text-2xl font-extrabold text-slate-900">{currency}{res.price}</p>
             </div>
             <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-3 flex flex-col items-center text-center">
-              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-1">Discount</p>
-              <p className="text-xl font-extrabold text-slate-900">{discountType === 'percent' ? `${discount || 0}%` : `${currency}${discount || 0}`}</p>
+              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-0.5">Discount</p>
+              <p className="text-xl md:text-2xl font-extrabold text-slate-900">{discountType === 'percent' ? `${discount || 0}%` : `${currency}${discount || 0}`}</p>
             </div>
             <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-3 flex flex-col items-center text-center">
-              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-1">Coupon</p>
-              <p className="text-xl font-extrabold text-slate-900">{coupon ? `${coupon}%` : "None"}</p>
+              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-0.5">Coupon</p>
+              <p className="text-xl md:text-2xl font-extrabold text-slate-900">{coupon ? `${coupon}%` : "None"}</p>
             </div>
             <div className="bg-white/70 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-3 flex flex-col items-center text-center">
-              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-1">Saved</p>
-              <p className="text-xl font-extrabold text-[#059669]">{currency}{res.totalSaved}</p>
+              <p className="text-[10px] text-emerald-800/70 uppercase tracking-wider font-bold mb-0.5">Saved</p>
+              <p className="text-xl md:text-2xl font-extrabold text-emerald-600">{currency}{res.totalSaved}</p>
             </div>
           </div>
         </div>
