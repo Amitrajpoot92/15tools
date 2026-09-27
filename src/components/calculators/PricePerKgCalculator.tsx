@@ -45,14 +45,14 @@ export function PricePerKgCalculator() {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: currency === '₹' ? 'INR' : 'USD',
-      minimumFractionDigits: 2,
+      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
       maximumFractionDigits: 2
     }).format(val).replace('INR', '₹').replace('USD', '$');
   };
 
   const formatGrams = (val: number) => {
     return new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 2,
+      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
       maximumFractionDigits: 2
     }).format(val);
   };
@@ -150,14 +150,6 @@ export function PricePerKgCalculator() {
                 />
               </div>
             )}
-            
-            {/* Swap Button */}
-            <button
-              onClick={() => setMode(mode === "quantity" ? "price" : "quantity")}
-              className="w-full bg-white border border-amber-200/50 rounded-2xl py-3 text-amber-700 font-bold text-sm hover:bg-amber-50 transition-colors flex items-center justify-center gap-2 shadow-sm"
-            >
-              <ArrowRightLeft className="w-4 h-4" /> Swap Mode
-            </button>
           </div>
         </div>
 
@@ -201,20 +193,20 @@ export function PricePerKgCalculator() {
                 <p className="text-[10px] text-amber-800/70 font-bold uppercase tracking-widest mb-2">
                   {mode === "quantity" ? "Calculated Quantity" : "Calculated Price"}
                 </p>
-                <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tighter mb-2 drop-shadow-sm truncate max-w-full px-2" title={mode === "quantity" ? `${formatGrams(qty)} Grams` : formatCurrency(price)}>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tighter mb-2 drop-shadow-sm w-full break-all px-2" title={mode === "quantity" ? `${formatGrams(qty)} Grams` : formatCurrency(price)}>
                   {mode === "quantity" ? (
                     <span className="flex items-baseline justify-center gap-1">
-                      {formatGrams(qty)} <span className="text-2xl text-amber-600">g</span>
+                      {formatGrams(qty)} <span className="text-xl md:text-2xl text-amber-600">Grams</span>
                     </span>
                   ) : (
                     formatCurrency(price)
                   )}
                 </div>
-                <p className="text-amber-900 font-bold text-sm md:text-base drop-shadow-sm mt-2">
+                <div className="bg-amber-100/50 border border-amber-200 text-amber-900 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mt-2 shadow-sm">
                   {mode === "quantity" 
-                    ? `${formatCurrency(price)} buys this quantity`
-                    : `Total price for ${formatGrams(qty)} Grams`}
-                </p>
+                    ? `Quantity for ${formatCurrency(price)}`
+                    : `Price for ${formatGrams(qty)} Grams`}
+                </div>
               </div>
             </motion.div>
           </div>
