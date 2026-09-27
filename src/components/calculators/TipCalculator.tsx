@@ -50,7 +50,7 @@ export function TipCalculator() {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: currency === '₹' ? 'INR' : 'USD',
-      minimumFractionDigits: 2,
+      minimumFractionDigits: amount % 1 !== 0 ? 2 : 0,
       maximumFractionDigits: 2
     }).format(amount).replace('INR', '₹').replace('USD', '$');
   };
@@ -203,7 +203,7 @@ export function TipCalculator() {
             >
               <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
                 <p className="text-[10px] text-orange-800/70 font-bold uppercase tracking-widest mb-2">Total Payable Per Person</p>
-                <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tighter mb-3 drop-shadow-sm truncate max-w-full px-2" title={formatCurrency(split)}>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tighter mb-3 drop-shadow-sm w-full break-all px-2" title={formatCurrency(split)}>
                   {formatCurrency(split)}
                 </div>
                 <div className="bg-orange-100/50 border border-orange-200 text-orange-800 px-4 py-1.5 rounded-full text-sm font-bold inline-flex items-center gap-1">
@@ -211,24 +211,24 @@ export function TipCalculator() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-3 gap-3 mt-4">
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <span className="text-lg md:text-xl font-extrabold text-slate-800 truncate max-w-full" title={formatCurrency(tip)}>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4">
+                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center text-center">
+                  <span className="text-base sm:text-lg md:text-xl font-extrabold text-slate-800 w-full break-all" title={formatCurrency(tip)}>
                     {formatCurrency(tip)}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Total Tip</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Total Tip</span>
                 </div>
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <span className="text-lg md:text-xl font-extrabold text-slate-800 truncate max-w-full" title={formatCurrency(total)}>
+                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center text-center">
+                  <span className="text-base sm:text-lg md:text-xl font-extrabold text-slate-800 w-full break-all" title={formatCurrency(total)}>
                     {formatCurrency(total)}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Bill + Tip</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Bill + Tip</span>
                 </div>
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                  <span className="text-lg md:text-xl font-extrabold text-slate-800 truncate max-w-full" title={formatCurrency(tipPerPerson)}>
+                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-orange-200/50 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center text-center">
+                  <span className="text-base sm:text-lg md:text-xl font-extrabold text-slate-800 w-full break-all" title={formatCurrency(tipPerPerson)}>
                     {formatCurrency(tipPerPerson)}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Tip/Person</span>
+                  <span className="text-[9px] sm:text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Tip/Person</span>
                 </div>
               </div>
             </motion.div>
