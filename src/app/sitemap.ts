@@ -1,45 +1,26 @@
 import { MetadataRoute } from 'next'
 import { BLOG_POSTS } from '@/lib/blog-data'
+import { TOOLS } from '@/lib/constants'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://topcalcbox.com'
 
-  const routes = [
+  const staticPages = [
     '',
     '/about',
     '/contact',
     '/privacy-policy',
     '/terms-and-conditions',
     '/disclaimer',
-    '/percentage-calculator',
-    '/discount-calculator',
-    '/gst-calculator',
-    '/profit-and-loss-calculator',
-    '/wholesale-calculator',
-    '/emi-calculator',
-    '/sip-calculator',
-    '/subscription-cost-calculator',
-    '/marks-percentage-calculator',
-    '/attendance-percentage-calculator',
-    '/negative-marking-calculator',
-    '/average-calculator',
-    '/bodmas-calculator',
-    '/age-calculator-online',
-    '/birthday-countdown',
-    '/age-difference-calculator',
-    '/date-difference-calculator',
-    '/cost-per-item-calculator',
-    '/price-per-kg-calculator',
-    '/tip-calculator',
-    '/fuel-cost-calculator',
-    '/grocery-bill-calculator',
-    '/bmi-calculator',
-    '/calorie-calculator',
-    '/love-calculator',
+    '/news',
     '/blog'
   ]
 
-  const staticRoutes = routes.map((route) => ({
+  const toolRoutes = TOOLS.map(tool => `/${tool.slug}`)
+  
+  const allStaticRoutes = [...staticPages, ...toolRoutes]
+
+  const staticRoutes = allStaticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency: 'weekly' as const,
