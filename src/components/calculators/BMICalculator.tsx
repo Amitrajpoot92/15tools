@@ -71,103 +71,108 @@ export function BMICalculator() {
     <div className="w-full relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
+      <div className="relative z-10 space-y-4 sm:space-y-6">
         {/* Input Section */}
-        <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-5 md:p-6 relative">
+        <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-4 md:p-5 relative">
           
           {/* Unit System Toggle */}
-          <div className="mb-6 flex gap-2">
-            <button
-              onClick={() => setUnitSystem("metric")}
-              className={`flex-1 py-3 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border shadow-sm ${
-                unitSystem === "metric" 
-                  ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                  : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
-              }`}
-            >
-              Kilograms (kg) /<br />Centimeters (cm)
-            </button>
-            <button
-              onClick={() => setUnitSystem("us")}
-              className={`flex-1 py-3 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border shadow-sm flex items-center justify-center text-center ${
-                unitSystem === "us" 
-                  ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                  : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
-              }`}
-            >
-              Pounds (lb) /<br />Feet (ft)
-            </button>
+          <div className="mb-4">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left mb-1.5">Unit System</label>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setUnitSystem("metric")}
+                className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border shadow-sm ${
+                  unitSystem === "metric" 
+                    ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
+                    : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
+                }`}
+              >
+                Metric (kg/cm)
+              </button>
+              <button
+                onClick={() => setUnitSystem("us")}
+                className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border shadow-sm flex items-center justify-center text-center ${
+                  unitSystem === "us" 
+                    ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
+                    : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
+                }`}
+              >
+                US (lb/ft)
+              </button>
+            </div>
           </div>
 
-          <div className="space-y-6">
-            {unitSystem === "metric" ? (
-              <>
-                {/* Metric Inputs */}
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Weight — Kilograms (kg)</label>
-                  <input
-                    type="number"
-                    value={weightKg}
-                    onChange={(e) => setWeightKg(e.target.value)}
-                    placeholder="Example: 70"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Height — Centimeters (cm)</label>
-                  <input
-                    type="number"
-                    value={heightCm}
-                    onChange={(e) => setHeightCm(e.target.value)}
-                    placeholder="Example: 175"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                {/* US Inputs */}
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Weight — Pounds (lb)</label>
-                  <input
-                    type="number"
-                    value={weightLb}
-                    onChange={(e) => setWeightLb(e.target.value)}
-                    placeholder="Example: 154"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Height — Feet (ft) / Inches (in)</label>
-                  <div className="flex gap-4">
+          <div className="space-y-3 sm:space-y-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {unitSystem === "metric" ? (
+                <>
+                  {/* Metric Inputs */}
+                  <div className="space-y-1.5 col-span-2 sm:col-span-1">
+                    <label className="text-xs sm:text-sm font-bold text-slate-700">Weight (kg)</label>
                     <input
                       type="number"
-                      value={heightFt}
-                      onChange={(e) => setHeightFt(e.target.value)}
-                      placeholder="Feet (ft)"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                    />
-                    <input
-                      type="number"
-                      value={heightIn}
-                      onChange={(e) => setHeightIn(e.target.value)}
-                      placeholder="Inches (in)"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                      value={weightKg}
+                      onChange={(e) => setWeightKg(e.target.value)}
+                      placeholder="70"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                     />
                   </div>
-                </div>
-              </>
-            )}
+                  
+                  <div className="space-y-1.5 col-span-2 sm:col-span-1">
+                    <label className="text-xs sm:text-sm font-bold text-slate-700">Height (cm)</label>
+                    <input
+                      type="number"
+                      value={heightCm}
+                      onChange={(e) => setHeightCm(e.target.value)}
+                      placeholder="175"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* US Inputs */}
+                  <div className="space-y-1.5 col-span-2 sm:col-span-1">
+                    <label className="text-xs sm:text-sm font-bold text-slate-700">Weight (lb)</label>
+                    <input
+                      type="number"
+                      value={weightLb}
+                      onChange={(e) => setWeightLb(e.target.value)}
+                      placeholder="154"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    />
+                  </div>
+                  
+                  <div className="space-y-1.5 col-span-2 sm:col-span-1">
+                    <label className="text-xs sm:text-sm font-bold text-slate-700">Height (ft / in)</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <input
+                        type="number"
+                        value={heightFt}
+                        onChange={(e) => setHeightFt(e.target.value)}
+                        placeholder="Feet"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                      />
+                      <input
+                        type="number"
+                        value={heightIn}
+                        onChange={(e) => setHeightIn(e.target.value)}
+                        placeholder="Inches"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border border-emerald-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border border-emerald-200/60 relative overflow-hidden mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+          <div className="w-full flex justify-between items-center mb-4 z-10 flex-wrap gap-4">
             <div className="flex items-center gap-2 text-emerald-800">
                <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">BMI Result</h3>
             </div>
@@ -195,11 +200,11 @@ export function BMICalculator() {
               key={bmiStr}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full flex flex-col md:flex-row gap-4"
+              className="w-full flex flex-col md:flex-row gap-3"
             >
-              <div className="flex-1 bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-                <p className="text-[10px] text-emerald-800/70 font-bold uppercase tracking-widest mb-2">Your BMI</p>
-                <div className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-3 drop-shadow-sm truncate px-2">
+              <div className="flex-1 bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <p className="text-[10px] text-emerald-800 font-bold uppercase tracking-widest mb-1">Your BMI</p>
+                <div className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-2 drop-shadow-sm truncate px-2">
                   {bmiStr}
                 </div>
                 <div className="bg-emerald-100/50 border border-emerald-200 text-emerald-800 px-4 py-1.5 rounded-full text-sm font-bold">
@@ -207,8 +212,8 @@ export function BMICalculator() {
                 </div>
               </div>
 
-              <div className="w-full md:w-1/3 bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-                <p className="text-[10px] text-emerald-800/70 font-bold uppercase tracking-widest mb-2">Healthy BMI Range</p>
+              <div className="w-full md:w-1/3 bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <p className="text-[10px] text-emerald-800 font-bold uppercase tracking-widest mb-1">Healthy BMI Range</p>
                 <p className="text-xl md:text-2xl font-extrabold text-slate-800">18.5 – 24.9</p>
               </div>
             </motion.div>

@@ -83,17 +83,17 @@ export function CalorieCalculator() {
       
       <div className="relative z-10 space-y-6">
         {/* Input Section */}
-        <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-5 md:p-6 relative">
+        <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-4 md:p-5 relative">
           
           {/* Toggles Container */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-2 gap-3 mb-4">
             {/* Unit System Toggle */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Unit System</label>
-              <div className="flex bg-white/80 p-1.5 rounded-2xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left">Unit System</label>
+              <div className="flex bg-white/80 p-1 rounded-xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
                 <button
                   onClick={() => setUnitSystem("metric")}
-                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                  className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     unitSystem === "metric" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
                       : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
@@ -103,24 +103,24 @@ export function CalorieCalculator() {
                 </button>
                 <button
                   onClick={() => setUnitSystem("us")}
-                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                  className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     unitSystem === "us" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
                       : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
-                  US / Imperial
+                  Imperial
                 </button>
               </div>
             </div>
 
             {/* Gender Toggle */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Sex</label>
-              <div className="flex bg-white/80 p-1.5 rounded-2xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left">Sex</label>
+              <div className="flex bg-white/80 p-1 rounded-xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
                 <button
                   onClick={() => setGender("male")}
-                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                  className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     gender === "male" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
                       : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
@@ -130,7 +130,7 @@ export function CalorieCalculator() {
                 </button>
                 <button
                   onClick={() => setGender("female")}
-                  className={`flex-1 py-2.5 px-2 rounded-xl text-sm font-bold transition-all ${
+                  className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     gender === "female" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
                       : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
@@ -142,100 +142,98 @@ export function CalorieCalculator() {
             </div>
           </div>
 
-          <div className="space-y-6">
-            {/* Age */}
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Age (years)</label>
-              <input
-                type="number"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                placeholder="Example: 30"
-                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-              />
-            </div>
+          <div className="space-y-3 sm:space-y-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {/* Age */}
+              <div className="space-y-1.5">
+                <label className="text-xs sm:text-sm font-bold text-slate-700">Age (yrs)</label>
+                <input
+                  type="number"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  placeholder="30"
+                  className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                />
+              </div>
 
-            {unitSystem === "metric" ? (
-              <>
-                {/* Metric Inputs */}
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Weight — Kilograms (kg)</label>
+              {unitSystem === "metric" ? (
+                <div className="space-y-1.5">
+                  <label className="text-xs sm:text-sm font-bold text-slate-700">Weight (kg)</label>
                   <input
                     type="number"
                     value={weightKg}
                     onChange={(e) => setWeightKg(e.target.value)}
-                    placeholder="Example: 70"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    placeholder="70"
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                   />
                 </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Height — Centimeters (cm)</label>
-                  <input
-                    type="number"
-                    value={heightCm}
-                    onChange={(e) => setHeightCm(e.target.value)}
-                    placeholder="Example: 175"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                {/* US Inputs */}
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Weight — Pounds (lb)</label>
+              ) : (
+                <div className="space-y-1.5">
+                  <label className="text-xs sm:text-sm font-bold text-slate-700">Weight (lb)</label>
                   <input
                     type="number"
                     value={weightLb}
                     onChange={(e) => setWeightLb(e.target.value)}
-                    placeholder="Example: 154"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    placeholder="154"
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                   />
                 </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Height — Feet (ft) / Inches (in)</label>
-                  <div className="flex gap-4">
-                    <input
-                      type="number"
-                      value={heightFt}
-                      onChange={(e) => setHeightFt(e.target.value)}
-                      placeholder="Feet (ft)"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                    />
-                    <input
-                      type="number"
-                      value={heightIn}
-                      onChange={(e) => setHeightIn(e.target.value)}
-                      placeholder="Inches (in)"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
-                    />
-                  </div>
+              )}
+            </div>
+
+            {unitSystem === "metric" ? (
+              <div className="space-y-1.5">
+                <label className="text-xs sm:text-sm font-bold text-slate-700">Height (cm)</label>
+                <input
+                  type="number"
+                  value={heightCm}
+                  onChange={(e) => setHeightCm(e.target.value)}
+                  placeholder="175"
+                  className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                />
+              </div>
+            ) : (
+              <div className="space-y-1.5">
+                <label className="text-xs sm:text-sm font-bold text-slate-700">Height (ft / in)</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="number"
+                    value={heightFt}
+                    onChange={(e) => setHeightFt(e.target.value)}
+                    placeholder="Feet"
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                  />
+                  <input
+                    type="number"
+                    value={heightIn}
+                    onChange={(e) => setHeightIn(e.target.value)}
+                    placeholder="Inches"
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                  />
                 </div>
-              </>
+              </div>
             )}
 
             {/* Activity Level */}
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-700">Activity Level</label>
+            <div className="space-y-1.5">
+              <label className="text-xs sm:text-sm font-bold text-slate-700">Activity Level</label>
               <select
                 value={activity}
                 onChange={(e) => setActivity(e.target.value)}
-                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm appearance-none cursor-pointer"
+                className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-[13px] sm:text-base text-slate-900 font-bold focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm cursor-pointer"
               >
-                <option value="1.2">Sedentary — Little or no exercise</option>
-                <option value="1.375">Lightly Active — Exercise 1-3 days/week</option>
-                <option value="1.55">Moderately Active — Exercise 3-5 days/week</option>
-                <option value="1.725">Very Active — Exercise 6-7 days/week</option>
-                <option value="1.9">Extra Active — Very hard exercise/job</option>
+                <option value="1.2">Sedentary (Little/no exercise)</option>
+                <option value="1.375">Lightly Active (1-3 days/week)</option>
+                <option value="1.55">Moderately Active (3-5 days/week)</option>
+                <option value="1.725">Very Active (6-7 days/week)</option>
+                <option value="1.9">Extra Active (Very hard work)</option>
               </select>
             </div>
           </div>
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border border-emerald-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border border-emerald-200/60 relative overflow-hidden mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:24px_24px]" />
           
           <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
@@ -284,15 +282,15 @@ export function CalorieCalculator() {
                   <span className="text-lg md:text-xl font-extrabold text-slate-800 w-full break-all">
                     {weightLoss.toLocaleString('en-IN')}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Weight Loss</span>
-                  <span className="text-[9px] text-slate-400 font-medium leading-tight mt-1">(-0.5kg/week)</span>
+                  <span className="text-[10px] text-slate-700 font-bold uppercase tracking-wider mt-1">Weight Loss</span>
+                  <span className="text-[10px] text-emerald-700 font-bold leading-tight mt-1">(-0.5kg/week)</span>
                 </div>
                 <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                   <span className="text-lg md:text-xl font-extrabold text-slate-800 w-full break-all">
                     {weightGain.toLocaleString('en-IN')}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Weight Gain</span>
-                  <span className="text-[9px] text-slate-400 font-medium leading-tight mt-1">(+0.5kg/week)</span>
+                  <span className="text-[10px] text-slate-700 font-bold uppercase tracking-wider mt-1">Weight Gain</span>
+                  <span className="text-[10px] text-emerald-700 font-bold leading-tight mt-1">(+0.5kg/week)</span>
                 </div>
               </div>
             </motion.div>

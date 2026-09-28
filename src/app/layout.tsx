@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     description: "A premium suite of online calculators for everyday mathematics and finance.",
     images: ["https://topcalcbox.com/icon.png"],
   },
+  other: {
+    monetag: "d5158a86fb9002057fbb3a8f6f37e1ba"
+  }
 };
 
 export default function RootLayout({

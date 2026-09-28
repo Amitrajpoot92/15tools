@@ -64,40 +64,40 @@ export function LoveCalculator() {
       
       <div className="relative z-10 space-y-6">
         {/* Input Section */}
-        <div className="bg-rose-50/50 border border-rose-100/50 rounded-2xl p-5 md:p-6 relative">
-          <div className="space-y-6">
-            <div className="space-y-2">
+        <div className="bg-rose-50/50 border border-rose-100/50 rounded-2xl p-4 md:p-5 relative">
+          <div className="space-y-4">
+            <div className="space-y-1.5">
               <label className="text-sm font-bold text-slate-700">Your Full Name</label>
               <input
                 type="text"
                 value={name1}
                 onChange={(e) => setName1(e.target.value)}
                 placeholder="Romeo"
-                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-sm"
+                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-base text-slate-900 font-bold placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-sm"
               />
             </div>
             
-            <div className="flex justify-center my-0 relative z-10">
-              <div className="bg-white p-3 rounded-full shadow-sm border border-rose-100 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-rose-500 fill-rose-500" />
+            <div className="flex justify-center -my-2 relative z-10 pointer-events-none">
+              <div className="bg-white p-2 rounded-full shadow-sm border border-rose-100 flex items-center justify-center">
+                <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <label className="text-sm font-bold text-slate-700">Crush or Partner's Name</label>
               <input
                 type="text"
                 value={name2}
                 onChange={(e) => setName2(e.target.value)}
                 placeholder="Juliet"
-                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-sm"
+                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-base text-slate-900 font-bold placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-sm"
               />
             </div>
 
             <button
               onClick={calculateLove}
               disabled={!name1.trim() || !name2.trim() || isCalculating}
-              className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-lg rounded-xl py-3.5 shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/30 hover:from-rose-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+              className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-base md:text-lg rounded-xl py-3 shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/30 hover:from-rose-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-1"
             >
               {isCalculating ? "Calculating Destiny..." : "Calculate Love %"}
             </button>
@@ -105,10 +105,10 @@ export function LoveCalculator() {
         </div>
 
         {/* Result Section */}
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-pink-50/40 rounded-3xl shadow-[0_8px_30px_rgb(236,72,153,0.12)] border border-pink-200/60 relative overflow-hidden min-h-[350px]">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-pink-50/40 rounded-3xl shadow-[0_8px_30px_rgb(236,72,153,0.12)] border border-pink-200/60 relative overflow-hidden min-h-[300px] mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ec489908_1px,transparent_1px),linear-gradient(to_bottom,#ec489908_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+          <div className="w-full flex justify-between items-center mb-4 z-10 flex-wrap gap-4">
             <div className="flex items-center gap-2 text-rose-800">
                <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">Love Result</h3>
             </div>
