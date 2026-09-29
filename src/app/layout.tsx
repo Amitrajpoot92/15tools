@@ -5,6 +5,7 @@ import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
+import { AdBanner } from "@/components/ads/AdBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -76,6 +77,11 @@ export default function RootLayout({
             
             <div className="relative z-10 px-6 md:px-10 pt-6 md:pt-10 pb-0 max-w-7xl mx-auto flex-1 w-full">
               {children}
+              
+              {/* Adsterra Banner (320x50) */}
+              <div className="mt-8 mb-4 flex justify-center w-full">
+                <AdBanner size="320x50" />
+              </div>
             </div>
             
             <div className="relative z-10">
