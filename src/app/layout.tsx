@@ -5,7 +5,6 @@ import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
-import { AdBanner } from "@/components/ads/AdBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,9 +28,6 @@ export const metadata: Metadata = {
     description: "A premium suite of online calculators for everyday mathematics and finance.",
     images: ["https://topcalcbox.com/icon.png"],
   },
-  other: {
-    monetag: "d5158a86fb9002057fbb3a8f6f37e1ba"
-  }
 };
 
 export default function RootLayout({
@@ -43,11 +39,21 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-slate-50 text-slate-900 min-h-screen selection:bg-blue-500/20`}>
         <div className="flex h-screen overflow-hidden">
-          <Script id="monetag-push" strategy="afterInteractive">
-            {`(function(s){s.dataset.zone='11915714',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
-          </Script>
-          <Script id="monetag-vignette" strategy="afterInteractive">
-            {`(function(s){s.dataset.zone='11915722',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
+          {/* Google Analytics */}
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=G-X9S0Y748KX`}
+          />
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+          >
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-X9S0Y748KX');
+            `}
           </Script>
           <script
             type="application/ld+json"
@@ -77,11 +83,6 @@ export default function RootLayout({
             
             <div className="relative z-10 px-6 md:px-10 pt-6 md:pt-10 pb-0 max-w-7xl mx-auto flex-1 w-full">
               {children}
-
-              {/* Adsterra Banner (300x250) - Bottom of Page */}
-              <div className="mt-12 mb-6 flex justify-center w-full">
-                <AdBanner size="300x250" />
-              </div>
             </div>
             
             <div className="relative z-10">
