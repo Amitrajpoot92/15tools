@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 type AdSize = "320x50" | "300x250" | "468x60" | "728x90";
 
@@ -11,6 +12,7 @@ interface AdBannerProps {
 
 export function AdBanner({ size, className = "" }: AdBannerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -72,7 +74,7 @@ export function AdBanner({ size, className = "" }: AdBannerProps) {
     };
 
     createAd();
-  }, [size]);
+  }, [size, pathname]);
 
   return (
     <div className={`flex justify-center items-center my-6 overflow-hidden ${className}`}>
