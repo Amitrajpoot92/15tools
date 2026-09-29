@@ -62,7 +62,7 @@ export function AdBanner({ size, className = "" }: AdBannerProps) {
       // 2. Setup invoke script
       const invokeScript = document.createElement('script');
       invokeScript.type = 'text/javascript';
-      invokeScript.src = \`https://gentlemenwaspishunits.com/\${key}/invoke.js\`;
+      invokeScript.src = `https://gentlemenwaspishunits.com/${key}/invoke.js`;
       
       // Append scripts to container
       if (containerRef.current) {
@@ -75,7 +75,7 @@ export function AdBanner({ size, className = "" }: AdBannerProps) {
   }, [size]);
 
   return (
-    <div className={\`flex justify-center items-center my-6 overflow-hidden \${className}\`}>
+    <div className={`flex justify-center items-center my-6 overflow-hidden ${className}`}>
       <div ref={containerRef} />
     </div>
   );
