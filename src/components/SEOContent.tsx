@@ -6,28 +6,33 @@ export function SEOContent({ children }: { children: React.ReactNode }) {
   const childrenArray = React.Children.toArray(children);
   
   const processedChildren: React.ReactNode[] = [];
-  let adInserted = false;
+  let h2Count = 0;
 
   childrenArray.forEach((child) => {
     processedChildren.push(child);
     
-    // Insert AdBanner after the first <h2> tag
-    if (!adInserted && React.isValidElement(child) && child.type === 'h2') {
-      processedChildren.push(
-        <div key="seo-ad" className="my-6 flex justify-center w-full">
-          <AdBanner size="320x50" />
-        </div>
-      );
-      adInserted = true;
+    if (React.isValidElement(child) && child.type === 'h2') {
+      h2Count++;
+      
+      // Insert AdBanner after the first <h2> tag ("What is...")
+      if (h2Count === 1) {
+        processedChildren.push(
+          <div key="seo-ad-1" className="my-6 flex justify-center w-full">
+            <AdBanner size="320x50" />
+          </div>
+        );
+      }
+      
+      // Insert NativeAd after the second <h2> tag ("How to Use...")
+      if (h2Count === 2) {
+        processedChildren.push(
+          <div key="seo-ad-native" className="my-6 w-full">
+            <NativeAd />
+          </div>
+        );
+      }
     }
   });
-
-  // Append Native Ad at the end of the content
-  processedChildren.push(
-    <div key="native-ad-bottom">
-      <NativeAd />
-    </div>
-  );
 
   return (
     <div className="mt-8 pt-4 max-w-4xl mx-auto">
