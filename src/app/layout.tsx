@@ -77,10 +77,10 @@ export default function RootLayout({
             
             <div className="relative z-10 px-6 md:px-10 pt-6 md:pt-10 pb-0 max-w-7xl mx-auto flex-1 w-full">
               {children}
-              
-              {/* Adsterra Banner (320x50) */}
-              <div className="mt-8 mb-4 flex justify-center w-full">
-                <AdBanner size="320x50" />
+
+              {/* Adsterra Banner (300x250) - Bottom of Page */}
+              <div className="mt-12 mb-6 flex justify-center w-full">
+                <AdBanner size="300x250" />
               </div>
             </div>
             
