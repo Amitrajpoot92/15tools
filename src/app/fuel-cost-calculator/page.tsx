@@ -35,11 +35,11 @@ export default function FuelCostPage() {
     
       <div className="max-w-4xl mx-auto mb-6 bg-white rounded-3xl p-3 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-[#c3f6e1] rounded-2xl p-4 md:p-6 mb-4 border border-emerald-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+        <div className="flex flex-col items-center text-center bg-blue-100 rounded-2xl p-4 md:p-6 mb-6 border border-blue-300">
+          <h1 className="text-xl md:text-2xl font-extrabold text-blue-900 tracking-tight mb-2">
             Fuel Cost Calculator
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Calculate your trip fuel cost quickly and easily.
           </p>
         </div>

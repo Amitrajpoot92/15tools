@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, RotateCcw } from "lucide-react";
+import { Copy, RotateCcw, Check } from "lucide-react";
 
 export function FuelCostCalculator() {
   const [unitSystem, setUnitSystem] = useState<"metric" | "us">("metric");
@@ -58,84 +58,79 @@ export function FuelCostCalculator() {
   const effLabel = unitSystem === 'metric' ? 'KM/L' : 'MPG';
   const priceLabel = unitSystem === 'metric' ? 'Litre' : 'Gallon';
   const volUnit = unitSystem === 'metric' ? 'L' : 'gal';
-  const effHelper = unitSystem === 'metric' ? 'mileage' : 'MPG';
   const distLabelSingle = unitSystem === 'metric' ? 'KM' : 'Mile';
 
   return (
-    <div className="w-full space-y-3">
-      {/* Input Section */}
-      <div className="bg-[#e2faec] border border-[#bbf2d7] rounded-3xl p-4 md:p-5 relative">
-        
-        {/* Unit System Toggle */}
-        <div className="mb-4">
-          <div className="flex bg-[#d1f4e0] p-1.5 rounded-2xl border border-[#bbf2d7]">
-            <button
-              onClick={() => setUnitSystem("metric")}
-              className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                unitSystem === "metric" ? "bg-white text-emerald-800 shadow-sm" : "text-emerald-700/60 hover:text-emerald-800"
-              }`}
-            >
-              Metric (KM / Liters)
-            </button>
-            <button
-              onClick={() => setUnitSystem("us")}
-              className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                unitSystem === "us" ? "bg-white text-emerald-800 shadow-sm" : "text-emerald-700/60 hover:text-emerald-800"
-              }`}
-            >
-              US (Miles / Gallons)
-            </button>
-          </div>
-        </div>
+    <div className="w-full">
+      {/* Tabs */}
+      <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-1 mb-5">
+        <button
+          onClick={() => setUnitSystem("metric")}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            unitSystem === "metric" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"
+          }`}
+        >
+          Metric (KM / Liters)
+        </button>
+        <button
+          onClick={() => setUnitSystem("us")}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+            unitSystem === "us" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"
+          }`}
+        >
+          US (Miles / Gallons)
+        </button>
+      </div>
 
+      <div className="space-y-5 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
         <div className="space-y-4">
           {/* Trip Distance */}
-          <div className="space-y-1.5">
-            <label className="text-sm font-bold text-slate-800">Trip Distance ({distanceLabel})</label>
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Trip Distance ({distanceLabel})</label>
             <input
               type="number"
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
               placeholder="240"
-              className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-2.5 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+              className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
             />
           </div>
           
           {/* Fuel Efficiency */}
-          <div className="space-y-1.5">
-            <label className="text-sm font-bold text-slate-800">Efficiency / Mileage ({effLabel})</label>
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Efficiency / Mileage ({effLabel})</label>
             <input
               type="number"
               value={efficiency}
               onChange={(e) => setEfficiency(e.target.value)}
               placeholder="60"
-              className="w-full bg-white border border-emerald-100/50 rounded-2xl px-4 py-2.5 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+              className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
             />
           </div>
 
           {/* Fuel Price */}
-          <div className="space-y-1.5">
-            <label className="text-sm font-bold text-slate-800">Price Per {priceLabel} ({currencySymbol})</label>
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Price Per {priceLabel} ({currencySymbol})</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <span className="text-slate-600 font-bold text-lg">{currencySymbol}</span>
-              </div>
               <input
                 type="number"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="100"
-                className="w-full bg-white border border-emerald-100/50 rounded-2xl pl-10 pr-4 py-2.5 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all shadow-sm"
+                className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 pl-12 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
               />
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currencySymbol}</span>
             </div>
           </div>
+        </div>
 
-          {/* Result Box */}
-          <div className="bg-[#b3f2d6] rounded-3xl p-5 relative shadow-sm border border-[#96e3c2] mt-5">
-            <div className="absolute top-3 right-3 flex gap-2">
-              <button 
-                onClick={() => {
-                  const text = `Fuel Cost Calculator
+        {/* Result Box */}
+        <div className="bg-blue-100 border border-blue-300 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-slate-900">Total Fuel Cost</span>
+            <div className="flex items-center gap-1.5">
+              <button onClick={() => {
+                const text = `Fuel Cost Calculator
 Trip Distance: ${distance || 0} ${distanceLabel}
 Fuel Efficiency: ${efficiency || 0} ${effLabel}
 Fuel Price: ${currencySymbol}${price || 0} per ${priceLabel}
@@ -144,46 +139,31 @@ Fuel Required: ${needed.toFixed(2)} ${volUnit}
 Cost Per ${distLabelSingle}: ${formatCurrency(costPerUnit)}
 
 Calculate Online: https://topcalcbox.com/fuel-cost-calculator`;
-                  copyToClipboard(text);
-                }} 
-                className="flex items-center justify-center px-3 py-1.5 bg-white rounded-xl text-xs font-bold text-emerald-800 hover:bg-emerald-50 transition-colors shadow-sm"
-              >
+                copyToClipboard(text);
+              }} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>
-              <button 
-                onClick={reset}
-                className="flex items-center justify-center w-8 h-8 bg-white rounded-xl text-emerald-800 hover:bg-emerald-50 transition-colors shadow-sm"
-              >
+              <button onClick={reset} className="p-1.5 text-slate-800 hover:text-slate-900 transition-colors">
                 <RotateCcw className="w-4 h-4" />
               </button>
             </div>
-            
-            <div className="flex flex-col items-center mt-8 mb-2 text-center">
-              <p className="text-emerald-950 text-xs font-black uppercase tracking-[0.2em] mb-1 drop-shadow-sm">
-                Total Fuel Cost
-              </p>
-              <motion.div 
-                key={cost}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="text-4xl md:text-5xl font-black text-emerald-950 tracking-tight mb-2 drop-shadow-sm truncate w-full px-2"
-              >
-                {formatCurrency(cost)}
-              </motion.div>
-              <div className="bg-[#9ae4c5] text-emerald-950 px-3 py-1 rounded-full text-xs font-bold mt-1 shadow-sm">
-                {needed.toFixed(2)} {volUnit} Fuel Needed
-              </div>
-            </div>
+          </div>
+          
+          <div className="flex items-baseline mb-3">
+            <span className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#1e1b4b]">
+              {formatCurrency(cost)}
+            </span>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3 mt-4">
-              <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
-                <p className="text-slate-500 font-bold text-xs sm:text-sm mb-1">Fuel Required</p>
-                <p className="text-xl sm:text-2xl font-extrabold text-slate-800">{needed.toFixed(2)} {volUnit}</p>
-              </div>
-              <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
-                <p className="text-slate-500 font-bold text-xs sm:text-sm mb-1">Cost Per {distLabelSingle}</p>
-                <p className="text-xl sm:text-2xl font-extrabold text-slate-800">{formatCurrency(costPerUnit)}</p>
-              </div>
+          <div className="grid grid-cols-2 gap-3 mt-4">
+            <div className="bg-white/60 rounded-xl p-3 text-center">
+              <p className="text-slate-600 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-1">Fuel Required</p>
+              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{needed.toFixed(2)} {volUnit}</p>
+            </div>
+            <div className="bg-white/60 rounded-xl p-3 text-center">
+              <p className="text-slate-600 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-1">Cost Per {distLabelSingle}</p>
+              <p className="text-lg sm:text-xl font-extrabold text-slate-900">{formatCurrency(costPerUnit)}</p>
             </div>
           </div>
         </div>
