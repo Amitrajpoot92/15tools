@@ -50,107 +50,76 @@ export default function TipCalculatorPage() {
       </div>
 
       <SEOContent>
-        <h2>What is a Tip Calculator?</h2>
-        <p>
-          A <strong>Tip Calculator</strong> is a highly practical, everyday utility designed to instantly compute the exact gratuity amount on a restaurant bill, taxi fare, or salon service. In addition to determining the tip, a modern tip calculator also functions as a bill-splitting tool, allowing you to divide the total cost (including the tip) evenly among a group of people.
-        </p>
-        <p>
-          When the waiter hands you the check at the end of a great meal, the last thing you want to do is perform mental arithmetic, especially if the bill is for a large party. The <strong>TopCalcBox Tip Calculator</strong> removes the stress of calculating percentages and dividing numbers. By simply entering your bill amount and selecting a tip percentage, you immediately receive a clear breakdown of the tip amount, the total bill, and exactly how much each person at the table needs to pay.
-        </p>
+        <h2>What is a Tip Calculator</h2>
+        <p>A Tip Calculator is an online tool that helps you quickly calculate the tip amount, total bill including tip, and amount each person should pay. It is useful when dining at a restaurant, ordering food, or splitting a bill with friends, family, or colleagues.</p>
+        <p>Simply enter the bill amount, choose or enter a tip percentage, and select the number of people. The calculator automatically works out the total tip, bill plus tip, tip per person, and total amount payable by each person.</p>
+        <p>Example: If your bill is ₹10,000 and you add a 20% tip, the tip is ₹2,000 and the total bill becomes ₹12,000. If 2 people split the bill equally, each person pays ₹6,000.</p>
+        <p>This makes it easier to calculate tips, split restaurant bills, and avoid manual calculations.</p>
+
+        <h2>How to Use a Tip Calculator</h2>
+        <p>A Tip Calculator makes it easy to calculate the tip, add it to your bill, and split the final amount between multiple people. You only need to enter your bill amount, choose the tip percentage, and select how many people are sharing the bill.</p>
+        <ol>
+          <li><strong>Select Currency:</strong> Choose your preferred currency, such as ₹ or $.</li>
+          <li><strong>Enter Bill Amount:</strong> Enter the total restaurant or service bill.</li>
+          <li><strong>Enter Tip Percentage:</strong> Add your desired tip percentage or choose a suggested rate such as 10%, 15%, 18%, or 20%.</li>
+          <li><strong>Select Number of People:</strong> Use the + / − buttons to enter the number of people sharing the bill.</li>
+          <li><strong>Check the Result:</strong> The calculator shows the total tip, bill + tip, tip per person, and total payable per person.</li>
+          <li><strong>Copy or Reset:</strong> Copy the result or reset the calculator for a new calculation.</li>
+        </ol>
+        <p>Example: For a ₹10,000 bill with a 20% tip shared by 2 people, the total tip is ₹2,000, the final bill is ₹12,000, and each person pays ₹6,000.</p>
+
+        <h2>Calculation Formula</h2>
+        <p>The Tip Calculator uses simple formulas to calculate the tip, total bill, and amount per person.</p>
         
-        <h2>How to Use the Tip Calculator</h2>
-        <p>
-          Our interface is built for speed, making it perfect for use on a mobile phone right at the dinner table. Here is how you use it:
-        </p>
+        <h3>1. Tip Amount</h3>
+        <p>Tip = Bill Amount × Tip % ÷ 100</p>
+        <p>Example: ₹10,000 × 20 ÷ 100 = ₹2,000</p>
+        
+        <h3>2. Bill + Tip</h3>
+        <p>Total Bill = Bill Amount + Tip</p>
+        <p>Example: ₹10,000 + ₹2,000 = ₹12,000</p>
+        
+        <h3>3. Amount Per Person</h3>
+        <p>Amount Per Person = Total Bill ÷ Number of People</p>
+        <p>Example: ₹12,000 ÷ 2 = ₹6,000 per person</p>
+        
+        <h3>4. Tip Per Person</h3>
+        <p>Tip Per Person = Total Tip ÷ Number of People</p>
+        <p>Example: ₹2,000 ÷ 2 = ₹1,000 per person</p>
+
+        <h2>Who Can Use a Tip Calculator</h2>
+        <p>A Tip Calculator is useful for anyone who wants to quickly calculate a tip, add it to the bill, or split the final amount between multiple people.</p>
         <ul>
-          <li><strong>Step 1: Enter the Bill Amount.</strong> Type the total amount shown on your receipt into the "Bill Amount" input field before any tip is added.</li>
-          <li><strong>Step 2: Select a Tip Percentage.</strong> Choose how much you want to tip. We provide quick-select buttons for standard gratuity rates (10%, 15%, 18%, 20%). You can also manually enter a custom percentage if you received exceptional service and want to tip higher.</li>
-          <li><strong>Step 3: Number of People (Split).</strong> If you are dining alone or paying for the whole table, leave this at 1. If you are splitting the bill with friends, adjust the slider or type in the exact number of people in your party.</li>
-          <li><strong>Step 4: Review the Breakdown.</strong> The calculator will instantly display the Tip Amount, the Total Bill (Bill + Tip), and the exact Per Person cost.</li>
+          <li><strong>Restaurant Customers</strong> – Calculate the tip and final bill after dining out.</li>
+          <li><strong>Friends & Groups</strong> – Easily split a restaurant bill among several people.</li>
+          <li><strong>Families</strong> – Calculate the total amount and each person’s share when dining together.</li>
+          <li><strong>Travelers</strong> – Quickly work out tips when eating at restaurants in different places.</li>
+          <li><strong>CafÃ© & Food Customers</strong> – Calculate tips for cafÃ©s, food deliveries, and other services.</li>
+          <li><strong>Event & Party Groups</strong> – Split a shared food or service bill without manual calculations.</li>
+          <li><strong>Students & Friends</strong> – Divide bills fairly when eating or ordering food together.</li>
+          <li><strong>Everyday Users</strong> – Quickly calculate any percentage-based tip and the final amount to pay.</li>
         </ul>
 
-        <h2>Standard Tipping Etiquette by Industry</h2>
-        <p>
-          Tipping culture can be incredibly confusing, as expectations vary wildly by industry and geographic location. In North America, tipping is customary and forms a significant portion of a service worker's income. Here is a general guide to standard tipping percentages:
-        </p>
-        <ul>
-          <li><strong>Restaurants (Sit-down):</strong> 15% for average service, 18% for good service, and 20% to 25% for excellent service. If the service was poor, a 10% tip is generally considered the absolute minimum.</li>
-          <li><strong>Bartenders:</strong> Typically $1 to $2 per drink, or 15% to 20% of the total bar tab.</li>
-          <li><strong>Food Delivery (UberEats, DoorDash):</strong> 15% to 20% of the food total, with a minimum of $3 to $5 depending on the weather and distance traveled.</li>
-          <li><strong>Hair Salons & Spas:</strong> 15% to 20% of the total service cost given directly to your stylist or massage therapist.</li>
-          <li><strong>Taxi & Rideshare (Uber, Lyft):</strong> 15% to 20% of the fare.</li>
-          <li><strong>Coffee Shops (Counter Service):</strong> Tipping is generally optional here, but leaving loose change or $1 in the tip jar is highly appreciated by baristas.</li>
-        </ul>
-
-        <h2>Calculation Formula: The Math Behind the Tip</h2>
-        <p>
-          If your phone battery dies and you need to calculate the tip manually on a napkin, the mathematical formula relies on basic percentages. Here is how you calculate the tip and the split:
-        </p>
-        
-        <h3>1. Calculating the Tip Amount</h3>
-        <blockquote>
-          <strong>Tip Amount</strong> = (Bill Amount × Tip Percentage) / 100
-        </blockquote>
-        <p><em>Example:</em> Your bill is $85 and you want to tip 20%. The calculation is (85 × 20) / 100 = 1700 / 100 = <strong>$17.00 tip</strong>.</p>
-
-        <h3>2. Calculating the Total Bill</h3>
-        <blockquote>
-          <strong>Total Bill</strong> = Bill Amount + Tip Amount
-        </blockquote>
-        <p><em>Example:</em> $85.00 + $17.00 = <strong>$102.00 Total</strong>.</p>
-
-        <h3>3. Splitting the Bill Per Person</h3>
-        <blockquote>
-          <strong>Cost Per Person</strong> = Total Bill / Number of People
-        </blockquote>
-        <p><em>Example:</em> If you are splitting that $102.00 bill evenly among 3 friends: 102 / 3 = <strong>$34.00 per person</strong>.</p>
-
-        <h2>Common Uses / Who Can Use It</h2>
-        <p>
-          A Tip Calculator is an everyday tool that virtually every consumer can benefit from. Here are some of the most common situations where it is utilized:
-        </p>
-        <ul>
-          <li><strong>Group Dinners:</strong> Splitting a massive restaurant bill among 6 or 7 people without causing a disagreement over who owes what.</li>
-          <li><strong>Corporate Expenses:</strong> Business travelers use it to calculate exact gratuities so they can accurately report their meal expenses to their accounting department.</li>
-          <li><strong>Tourists and Travelers:</strong> When visiting a country with unfamiliar currency or different tipping customs, a calculator ensures you don't accidentally undertip or wildly overtip your servers.</li>
-          <li><strong>Event Gratuities:</strong> Calculating the mandatory gratuity for catering staff, wedding bartenders, or large-party banquet servers.</li>
-        </ul>
-
-        <h2>Frequently Asked Questions (FAQ)</h2>
-        
-        <h3>1. Should I calculate the tip before or after tax?</h3>
-        <p>
-          This is a matter of personal preference and etiquette, but the standard practice is to calculate the tip based on the <strong>pre-tax subtotal</strong> of your bill. However, many people find it easier to simply calculate 15% or 20% on the final post-tax total, which results in a slightly higher tip for the server.
-        </p>
-
-        <h3>2. What should I do if the restaurant automatically added a gratuity?</h3>
-        <p>
-          Many restaurants automatically add an 18% or 20% gratuity to the bill for large parties (usually groups of 6 or more). Always check your receipt. If gratuity is already included, you do not need to add an additional tip, though you may leave extra if the service was phenomenal.
-        </p>
-
-        <h3>3. Does this tool round the numbers for me?</h3>
-        <p>
-          Yes, our TopCalcBox Tip Calculator automatically rounds the final output to two decimal places (e.g., $15.45) so it matches standard currency formats perfectly.
-        </p>
-
-        <h3>4. How do I tip if we ordered different items?</h3>
-        <p>
-          Our "Split the Bill" feature divides the total cost completely evenly. If one person ordered a $50 steak and another ordered a $15 salad, an even split is not fair. In that scenario, you should use the tool to find the Tip Amount, and then individuals should manually add their portion of the tip to their specific meal cost.
-        </p>
-
-        <h3>5. Is this calculator free to use on my phone?</h3>
-        <p>
-          Yes, TopCalcBox is entirely free and completely mobile-responsive. You can bookmark this page on your smartphone's browser to access the calculator instantly whenever you dine out.
-        </p>
+        <h2>Frequently Asked Questions</h2>
+        <h3>1. What is a Tip Calculator?</h3>
+        <p>A Tip Calculator helps you quickly calculate the tip amount, total bill including tip, and amount each person should pay.</p>
+        <h3>2. How do I split a restaurant bill with a tip?</h3>
+        <p>Enter the bill amount, tip percentage, and number of people. The calculator shows the total amount per person, including the tip.</p>
+        <h3>3. Can I choose my own tip percentage?</h3>
+        <p>Yes. You can enter the tip percentage you want instead of using the suggested tip options.</p>
+        <h3>4. How much should I tip at a restaurant?</h3>
+        <p>The appropriate tip percentage depends on the country, restaurant, service, and local tipping customs. You can enter the percentage you want to calculate.</p>
+        <h3>5. Can I calculate a tip without splitting the bill?</h3>
+        <p>Yes. Simply enter the bill amount and tip percentage. You can ignore the number of people if you are paying the bill yourself.</p>
 
         <h2>Related Calculators</h2>
-        <p>
-          If you frequently find yourself doing mental math for daily finances, check out our other useful calculators:
-        </p>
         <ul>
-          <li><a href="/percentage-calculator" className="text-orange-600 hover:underline">Percentage Calculator</a> - For generalized percentage problems outside of the restaurant environment.</li>
-          <li><a href="/discount-calculator" className="text-orange-600 hover:underline">Discount Calculator</a> - Find out exactly how much you are saving on retail purchases before you hit the checkout line.</li>
-          <li><a href="/gst-calculator" className="text-orange-600 hover:underline">GST Calculator</a> - Quickly extract or add sales tax to a bill.</li>
+          <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
+          <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
+          <li><a href="/cost-per-item-calculator" className="text-blue-600 hover:underline">Cost Per Item Calculator</a></li>
+          <li><a href="/price-per-kg-calculator" className="text-blue-600 hover:underline">Price per Kg Calculator</a></li>
+          <li><a href="/fuel-cost-calculator" className="text-blue-600 hover:underline">Fuel Cost Calculator</a></li>
+          <li><a href="/grocery-bill-calculator" className="text-blue-600 hover:underline">Grocery Bill Calculator</a></li>
         </ul>
       </SEOContent>
     </div>

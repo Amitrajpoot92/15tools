@@ -182,19 +182,19 @@ export function GroceryBillCalculator() {
           
           <div className="absolute top-3 right-3 flex items-center gap-1.5 z-10">
             <button onClick={() => {
-              let copyStr = "Grocery Bill\n--------------------\n";
+              let copyStr = "Grocery Bill Calculator \n--------------------\n";
               let index = 1;
               items.forEach(s => {
                 if (s.name || s.price) {
                   const qty = parseFloat(s.quantity) || 1;
                   const price = parseFloat(s.price) || 0;
                   const total = price * qty;
-                  copyStr += `${index}. ${s.name || 'Item'} - ${currency}${formatNumber(total, 2)}\n`;
+                  copyStr += `${index}. ${s.name || 'Item'} - ${currency}${formatNumber(price, 2)} × ${qty} = ${currency}${formatNumber(total, 2)}\n`;
                   index++;
                 }
               });
               copyStr += "--------------------\n";
-              copyStr += `Total: ${currency}${formatNumber(result.total, 2)}\n\n`;
+              copyStr += `Total Bill: ${currency}${formatNumber(result.total, 2)}\n\n`;
               copyStr += "Calculate Online: https://topcalcbox.com/grocery-bill-calculator";
               
               copyToClipboard(copyStr);

@@ -15,15 +15,15 @@ export default function Page() {
       </div>
       <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm text-slate-600 space-y-5 text-sm md:text-base leading-relaxed mb-4">
         <p>Welcome to <strong>TopCalcBox</strong>, a simple and easy-to-use online calculator website designed to make everyday calculations quick and hassle-free.</p>
-        <p>From managing money and checking percentages to calculating age, dates, marks, shopping costs, fuel expenses, electricity bills, and fitness-related numbers, TopCalcBox brings useful calculators together in one place.</p>
+        <p>From managing money and checking percentages to calculating age, dates, marks, shopping costs, fuel expenses, grocery bills, and fitness-related numbers, TopCalcBox brings useful calculators together in one place.</p>
         
         <h2 className="text-lg md:text-xl font-bold text-slate-900 mt-6 mb-2">What We Offer</h2>
         <p>TopCalcBox currently provides 25 practical calculators across different categories:</p>
         <ul className="list-disc pl-5 space-y-1.5">
-          <li><strong>Finance & Money:</strong> Percentage, Discount, GST, Profit & Loss, Margin, EMI, SIP, and Subscription Cost Calculators</li>
+          <li><strong>Finance & Money:</strong> Percentage, Discount, GST, Profit & Loss, Wholesale Price, EMI, SIP, and Subscription Cost Calculators</li>
           <li><strong>Math & Education:</strong> Marks Percentage, Attendance Percentage, Negative Marking, Average, and BODMAS Calculators</li>
           <li><strong>Date & Age:</strong> Age, Birthday Countdown, Age Difference, and Date Difference Calculators</li>
-          <li><strong>Shopping & Daily Life:</strong> Cost Per Item, Price per Kg, Tip, Fuel Cost, and Electricity Bill Calculators</li>
+          <li><strong>Shopping & Daily Life:</strong> Cost Per Item, Price per Kg, Tip, Fuel Cost, and Grocery Bill Calculators</li>
           <li><strong>Health & Fitness:</strong> BMI and Calorie Calculators</li>
           <li><strong>Fun & Lifestyle:</strong> Love Calculator</li>
         </ul>

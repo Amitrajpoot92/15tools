@@ -69,7 +69,7 @@ export default function Page() {
 
         <h2>SIP Calculation Formula</h2>
         <p>The SIP maturity amount is calculated using the standard future value formula for monthly investments:</p>
-        <p><strong>FV = P × [((1 + r)ⁿ − 1) ÷ r] × (1 + r)</strong></p>
+        <p><strong>FV = P × [((1 + r)â¿ − 1) ÷ r] × (1 + r)</strong></p>
         <p>Where:</p>
         <ul>
           <li><strong>FV</strong> = Total Expected Amount</li>
@@ -87,8 +87,8 @@ export default function Page() {
           Period = 10 years<br/>
           <br/>
           Total Invested = ₹6,00,000<br/>
-          Wealth Gained ≈ ₹5,61,695<br/>
-          Total Expected Amount ≈ ₹11,61,695
+          Wealth Gained â‰ˆ ₹5,61,695<br/>
+          Total Expected Amount â‰ˆ ₹11,61,695
         </p>
         <p>Actual returns may vary because SIP returns are market-linked.</p>
 
@@ -125,7 +125,7 @@ export default function Page() {
           <li><a href="/discount-calculator" className="text-rose-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/gst-calculator" className="text-rose-600 hover:underline">GST Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/emi-calculator" className="text-rose-600 hover:underline">EMI Calculator</a></li>
           <li><a href="/subscription-cost-calculator" className="text-rose-600 hover:underline">Subscription Cost Calculator</a></li>
         </ul>

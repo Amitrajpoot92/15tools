@@ -67,7 +67,7 @@ export default function Page() {
 
         <h2>EMI Calculation Formula</h2>
         <p>The EMI formula is used to calculate the monthly loan installment based on the loan amount, interest rate, and repayment tenure.</p>
-        <p><strong>EMI = P × r × (1 + r)ⁿ ÷ [(1 + r)ⁿ − 1]</strong></p>
+        <p><strong>EMI = P × r × (1 + r)â¿ ÷ [(1 + r)â¿ − 1]</strong></p>
         <p>Where:</p>
         <ul>
           <li><strong>P</strong> = Principal Loan Amount</li>
@@ -116,7 +116,7 @@ export default function Page() {
         <p>EMI is calculated using the loan amount, monthly interest rate, and total number of monthly payments.</p>
 
         <h4>3. What is the EMI formula?</h4>
-        <p>The standard EMI formula is: EMI = P × r × (1 + r)ⁿ ÷ [(1 + r)ⁿ − 1], where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments.</p>
+        <p>The standard EMI formula is: EMI = P × r × (1 + r)â¿ ÷ [(1 + r)â¿ − 1], where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments.</p>
 
         <h4>4. How much EMI can I afford for a loan?</h4>
         <p>Your affordable EMI depends on your monthly income, regular expenses, existing EMIs, and other financial commitments. Use the calculator to compare different loan amounts and tenures.</p>
@@ -130,7 +130,7 @@ export default function Page() {
           <li><a href="/discount-calculator" className="text-indigo-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/gst-calculator" className="text-indigo-600 hover:underline">GST Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-indigo-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-indigo-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-indigo-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/sip-calculator" className="text-indigo-600 hover:underline">SIP Calculator</a></li>
           <li><a href="/subscription-cost-calculator" className="text-indigo-600 hover:underline">Subscription Cost Calculator</a></li>
         </ul>

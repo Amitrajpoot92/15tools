@@ -36,11 +36,11 @@ export default function Page() {
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
         {/* Ultra Compact Header */}
         {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-emerald-100 rounded-2xl p-4 md:p-6 mb-6 border border-emerald-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-emerald-900 tracking-tight mb-1">
+        <div className="flex flex-col items-center text-center bg-blue-100 rounded-2xl p-4 md:p-6 mb-6 border border-blue-300">
+          <h1 className="text-xl md:text-2xl font-extrabold text-blue-900 tracking-tight mb-2">
             Calorie Calculator
           </h1>
-          <p className="text-slate-800 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Estimate your daily calorie needs based on your body and activity.
           </p>
         </div>
@@ -52,40 +52,73 @@ export default function Page() {
       </div>
 
       <SEOContent>
-        <h2>What is a Calorie Calculator?</h2>
-        <p>
-          A <strong>Calorie Calculator</strong> is a specialized health tool that determines your Total Daily Energy Expenditure (TDEE). This is the exact number of calories your body burns in a 24-hour period while performing basic life-sustaining functions (like breathing and circulating blood) plus any physical activity you engage in. Knowing your TDEE is the cornerstone of any successful diet or fitness plan.
-        </p>
-        
+        <h2>What is a Calorie Calculator</h2>
+        <p>A Calorie Calculator is an online tool that helps estimate how many calories you may need each day based on your age, sex, weight, height, and activity level. It gives you an estimated daily calorie target for maintaining your current weight.</p>
+        <p>You can choose between Metric and Imperial units, select your sex, enter your body details, and choose your activity level such as sedentary, lightly active, or moderately active. The calculator then provides estimated calorie targets for weight maintenance, weight loss, and weight gain.</p>
+        <p>Calorie needs are estimates because actual energy requirements can vary from person to person. Physical activity, body composition, health conditions, lifestyle, and other factors can affect daily calorie needs.</p>
+
         <h2>How to Use the Calorie Calculator</h2>
-        <p>
-          To get the most accurate results, you need to provide the calculator with some basic biological metrics. Follow these steps:
-        </p>
-        <ul>
-          <li><strong>Step 1: Enter your Age and Gender.</strong> Metabolism changes with age and differs between men and women.</li>
-          <li><strong>Step 2: Enter your Weight and Height.</strong> These metrics define your body mass.</li>
-          <li><strong>Step 3: Select your Activity Level.</strong> Be honest here. If you sit at a desk all day and don't exercise, select "Sedentary." If you hit the gym 4 times a week, select "Moderately active."</li>
-        </ul>
+        <p>The Calorie Calculator uses your basic body details and activity level to estimate your daily calorie needs. Enter the required information and get your calorie targets instantly.</p>
+        <ol>
+          <li><strong>Select Unit System</strong> – Choose Metric or Imperial.</li>
+          <li><strong>Select Gender</strong> – Choose Male or Female.</li>
+          <li><strong>Enter Age</strong> – Enter your age in years.</li>
+          <li><strong>Enter Weight</strong> – Add your current weight in kg or lb.</li>
+          <li><strong>Enter Height</strong> – Enter your height in cm or feet and inches.</li>
+          <li><strong>Select Activity Level</strong> – Choose the option that best matches your usual physical activity.</li>
+          <li><strong>Check Your Results</strong> – View your estimated calories for maintaining, losing, or gaining weight.</li>
+          <li><strong>Copy or Reset</strong> – Copy the result or reset the calculator for a new calculation.</li>
+        </ol>
 
         <h2>Understanding the Results</h2>
-        <p>
-          Once you have inputted your data, the calculator will generate three important numbers based on the highly accurate Mifflin-St Jeor Equation:
-        </p>
+        <p>After entering your details, the calculator provides estimated daily calorie targets based on your age, sex, weight, height, and activity level. The results help you understand the approximate calories associated with maintaining, losing, or gaining weight.</p>
+        <p><strong>Maintain Weight:</strong> This is your estimated daily calorie target for maintaining your current weight based on the information you entered.</p>
+        <p><strong>Weight Loss (-0.5 kg/week):</strong> This shows an estimated daily calorie target designed around a gradual weight-loss goal of approximately 0.5 kg per week.</p>
+        <p><strong>Weight Gain (+0.5 kg/week):</strong> This shows an estimated daily calorie target designed around a gradual weight-gain goal of approximately 0.5 kg per week.</p>
+        <p>These values are estimates, not exact calorie requirements. Actual results can vary depending on activity, body composition, health, lifestyle, and other individual factors.</p>
+
+        <h2>Calorie Calculation Formula</h2>
+        <p>The Calorie Calculator first calculates your Basal Metabolic Rate (BMR) using the Mifflin-St Jeor Equation. BMR is the estimated number of calories your body needs at rest to perform basic functions such as breathing, circulation, and maintaining body temperature.</p>
+        
+        <h3>Mifflin-St Jeor Equation</h3>
+        <p>Where:<br />W = Weight in kg<br />H = Height in cm<br />A = Age in years</p>
+        <p>For Men BMR = 10W + 6.25H - 5A + 5</p>
+        <p>For Women BMR = 10W + 6.25H - 5A - 161</p>
+
+        <h2>Who Can Use a Calorie Calculator</h2>
+        <p>A Calorie Calculator can be useful for adults who want to estimate their daily calorie needs based on their personal details and activity level.</p>
         <ul>
-          <li><strong>Maintain Weight:</strong> This is your maintenance calorie target. If you eat this exact amount of calories every day, your body weight will remain exactly the same.</li>
-          <li><strong>Mild Weight Loss:</strong> This target puts you in a small caloric deficit (usually around 250 calories below maintenance). This is a slow, steady, and highly sustainable way to lose weight.</li>
-          <li><strong>Weight Loss (-0.5kg/week):</strong> This target puts you in a 500-calorie deficit. Because one pound of body fat is roughly equivalent to 3,500 calories, eating at a 500-calorie deficit every day will result in about 1 pound (or 0.45 kg) of weight loss per week.</li>
+          <li><strong>People Managing Their Weight</strong> – Estimate daily calories for maintaining, losing, or gaining weight.</li>
+          <li><strong>Fitness Enthusiasts</strong> – Get an approximate calorie target to support their fitness routine.</li>
+          <li><strong>Gym Users</strong> – Understand their estimated daily energy needs based on activity level.</li>
+          <li><strong>People Planning Their Diet</strong> – Use calorie estimates when planning daily food intake.</li>
+          <li><strong>Athletes & Active Individuals</strong> – Get a general estimate of calorie requirements based on physical activity.</li>
+          <li><strong>Busy Professionals</strong> – Quickly check their estimated daily calorie needs without manual calculations.</li>
+          <li><strong>Students & Learners</strong> – Understand how BMR, activity level, and calorie needs are calculated.</li>
         </ul>
+        <p>Note: Calorie results are estimates and should not be treated as personalised medical or dietary advice.</p>
 
-        <h2>The Importance of a Caloric Deficit</h2>
-        <p>
-          In the world of nutrition and weight loss, thermodynamics rules supreme. No matter what specific diet you follow—whether it is Keto, Paleo, Vegan, or Intermittent Fasting—you will not lose body fat unless you are in a caloric deficit. Our calculator helps you find the exact ceiling of calories you can consume to ensure you stay in that fat-burning zone.
-        </p>
+        <h2>Frequently Asked Questions</h2>
+        <h3>1. What is a Calorie Calculator?</h3>
+        <p>A Calorie Calculator estimates your daily calorie needs using details such as age, sex, weight, height, and activity level.</p>
+        <h3>2. Does activity level affect calorie requirements?</h3>
+        <p>Yes. A higher activity level generally results in a higher estimated daily calorie requirement.</p>
+        <h3>3. What does Weight Loss (-0.5 kg/week) mean?</h3>
+        <p>It is an estimated calorie target designed around a gradual weight-loss goal of approximately 0.5 kg per week.</p>
+        <h3>4. Can I use pounds and feet?</h3>
+        <p>Yes. Select Imperial to enter your weight in pounds and height in feet and inches.</p>
+        <h3>5. How accurate are the calorie estimates from this calculator?</h3>
+        <p>The results provide an estimated daily calorie requirement based on your age, sex, weight, height, and activity level. Your actual calorie needs may be different because factors such as body composition, daily activity, metabolism, lifestyle, and overall health can affect how many calories your body uses.</p>
 
-        <h3>Disclaimer</h3>
-        <p>
-          The TopCalcBox Calorie Calculator provides a highly educated estimate based on population averages. Individual metabolisms can vary. If you have medical conditions like thyroid issues, or if you are pregnant, please consult with a registered dietitian or doctor before making drastic changes to your diet.
-        </p>
+        <h2>Related Calculators</h2>
+        <ul>
+          <li><a href="/percentage-calculator" className="text-blue-600 hover:underline">Percentage Calculator</a></li>
+          <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
+          <li><a href="/age-calculator-online" className="text-blue-600 hover:underline">Age Calculator Online</a></li>
+          <li><a href="/fuel-cost-calculator" className="text-blue-600 hover:underline">Fuel Cost Calculator</a></li>
+          <li><a href="/bmi-calculator" className="text-blue-600 hover:underline">BMI Calculator</a></li>
+          <li><a href="/love-calculator" className="text-blue-600 hover:underline">Love Calculator</a></li>
+        </ul>
       </SEOContent>
     </div>
   );

@@ -122,7 +122,7 @@ export default function ProfitLossPage() {
           <li><a href="/percentage-calculator" className="text-orange-600 hover:underline">Percentage Calculator</a></li>
           <li><a href="/discount-calculator" className="text-orange-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/gst-calculator" className="text-orange-600 hover:underline">GST Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-orange-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-orange-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/emi-calculator" className="text-orange-600 hover:underline">EMI Calculator</a></li>
           <li><a href="/sip-calculator" className="text-orange-600 hover:underline">SIP Calculator</a></li>
           <li><a href="/subscription-cost-calculator" className="text-orange-600 hover:underline">Subscription Cost Calculator</a></li>
