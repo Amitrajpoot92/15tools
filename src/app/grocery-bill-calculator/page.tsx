@@ -4,8 +4,8 @@ import { SEOContent } from "@/components/SEOContent";
 import { ShoppingCart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Grocery Bill Calculator - Estimate Your Shopping Total | TopCalcBox",
-  description: "Calculate your grocery bill before checkout. Easily sum up item prices and quantities to stay within your shopping budget.",
+  title: "Grocery Bill Calculator",
+  description: "Calculate your total grocery bill by adding product names and prices. Easily add items, check the total cost, and manage your grocery shopping expenses.",
 };
 
 export default function Page() {

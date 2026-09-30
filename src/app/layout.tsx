@@ -9,8 +9,8 @@ import { CookieConsent } from "@/components/CookieConsent";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TopCalcBox - Fast & Accurate Online Calculators",
-  description: "A premium suite of online calculators for everyday mathematics and finance.",
+  title: "TopCalcBox - Free Online Calculators",
+  description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "TopCalcBox",
-    title: "TopCalcBox - Fast & Accurate Online Calculators",
-    description: "A premium suite of online calculators for everyday mathematics and finance.",
+    title: "TopCalcBox - Free Online Calculators",
+    description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
     images: [{ url: "https://topcalcbox.com/icon.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TopCalcBox - Fast & Accurate Online Calculators",
-    description: "A premium suite of online calculators for everyday mathematics and finance.",
+    title: "TopCalcBox - Free Online Calculators",
+    description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
     images: ["https://topcalcbox.com/icon.png"],
   },
 };

@@ -4,8 +4,8 @@ import { SEOContent } from "@/components/SEOContent";
 import { Flame } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Calorie Calculator - Calculate Daily Caloric Needs | TopCalcBox",
-  description: "Find out exactly how many calories you need to eat per day to maintain your weight, lose weight, or build muscle based on your age, height, and activity level.",
+  title: "Calorie Calculator",
+  description: "Calculate your estimated daily calorie needs based on your age, gender, height, weight, and activity level with our free calculator.",
 };
 
 export default function Page() {

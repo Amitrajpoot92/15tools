@@ -4,8 +4,8 @@ import { SEOContent } from "@/components/SEOContent";
 import { Fuel } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Fuel Cost Calculator - Estimate Trip Expenses | TopCalcBox",
-  description: "Free online fuel cost calculator. Plan your road trip budget by calculating exactly how much gas you will need and what it will cost.",
+  title: "Fuel Cost Calculator",
+  description: "Calculate your fuel cost for a trip using distance, mileage, and fuel price. Estimate your travel expenses quickly and easily.",
 };
 
 export default function FuelCostPage() {

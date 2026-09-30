@@ -4,8 +4,8 @@ import { SEOContent } from "@/components/SEOContent";
 import { Activity } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BMI Calculator - Check Your Body Mass Index | TopCalcBox",
-  description: "Calculate your Body Mass Index (BMI) instantly. Find out if you are underweight, normal, overweight, or obese using our free online health calculator.",
+  title: "BMI Calculator",
+  description: "Calculate your Body Mass Index using your height and weight. Get your BMI result instantly with our free online BMI calculator.",
 };
 
 export default function Page() {
