@@ -116,7 +116,7 @@ export function CalorieCalculator() {
 
             {/* Gender Toggle */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left">Sex</label>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left">Gender</label>
               <div className="flex bg-white/80 p-1 rounded-xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
                 <button
                   onClick={() => setGender("male")}
