@@ -114,7 +114,7 @@ export default function PricePerKgCalculatorPage() {
         <h2>Related Calculators</h2>
         <ul>
           <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-price-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/cost-per-item-calculator" className="text-blue-600 hover:underline">Cost Per Item Calculator</a></li>
           <li><a href="/tip-calculator" className="text-blue-600 hover:underline">Tip Calculator</a></li>
           <li><a href="/fuel-cost-calculator" className="text-blue-600 hover:underline">Fuel Cost Calculator</a></li>

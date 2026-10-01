@@ -35,7 +35,7 @@ export default function BODMASCalculatorPage() {
         {/* Ultra Compact Header */}
         {/* Ultra Compact Header */}
         <div className="flex flex-col items-center text-center bg-amber-100 rounded-2xl p-4 md:p-6 mb-6 border border-amber-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-[#111827] tracking-tight mb-1">
+          <h1 className="text-xl md:text-2xl font-extrabold text-amber-900 tracking-tight mb-1">
             BODMAS Calculator
           </h1>
           <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">

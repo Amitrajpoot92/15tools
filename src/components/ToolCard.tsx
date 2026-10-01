@@ -5,24 +5,27 @@ import { motion } from "framer-motion";
 import { Tool } from "@/lib/constants";
 
 // Premium Glassmorphism Cards with Hard Color Gradients & Shadows
-const colorMaps: Record<string, { accentBg: string, accentText: string, hoverText: string, glow: string }> = {
+const colorMaps: Record<string, { accentBg: string, accentText: string, hoverText: string, glow: string, darkText: string }> = {
   orange: { 
     accentBg: "bg-gradient-to-br from-orange-400 to-orange-600 shadow-[0_8px_16px_-6px_rgba(249,115,22,0.6)]", 
     accentText: "text-orange-500", 
     hoverText: "group-hover:text-orange-600",
-    glow: "from-orange-100/60"
+    glow: "from-orange-100/60",
+    darkText: "text-orange-900"
   },
   amber: { 
     accentBg: "bg-gradient-to-br from-amber-400 to-amber-600 shadow-[0_8px_16px_-6px_rgba(245,158,11,0.6)]", 
     accentText: "text-amber-500", 
     hoverText: "group-hover:text-amber-600",
-    glow: "from-amber-100/60"
+    glow: "from-amber-100/60",
+    darkText: "text-amber-900"
   },
   rose: { 
     accentBg: "bg-gradient-to-br from-rose-400 to-rose-600 shadow-[0_8px_16px_-6px_rgba(225,29,72,0.6)]", 
     accentText: "text-rose-500", 
     hoverText: "group-hover:text-rose-600",
-    glow: "from-rose-100/60"
+    glow: "from-rose-100/60",
+    darkText: "text-rose-900"
   },
 };
 
@@ -52,7 +55,7 @@ export function ToolCard({ tool, index }: { tool: Tool; index: number }) {
             </div>
             
             <div className="flex-1 min-w-0">
-              <h3 className={`text-[15px] font-bold text-slate-800 leading-snug transition-colors duration-300 ${styles.hoverText} truncate`}>
+              <h3 className={`text-[15px] font-bold ${styles.darkText} leading-snug transition-colors duration-300 ${styles.hoverText} truncate`}>
                 {tool.name}
               </h3>
               <p className="text-[13px] text-slate-500 line-clamp-1 mt-0.5">

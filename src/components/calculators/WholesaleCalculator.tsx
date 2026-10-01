@@ -134,7 +134,7 @@ Wholesale Price Per Unit: ${currency}${formatNumber(result.wholesalePricePerUnit
 Total Profit: ${currency}${formatNumber(result.totalProfit)}
 Total Revenue: ${currency}${formatNumber(result.totalRevenue)}
 
-Calculate Online: https://topcalcbox.com/wholesale-price-calculator/`;
+Calculate Online: https://topcalcbox.com/wholesale-calculator/`;
                 copyToClipboard(text);
               }} 
               className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm"
