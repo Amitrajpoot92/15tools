@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
     images: ["https://topcalcbox.com/icon.png"],
   },
+  other: {
+    "google-adsense-account": "ca-pub-9267692450432886",
+  },
 };
 
 export default function RootLayout({
@@ -55,6 +58,13 @@ export default function RootLayout({
               gtag('config', 'G-X9S0Y748KX');
             `}
           </Script>
+          {/* Google AdSense */}
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9267692450432886"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
