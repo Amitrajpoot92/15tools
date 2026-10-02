@@ -40,6 +40,7 @@ export type Tool = {
   icon: React.ElementType;
   color: string;
   category: Category;
+  popular?: boolean;
 };
 
 // Premium Orange/Warm Palette:
@@ -54,7 +55,8 @@ export const TOOLS: Tool[] = [
     description: "Quickly find the percentage of any number, calculate discounts, or figure out ratio percentages.",
     icon: Percent,
     color: "text-orange-500",
-    category: "FINANCE & MONEY"
+    category: "FINANCE & MONEY",
+    popular: true
   },
   {
     name: "Discount Calculator",

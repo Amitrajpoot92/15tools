@@ -30,15 +30,7 @@ export default function Page() {
             </div>
           </div>
 
-          <h2 className="text-lg font-bold text-slate-900 mb-3">WHAT CAN YOU CONTACT US ABOUT?</h2>
-          <ul className="list-disc pl-5 space-y-1.5 text-sm mb-6">
-            <li>Report a calculator error</li>
-            <li>Suggest a new calculator</li>
-            <li>Share feedback about the website</li>
-            <li>Report a technical problem</li>
-            <li>Ask a question about our calculators</li>
-            <li>Business or partnership enquiries</li>
-          </ul>
+
 
           <div className="mt-auto bg-orange-50 p-4 rounded-xl border border-orange-100">
             <h3 className="font-bold text-orange-800 mb-1">WE’RE HERE TO HELP</h3>
@@ -47,32 +39,38 @@ export default function Page() {
         </div>
 
         {/* Direct Email Prompt */}
-        <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col justify-center items-center text-center">
-          <div className="bg-orange-50 p-5 rounded-full mb-5 border border-orange-100 shadow-inner">
-            <MessageSquare className="w-10 h-10 text-orange-500" />
-          </div>
-          <h2 className="text-2xl font-extrabold text-slate-900 mb-3">
-            Send Us a Message
-          </h2>
-          <p className="text-slate-600 mb-8 text-sm md:text-base leading-relaxed max-w-xs">
-            Choose how you would like to send us an email. We typically respond within 24 hours.
-          </p>
+        <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm text-slate-600 flex flex-col">
+          <h2 className="text-lg font-extrabold text-slate-900 mb-6 uppercase tracking-wider">HOW CAN WE HELP?</h2>
           
-          <div className="w-full">
-            <a 
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=help.rka@gmail.com" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full bg-slate-900 text-white font-bold py-3.5 px-6 rounded-xl hover:bg-orange-600 transition-all shadow-md flex items-center justify-center gap-2 hover:scale-[1.02]"
-            >
-              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-              Open in Gmail
-            </a>
-          </div>
-          
-          <div className="mt-8 text-xs font-medium text-slate-400 bg-slate-50 px-4 py-2 rounded-lg border border-slate-100">
-            Or email us manually at: <br/>
-            <span className="text-slate-700 font-bold">help.rka@gmail.com</span>
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-bold text-slate-800 text-sm">Calculator Error</h3>
+              <p className="text-sm mt-0.5">Report an incorrect result or calculation</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 text-sm">Suggest a Calculator</h3>
+              <p className="text-sm mt-0.5">Recommend a useful new calculator</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 text-sm">Website Feedback</h3>
+              <p className="text-sm mt-0.5">Share your ideas or suggestions</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 text-sm">Technical Problem</h3>
+              <p className="text-sm mt-0.5">Report a bug or website issue</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 text-sm">Calculator Question</h3>
+              <p className="text-sm mt-0.5">Ask us about our calculators</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800 text-sm">Business and Partnerships</h3>
+              <p className="text-sm mt-0.5 leading-relaxed">Interested in a business partnership, collaboration, or professional opportunity? Tell us about your idea, and let’s explore how we can work together.</p>
+            </div>
+            <div className="pt-2">
+              <h3 className="font-bold text-slate-900 text-sm flex items-center gap-1.5 bg-orange-50 inline-flex px-3 py-1 rounded-lg border border-orange-100 mb-1.5"><span className="text-base">📢</span> Advertise With Us</h3>
+              <p className="text-sm mt-0.5 leading-relaxed">Promote your product, service, app, or brand and connect with our website audience through advertising and promotional opportunities.</p>
+            </div>
           </div>
         </div>
       </div>

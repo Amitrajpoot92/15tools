@@ -4,7 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Tool } from "@/lib/constants";
 
-// Premium Glassmorphism Cards with Hard Color Gradients & Shadows
+import { ChevronRight, Flame } from "lucide-react";
+
 const colorMaps: Record<string, { accentBg: string, accentText: string, hoverText: string, glow: string, darkText: string }> = {
   orange: { 
     accentBg: "bg-gradient-to-br from-orange-400 to-orange-600 shadow-[0_8px_16px_-6px_rgba(249,115,22,0.6)]", 
@@ -43,24 +44,39 @@ export function ToolCard({ tool, index }: { tool: Tool; index: number }) {
     >
       <Link href={`/${tool.slug}`} className="block h-full outline-none">
         <div 
-          className="group relative flex items-center h-full rounded-2xl bg-white/60 backdrop-blur-xl p-4 transition-all duration-400 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-white overflow-hidden ring-1 ring-slate-200/50"
+          className="group relative flex items-center h-full rounded-[1.25rem] bg-white p-3 transition-all duration-400 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-slate-100 overflow-hidden ring-1 ring-slate-200/50"
         >
           {/* Subtle colored glow hover effect in the background */}
           <div className={`absolute inset-0 bg-gradient-to-r ${styles.glow} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
-          <div className="relative z-10 flex items-center w-full space-x-4">
+          <div className="relative z-10 flex items-center w-full gap-3 md:gap-4">
             {/* App Icon Container */}
-            <div className={`p-3.5 rounded-[1rem] transition-transform duration-300 group-hover:scale-110 group-active:scale-95 ${styles.accentBg} text-white shrink-0`}>
-              <Icon className="w-6 h-6" />
+            <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 group-active:scale-95 ${styles.accentBg} text-white shrink-0 shadow-md`}>
+              <Icon className="w-7 h-7 md:w-8 md:h-8" strokeWidth={2.5} />
             </div>
             
-            <div className="flex-1 min-w-0">
-              <h3 className={`text-[15px] font-bold ${styles.darkText} leading-snug transition-colors duration-300 ${styles.hoverText} truncate`}>
+            <div className="flex-1 min-w-0 flex flex-col justify-center relative py-1">
+              {tool.popular && (
+                <div className="absolute top-0 right-0 hidden sm:flex items-center gap-1 bg-orange-100/80 text-orange-600 px-2 py-0.5 rounded-full text-[9px] font-extrabold tracking-wider uppercase border border-orange-200 shadow-sm">
+                  <Flame className="w-2.5 h-2.5 fill-orange-500" />
+                  Popular
+                </div>
+              )}
+              
+              <h3 className={`text-base md:text-lg font-bold text-slate-900 leading-tight transition-colors duration-300 ${styles.hoverText} truncate pr-16 sm:pr-20`}>
                 {tool.name}
               </h3>
-              <p className="text-[13px] text-slate-500 line-clamp-1 mt-0.5">
-                {tool.description}
-              </p>
+              
+              <div className="mt-1.5 md:mt-2">
+                <div className="inline-flex items-center gap-1 bg-blue-500 text-white px-3 py-1 md:py-1.5 rounded-full text-[11px] md:text-xs font-bold shadow-sm shadow-blue-500/20 group-hover:bg-blue-600 transition-colors">
+                  Open Calculator <ChevronRight className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Arrow Button */}
+            <div className="hidden sm:flex w-8 h-8 rounded-full bg-blue-50 text-blue-600 items-center justify-center shrink-0 shadow-sm group-hover:bg-blue-100 group-hover:text-blue-700 transition-colors">
+              <ChevronRight className="w-4 h-4" strokeWidth={3} />
             </div>
           </div>
         </div>

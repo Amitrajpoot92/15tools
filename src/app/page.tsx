@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { TOOLS } from "@/lib/constants";
 import { ToolCard } from "@/components/ToolCard";
-import { Search, Sparkles, CheckCircle2, Zap, Smartphone, MousePointer2, ShieldCheck, HelpCircle, FileQuestion, Calculator } from "lucide-react";
+import { Search, Sparkles, CheckCircle2, Zap, Smartphone, MousePointer2, ShieldCheck, HelpCircle, FileQuestion, Calculator, Banknote, CalendarDays, ShoppingCart, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -62,7 +62,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="relative w-full max-w-lg group"
           >
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
               <Search className="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-focus-within:text-orange-400 transition-colors" />
             </div>
             <input 
@@ -77,50 +77,55 @@ export default function Home() {
       </div>
 
       {/* Features Badges */}
-      <div className="flex flex-wrap justify-center gap-2 md:gap-3 mt-6 mb-8 max-w-5xl mx-auto px-1 sm:px-2">
-        <div className="flex justify-center gap-2 md:gap-3 w-full md:w-auto">
-          {[
-            { icon: ShieldCheck, text: "100% Free to Use" },
-            { icon: MousePointer2, text: "No Sign-Up Required" },
-          ].map((feature, idx) => (
-            <div key={`r1-${idx}`} className="inline-flex items-center justify-center space-x-1 sm:space-x-1.5 bg-white border border-slate-200 text-slate-600 px-2 sm:px-3 py-1.5 md:px-4 rounded-full text-[9px] sm:text-[10px] md:text-xs font-extrabold uppercase tracking-widest shadow-sm hover:border-orange-200 hover:text-orange-600 hover:bg-orange-50 transition-all cursor-default">
-              <feature.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 flex-shrink-0" />
-              <span className="whitespace-nowrap">{feature.text}</span>
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-center gap-2 md:gap-3 w-full md:w-auto">
-          {[
-            { icon: Zap, text: "Lightning Fast" },
-            { icon: Smartphone, text: "Mobile-Friendly" },
-          ].map((feature, idx) => (
-            <div key={`r2-${idx}`} className="inline-flex items-center justify-center space-x-1 sm:space-x-1.5 bg-white border border-slate-200 text-slate-600 px-2 sm:px-3 py-1.5 md:px-4 rounded-full text-[9px] sm:text-[10px] md:text-xs font-extrabold uppercase tracking-widest shadow-sm hover:border-orange-200 hover:text-orange-600 hover:bg-orange-50 transition-all cursor-default">
-              <feature.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 flex-shrink-0" />
-              <span className="whitespace-nowrap">{feature.text}</span>
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-center gap-2 md:gap-3 w-full md:w-auto">
-          {[
-            { icon: CheckCircle2, text: "Easy to Understand" }
-          ].map((feature, idx) => (
-            <div key={`r3-${idx}`} className="inline-flex items-center justify-center space-x-1 sm:space-x-1.5 bg-white border border-slate-200 text-slate-600 px-2 sm:px-3 py-1.5 md:px-4 rounded-full text-[9px] sm:text-[10px] md:text-xs font-extrabold uppercase tracking-widest shadow-sm hover:border-orange-200 hover:text-orange-600 hover:bg-orange-50 transition-all cursor-default">
-              <feature.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 flex-shrink-0" />
-              <span className="whitespace-nowrap">{feature.text}</span>
-            </div>
-          ))}
-        </div>
+      <div className="flex flex-wrap justify-center gap-2.5 md:gap-3 mt-6 mb-10 max-w-4xl mx-auto px-2">
+        {[
+          { icon: ShieldCheck, text: "100% Free to Use" },
+          { icon: MousePointer2, text: "No Sign-Up Required" },
+          { icon: Zap, text: "Lightning Fast" },
+          { icon: Smartphone, text: "Mobile-Friendly" },
+          { icon: CheckCircle2, text: "Easy to Understand" }
+        ].map((feature, idx) => (
+          <div 
+            key={idx} 
+            className="inline-flex items-center space-x-1.5 bg-white border border-slate-200 text-slate-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest shadow-sm hover:border-orange-300 hover:text-orange-600 hover:bg-orange-50 hover:shadow-md transition-all cursor-default"
+          >
+            <feature.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-orange-500" strokeWidth={2.5} />
+            <span className="whitespace-nowrap">{feature.text}</span>
+          </div>
+        ))}
       </div>
 
       {/* Grid Section */}
       <div>
-        <div className="flex items-center justify-between mb-8 px-2">
-          <h2 className="text-2xl font-bold text-slate-800">
-            {searchQuery ? "Search Results" : "All Calculators"}
-          </h2>
-          <span className="text-sm font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-            {filteredTools.length} Tools
-          </span>
+        {/* Main Header Banner */}
+        <div className="relative overflow-hidden rounded-[1.25rem] border border-orange-100 bg-orange-50/70 p-2 md:p-3 flex items-center justify-between shadow-sm mb-10">
+          <div className="flex items-center gap-3 md:gap-4">
+            {/* Left Icon Block */}
+            <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center shadow-md bg-gradient-to-br from-amber-400 to-orange-500 text-white shrink-0 ml-1 md:ml-2">
+              <Calculator className="w-7 h-7 md:w-8 md:h-8" strokeWidth={2.5} />
+            </div>
+            
+            {/* Title */}
+            <div className="flex flex-col justify-center">
+              <h2 className="text-xl md:text-3xl font-black text-slate-800 tracking-tight leading-none">
+                {searchQuery ? "Search Results" : (
+                  <>All <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">Calculators</span></>
+                )}
+              </h2>
+              {!searchQuery && (
+                <p className="text-[11px] md:text-sm font-bold text-slate-600 mt-1 md:mt-1.5">
+                  Explore all tools in one place
+                </p>
+              )}
+            </div>
+          </div>
+          
+          {/* Right Tools Badge */}
+          <div className="mr-1 md:mr-2 flex items-center justify-center gap-1.5 px-3 py-1.5 md:px-5 md:py-2.5 rounded-xl shadow-sm bg-gradient-to-br from-orange-400 to-orange-600 text-white shrink-0 border-2 md:border-[3px] border-white">
+            <div className="hidden sm:block"><Sparkles className="w-4 h-4 md:w-5 md:h-5 fill-white/20" /></div>
+            <span className="text-lg md:text-2xl font-black leading-none">{filteredTools.length}</span>
+            <span className="text-[9px] md:text-sm font-bold mt-0.5">Tools</span>
+          </div>
         </div>
 
         {filteredTools.length > 0 ? (
@@ -136,14 +141,40 @@ export default function Home() {
               const categoryTools = filteredTools.filter(t => t.category === category);
               if (categoryTools.length === 0) return null;
               
+              const categoryThemes: Record<string, { lightBg: string, border: string, iconBg: string, badgeBg: string, titleColor: string, icon: any }> = {
+                "FINANCE & MONEY": { lightBg: "bg-orange-50/70", border: "border-orange-100", iconBg: "bg-gradient-to-br from-amber-400 to-orange-500", badgeBg: "bg-gradient-to-br from-orange-400 to-orange-600", titleColor: "text-slate-900", icon: Banknote },
+                "MATH & EDUCATION": { lightBg: "bg-blue-50/70", border: "border-blue-100", iconBg: "bg-gradient-to-br from-blue-400 to-blue-600", badgeBg: "bg-gradient-to-br from-blue-400 to-blue-600", titleColor: "text-blue-900", icon: Calculator },
+                "DATE & AGE": { lightBg: "bg-purple-50/70", border: "border-purple-100", iconBg: "bg-gradient-to-br from-purple-400 to-purple-600", badgeBg: "bg-gradient-to-br from-purple-400 to-purple-600", titleColor: "text-slate-900", icon: CalendarDays },
+                "SHOPPING & DAILY LIFE": { lightBg: "bg-emerald-50/70", border: "border-emerald-100", iconBg: "bg-gradient-to-br from-emerald-400 to-emerald-600", badgeBg: "bg-gradient-to-br from-emerald-400 to-emerald-600", titleColor: "text-emerald-900", icon: ShoppingCart },
+                "HEALTH & FITNESS": { lightBg: "bg-rose-50/70", border: "border-rose-100", iconBg: "bg-gradient-to-br from-rose-400 to-rose-600", badgeBg: "bg-gradient-to-br from-rose-400 to-rose-600", titleColor: "text-rose-900", icon: Heart },
+                "FUN & LIFESTYLE": { lightBg: "bg-amber-50/70", border: "border-amber-100", iconBg: "bg-gradient-to-br from-amber-400 to-amber-600", badgeBg: "bg-gradient-to-br from-amber-400 to-amber-600", titleColor: "text-amber-900", icon: Sparkles }
+              };
+              
+              const cTheme = categoryThemes[category] || categoryThemes["FINANCE & MONEY"];
+
               return (
                 <div key={category} className="space-y-6">
-                  <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 pl-2">
-                    <h3 className="text-xl font-extrabold text-slate-800 tracking-tight">{category}</h3>
-                    <span className="text-xs font-bold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100">
-                      {categoryTools.length}
-                    </span>
+                  {/* Category Header Banner */}
+                  <div className={`relative overflow-hidden rounded-[1.25rem] border ${cTheme.border} ${cTheme.lightBg} p-1.5 md:p-2 flex items-center justify-between shadow-sm`}>
+                    <div className="flex items-center gap-3">
+                      {/* Left Icon Block */}
+                      <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center shadow-md ${cTheme.iconBg} text-white shrink-0 ml-1 md:ml-2`}>
+                        <cTheme.icon className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className={`text-lg md:text-xl font-black ${cTheme.titleColor} uppercase tracking-tight`}>
+                        {category}
+                      </h3>
+                    </div>
+                    
+                    {/* Right Tools Badge */}
+                    <div className={`mr-1.5 md:mr-2 flex flex-col items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl shadow-sm ${cTheme.badgeBg} text-white shrink-0 border-2 md:border-[3px] border-white`}>
+                      <span className="text-xl md:text-2xl font-black leading-none">{categoryTools.length}</span>
+                      <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-0.5">Tools</span>
+                    </div>
                   </div>
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {categoryTools.map((tool, idx) => (
                       <ToolCard key={tool.slug} tool={tool} index={idx} />
