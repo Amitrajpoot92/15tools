@@ -32,13 +32,13 @@ export default function LoveCalculatorPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-blue-100 rounded-2xl p-4 md:p-6 mb-6 border border-blue-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-rose-900 tracking-tight mb-2">
+        {/* Compact Header */}
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-rose-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-rose-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-rose-950 tracking-tight mb-1">
             Love Calculator
           </h1>
-          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-rose-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Find out the true compatibility percentage between you and your crush playfully and instantly.
           </p>
         </div>

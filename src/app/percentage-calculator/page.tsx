@@ -34,12 +34,12 @@ export default function PercentageCalculatorPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-blue-100 rounded-2xl p-4 md:p-6 mb-6 border border-blue-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-orange-900 tracking-tight mb-2">
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-indigo-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-indigo-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-indigo-950 tracking-tight mb-1">
             Percentage Calculator
           </h1>
-          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-indigo-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Calculate a percentage of any number, find percentage increases or decreases, and work out the percentage difference between values.
           </p>
         </div>
@@ -145,7 +145,7 @@ export default function PercentageCalculatorPage() {
           <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/gst-calculator" className="text-blue-600 hover:underline">GST Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/emi-calculator" className="text-blue-600 hover:underline">EMI Calculator</a></li>
           <li><a href="/sip-calculator" className="text-blue-600 hover:underline">SIP Calculator</a></li>
           <li><a href="/subscription-cost-calculator" className="text-blue-600 hover:underline">Subscription Cost Calculator</a></li>

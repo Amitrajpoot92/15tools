@@ -34,12 +34,12 @@ export default function Page() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-indigo-50 rounded-2xl p-4 md:p-6 mb-6 border border-indigo-200">
-          <h1 className="text-xl md:text-2xl font-extrabold text-rose-900 tracking-tight mb-2">
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-indigo-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-indigo-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-indigo-950 tracking-tight mb-1">
             EMI Calculator
           </h1>
-          <p className="text-slate-900 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-indigo-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Plan your loans by calculating Equated Monthly Installments and interest.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function Page() {
 
         <h2>EMI Calculation Formula</h2>
         <p>The EMI formula is used to calculate the monthly loan installment based on the loan amount, interest rate, and repayment tenure.</p>
-        <p><strong>EMI = P × r × (1 + r)â¿ ÷ [(1 + r)â¿ − 1]</strong></p>
+        <p><strong>EMI = P × r × (1 + r)<sup>n</sup> ÷ [(1 + r)<sup>n</sup> − 1]</strong></p>
         <p>Where:</p>
         <ul>
           <li><strong>P</strong> = Principal Loan Amount</li>
@@ -116,7 +116,7 @@ export default function Page() {
         <p>EMI is calculated using the loan amount, monthly interest rate, and total number of monthly payments.</p>
 
         <h4>3. What is the EMI formula?</h4>
-        <p>The standard EMI formula is: EMI = P × r × (1 + r)â¿ ÷ [(1 + r)â¿ − 1], where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments.</p>
+        <p>The standard EMI formula is: EMI = P × r × (1 + r)<sup>n</sup> ÷ [(1 + r)<sup>n</sup> − 1], where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments.</p>
 
         <h4>4. How much EMI can I afford for a loan?</h4>
         <p>Your affordable EMI depends on your monthly income, regular expenses, existing EMIs, and other financial commitments. Use the calculator to compare different loan amounts and tenures.</p>
@@ -130,7 +130,7 @@ export default function Page() {
           <li><a href="/discount-calculator" className="text-indigo-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/gst-calculator" className="text-indigo-600 hover:underline">GST Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-indigo-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-indigo-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-indigo-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/sip-calculator" className="text-indigo-600 hover:underline">SIP Calculator</a></li>
           <li><a href="/subscription-cost-calculator" className="text-indigo-600 hover:underline">Subscription Cost Calculator</a></li>
         </ul>

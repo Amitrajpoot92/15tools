@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/discount-calculator',
     '/gst-calculator',
     '/profit-and-loss-calculator',
-    '/wholesale-calculator',
+    '/wholesale-price-calculator',
     '/emi-calculator',
     '/sip-calculator',
     '/subscription-cost-calculator',

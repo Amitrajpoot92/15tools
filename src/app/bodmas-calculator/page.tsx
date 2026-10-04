@@ -32,13 +32,13 @@ export default function BODMASCalculatorPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-amber-100 rounded-2xl p-4 md:p-6 mb-6 border border-amber-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-amber-900 tracking-tight mb-1">
+        {/* Compact Header */}
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-amber-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-amber-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-amber-950 tracking-tight mb-1">
             BODMAS Calculator
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-amber-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Solve complex math equations step-by-step instantly using the correct order of operations.
           </p>
         </div>

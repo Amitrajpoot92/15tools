@@ -34,13 +34,13 @@ export default function BirthdayCountdownPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-indigo-50 rounded-2xl p-4 md:p-6 mb-6 border border-indigo-200">
-          <h1 className="text-xl md:text-2xl font-extrabold text-orange-900 tracking-tight mb-1">
+        {/* Compact Header */}
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-fuchsia-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-fuchsia-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-fuchsia-950 tracking-tight mb-1">
             Birthday Countdown
           </h1>
-          <p className="text-indigo-800/70 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-fuchsia-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Excited for your special day? Start a live countdown to see exactly how much time is left.
           </p>
         </div>

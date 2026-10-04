@@ -84,7 +84,7 @@ export const TOOLS: Tool[] = [
   },
   {
     name: "Wholesale Price Calculator",
-    slug: "wholesale-calculator",
+    slug: "wholesale-price-calculator",
     description: "Find out the selling price, cost, and profit margin for your retail products.",
     icon: PieChart,
     color: "text-amber-500",

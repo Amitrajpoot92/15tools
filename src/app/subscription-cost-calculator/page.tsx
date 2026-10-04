@@ -34,13 +34,13 @@ export default function SubscriptionCostPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-rose-50 rounded-2xl p-4 md:p-6 mb-6 border border-rose-200">
-          <h1 className="text-xl md:text-2xl font-extrabold text-rose-900 tracking-tight mb-1">
+        {/* Compact Header */}
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-rose-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-rose-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-rose-950 tracking-tight mb-1">
             Subscription Cost Calculator
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-rose-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Add up all your digital subscriptions to see your true monthly and yearly expenses.
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function SubscriptionCostPage() {
           <li><a href="/discount-calculator" className="text-rose-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/gst-calculator" className="text-rose-600 hover:underline">GST Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/emi-calculator" className="text-rose-600 hover:underline">EMI Calculator</a></li>
           <li><a href="/sip-calculator" className="text-rose-600 hover:underline">SIP Calculator</a></li>
         </ul>

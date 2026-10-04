@@ -34,12 +34,12 @@ export default function GSTCalculatorPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-purple-100 rounded-2xl p-4 md:p-6 mb-6 border border-purple-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-rose-900 tracking-tight mb-1">
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-purple-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-purple-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-purple-950 tracking-tight mb-1">
             GST Calculator
           </h1>
-          <p className="text-slate-600 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-purple-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Add or remove GST from your price and see the GST amount and final price instantly.
           </p>
         </div>
@@ -147,7 +147,7 @@ export default function GSTCalculatorPage() {
           <li><a href="/percentage-calculator" className="text-rose-600 hover:underline">Percentage Calculator</a></li>
           <li><a href="/discount-calculator" className="text-rose-600 hover:underline">Discount Calculator</a></li>
           <li><a href="/profit-and-loss-calculator" className="text-rose-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-rose-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/emi-calculator" className="text-rose-600 hover:underline">EMI Calculator</a></li>
           <li><a href="/sip-calculator" className="text-rose-600 hover:underline">SIP Calculator</a></li>
           <li><a href="/subscription-cost-calculator" className="text-rose-600 hover:underline">Subscription Cost Calculator</a></li>

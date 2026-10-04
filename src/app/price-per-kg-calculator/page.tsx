@@ -32,13 +32,13 @@ export default function PricePerKgCalculatorPage() {
 
     
       <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
-        {/* Ultra Compact Header */}
-        {/* Ultra Compact Header */}
-        <div className="flex flex-col items-center text-center bg-amber-100 rounded-2xl p-4 md:p-6 mb-6 border border-amber-300">
-          <h1 className="text-xl md:text-2xl font-extrabold text-amber-900 tracking-tight mb-1">
+        {/* Compact Header */}
+        {/* Compact Header */}
+        <div className="flex flex-col items-center text-center bg-amber-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-amber-200/80">
+          <h1 className="text-xl md:text-2xl font-extrabold text-amber-950 tracking-tight mb-1">
             Price Per Kg Calculator
           </h1>
-          <p className="text-slate-800 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
+          <p className="text-amber-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
             Calculate quantity in grams or total price from a price per kilogram.
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function PricePerKgCalculatorPage() {
         <h2>Related Calculators</h2>
         <ul>
           <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
+          <li><a href="/wholesale-price-calculator" className="text-blue-600 hover:underline">Wholesale Price Calculator</a></li>
           <li><a href="/cost-per-item-calculator" className="text-blue-600 hover:underline">Cost Per Item Calculator</a></li>
           <li><a href="/tip-calculator" className="text-blue-600 hover:underline">Tip Calculator</a></li>
           <li><a href="/fuel-cost-calculator" className="text-blue-600 hover:underline">Fuel Cost Calculator</a></li>
