@@ -18,7 +18,7 @@ staticDirs.forEach(dir => {
       return `{/* Compact Premium Header */}
       <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 mb-8 mt-2 shadow-xl border border-slate-800 text-center overflow-hidden relative">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-500/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
         <div className="relative z-10 flex flex-col items-center justify-center">
           <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
             ${title.trim()}

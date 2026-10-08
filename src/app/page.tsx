@@ -4,7 +4,6 @@ import { useState } from "react";
 import { TOOLS } from "@/lib/constants";
 import { ToolCard } from "@/components/ToolCard";
 import { Search, Sparkles, CheckCircle2, Zap, Smartphone, MousePointer2, ShieldCheck, HelpCircle, FileQuestion, Calculator, Banknote, CalendarDays, ShoppingCart, Heart, ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,44 +24,25 @@ export default function Home() {
           <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-500/20 rounded-full blur-[100px]" />
           <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-rose-500/20 rounded-full blur-[100px]" />
           {/* Subtle grid pattern overlay */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+          <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay"></div>
         </div>
 
         <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-1.5 rounded-full text-orange-200 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 md:mb-5 shadow-sm"
-          >
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-1.5 rounded-full text-orange-200 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 md:mb-5 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
             <span>FREE CALCULATOR TOOLS</span>
-          </motion.div>
+          </div>
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3 md:mb-4"
-          >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3 md:mb-4">
             Calculate Anything. <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">Instantly.</span>
-          </motion.h1>
+          </h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-xl font-medium px-2"
-          >
+          <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-xl font-medium px-2">
             Free Online Calculators for Finance, Math, Education, Health, Age, Dates & Daily Life
-          </motion.p>
+          </p>
 
           {/* Search Bar */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="relative w-full max-w-lg group"
-          >
+          <div className="relative w-full max-w-lg group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
               <Search className="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-focus-within:text-orange-400 transition-colors" />
             </div>
@@ -73,7 +53,7 @@ export default function Home() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder-slate-400 rounded-xl md:rounded-2xl py-3 md:py-4 pl-11 md:pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all text-base md:text-lg shadow-lg"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -225,17 +205,13 @@ export default function Home() {
             })()}
           </div>
         ) : (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20 bg-white rounded-3xl border border-slate-100 shadow-sm"
-          >
+          <div className="text-center py-20 bg-white rounded-3xl border border-slate-100 shadow-sm animate-fade-in">
             <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-10 h-10 text-slate-300" />
             </div>
             <h3 className="text-xl font-bold text-slate-700">No calculators found</h3>
             <p className="text-slate-500 mt-2">Try searching for something else, like "Percentage" or "Age".</p>
-          </motion.div>
+          </div>
         )}
       </div>
       {/* Home Page SEO & Info Section */}
@@ -368,6 +344,8 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={() => setOpenFaq(isOpen ? null : idx)}
+                        aria-expanded={isOpen}
+                        aria-label={faq.q}
                         className="w-full text-left p-3 sm:p-3.5 flex items-center justify-between gap-3 select-none transition-colors"
                       >
                         <div className="flex items-center gap-3 min-w-0">

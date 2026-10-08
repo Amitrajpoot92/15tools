@@ -11,7 +11,15 @@ export function Footer() {
             <div className="relative">
               {/* Strong orange glow behind the logo */}
               <div className="absolute inset-0 bg-orange-500 blur-xl opacity-40 rounded-xl" />
-              <img src="/icon.png" alt="TopCalcBox Logo" className="w-9 h-9 md:w-10 md:h-10 rounded-xl relative z-10 shadow-sm" />
+              <img 
+                src="/icon-96.webp" 
+                alt="TopCalcBox Logo" 
+                width="40" 
+                height="40" 
+                loading="lazy" 
+                decoding="async" 
+                className="w-9 h-9 md:w-10 md:h-10 rounded-xl relative z-10 shadow-sm" 
+              />
             </div>
             <span className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
               TopCalcBox
@@ -34,7 +42,7 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="text-xs md:text-[13px] text-slate-400 font-medium max-w-lg mx-auto leading-relaxed">
+        <p className="text-xs md:text-[13px] text-slate-500 font-medium max-w-lg mx-auto leading-relaxed">
           © {new Date().getFullYear()} TopCalcBox. All Rights Reserved. All calculators are for informational and educational purposes only.
         </p>
         

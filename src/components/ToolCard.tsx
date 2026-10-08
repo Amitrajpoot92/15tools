@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Tool } from "@/lib/constants";
-
 import { ChevronRight, Flame } from "lucide-react";
 
 const colorMaps: Record<string, { accentBg: string, accentText: string, hoverText: string, glow: string, darkText: string }> = {
@@ -30,18 +28,13 @@ const colorMaps: Record<string, { accentBg: string, accentText: string, hoverTex
   },
 };
 
-export function ToolCard({ tool, index }: { tool: Tool; index: number }) {
+export function ToolCard({ tool }: { tool: Tool; index?: number }) {
   const Icon = tool.icon;
   const baseColor = tool.color.split('-')[1];
   const styles = colorMaps[baseColor] || colorMaps.orange;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.04, ease: [0.23, 1, 0.32, 1] }}
-      className="h-full"
-    >
+    <div className="h-full">
       <Link href={`/${tool.slug}`} className="block h-full outline-none">
         <div 
           className="group relative flex items-center h-full rounded-[1.25rem] bg-white p-3 transition-all duration-400 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.1)] hover:-translate-y-1 border border-slate-100 overflow-hidden ring-1 ring-slate-200/50"
@@ -69,19 +62,19 @@ export function ToolCard({ tool, index }: { tool: Tool; index: number }) {
               </div>
               
               <div className="mt-1 md:mt-1.5">
-                <div className="inline-flex items-center gap-1 bg-blue-500 text-white px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold shadow-sm shadow-blue-500/20 group-hover:bg-blue-600 transition-colors">
+                <div className="inline-flex items-center gap-1 bg-blue-700 text-white px-2.5 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold shadow-sm shadow-blue-700/20 group-hover:bg-blue-800 transition-colors">
                   Open Calculator <ChevronRight className="w-3 h-3 md:w-3.5 md:h-3.5" />
                 </div>
               </div>
             </div>
 
             {/* Right Arrow Button */}
-            <div className="hidden sm:flex w-7 h-7 md:w-8 md:h-8 rounded-full bg-blue-50 text-blue-600 items-center justify-center shrink-0 shadow-sm group-hover:bg-blue-100 group-hover:text-blue-700 transition-colors">
+            <div className="hidden sm:flex w-7 h-7 md:w-8 md:h-8 rounded-full bg-blue-50 text-blue-800 items-center justify-center shrink-0 shadow-sm group-hover:bg-blue-100 group-hover:text-blue-900 transition-colors">
               <ChevronRight className="w-3.5 h-3.5 md:w-4 md:h-4" strokeWidth={3} />
             </div>
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

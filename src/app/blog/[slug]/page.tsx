@@ -78,7 +78,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       <div className="bg-slate-900 rounded-[2rem] p-6 md:p-10 mb-10 shadow-xl border border-slate-800 relative overflow-hidden">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-500/20 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
         
         <div className="relative z-10 flex flex-col items-start text-left">
           <div className="flex items-center space-x-2 text-xs font-bold text-blue-300 mb-6 uppercase tracking-widest bg-blue-500/10 px-3 py-1.5 rounded-full border border-blue-500/20">

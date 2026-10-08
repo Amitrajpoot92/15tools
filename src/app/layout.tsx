@@ -5,28 +5,29 @@ import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
+import { PwaHandler } from "@/components/PwaHandler";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "TopCalcBox - Free Online Calculators",
   description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/icon-96.webp",
+    apple: "/icon-96.webp",
   },
   openGraph: {
     type: "website",
     siteName: "TopCalcBox",
     title: "TopCalcBox - Free Online Calculators",
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
-    images: [{ url: "https://topcalcbox.com/icon.png" }],
+    images: [{ url: "https://topcalcbox.com/icon.webp" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TopCalcBox - Free Online Calculators",
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
-    images: ["https://topcalcbox.com/icon.png"],
+    images: ["https://topcalcbox.com/icon.webp"],
   },
   other: {
     "google-adsense-account": "ca-pub-9267692450432886",
@@ -42,14 +43,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-slate-50 text-slate-900 min-h-screen selection:bg-blue-500/20`}>
         <div className="flex h-screen overflow-hidden">
-          {/* Google Analytics */}
+          {/* Google Analytics (lazy loaded to prevent main-thread blocking) */}
           <Script
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             src={`https://www.googletagmanager.com/gtag/js?id=G-X9S0Y748KX`}
           />
           <Script
             id="google-analytics"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           >
             {`
               window.dataLayer = window.dataLayer || [];
@@ -58,12 +59,12 @@ export default function RootLayout({
               gtag('config', 'G-X9S0Y748KX');
             `}
           </Script>
-          {/* Google AdSense */}
+          {/* Google AdSense (lazy loaded to prioritize core layout & speed) */}
           <Script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9267692450432886"
             crossOrigin="anonymous"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
           <script
             type="application/ld+json"
@@ -101,6 +102,9 @@ export default function RootLayout({
             
             {/* AdSense Compliance */}
             <CookieConsent />
+            
+            {/* Dynamic PWA Installer & Launch Handler */}
+            <PwaHandler />
           </main>
         </div>
       </body>

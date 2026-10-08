@@ -55,13 +55,15 @@ export function CookieConsent() {
             <div className="flex w-full md:w-auto items-center gap-3 shrink-0">
               <button 
                 onClick={() => setShow(false)}
-                className="flex-1 md:flex-none px-5 py-2.5 rounded-xl border border-slate-600 text-slate-300 hover:bg-slate-800 text-sm font-bold transition-colors"
+                aria-label="Decline cookies"
+                className="flex-1 md:flex-none px-5 py-2.5 rounded-xl border border-slate-500 bg-slate-800 text-slate-100 hover:bg-slate-700 text-sm font-bold transition-colors shadow-sm"
               >
                 Decline
               </button>
               <button 
                 onClick={handleAccept}
-                className="flex-1 md:flex-none px-6 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold shadow-sm transition-colors border border-orange-600"
+                aria-label="Accept all cookies"
+                className="flex-1 md:flex-none px-6 py-2.5 rounded-xl bg-orange-700 hover:bg-orange-800 text-white text-sm font-bold shadow-sm transition-colors border border-orange-600"
               >
                 Accept All
               </button>
@@ -70,7 +72,8 @@ export function CookieConsent() {
             {/* Mobile close button (absolute) */}
             <button 
               onClick={() => setShow(false)}
-              className="absolute top-2 right-2 md:hidden p-2 text-slate-400 hover:text-white"
+              aria-label="Close cookie consent"
+              className="absolute top-2 right-2 md:hidden p-2 text-slate-300 hover:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
             >
               <X className="w-4 h-4" />
             </button>
