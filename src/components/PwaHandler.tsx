@@ -45,6 +45,14 @@ export function PwaHandler() {
     }
     appleTitleMeta.content = matchedTool ? matchedTool.name : "TopCalcBox";
 
+    // Ensure status bar theme-color is neutral white (no orange color)
+    let themeColorMeta = document.querySelector<HTMLMetaElement>("meta[name='theme-color']");
+    if (!themeColorMeta) {
+      themeColorMeta = document.createElement("meta");
+      themeColorMeta.name = "theme-color";
+      document.head.appendChild(themeColorMeta);
+    }
+    themeColorMeta.content = "#ffffff";
   }, [pathname]);
 
   // 2. Standalone App Launch Detection & Redirection (Cold Start)

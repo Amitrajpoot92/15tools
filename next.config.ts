@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  compress: true,
+  poweredByHeader: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   async headers() {
     return [
       {
-        source: "/:all*(svg|jpg|png|webp|avif|woff2|ico)",
+        source: "/(.*\\.(?:ico|png|jpg|jpeg|webp|avif|svg|woff|woff2|ttf))",
         headers: [
           {
             key: "Cache-Control",

@@ -61,6 +61,7 @@ export function Sidebar() {
             alt="TopCalcBox Logo" 
             width="32" 
             height="32" 
+            loading="eager"
             decoding="async" 
             className="w-8 h-8 rounded-[8px] shadow-sm" 
           />

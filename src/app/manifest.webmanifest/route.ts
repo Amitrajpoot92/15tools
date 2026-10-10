@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     display: "standalone",
     orientation: "portrait",
     background_color: "#ffffff",
-    theme_color: "#f97316",
+    theme_color: "#ffffff",
     icons: [
       {
         src: "/icon.png",
