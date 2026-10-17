@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, RotateCcw, ArrowRightLeft } from "lucide-react";
+import { Copy, RotateCcw } from "lucide-react";
 
 export function PricePerKgCalculator() {
-  const [mode, setMode] = useState<"quantity" | "price">("quantity");
+  const [mode, setMode] = useState<"quantity" | "price">("price");
   const [currency, setCurrency] = useState<"$" | "₹">("₹");
-  const [pricePerKg, setPricePerKg] = useState<string>("");
+  const [pricePerKg, setPricePerKg] = useState<string>("80");
   const [amount, setAmount] = useState<string>("");
-  const [grams, setGrams] = useState<string>("");
+  const [kg, setKg] = useState<string>("");
+  const [grams, setGrams] = useState<string>("250");
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = (text: string) => {
@@ -20,26 +21,49 @@ export function PricePerKgCalculator() {
 
   const calculate = () => {
     const pkg = parseFloat(pricePerKg);
-    if (isNaN(pkg) || pkg <= 0) return { qty: 0, price: 0 };
+    if (isNaN(pkg) || pkg <= 0) return { qty: 0, price: 0, formattedQty: "0 Grams" };
     
     if (mode === "quantity") {
       const amt = parseFloat(amount);
-      if (isNaN(amt) || amt < 0) return { qty: 0, price: 0 };
-      return { qty: (amt / pkg) * 1000, price: amt };
+      if (isNaN(amt) || amt < 0) return { qty: 0, price: 0, formattedQty: "0 Grams" };
+      const totalG = (amt / pkg) * 1000;
+      return { 
+        qty: totalG, 
+        price: amt, 
+        formattedQty: `${formatGrams(totalG)} Grams` 
+      };
     } else {
-      const g = parseFloat(grams);
-      if (isNaN(g) || g < 0) return { qty: 0, price: 0 };
-      return { qty: g, price: (g / 1000) * pkg };
+      const k = parseFloat(kg) || 0;
+      const g = parseFloat(grams) || 0;
+      const totalG = (k * 1000) + g;
+      if (totalG <= 0) return { qty: 0, price: 0, formattedQty: "0 Grams" };
+      const calcPrice = (totalG / 1000) * pkg;
+      
+      let formatted = "";
+      if (k > 0 && g > 0) {
+        formatted = `${k} kg ${g} g`;
+      } else if (k > 0) {
+        formatted = `${k} kg`;
+      } else {
+        formatted = `${formatGrams(g)} Grams`;
+      }
+
+      return { 
+        qty: totalG, 
+        price: calcPrice, 
+        formattedQty: formatted 
+      };
     }
   };
 
   const reset = () => {
     setPricePerKg("");
     setAmount("");
+    setKg("");
     setGrams("");
   };
 
-  const { qty, price } = calculate();
+  const { qty, price, formattedQty } = calculate();
 
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('en-IN', {
@@ -140,14 +164,47 @@ export function PricePerKgCalculator() {
               </div>
             ) : (
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700">Quantity in Grams</label>
-                <input
-                  type="number"
-                  value={grams}
-                  onChange={(e) => setGrams(e.target.value)}
-                  placeholder="250"
-                  className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/10 transition-all shadow-sm"
-                />
+                <label className="text-sm font-bold text-slate-700">Quantity</label>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  {/* Kilograms (kg) box */}
+                  <div className="space-y-1">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Kilograms (kg)</span>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={kg}
+                        onChange={(e) => setKg(e.target.value)}
+                        placeholder="0"
+                        min="0"
+                        className="w-full bg-white border border-slate-200 rounded-xl pl-4 pr-12 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/10 transition-all shadow-sm"
+                      />
+                      <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
+                        <span className="text-slate-400 font-bold text-sm">kg</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Grams (g) box */}
+                  <div className="space-y-1">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Grams (g)</span>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        value={grams}
+                        onChange={(e) => setGrams(e.target.value)}
+                        placeholder="250"
+                        min="0"
+                        className="w-full bg-white border border-slate-200 rounded-xl pl-4 pr-12 py-3 text-lg text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/10 transition-all shadow-sm"
+                      />
+                      <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
+                        <span className="text-slate-400 font-bold text-sm">g</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs font-semibold text-slate-500 pt-1">
+                  Enter Kilograms (kg), Grams (g), or both (e.g. 1 kg 250 g)
+                </p>
               </div>
             )}
           </div>
@@ -166,7 +223,7 @@ export function PricePerKgCalculator() {
                 onClick={() => {
                   const text = mode === "quantity"
                     ? `Price Per Kg Calculator\nPrice Per Kg: ${currency}${pricePerKg || 0}\nYour Amount: ${currency}${amount || 0}\nCalculated Quantity: ${formatGrams(qty)} Grams\n\nCalculate Online: https://topcalcbox.com/price-per-kg-calculator`
-                    : `Price Per Kg Calculator\nPrice Per Kg: ${currency}${pricePerKg || 0}\nQuantity in Grams: ${grams || 0}\nCalculated Price: ${formatCurrency(price)}\n\nCalculate Online: https://topcalcbox.com/price-per-kg-calculator`;
+                    : `Price Per Kg Calculator\nPrice Per Kg: ${currency}${pricePerKg || 0}\nQuantity: ${formattedQty}\nCalculated Price: ${formatCurrency(price)}\n\nCalculate Online: https://topcalcbox.com/price-per-kg-calculator`;
                   copyToClipboard(text);
                 }} 
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm"
@@ -205,7 +262,7 @@ export function PricePerKgCalculator() {
                 <div className="bg-amber-100/50 border border-amber-200 text-amber-900 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mt-2 shadow-sm">
                   {mode === "quantity" 
                     ? `Quantity for ${formatCurrency(price)}`
-                    : `Price for ${formatGrams(qty)} Grams`}
+                    : `Price for ${formattedQty}`}
                 </div>
               </div>
             </motion.div>
