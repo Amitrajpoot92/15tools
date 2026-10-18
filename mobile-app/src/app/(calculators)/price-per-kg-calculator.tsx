@@ -12,11 +12,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { calculatePriceFromWeight } from "@/lib/calculations/shopping";
-import { Copy, RotateCcw, Check } from "lucide-react-native";
+import { Copy, RotateCcw, Check, Scale } from "lucide-react-native";
 
 export default function PricePerKgCalculatorScreen() {
-  const [mode, setMode] = useState<"price" | "quantity">("price");
+  const [mode, setMode] = useState<"quantity" | "price">("price");
   const [currency, setCurrency] = useState<"₹" | "$">("₹");
   const [pricePerKg, setPricePerKg] = useState("80");
   const [amount, setAmount] = useState("20");
@@ -24,17 +23,50 @@ export default function PricePerKgCalculatorScreen() {
   const [grams, setGrams] = useState("250");
   const [copied, setCopied] = useState(false);
 
-  const pkg = parseFloat(pricePerKg) || 0;
-  const numKg = parseFloat(kg) || 0;
-  const numGrams = parseFloat(grams) || 0;
-  const numAmount = parseFloat(amount) || 0;
+  const calculate = () => {
+    const pkg = parseFloat(pricePerKg);
+    if (isNaN(pkg) || pkg <= 0) {
+      return { qty: 0, price: 0, formattedQty: "0 Grams" };
+    }
 
-  // Find Price calculation
-  const priceResult = calculatePriceFromWeight(pkg, numKg, numGrams);
+    if (mode === "quantity") {
+      const amt = parseFloat(amount);
+      if (isNaN(amt) || amt < 0) {
+        return { qty: 0, price: 0, formattedQty: "0 Grams" };
+      }
+      const totalG = (amt / pkg) * 1000;
+      return {
+        qty: totalG,
+        price: amt,
+        formattedQty: `${formatGrams(totalG)} Grams`,
+      };
+    } else {
+      const k = parseFloat(kg) || 0;
+      const g = parseFloat(grams) || 0;
+      const totalG = k * 1000 + g;
+      if (totalG <= 0) {
+        return { qty: 0, price: 0, formattedQty: "0 Grams" };
+      }
+      const calcPrice = (totalG / 1000) * pkg;
 
-  // Find Quantity calculation: grams = (amount / pricePerKg) * 1000
-  const qtyGrams = pkg > 0 ? (numAmount / pkg) * 1000 : 0;
-  const qtyKg = qtyGrams / 1000;
+      let formatted = "";
+      if (k > 0 && g > 0) {
+        formatted = `${k} kg ${g} g`;
+      } else if (k > 0) {
+        formatted = `${k} kg`;
+      } else {
+        formatted = `${formatGrams(g)} Grams`;
+      }
+
+      return {
+        qty: totalG,
+        price: calcPrice,
+        formattedQty: formatted,
+      };
+    }
+  };
+
+  const { qty, price, formattedQty } = calculate();
 
   const formatCurrency = (val: number) => {
     return (
@@ -46,13 +78,20 @@ export default function PricePerKgCalculatorScreen() {
     );
   };
 
+  const formatGrams = (val: number) => {
+    return val.toLocaleString("en-US", {
+      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
+      maximumFractionDigits: 2,
+    });
+  };
+
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const summary =
-      mode === "price"
-        ? `Price per Kg Calculation:\nRate: ${currency}${pkg}/kg\nQuantity: ${priceResult.formattedQuantity || "0 Grams"}\nTotal Price: ${formatCurrency(priceResult.price)}`
-        : `Price per Kg Calculation:\nRate: ${currency}${pkg}/kg\nBudget: ${currency}${numAmount}\nQuantity: ${qtyGrams.toFixed(1)} Grams (${qtyKg.toFixed(2)} kg)`;
-    await Clipboard.setStringAsync(summary);
+    const text =
+      mode === "quantity"
+        ? `Price Per Kg Calculator\nPrice Per Kg: ${currency}${pricePerKg || 0}\nYour Amount: ${currency}${amount || 0}\nCalculated Quantity: ${formatGrams(qty)} Grams\n\nCalculate Online: https://topcalcbox.com/price-per-kg-calculator/`
+        : `Price Per Kg Calculator\nPrice Per Kg: ${currency}${pricePerKg || 0}\nQuantity: ${formattedQty}\nCalculated Price: ${formatCurrency(price)}\n\nCalculate Online: https://topcalcbox.com/price-per-kg-calculator/`;
+    await Clipboard.setStringAsync(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -60,9 +99,9 @@ export default function PricePerKgCalculatorScreen() {
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setPricePerKg("");
+    setAmount("");
     setKg("");
     setGrams("");
-    setAmount("");
   };
 
   const handleQuickWeight = (kVal: string, gVal: string) => {
@@ -76,100 +115,140 @@ export default function PricePerKgCalculatorScreen() {
       <StatusBar style="dark" />
       <CalculatorHeader
         title="Price per Kg Calculator"
-        subtitle="Calculate exact price from kilograms and grams, or find quantity from budget."
+        subtitle="Find the exact cost per kilogram to easily compare grocery prices."
         iconName="Scale"
-        themeColor="#059669"
-        themeBg="#ECFDF5"
+        themeColor="#D97706"
+        themeBg="#FEF3C7"
       />
 
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
+        {/* Currency Switcher */}
+        <View style={styles.currencyRow}>
+          <Text style={styles.currencySectionTitle}>CURRENCY</Text>
+          <View style={styles.currencyToggle}>
+            <Pressable
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCurrency("₹");
+              }}
+              style={[
+                styles.currencyBtn,
+                currency === "₹" && styles.currencyBtnActive,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.currencyBtnText,
+                  currency === "₹" && styles.currencyBtnTextActive,
+                ]}
+              >
+                ₹ INR
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                Haptics.selectionAsync();
+                setCurrency("$");
+              }}
+              style={[
+                styles.currencyBtn,
+                currency === "$" && styles.currencyBtnActive,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.currencyBtnText,
+                  currency === "$" && styles.currencyBtnTextActive,
+                ]}
+              >
+                $ USD
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+
         {/* Mode Selector Tabs */}
-        <View style={styles.tabContainer}>
+        <View style={styles.modeContainer}>
           <Pressable
-            style={[styles.tab, mode === "price" && styles.activeTab]}
-            onPress={() => {
-              Haptics.selectionAsync();
-              setMode("price");
-            }}
-          >
-            <Text style={[styles.tabText, mode === "price" && styles.activeTabText]}>
-              Find Price
-            </Text>
-          </Pressable>
-          <Pressable
-            style={[styles.tab, mode === "quantity" && styles.activeTab]}
+            style={[styles.modeTab, mode === "quantity" && styles.modeTabActive]}
             onPress={() => {
               Haptics.selectionAsync();
               setMode("quantity");
             }}
           >
-            <Text style={[styles.tabText, mode === "quantity" && styles.activeTabText]}>
+            <Text
+              style={[
+                styles.modeTabText,
+                mode === "quantity" && styles.modeTabTextActive,
+              ]}
+            >
               Find Quantity
+            </Text>
+          </Pressable>
+          <Pressable
+            style={[styles.modeTab, mode === "price" && styles.modeTabActive]}
+            onPress={() => {
+              Haptics.selectionAsync();
+              setMode("price");
+            }}
+          >
+            <Text
+              style={[
+                styles.modeTabText,
+                mode === "price" && styles.modeTabTextActive,
+              ]}
+            >
+              Find Price
             </Text>
           </Pressable>
         </View>
 
         {/* Input Card */}
-        <View style={styles.card}>
-          {/* Price per Kg */}
-          <View style={styles.labelRow}>
-            <Text style={styles.inputLabel}>PRICE PER KILOGRAM (KG)</Text>
-            {/* Currency selector */}
-            <View style={styles.currencyToggle}>
-              {(["₹", "$"] as const).map((c) => (
-                <Pressable
-                  key={c}
-                  onPress={() => {
-                    Haptics.selectionAsync();
-                    setCurrency(c);
-                  }}
-                  style={[
-                    styles.currencyBtn,
-                    currency === c && styles.activeCurrencyBtn,
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.currencyBtnText,
-                      currency === c && styles.activeCurrencyBtnText,
-                    ]}
-                  >
-                    {c}
-                  </Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-
+        <View style={styles.inputCard}>
+          <Text style={styles.inputLabel}>PRICE PER KILOGRAM</Text>
           <View style={styles.inputWrapper}>
-            <Text style={styles.prefix}>{currency}</Text>
+            <Text style={styles.currencyPrefix}>{currency}</Text>
             <TextInput
-              style={styles.textInput}
-              keyboardType="decimal-pad"
+              style={styles.textInputWithPrefix}
+              keyboardType="numeric"
               value={pricePerKg}
               onChangeText={setPricePerKg}
               placeholder="80"
               placeholderTextColor="#94A3B8"
             />
           </View>
-          <Text style={styles.rateHint}>Rate is per 1 kilogram (1,000 grams)</Text>
+          <Text style={styles.helperText}>Rate is per kilogram (kg)</Text>
 
-          {mode === "price" ? (
-            <View style={{ marginTop: 14 }}>
-              <Text style={styles.inputLabel}>QUANTITY (KG & GRAMS)</Text>
-              
-              {/* TWO BOXES: KG and GRAMS */}
-              <View style={styles.twoBoxesRow}>
-                {/* Kilograms Box */}
-                <View style={styles.boxContainer}>
-                  <Text style={styles.subBoxLabel}>Kilograms (kg)</Text>
-                  <View style={styles.unitInputWrapper}>
+          {mode === "quantity" ? (
+            <View style={{ marginTop: 16 }}>
+              <Text style={styles.inputLabel}>YOUR BUDGET / AMOUNT</Text>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.currencyPrefix}>{currency}</Text>
+                <TextInput
+                  style={styles.textInputWithPrefix}
+                  keyboardType="numeric"
+                  value={amount}
+                  onChangeText={setAmount}
+                  placeholder="20"
+                  placeholderTextColor="#94A3B8"
+                />
+              </View>
+            </View>
+          ) : (
+            <View style={{ marginTop: 16 }}>
+              <Text style={styles.inputLabel}>QUANTITY</Text>
+              <View style={styles.weightRow}>
+                {/* Kilograms (kg) box */}
+                <View style={styles.weightCol}>
+                  <Text style={styles.weightColLabel}>KILOGRAMS (KG)</Text>
+                  <View style={styles.weightInputWrapper}>
                     <TextInput
-                      style={styles.textInput}
-                      keyboardType="decimal-pad"
+                      style={styles.weightTextInput}
+                      keyboardType="numeric"
                       value={kg}
                       onChangeText={setKg}
                       placeholder="0"
@@ -179,13 +258,13 @@ export default function PricePerKgCalculatorScreen() {
                   </View>
                 </View>
 
-                {/* Grams Box */}
-                <View style={styles.boxContainer}>
-                  <Text style={styles.subBoxLabel}>Grams (g)</Text>
-                  <View style={styles.unitInputWrapper}>
+                {/* Grams (g) box */}
+                <View style={styles.weightCol}>
+                  <Text style={styles.weightColLabel}>GRAMS (G)</Text>
+                  <View style={styles.weightInputWrapper}>
                     <TextInput
-                      style={styles.textInput}
-                      keyboardType="decimal-pad"
+                      style={styles.weightTextInput}
+                      keyboardType="numeric"
                       value={grams}
                       onChangeText={setGrams}
                       placeholder="250"
@@ -197,70 +276,30 @@ export default function PricePerKgCalculatorScreen() {
               </View>
 
               {/* Quick Weight Chips */}
-              <View style={styles.quickChipsRow}>
+              <View style={styles.chipsRow}>
                 {[
-                  { label: "100g", k: "0", g: "100" },
-                  { label: "250g", k: "0", g: "250" },
-                  { label: "500g", k: "0", g: "500" },
-                  { label: "1 kg", k: "1", g: "0" },
-                  { label: "2 kg", k: "2", g: "0" },
-                ].map((chip) => (
+                  { label: "100g", k: "", g: "100" },
+                  { label: "250g", k: "", g: "250" },
+                  { label: "500g", k: "", g: "500" },
+                  { label: "750g", k: "", g: "750" },
+                  { label: "1 kg", k: "1", g: "" },
+                  { label: "1.5 kg", k: "1", g: "500" },
+                ].map((item) => (
                   <Pressable
-                    key={chip.label}
-                    onPress={() => handleQuickWeight(chip.k, chip.g)}
+                    key={item.label}
                     style={[
-                      styles.quickChip,
-                      kg === chip.k && grams === chip.g && styles.activeQuickChip,
+                      styles.chip,
+                      kg === item.k && grams === item.g && styles.chipActive,
                     ]}
+                    onPress={() => handleQuickWeight(item.k, item.g)}
                   >
                     <Text
                       style={[
-                        styles.quickChipText,
-                        kg === chip.k && grams === chip.g && styles.activeQuickChipText,
+                        styles.chipText,
+                        kg === item.k && grams === item.g && styles.chipTextActive,
                       ]}
                     >
-                      {chip.label}
-                    </Text>
-                  </Pressable>
-                ))}
-              </View>
-            </View>
-          ) : (
-            <View style={{ marginTop: 14 }}>
-              <Text style={styles.inputLabel}>YOUR BUDGET / AMOUNT</Text>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.prefix}>{currency}</Text>
-                <TextInput
-                  style={styles.textInput}
-                  keyboardType="decimal-pad"
-                  value={amount}
-                  onChangeText={setAmount}
-                  placeholder="20"
-                  placeholderTextColor="#94A3B8"
-                />
-              </View>
-
-              {/* Quick Amount Chips */}
-              <View style={styles.quickChipsRow}>
-                {["10", "20", "50", "100", "200"].map((amt) => (
-                  <Pressable
-                    key={amt}
-                    onPress={() => {
-                      Haptics.selectionAsync();
-                      setAmount(amt);
-                    }}
-                    style={[
-                      styles.quickChip,
-                      amount === amt && styles.activeQuickChip,
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.quickChipText,
-                        amount === amt && styles.activeQuickChipText,
-                      ]}
-                    >
-                      {currency}{amt}
+                      {item.label}
                     </Text>
                   </Pressable>
                 ))}
@@ -269,76 +308,66 @@ export default function PricePerKgCalculatorScreen() {
           )}
         </View>
 
-        {/* Results Card */}
+        {/* Result Card */}
         <View style={styles.resultCard}>
           <View style={styles.resultHeader}>
-            <Text style={styles.resultTitle}>Calculation Result</Text>
+            <View style={styles.resultHeaderLeft}>
+              <View style={styles.resultDot} />
+              <Text style={styles.resultTitle}>CALCULATION RESULT</Text>
+            </View>
             <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.iconBtn}>
-                {copied ? <Check size={16} color="#16A34A" /> : <Copy size={16} color="#64748B" />}
+              <Pressable
+                style={({ pressed }) => [
+                  styles.actionBtn,
+                  pressed && { opacity: 0.7 },
+                ]}
+                onPress={handleCopy}
+              >
+                {copied ? (
+                  <Check size={14} color="#059669" />
+                ) : (
+                  <Copy size={14} color="#D97706" />
+                )}
+                <Text
+                  style={[
+                    styles.actionBtnText,
+                    copied && { color: "#059669" },
+                  ]}
+                >
+                  {copied ? "Copied" : "Copy"}
+                </Text>
               </Pressable>
-              <Pressable onPress={handleReset} style={styles.iconBtn}>
-                <RotateCcw size={16} color="#64748B" />
+
+              <Pressable
+                style={({ pressed }) => [
+                  styles.actionBtnIcon,
+                  pressed && { opacity: 0.7 },
+                ]}
+                onPress={handleReset}
+              >
+                <RotateCcw size={14} color="#D97706" />
               </Pressable>
             </View>
           </View>
 
-          {/* Big Result Total */}
-          <View style={styles.totalBlock}>
-            <Text style={styles.totalLabel}>
-              {mode === "price" ? "CALCULATED PRICE" : "CALCULATED QUANTITY"}
+          {/* Hero Result */}
+          <View style={styles.heroBox}>
+            <Text style={styles.heroSubTitle}>
+              {mode === "quantity" ? "CALCULATED QUANTITY" : "CALCULATED PRICE"}
             </Text>
-            <Text style={styles.totalValue}>
-              {mode === "price"
-                ? formatCurrency(priceResult.price)
-                : `${Math.round(qtyGrams).toLocaleString("en-IN")} Grams`}
+            <Text style={styles.heroValue}>
+              {mode === "quantity"
+                ? `${formatGrams(qty)} g`
+                : formatCurrency(price)}
             </Text>
-
-            {/* Badge showing Price for X kg Y g */}
-            <View style={styles.badgeContainer}>
-              <Text style={styles.badgeText}>
-                {mode === "price"
-                  ? `Price for ${priceResult.formattedQuantity || "0 Grams"}`
-                  : `Quantity for ${formatCurrency(numAmount)}`}
+            <View style={styles.badgePill}>
+              <Text style={styles.badgePillText}>
+                {mode === "quantity"
+                  ? `Quantity for ${formatCurrency(price)}`
+                  : `Price for ${formattedQty}`}
               </Text>
             </View>
           </View>
-
-          {/* Breakdown Rows */}
-          <View style={styles.breakdownRow}>
-            <Text style={styles.breakdownLabel}>Rate per Kilogram:</Text>
-            <Text style={styles.breakdownValue}>{formatCurrency(pkg)}/kg</Text>
-          </View>
-
-          {mode === "price" ? (
-            <>
-              <View style={styles.breakdownRow}>
-                <Text style={styles.breakdownLabel}>Total Weight in Grams:</Text>
-                <Text style={styles.breakdownValue}>
-                  {priceResult.totalGrams.toLocaleString("en-IN")} g ({priceResult.totalKg.toFixed(3)} kg)
-                </Text>
-              </View>
-              <View style={[styles.breakdownRow, { borderBottomWidth: 0 }]}>
-                <Text style={styles.breakdownLabel}>Final Payable Price:</Text>
-                <Text style={[styles.breakdownValue, { color: "#059669", fontWeight: "900" }]}>
-                  {formatCurrency(priceResult.price)}
-                </Text>
-              </View>
-            </>
-          ) : (
-            <>
-              <View style={styles.breakdownRow}>
-                <Text style={styles.breakdownLabel}>Equivalent in Kilograms:</Text>
-                <Text style={styles.breakdownValue}>{qtyKg.toFixed(3)} kg</Text>
-              </View>
-              <View style={[styles.breakdownRow, { borderBottomWidth: 0 }]}>
-                <Text style={styles.breakdownLabel}>Calculated Grams:</Text>
-                <Text style={[styles.breakdownValue, { color: "#059669", fontWeight: "900" }]}>
-                  {Math.round(qtyGrams).toLocaleString("en-IN")} Grams
-                </Text>
-              </View>
-            </>
-          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -346,257 +375,289 @@ export default function PricePerKgCalculatorScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F8FAFC" },
-  scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
-  tabContainer: {
-    flexDirection: "row",
-    backgroundColor: "#E2E8F0",
-    borderRadius: 14,
-    padding: 4,
-    marginBottom: 14,
-  },
-  tab: {
+  container: {
     flex: 1,
-    paddingVertical: 10,
-    alignItems: "center",
-    borderRadius: 11,
+    backgroundColor: "#F8FAFC",
   },
-  activeTab: {
-    backgroundColor: "#ffffff",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
+  scrollContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 40,
   },
-  tabText: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: "#64748B",
-  },
-  activeTabText: {
-    color: "#0F172A",
-    fontWeight: "900",
-  },
-  card: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    marginBottom: 16,
-  },
-  labelRow: {
+  currencyRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 6,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#F1F5F9",
   },
-  inputLabel: {
-    fontSize: 11,
-    fontWeight: "800",
+  currencySectionTitle: {
+    fontSize: 12,
+    fontWeight: "700",
     color: "#64748B",
-    letterSpacing: 0.5,
+    letterSpacing: 0.8,
   },
   currencyToggle: {
     flexDirection: "row",
     backgroundColor: "#F1F5F9",
-    borderRadius: 8,
-    padding: 2,
+    borderRadius: 12,
+    padding: 3,
   },
   currencyBtn: {
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
   },
-  activeCurrencyBtn: {
-    backgroundColor: "#ffffff",
+  currencyBtnActive: {
+    backgroundColor: "#FFFFFF",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    elevation: 1,
+    elevation: 2,
   },
   currencyBtnText: {
     fontSize: 12,
-    fontWeight: "800",
+    fontWeight: "700",
     color: "#64748B",
   },
-  activeCurrencyBtnText: {
-    color: "#059669",
+  currencyBtnTextActive: {
+    color: "#D97706",
+  },
+  modeContainer: {
+    flexDirection: "row",
+    backgroundColor: "#F1F5F9",
+    borderRadius: 14,
+    padding: 4,
+    marginBottom: 16,
+  },
+  modeTab: {
+    flex: 1,
+    paddingVertical: 10,
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  modeTabActive: {
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  modeTabText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#64748B",
+  },
+  modeTabTextActive: {
+    color: "#92400E",
+  },
+  inputCard: {
+    backgroundColor: "#FEF3C7",
+    borderRadius: 20,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#FDE68A",
+    marginBottom: 20,
+  },
+  inputLabel: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#78350F",
+    letterSpacing: 0.6,
+    marginBottom: 8,
+  },
+  helperText: {
+    fontSize: 11,
+    fontWeight: "700",
+    color: "#92400E",
+    marginTop: 4,
   },
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F8FAFC",
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
+    backgroundColor: "#FFFFFF",
     borderRadius: 14,
-    paddingHorizontal: 14,
-    height: 50,
+    borderWidth: 1,
+    borderColor: "#FDE68A",
   },
-  prefix: {
+  currencyPrefix: {
+    paddingLeft: 16,
+    paddingRight: 6,
     fontSize: 18,
     fontWeight: "800",
     color: "#94A3B8",
-    marginRight: 6,
   },
-  rateHint: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#059669",
-    marginTop: 4,
-    paddingHorizontal: 2,
-  },
-  twoBoxesRow: {
-    flexDirection: "row",
-    gap: 10,
-    marginTop: 6,
-  },
-  boxContainer: {
+  textInputWithPrefix: {
     flex: 1,
-  },
-  subBoxLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#475569",
-    marginBottom: 4,
-  },
-  unitInputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F8FAFC",
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
-    borderRadius: 14,
-    paddingHorizontal: 12,
     height: 50,
-  },
-  unitSuffix: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: "#94A3B8",
-    marginLeft: 6,
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: "700",
     color: "#0F172A",
+    paddingRight: 16,
   },
-  quickChipsRow: {
+  weightRow: {
     flexDirection: "row",
-    gap: 6,
-    marginTop: 10,
+    gap: 12,
   },
-  quickChip: {
+  weightCol: {
     flex: 1,
-    backgroundColor: "#F1F5F9",
-    paddingVertical: 7,
-    borderRadius: 10,
+  },
+  weightColLabel: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: "#92400E",
+    letterSpacing: 0.5,
+    marginBottom: 4,
+  },
+  weightInputWrapper: {
+    flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#FDE68A",
+    paddingRight: 12,
   },
-  activeQuickChip: {
-    backgroundColor: "#ECFDF5",
-    borderColor: "#A7F3D0",
+  weightTextInput: {
+    flex: 1,
+    height: 50,
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#0F172A",
+    paddingLeft: 14,
   },
-  quickChipText: {
+  unitSuffix: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#94A3B8",
+  },
+  chipsRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 12,
+  },
+  chip: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#FDE68A",
+  },
+  chipActive: {
+    backgroundColor: "#D97706",
+    borderColor: "#D97706",
+  },
+  chipText: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#475569",
+    color: "#92400E",
   },
-  activeQuickChipText: {
-    color: "#059669",
-    fontWeight: "800",
+  chipTextActive: {
+    color: "#FFFFFF",
   },
   resultCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    padding: 16,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    padding: 18,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
+    borderColor: "#FDE68A",
+    shadowColor: "#D97706",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
     elevation: 3,
   },
   resultHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: 16,
+  },
+  resultHeaderLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  resultDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#D97706",
   },
   resultTitle: {
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#78350F",
+    letterSpacing: 0.8,
   },
   actionButtons: {
     flexDirection: "row",
+    alignItems: "center",
     gap: 6,
   },
-  iconBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#F1F5F9",
-    justifyContent: "center",
+  actionBtn: {
+    flexDirection: "row",
     alignItems: "center",
-  },
-  totalBlock: {
-    backgroundColor: "#ECFDF5",
-    borderRadius: 16,
-    padding: 16,
-    alignItems: "center",
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "#D1FAE5",
-  },
-  totalLabel: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.5,
-    marginBottom: 4,
-  },
-  totalValue: {
-    fontSize: 32,
-    fontWeight: "900",
-    color: "#059669",
-  },
-  badgeContainer: {
+    gap: 4,
     backgroundColor: "#FEF3C7",
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#FDE68A",
-    marginTop: 8,
   },
-  badgeText: {
+  actionBtnText: {
     fontSize: 11,
+    fontWeight: "700",
+    color: "#D97706",
+  },
+  actionBtnIcon: {
+    backgroundColor: "#FEF3C7",
+    padding: 6,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#FDE68A",
+  },
+  heroBox: {
+    backgroundColor: "#FEF3C7",
+    borderRadius: 18,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#FDE68A",
+  },
+  heroSubTitle: {
+    fontSize: 10,
     fontWeight: "800",
     color: "#92400E",
-    textTransform: "uppercase",
+    letterSpacing: 1.2,
+    marginBottom: 4,
   },
-  breakdownRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingVertical: 9,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
+  heroValue: {
+    fontSize: 36,
+    fontWeight: "900",
+    color: "#78350F",
+    letterSpacing: -0.5,
   },
-  breakdownLabel: {
-    fontSize: 13,
-    color: "#64748B",
-    fontWeight: "500",
+  badgePill: {
+    backgroundColor: "#FDE68A",
+    paddingHorizontal: 14,
+    paddingVertical: 5,
+    borderRadius: 20,
+    marginTop: 8,
   },
-  breakdownValue: {
-    fontSize: 13,
-    color: "#0F172A",
+  badgePillText: {
+    fontSize: 12,
     fontWeight: "700",
+    color: "#78350F",
   },
 });

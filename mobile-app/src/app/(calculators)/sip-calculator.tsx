@@ -12,197 +12,173 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { calculateSIP } from "@/lib/calculations/finance";
-import { Copy, RotateCcw, Check } from "lucide-react-native";
+import { Copy, RotateCcw, Check, LineChart } from "lucide-react-native";
 
 export default function SIPCalculatorScreen() {
-  const [monthlyInvestment, setMonthlyInvestment] = useState("5000");
-  const [returnRate, setReturnRate] = useState("12");
-  const [timePeriod, setTimePeriod] = useState("10");
+  const [investment, setInvestment] = useState("");
+  const [rate, setRate] = useState("");
+  const [years, setYears] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const P = parseFloat(monthlyInvestment) || 0;
-  const r = parseFloat(returnRate) || 0;
-  const t = parseFloat(timePeriod) || 0;
+  const calculateSIP = () => {
+    const P = parseFloat(investment);
+    const r = parseFloat(rate);
+    const n = parseFloat(years) * 12;
 
-  const result = calculateSIP(P, r, t);
+    if (!isNaN(P) && !isNaN(r) && !isNaN(n) && P > 0 && r > 0 && n > 0) {
+      const i = r / 12 / 100;
+      const expectedAmount = P * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+      const totalInvested = P * n;
+      const wealthGained = expectedAmount - totalInvested;
 
-  const formatCurrency = (val: number) => {
-    return "₹" + val.toLocaleString("en-IN");
+      return {
+        expectedAmount: expectedAmount.toFixed(0),
+        wealthGained: wealthGained.toFixed(0),
+        totalInvested: totalInvested.toFixed(0),
+      };
+    }
+    return { expectedAmount: "0", wealthGained: "0", totalInvested: "0" };
   };
+
+  const results = calculateSIP();
 
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const summary = `SIP Mutual Fund Growth:\nMonthly: ${formatCurrency(P)}\nDuration: ${t} Years\nInvested: ${formatCurrency(result.investedAmount)}\nEst. Returns: ${formatCurrency(result.estimatedReturns)}\nTotal Value: ${formatCurrency(result.totalValue)}`;
-    await Clipboard.setStringAsync(summary);
+    const text = `SIP Calculator\nMonthly Investment: ₹${investment || 0}\nExpected Return: ${
+      rate || 0
+    }%\nInvestment Period: ${years || 0} Years\nTotal Investment: ₹${Number(
+      results.totalInvested
+    ).toLocaleString("en-IN")}\nWealth Gained: ₹${Number(
+      results.wealthGained
+    ).toLocaleString("en-IN")}\nTotal Expected Amount: ₹${Number(
+      results.expectedAmount
+    ).toLocaleString("en-IN")}\n\nCalculate Online: https://topcalcbox.com/sip-calculator/`;
+    await Clipboard.setStringAsync(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    setMonthlyInvestment("5000");
-    setReturnRate("12");
-    setTimePeriod("10");
+    setInvestment("");
+    setRate("");
+    setYears("");
   };
-
-  const investedPercent =
-    result.totalValue > 0
-      ? Math.round((result.investedAmount / result.totalValue) * 100)
-      : 50;
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
       <StatusBar style="dark" />
       <CalculatorHeader
         title="SIP Calculator"
-        subtitle="Calculate future wealth growth and compounding returns for Mutual Fund SIPs."
+        subtitle="Calculate your wealth growth and expected returns for Mutual Fund SIPs."
         iconName="LineChart"
-        themeColor="#F43F5E"
+        themeColor="#E11D48"
         themeBg="#FFF1F2"
       />
 
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         {/* Input Card */}
-        <View style={styles.card}>
-          {/* Monthly Investment */}
-          <Text style={styles.inputLabel}>MONTHLY INVESTMENT (₹)</Text>
+        <View style={styles.inputCard}>
+          <Text style={styles.inputLabel}>MONTHLY INVESTMENT</Text>
           <View style={styles.inputWrapper}>
-            <Text style={styles.currencyPrefix}>₹</Text>
+            <Text style={styles.prefix}>₹</Text>
             <TextInput
               style={styles.textInput}
-              keyboardType="number-pad"
-              value={monthlyInvestment}
-              onChangeText={setMonthlyInvestment}
-              placeholder="5000"
+              keyboardType="numeric"
+              value={investment}
+              onChangeText={setInvestment}
+              placeholder="e.g. 5000"
               placeholderTextColor="#94A3B8"
             />
           </View>
 
-          {/* Quick Amount Pills */}
-          <View style={styles.quickPillsRow}>
-            {["1000", "2500", "5000", "10000"].map((amt) => (
-              <Pressable
-                key={amt}
-                onPress={() => {
-                  Haptics.selectionAsync();
-                  setMonthlyInvestment(amt);
-                }}
-                style={[
-                  styles.quickPill,
-                  monthlyInvestment === amt && styles.activeQuickPill,
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.quickPillText,
-                    monthlyInvestment === amt && styles.activeQuickPillText,
-                  ]}
-                >
-                  ₹{parseInt(amt).toLocaleString("en-IN")}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
-
-          {/* Expected Return Rate */}
-          <Text style={[styles.inputLabel, { marginTop: 14 }]}>
+          <Text style={[styles.inputLabel, { marginTop: 16 }]}>
             EXPECTED RETURN RATE (% P.A.)
           </Text>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.textInput}
-              keyboardType="decimal-pad"
-              value={returnRate}
-              onChangeText={setReturnRate}
-              placeholder="12"
+              keyboardType="numeric"
+              value={rate}
+              onChangeText={setRate}
+              placeholder="e.g. 12"
               placeholderTextColor="#94A3B8"
             />
             <Text style={styles.suffix}>%</Text>
           </View>
 
-          {/* Time Period */}
-          <Text style={[styles.inputLabel, { marginTop: 14 }]}>
+          <Text style={[styles.inputLabel, { marginTop: 16 }]}>
             TIME PERIOD (YEARS)
           </Text>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.textInput}
-              keyboardType="number-pad"
-              value={timePeriod}
-              onChangeText={setTimePeriod}
-              placeholder="10"
+              keyboardType="numeric"
+              value={years}
+              onChangeText={setYears}
+              placeholder="e.g. 10"
               placeholderTextColor="#94A3B8"
             />
-            <Text style={styles.suffix}>Yrs</Text>
+            <Text style={styles.suffix}>Years</Text>
           </View>
         </View>
 
-        {/* Results Card */}
-        <View style={styles.resultCard}>
+        {/* Result Box */}
+        <View style={styles.resultBox}>
           <View style={styles.resultHeader}>
-            <Text style={styles.resultTitle}>Projected Wealth</Text>
+            <View />
             <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.iconBtn}>
-                {copied ? (
-                  <Check size={16} color="#16A34A" />
-                ) : (
-                  <Copy size={16} color="#64748B" />
-                )}
+              <Pressable onPress={handleCopy} style={styles.copyBtn}>
+                {copied ? <Check size={14} color="#059669" /> : <Copy size={14} color="#E11D48" />}
+                <Text style={[styles.copyBtnText, copied && { color: "#059669" }]}>
+                  {copied ? "Copied" : "Copy"}
+                </Text>
               </Pressable>
-              <Pressable onPress={handleReset} style={styles.iconBtn}>
-                <RotateCcw size={16} color="#64748B" />
+              <Pressable onPress={handleReset} style={styles.resetBtn}>
+                <RotateCcw size={15} color="#E11D48" />
               </Pressable>
             </View>
           </View>
 
-          {/* Total Maturity Value */}
-          <View style={styles.totalBlock}>
-            <Text style={styles.totalLabel}>TOTAL MATURITY VALUE</Text>
-            <Text style={styles.totalValue}>
-              {formatCurrency(result.totalValue)}
+          {/* LineChart Icon Badge */}
+          <View style={styles.iconCircle}>
+            <LineChart size={28} color="#E11D48" />
+          </View>
+
+          <Text style={styles.resultCategory}>TOTAL EXPECTED AMOUNT</Text>
+          <View style={styles.priceRow}>
+            <Text style={styles.currencySymbol}>₹</Text>
+            <Text style={styles.finalPriceText}>
+              {Number(results.expectedAmount).toLocaleString("en-IN")}
             </Text>
           </View>
 
-          {/* Visual Ratio Bar */}
-          <View style={styles.ratioBarContainer}>
-            <View
-              style={[
-                styles.ratioBarInvested,
-                { width: `${investedPercent}%` },
-              ]}
-            />
-            <View
-              style={[
-                styles.ratioBarReturns,
-                { width: `${100 - investedPercent}%` },
-              ]}
-            />
-          </View>
-
-          {/* Breakdown */}
-          <View style={styles.breakdownRow}>
-            <View style={styles.legendRow}>
-              <View style={[styles.dot, { backgroundColor: "#0284C7" }]} />
-              <Text style={styles.breakdownLabel}>Invested Amount:</Text>
+          {/* Breakdown cards */}
+          <View style={styles.breakdownCards}>
+            <View style={styles.breakdownItem}>
+              <Text style={styles.breakdownLabel}>Invested Amount</Text>
+              <Text style={styles.breakdownValue}>
+                ₹{Number(results.totalInvested).toLocaleString("en-IN")}
+              </Text>
             </View>
-            <Text style={styles.breakdownValue}>
-              {formatCurrency(result.investedAmount)}
-            </Text>
-          </View>
-
-          <View style={[styles.breakdownRow, { borderBottomWidth: 0 }]}>
-            <View style={styles.legendRow}>
-              <View style={[styles.dot, { backgroundColor: "#10B981" }]} />
-              <Text style={styles.breakdownLabel}>Estimated Returns (Profit):</Text>
+            <View style={styles.breakdownItem}>
+              <Text style={styles.breakdownLabel}>Wealth Gained</Text>
+              <Text style={[styles.breakdownValue, { color: "#E11D48" }]}>
+                ₹{Number(results.wealthGained).toLocaleString("en-IN")}
+              </Text>
             </View>
-            <Text style={[styles.breakdownValue, { color: "#059669" }]}>
-              +{formatCurrency(result.estimatedReturns)}
-            </Text>
           </View>
+        </View>
+
+        {/* Disclaimer */}
+        <View style={styles.disclaimerBox}>
+          <Text style={styles.disclaimerText}>
+            Disclaimer: SIP returns shown are estimates for illustration purposes only and are not guaranteed. Actual returns may vary based on market performance and other factors.
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -210,178 +186,177 @@ export default function SIPCalculatorScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingBottom: 40,
-  },
-  card: {
-    backgroundColor: "#ffffff",
+  container: { flex: 1, backgroundColor: "#F8FAFC" },
+  scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
+  inputCard: {
+    backgroundColor: "#FFF1F2",
     borderRadius: 20,
-    padding: 16,
+    padding: 18,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#FFE4E6",
     marginBottom: 16,
   },
   inputLabel: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#64748B",
+    color: "#BE123C",
     letterSpacing: 0.5,
-    marginBottom: 6,
+    marginBottom: 8,
   },
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#CBD5E1",
     borderRadius: 14,
     paddingHorizontal: 14,
-    height: 50,
+    height: 52,
   },
-  currencyPrefix: {
+  textInput: {
+    flex: 1,
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  prefix: {
     fontSize: 18,
     fontWeight: "800",
     color: "#94A3B8",
     marginRight: 6,
   },
   suffix: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "700",
-    color: "#94A3B8",
+    color: "#64748B",
     marginLeft: 6,
   },
-  textInput: {
-    flex: 1,
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#0F172A",
-  },
-  quickPillsRow: {
-    flexDirection: "row",
-    gap: 6,
-    marginTop: 8,
-  },
-  quickPill: {
-    flex: 1,
-    backgroundColor: "#F1F5F9",
-    paddingVertical: 7,
-    borderRadius: 10,
+  resultBox: {
+    backgroundColor: "#FFE4E6",
+    borderRadius: 22,
+    padding: 20,
+    borderWidth: 1.5,
+    borderColor: "#FECDD3",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-  },
-  activeQuickPill: {
-    backgroundColor: "#F43F5E",
-    borderColor: "#E11D48",
-  },
-  quickPillText: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#475569",
-  },
-  activeQuickPillText: {
-    color: "#ffffff",
-  },
-  resultCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
+    shadowColor: "#E11D48",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 3,
   },
   resultHeader: {
+    width: "100%",
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 12,
-  },
-  resultTitle: {
-    fontSize: 14,
-    fontWeight: "800",
-    color: "#0F172A",
+    alignItems: "center",
   },
   actionButtons: {
     flexDirection: "row",
-    gap: 6,
-  },
-  iconBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#F1F5F9",
-    justifyContent: "center",
     alignItems: "center",
+    gap: 8,
   },
-  totalBlock: {
-    backgroundColor: "#ECFDF5",
-    borderRadius: 16,
-    padding: 16,
+  copyBtn: {
+    flexDirection: "row",
     alignItems: "center",
-    marginBottom: 14,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#D1FAE5",
+    borderColor: "#FECDD3",
+    gap: 4,
   },
-  totalLabel: {
+  copyBtnText: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.5,
+    color: "#E11D48",
+  },
+  resetBtn: {
+    width: 30,
+    height: 30,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#FECDD3",
+  },
+  iconCircle: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 6,
+    marginBottom: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  resultCategory: {
+    fontSize: 12,
+    fontWeight: "800",
+    color: "#9F1239",
+    letterSpacing: 1,
     marginBottom: 4,
   },
-  totalValue: {
-    fontSize: 28,
-    fontWeight: "900",
-    color: "#059669",
-  },
-  ratioBarContainer: {
-    height: 10,
-    borderRadius: 5,
+  priceRow: {
     flexDirection: "row",
-    overflow: "hidden",
-    marginBottom: 14,
+    alignItems: "baseline",
+    marginBottom: 18,
   },
-  ratioBarInvested: {
-    backgroundColor: "#0284C7",
+  currencySymbol: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#E11D48",
+    marginRight: 4,
   },
-  ratioBarReturns: {
-    backgroundColor: "#10B981",
+  finalPriceText: {
+    fontSize: 46,
+    fontWeight: "900",
+    color: "#0F172A",
+    letterSpacing: -1,
   },
-  breakdownRow: {
+  breakdownCards: {
+    width: "100%",
+    gap: 10,
+  },
+  breakdownItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  legendRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 6,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#FECDD3",
   },
   breakdownLabel: {
     fontSize: 13,
-    color: "#64748B",
-    fontWeight: "500",
+    fontWeight: "700",
+    color: "#475569",
   },
   breakdownValue: {
-    fontSize: 13,
+    fontSize: 15,
+    fontWeight: "900",
     color: "#0F172A",
-    fontWeight: "700",
+  },
+  disclaimerBox: {
+    marginTop: 14,
+    padding: 14,
+    backgroundColor: "#FFF1F2",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#FFE4E6",
+  },
+  disclaimerText: {
+    fontSize: 11,
+    color: "#BE123C",
+    lineHeight: 16,
+    textAlign: "center",
+    fontWeight: "500",
   },
 });

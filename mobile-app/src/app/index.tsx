@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Pressable,
+  Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -50,9 +51,11 @@ export default function HomeScreen() {
       {/* Top App Bar */}
       <View style={styles.topBar}>
         <View style={styles.brandRow}>
-          <View style={styles.logoBadge}>
-            <Calculator size={20} color="#ffffff" strokeWidth={2.5} />
-          </View>
+          <Image
+            source={require("../../assets/images/splash-icon.png")}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
           <View>
             <Text style={styles.brandTitle}>TopCalcBox</Text>
             <Text style={styles.brandSubtitle}>Free Online Calculators</Text>
@@ -221,6 +224,12 @@ const styles = StyleSheet.create({
   brandRow: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  logoImage: {
+    width: 38,
+    height: 38,
+    borderRadius: 8,
+    marginRight: 12,
   },
   logoBadge: {
     width: 38,

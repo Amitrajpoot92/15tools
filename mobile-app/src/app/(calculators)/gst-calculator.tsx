@@ -12,28 +12,61 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { calculateGST } from "@/lib/calculations/finance";
-import { Copy, RotateCcw, Check } from "lucide-react-native";
+import { Copy, RotateCcw, Check, Receipt } from "lucide-react-native";
+
+type GSTMode = "add" | "remove";
+type StateType = "intra" | "inter";
 
 export default function GSTCalculatorScreen() {
-  const [mode, setMode] = useState<"add" | "remove">("add");
+  const [mode, setMode] = useState<GSTMode>("add");
   const [amount, setAmount] = useState("1000");
   const [rate, setRate] = useState("18");
-  const [stateType, setStateType] = useState<"intra" | "inter">("intra");
+  const [stateType, setStateType] = useState<StateType>("intra");
   const [copied, setCopied] = useState(false);
 
-  const numAmount = parseFloat(amount) || 0;
-  const numRate = parseFloat(rate) || 0;
-  const result = calculateGST(numAmount, numRate, mode);
+  const calculate = () => {
+    const a = parseFloat(amount) || 0;
+    const r = parseFloat(rate) || 0;
 
-  const formatCurrency = (val: number) => {
-    return "₹" + val.toLocaleString("en-IN", { maximumFractionDigits: 2 });
+    let net = 0;
+    let gst = 0;
+    let total = 0;
+
+    if (mode === "add") {
+      net = a;
+      gst = (a * r) / 100;
+      total = a + gst;
+    } else {
+      total = a;
+      gst = a - a * (100 / (100 + r));
+      net = a - gst;
+    }
+
+    const cgst = gst / 2;
+    const sgst = gst / 2;
+    const igst = gst;
+
+    return { net, gst, total, cgst, sgst, igst };
+  };
+
+  const res = calculate();
+
+  const formatNumber = (num: number | string) => {
+    const val = typeof num === "string" ? parseFloat(num) : num;
+    if (isNaN(val)) return "0";
+    return val.toLocaleString("en-IN", { maximumFractionDigits: 2 });
   };
 
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const summary = `GST Calculation:\nNet Amount: ${formatCurrency(result.net)}\nGST (${rate}%): ${formatCurrency(result.gst)}\nTotal: ${formatCurrency(result.total)}`;
-    await Clipboard.setStringAsync(summary);
+    const text = `GST Calculator\nAmount: ₹${amount}\nGST Rate: ${rate}%\nGST Amount: ₹${formatNumber(
+      res.gst
+    )}\n${
+      mode === "add"
+        ? "Final Amount: ₹" + formatNumber(res.total)
+        : "Net Amount: ₹" + formatNumber(res.net)
+    }\n\nCalculate Online: https://topcalcbox.com/gst-calculator/`;
+    await Clipboard.setStringAsync(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -42,6 +75,8 @@ export default function GSTCalculatorScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setAmount("");
     setRate("18");
+    setStateType("intra");
+    setMode("add");
   };
 
   return (
@@ -49,84 +84,100 @@ export default function GSTCalculatorScreen() {
       <StatusBar style="dark" />
       <CalculatorHeader
         title="GST Calculator"
-        subtitle="Add or remove Goods and Services Tax with instant CGST/SGST/IGST tax breakup."
+        subtitle="Add or remove Goods and Services Tax (GST) from your amounts with ease."
         iconName="Receipt"
-        themeColor="#F43F5E"
-        themeBg="#FFF1F2"
+        themeColor="#9333EA"
+        themeBg="#FAF5FF"
       />
 
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         {/* Mode Selector Tabs */}
         <View style={styles.tabContainer}>
           <Pressable
-            style={[styles.tab, mode === "add" && styles.activeTab]}
             onPress={() => {
               Haptics.selectionAsync();
               setMode("add");
             }}
+            style={[styles.tabBtn, mode === "add" && styles.tabBtnActive]}
           >
-            <Text style={[styles.tabText, mode === "add" && styles.activeTabText]}>
-              Exclusive GST (Add)
+            <Text style={[styles.tabTitle, mode === "add" && styles.tabTitleActive]}>
+              Exclusive GST
+            </Text>
+            <Text style={[styles.tabSubtitle, mode === "add" && styles.tabSubtitleActive]}>
+              (Add GST)
             </Text>
           </Pressable>
+
           <Pressable
-            style={[styles.tab, mode === "remove" && styles.activeTab]}
             onPress={() => {
               Haptics.selectionAsync();
               setMode("remove");
             }}
+            style={[styles.tabBtn, mode === "remove" && styles.tabBtnActive]}
           >
-            <Text style={[styles.tabText, mode === "remove" && styles.activeTabText]}>
-              Inclusive GST (Remove)
+            <Text style={[styles.tabTitle, mode === "remove" && styles.tabTitleActive]}>
+              Inclusive GST
+            </Text>
+            <Text style={[styles.tabSubtitle, mode === "remove" && styles.tabSubtitleActive]}>
+              (Remove GST)
             </Text>
           </Pressable>
         </View>
 
-        {/* Input Card */}
-        <View style={styles.card}>
+        {/* Inputs Card */}
+        <View style={styles.inputCard}>
+          {/* Amount Input */}
           <Text style={styles.inputLabel}>
-            {mode === "add" ? "NET AMOUNT (₹)" : "TOTAL AMOUNT INCL. GST (₹)"}
+            {mode === "add" ? "NET AMOUNT (₹)" : "TOTAL AMOUNT (₹)"}
           </Text>
           <View style={styles.inputWrapper}>
-            <Text style={styles.currencyPrefix}>₹</Text>
+            <Text style={styles.prefix}>₹</Text>
             <TextInput
               style={styles.textInput}
-              keyboardType="decimal-pad"
+              keyboardType="numeric"
               value={amount}
               onChangeText={setAmount}
-              placeholder="0"
+              placeholder="1000"
               placeholderTextColor="#94A3B8"
             />
           </View>
 
-          {/* Quick Rate Pills */}
-          <Text style={[styles.inputLabel, { marginTop: 14 }]}>GST RATE (%)</Text>
-          <View style={styles.rateRow}>
-            {["5", "12", "18", "28"].map((r) => (
+          {/* Rate Input */}
+          <Text style={[styles.inputLabel, { marginTop: 16 }]}>GST RATE (%)</Text>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={styles.textInput}
+              keyboardType="numeric"
+              value={rate}
+              onChangeText={setRate}
+              placeholder="18"
+              placeholderTextColor="#94A3B8"
+            />
+            <Text style={styles.suffix}>%</Text>
+          </View>
+
+          {/* Quick GST Chips */}
+          <View style={styles.chipRow}>
+            {[5, 12, 18, 28].map((v) => (
               <Pressable
-                key={r}
+                key={v}
                 onPress={() => {
-                  Haptics.selectionAsync();
-                  setRate(r);
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setRate(v.toString());
                 }}
-                style={[styles.ratePill, rate === r && styles.activeRatePill]}
+                style={styles.chipBtn}
               >
-                <Text
-                  style={[
-                    styles.ratePillText,
-                    rate === r && styles.activeRatePillText,
-                  ]}
-                >
-                  {r}%
-                </Text>
+                <Text style={styles.chipText}>{v}%</Text>
               </Pressable>
             ))}
           </View>
 
-          {/* State Type Switch */}
+          {/* GST Type (Intra / Inter State) */}
+          <Text style={[styles.inputLabel, { marginTop: 18 }]}>GST TYPE</Text>
           <View style={styles.stateTypeRow}>
             <Pressable
               onPress={() => {
@@ -134,110 +185,142 @@ export default function GSTCalculatorScreen() {
                 setStateType("intra");
               }}
               style={[
-                styles.stateBtn,
-                stateType === "intra" && styles.activeStateBtn,
+                styles.stateTypeCard,
+                stateType === "intra" && styles.stateTypeCardActive,
               ]}
             >
-              <Text
+              <View>
+                <Text
+                  style={[
+                    styles.stateTypeTitle,
+                    stateType === "intra" && styles.stateTypeTitleActive,
+                  ]}
+                >
+                  Intra-State
+                </Text>
+                <Text style={styles.stateTypeSub}>CGST + SGST</Text>
+              </View>
+              <View
                 style={[
-                  styles.stateBtnText,
-                  stateType === "intra" && styles.activeStateBtnText,
+                  styles.radioDot,
+                  stateType === "intra" && styles.radioDotActive,
                 ]}
               >
-                Intra-State (CGST + SGST)
-              </Text>
+                {stateType === "intra" && <Check size={12} color="#FFFFFF" strokeWidth={3} />}
+              </View>
             </Pressable>
+
             <Pressable
               onPress={() => {
                 Haptics.selectionAsync();
                 setStateType("inter");
               }}
               style={[
-                styles.stateBtn,
-                stateType === "inter" && styles.activeStateBtn,
+                styles.stateTypeCard,
+                stateType === "inter" && styles.stateTypeCardActive,
               ]}
             >
-              <Text
+              <View>
+                <Text
+                  style={[
+                    styles.stateTypeTitle,
+                    stateType === "inter" && styles.stateTypeTitleActive,
+                  ]}
+                >
+                  Inter-State
+                </Text>
+                <Text style={styles.stateTypeSub}>IGST</Text>
+              </View>
+              <View
                 style={[
-                  styles.stateBtnText,
-                  stateType === "inter" && styles.activeStateBtnText,
+                  styles.radioDot,
+                  stateType === "inter" && styles.radioDotActive,
                 ]}
               >
-                Inter-State (IGST)
-              </Text>
+                {stateType === "inter" && <Check size={12} color="#FFFFFF" strokeWidth={3} />}
+              </View>
             </Pressable>
           </View>
         </View>
 
-        {/* Results Card */}
-        <View style={styles.resultCard}>
+        {/* Result Box */}
+        <View style={styles.resultBox}>
           <View style={styles.resultHeader}>
-            <Text style={styles.resultTitle}>Calculation Result</Text>
+            <View style={styles.headerTitleGroup}>
+              <Receipt size={16} color="#7E22CE" />
+              <Text style={styles.resultCategory}>
+                {mode === "add" ? "TOTAL PRICE (INCL. GST)" : "NET PRICE (EXCL. GST)"}
+              </Text>
+            </View>
             <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.iconBtn}>
-                {copied ? (
-                  <Check size={16} color="#16A34A" />
-                ) : (
-                  <Copy size={16} color="#64748B" />
-                )}
+              <Pressable onPress={handleCopy} style={styles.copyBtn}>
+                {copied ? <Check size={14} color="#059669" /> : <Copy size={14} color="#7E22CE" />}
+                <Text style={[styles.copyBtnText, copied && { color: "#059669" }]}>
+                  {copied ? "Copied" : "Copy"}
+                </Text>
               </Pressable>
-              <Pressable onPress={handleReset} style={styles.iconBtn}>
-                <RotateCcw size={16} color="#64748B" />
+              <Pressable onPress={handleReset} style={styles.resetBtn}>
+                <RotateCcw size={15} color="#7E22CE" />
               </Pressable>
             </View>
           </View>
 
-          {/* Big Total */}
-          <View style={styles.totalBlock}>
-            <Text style={styles.totalLabel}>
-              {mode === "add" ? "FINAL TOTAL PRICE" : "ORIGINAL NET AMOUNT"}
-            </Text>
-            <Text style={styles.totalValue}>
-              {formatCurrency(mode === "add" ? result.total : result.net)}
-            </Text>
+          {/* Final Amount Hero */}
+          <View style={styles.finalHeroCard}>
+            <Text style={styles.finalHeroLabel}>FINAL AMOUNT</Text>
+            <View style={styles.finalHeroPriceRow}>
+              <Text style={styles.finalHeroSymbol}>₹</Text>
+              <Text style={styles.finalHeroPrice}>
+                {formatNumber(mode === "add" ? res.total : res.net)}
+              </Text>
+            </View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>
+                {rate}% GST {mode === "add" ? "Included" : "Excluded"}
+              </Text>
+            </View>
           </View>
 
-          {/* Detailed Breakdown */}
-          <View style={styles.breakdownRow}>
-            <Text style={styles.breakdownLabel}>GST Tax ({rate}%):</Text>
-            <Text style={styles.breakdownValue}>{formatCurrency(result.gst)}</Text>
-          </View>
-
-          {stateType === "intra" ? (
-            <>
-              <View style={styles.breakdownRow}>
-                <Text style={styles.breakdownLabel}>CGST ({numRate / 2}%):</Text>
-                <Text style={styles.breakdownValue}>{formatCurrency(result.cgst)}</Text>
-              </View>
-              <View style={styles.breakdownRow}>
-                <Text style={styles.breakdownLabel}>SGST ({numRate / 2}%):</Text>
-                <Text style={styles.breakdownValue}>{formatCurrency(result.sgst)}</Text>
-              </View>
-            </>
-          ) : (
+          {/* Breakdown Rows */}
+          <View style={styles.breakdownCard}>
             <View style={styles.breakdownRow}>
-              <Text style={styles.breakdownLabel}>IGST ({numRate}%):</Text>
-              <Text style={styles.breakdownValue}>{formatCurrency(result.igst)}</Text>
+              <Text style={styles.breakdownLabel}>Net Amount</Text>
+              <Text style={styles.breakdownValue}>₹{formatNumber(res.net)}</Text>
             </View>
-          )}
 
-          <View style={[styles.breakdownRow, styles.lastBreakdownRow]}>
-            <Text style={styles.breakdownLabel}>
-              {mode === "add" ? "Net (Base Price):" : "Total (with GST):"}
-            </Text>
-            <Text style={[styles.breakdownValue, { fontWeight: "800" }]}>
-              {formatCurrency(mode === "add" ? result.net : result.total)}
-            </Text>
+            {stateType === "intra" ? (
+              <>
+                <View style={styles.breakdownRow}>
+                  <Text style={styles.breakdownLabel}>
+                    CGST ({(parseFloat(rate) / 2 || 0)}%)
+                  </Text>
+                  <Text style={[styles.breakdownValue, { color: "#7E22CE" }]}>
+                    +₹{formatNumber(res.cgst)}
+                  </Text>
+                </View>
+                <View style={styles.breakdownRow}>
+                  <Text style={styles.breakdownLabel}>
+                    SGST ({(parseFloat(rate) / 2 || 0)}%)
+                  </Text>
+                  <Text style={[styles.breakdownValue, { color: "#7E22CE" }]}>
+                    +₹{formatNumber(res.sgst)}
+                  </Text>
+                </View>
+              </>
+            ) : (
+              <View style={styles.breakdownRow}>
+                <Text style={styles.breakdownLabel}>IGST ({rate || 0}%)</Text>
+                <Text style={[styles.breakdownValue, { color: "#7E22CE" }]}>
+                  +₹{formatNumber(res.igst)}
+                </Text>
+              </View>
+            )}
+
+            <View style={[styles.breakdownRow, styles.totalRow]}>
+              <Text style={styles.totalRowLabel}>Total Amount</Text>
+              <Text style={styles.totalRowValue}>₹{formatNumber(res.total)}</Text>
+            </View>
           </View>
-        </View>
-
-        {/* Formula Explainer */}
-        <View style={styles.formulaCard}>
-          <Text style={styles.formulaTitle}>GST Calculation Formula</Text>
-          <Text style={styles.formulaText}>
-            • Add GST: GST Amount = (Amount × Rate) ÷ 100{"\n"}
-            • Remove GST: GST = Total - (Total × (100 ÷ (100 + Rate)))
-          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -245,229 +328,304 @@ export default function GSTCalculatorScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingBottom: 40,
-  },
+  container: { flex: 1, backgroundColor: "#F8FAFC" },
+  scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
   tabContainer: {
     flexDirection: "row",
-    backgroundColor: "#E2E8F0",
-    borderRadius: 14,
+    backgroundColor: "#F1F5F9",
+    borderRadius: 16,
     padding: 4,
-    marginBottom: 14,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
   },
-  tab: {
+  tabBtn: {
     flex: 1,
-    paddingVertical: 9,
+    paddingVertical: 10,
     alignItems: "center",
-    borderRadius: 11,
+    justifyContent: "center",
+    borderRadius: 12,
   },
-  activeTab: {
-    backgroundColor: "#ffffff",
+  tabBtnActive: {
+    backgroundColor: "#FFFFFF",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowRadius: 2,
     elevation: 2,
   },
-  tabText: {
+  tabTitle: {
     fontSize: 12,
-    fontWeight: "600",
+    fontWeight: "700",
     color: "#64748B",
   },
-  activeTabText: {
-    color: "#0F172A",
+  tabTitleActive: {
+    color: "#7E22CE",
     fontWeight: "800",
   },
-  card: {
-    backgroundColor: "#ffffff",
+  tabSubtitle: {
+    fontSize: 10,
+    color: "#94A3B8",
+    fontWeight: "500",
+  },
+  tabSubtitleActive: {
+    color: "#9333EA",
+    fontWeight: "600",
+  },
+  inputCard: {
+    backgroundColor: "#FAF5FF",
     borderRadius: 20,
-    padding: 16,
+    padding: 18,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#F3E8FF",
     marginBottom: 16,
   },
   inputLabel: {
     fontSize: 11,
     fontWeight: "800",
-    color: "#64748B",
+    color: "#6B21A8",
     letterSpacing: 0.5,
-    marginBottom: 6,
+    marginBottom: 8,
   },
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#CBD5E1",
     borderRadius: 14,
     paddingHorizontal: 14,
-    height: 50,
+    height: 52,
   },
-  currencyPrefix: {
+  textInput: {
+    flex: 1,
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  prefix: {
     fontSize: 18,
     fontWeight: "800",
     color: "#94A3B8",
     marginRight: 6,
   },
-  textInput: {
-    flex: 1,
+  suffix: {
     fontSize: 18,
-    fontWeight: "700",
-    color: "#0F172A",
-  },
-  rateRow: {
-    flexDirection: "row",
-    gap: 8,
-    marginBottom: 12,
-  },
-  ratePill: {
-    flex: 1,
-    backgroundColor: "#F1F5F9",
-    paddingVertical: 10,
-    borderRadius: 12,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-  },
-  activeRatePill: {
-    backgroundColor: "#F43F5E",
-    borderColor: "#E11D48",
-  },
-  ratePillText: {
-    fontSize: 13,
     fontWeight: "800",
-    color: "#475569",
+    color: "#94A3B8",
+    marginLeft: 6,
   },
-  activeRatePillText: {
-    color: "#ffffff",
+  chipRow: {
+    flexDirection: "row",
+    marginTop: 10,
+    gap: 6,
+  },
+  chipBtn: {
+    flex: 1,
+    backgroundColor: "#E2E8F0",
+    paddingVertical: 7,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  chipText: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#6B21A8",
   },
   stateTypeRow: {
     flexDirection: "row",
-    gap: 8,
-    marginTop: 6,
+    gap: 10,
   },
-  stateBtn: {
+  stateTypeCard: {
     flex: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 6,
-    borderRadius: 10,
-    backgroundColor: "#F8FAFC",
-    borderWidth: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1.5,
     borderColor: "#E2E8F0",
+    borderRadius: 14,
+    padding: 12,
+  },
+  stateTypeCardActive: {
+    borderColor: "#A855F7",
+    backgroundColor: "#FAF5FF",
+  },
+  stateTypeTitle: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#334155",
+  },
+  stateTypeTitleActive: {
+    color: "#7E22CE",
+    fontWeight: "800",
+  },
+  stateTypeSub: {
+    fontSize: 10,
+    color: "#64748B",
+    marginTop: 2,
+  },
+  radioDot: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1.5,
+    borderColor: "#CBD5E1",
+    justifyContent: "center",
     alignItems: "center",
   },
-  activeStateBtn: {
-    backgroundColor: "#EFF6FF",
-    borderColor: "#BFDBFE",
+  radioDotActive: {
+    backgroundColor: "#9333EA",
+    borderColor: "#9333EA",
   },
-  stateBtnText: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: "#64748B",
-    textAlign: "center",
-  },
-  activeStateBtnText: {
-    color: "#1D4ED8",
-  },
-  resultCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
+  resultBox: {
+    backgroundColor: "#FAF5FF",
+    borderRadius: 22,
+    padding: 18,
+    borderWidth: 1.5,
+    borderColor: "#E9D5FF",
+    shadowColor: "#9333EA",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 3,
   },
   resultHeader: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 12,
+    alignItems: "center",
+    marginBottom: 14,
   },
-  resultTitle: {
-    fontSize: 14,
+  headerTitleGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    flex: 1,
+  },
+  resultCategory: {
+    fontSize: 11,
     fontWeight: "800",
-    color: "#0F172A",
+    color: "#6B21A8",
+    letterSpacing: 0.5,
   },
   actionButtons: {
     flexDirection: "row",
-    gap: 6,
+    alignItems: "center",
+    gap: 8,
   },
-  iconBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#F1F5F9",
+  copyBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#E9D5FF",
+    gap: 4,
+  },
+  copyBtnText: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#6B21A8",
+  },
+  resetBtn: {
+    width: 30,
+    height: 30,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#E9D5FF",
   },
-  totalBlock: {
-    backgroundColor: "#FFF1F2",
+  finalHeroCard: {
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
     padding: 16,
     alignItems: "center",
-    marginBottom: 14,
     borderWidth: 1,
-    borderColor: "#FFE4E6",
+    borderColor: "#F3E8FF",
+    marginBottom: 12,
   },
-  totalLabel: {
-    fontSize: 11,
+  finalHeroLabel: {
+    fontSize: 10,
     fontWeight: "800",
-    color: "#9F1239",
-    letterSpacing: 0.5,
+    color: "#7E22CE",
+    letterSpacing: 1,
     marginBottom: 4,
   },
-  totalValue: {
-    fontSize: 28,
+  finalHeroPriceRow: {
+    flexDirection: "row",
+    alignItems: "baseline",
+    marginBottom: 8,
+  },
+  finalHeroSymbol: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#94A3B8",
+    marginRight: 4,
+  },
+  finalHeroPrice: {
+    fontSize: 38,
     fontWeight: "900",
-    color: "#E11D48",
+    color: "#0F172A",
+    letterSpacing: -1,
+  },
+  badge: {
+    backgroundColor: "#F3E8FF",
+    borderWidth: 1,
+    borderColor: "#E9D5FF",
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 20,
+  },
+  badgeText: {
+    fontSize: 10,
+    fontWeight: "800",
+    color: "#7E22CE",
+    textTransform: "uppercase",
+  },
+  breakdownCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#F3E8FF",
+    gap: 8,
   },
   breakdownRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  lastBreakdownRow: {
-    borderBottomWidth: 0,
-    paddingTop: 10,
+    alignItems: "center",
+    backgroundColor: "#F8FAFC",
+    padding: 10,
+    borderRadius: 10,
   },
   breakdownLabel: {
-    fontSize: 13,
-    color: "#64748B",
-    fontWeight: "500",
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#475569",
   },
   breakdownValue: {
     fontSize: 13,
+    fontWeight: "900",
     color: "#0F172A",
-    fontWeight: "700",
   },
-  formulaCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: 16,
-    padding: 14,
+  totalRow: {
+    backgroundColor: "#FAF5FF",
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#F3E8FF",
+    marginTop: 4,
   },
-  formulaTitle: {
+  totalRowLabel: {
     fontSize: 12,
-    fontWeight: "800",
-    color: "#334155",
-    marginBottom: 4,
+    fontWeight: "900",
+    color: "#6B21A8",
   },
-  formulaText: {
-    fontSize: 11,
-    color: "#64748B",
-    lineHeight: 16,
+  totalRowValue: {
+    fontSize: 14,
+    fontWeight: "900",
+    color: "#6B21A8",
   },
 });

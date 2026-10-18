@@ -12,159 +12,245 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { calculateAttendance } from "@/lib/calculations/math";
-import { Copy, RotateCcw, Check, ThumbsUp, AlertTriangle } from "lucide-react-native";
+import { Copy, RotateCcw, Check, AlertTriangle, CheckCircle2 } from "lucide-react-native";
 
 export default function AttendanceCalculatorScreen() {
-  const [totalClasses, setTotalClasses] = useState("50");
-  const [attendedClasses, setAttendedClasses] = useState("42");
-  const [targetPercentage, setTargetPercentage] = useState("75");
+  const [attended, setAttended] = useState("");
+  const [total, setTotal] = useState("");
+  const [target, setTarget] = useState("75");
   const [copied, setCopied] = useState(false);
 
-  const t = parseInt(totalClasses) || 0;
-  const a = parseInt(attendedClasses) || 0;
-  const target = parseFloat(targetPercentage) || 75;
+  const calculate = () => {
+    const a = parseInt(attended);
+    const t = parseInt(total);
+    const targetPercent = parseFloat(target);
 
-  const result = calculateAttendance(t, a, target);
+    if (!isNaN(a) && !isNaN(t) && t > 0 && a >= 0 && a <= t) {
+      const currentPercent = (a / t) * 100;
+      let statusString = "";
+      let statusMessage = "";
+      let futureInfo = { attended: 0, total: 0, percent: "0.00" };
+      let alert: "shortage" | "met" = "met";
+
+      if (!isNaN(targetPercent) && targetPercent > 0 && targetPercent <= 100) {
+        if (currentPercent < targetPercent) {
+          const needed = Math.ceil(
+            (targetPercent * t - 100 * a) / (100 - targetPercent)
+          );
+          const futureTotal = t + needed;
+          const futureAttended = a + needed;
+          const futurePercent = ((futureAttended / futureTotal) * 100).toFixed(2);
+
+          statusMessage = `You need to attend ${needed} more classes to attain ${targetPercent}% attendance.`;
+          futureInfo = {
+            attended: futureAttended,
+            total: futureTotal,
+            percent: futurePercent,
+          };
+          statusString = `${statusMessage}\nCurrent Attendance: ${a}/${t} ${currentPercent.toFixed(
+            2
+          )}%\nAttendance Required: ${futureAttended}/${futureTotal} -> ${futurePercent}%`;
+          alert = "shortage";
+        } else {
+          const canSkip = Math.floor(
+            (100 * a - targetPercent * t) / targetPercent
+          );
+          const futureTotal = t + canSkip;
+          const futurePercent = ((a / futureTotal) * 100).toFixed(2);
+
+          statusMessage = `You can bunk for ${canSkip} more days.`;
+          futureInfo = {
+            attended: a,
+            total: futureTotal,
+            percent: futurePercent,
+          };
+          statusString = `${statusMessage}\nCurrent Attendance: ${a}/${t} ${currentPercent.toFixed(
+            2
+          )}%\nAttendance Then: ${a}/${futureTotal} ${futurePercent}%`;
+          alert = "met";
+        }
+      }
+
+      return {
+        percentage: currentPercent.toFixed(2),
+        statusString,
+        statusMessage,
+        futureInfo,
+        alert,
+        valid: true,
+        a,
+        t,
+      };
+    }
+
+    return {
+      percentage: "0.00",
+      statusString: "",
+      statusMessage: "",
+      futureInfo: { attended: 0, total: 0, percent: "0.00" },
+      alert: "met" as const,
+      valid: false,
+      a: 0,
+      t: 0,
+    };
+  };
+
+  const result = calculate();
 
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const summary = `Attendance Status:\nCurrent: ${result.currentPercentage}%\nTarget: ${target}%\nStatus: ${
-      result.status === "safe"
-        ? `You can safely bunk ${result.classesDifference} classes!`
-        : `You must attend next ${result.classesDifference} classes!`
-    }`;
-    await Clipboard.setStringAsync(summary);
+    const text = `Attendance Percentage Calculator\nClasses Held (Total): ${
+      total || 0
+    }\nClasses Attended: ${attended || 0}\nTarget Attendance: ${
+      target || 0
+    }%\nCurrent Attendance: ${result.percentage}%\n\n${
+      result.statusString
+    }\n\nCalculate Online: https://topcalcbox.com/attendance-percentage-calculator/`;
+    await Clipboard.setStringAsync(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleReset = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    setTotalClasses("50");
-    setAttendedClasses("42");
-    setTargetPercentage("75");
+    setAttended("");
+    setTotal("");
+    setTarget("75");
   };
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
       <StatusBar style="dark" />
       <CalculatorHeader
-        title="Attendance Calculator"
-        subtitle="Track college/school attendance and see how many classes you can safely skip."
+        title="Attendance Percentage Calculator"
+        subtitle="Calculate your current attendance percentage and see how many classes you can skip."
         iconName="ClipboardCheck"
-        themeColor="#2563EB"
-        themeBg="#EFF6FF"
+        themeColor="#F97316"
+        themeBg="#FFF7ED"
       />
 
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
-        <View style={styles.card}>
-          <Text style={styles.inputLabel}>TOTAL CLASSES HELD</Text>
+        {/* Input Card */}
+        <View style={styles.inputCard}>
+          <Text style={styles.inputLabel}>CLASSES HELD (TOTAL)</Text>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.textInput}
-              keyboardType="number-pad"
-              value={totalClasses}
-              onChangeText={setTotalClasses}
-              placeholder="50"
+              keyboardType="numeric"
+              value={total}
+              onChangeText={setTotal}
+              placeholder="e.g. 50"
               placeholderTextColor="#94A3B8"
             />
           </View>
 
-          <Text style={[styles.inputLabel, { marginTop: 14 }]}>
-            CLASSES ATTENDED
-          </Text>
+          <Text style={[styles.inputLabel, { marginTop: 16 }]}>CLASSES ATTENDED</Text>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.textInput}
-              keyboardType="number-pad"
-              value={attendedClasses}
-              onChangeText={setAttendedClasses}
-              placeholder="42"
+              keyboardType="numeric"
+              value={attended}
+              onChangeText={setAttended}
+              placeholder="e.g. 35"
               placeholderTextColor="#94A3B8"
             />
           </View>
 
-          <Text style={[styles.inputLabel, { marginTop: 14 }]}>
+          <Text style={[styles.inputLabel, { marginTop: 16 }]}>
             TARGET ATTENDANCE (%)
           </Text>
           <View style={styles.inputWrapper}>
             <TextInput
               style={styles.textInput}
-              keyboardType="number-pad"
-              value={targetPercentage}
-              onChangeText={setTargetPercentage}
-              placeholder="75"
+              keyboardType="numeric"
+              value={target}
+              onChangeText={setTarget}
+              placeholder="e.g. 75"
               placeholderTextColor="#94A3B8"
             />
             <Text style={styles.suffix}>%</Text>
           </View>
         </View>
 
-        <View style={styles.resultCard}>
+        {/* Result Box */}
+        <View style={styles.resultBox}>
           <View style={styles.resultHeader}>
-            <Text style={styles.resultTitle}>Attendance Analysis</Text>
+            <Text style={styles.resultCategory}>CURRENT ATTENDANCE</Text>
             <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.iconBtn}>
-                {copied ? <Check size={16} color="#16A34A" /> : <Copy size={16} color="#64748B" />}
+              <Pressable onPress={handleCopy} style={styles.copyBtn}>
+                {copied ? <Check size={14} color="#059669" /> : <Copy size={14} color="#EA580C" />}
+                <Text style={[styles.copyBtnText, copied && { color: "#059669" }]}>
+                  {copied ? "Copied" : "Copy"}
+                </Text>
               </Pressable>
-              <Pressable onPress={handleReset} style={styles.iconBtn}>
-                <RotateCcw size={16} color="#64748B" />
+              <Pressable onPress={handleReset} style={styles.resetBtn}>
+                <RotateCcw size={15} color="#EA580C" />
               </Pressable>
             </View>
           </View>
 
-          <View
-            style={[
-              styles.totalBlock,
-              result.status === "safe" ? styles.safeBlock : styles.shortageBlock,
-            ]}
-          >
-            <Text
-              style={[
-                styles.totalLabel,
-                { color: result.status === "safe" ? "#065F46" : "#991B1B" },
-              ]}
-            >
-              CURRENT ATTENDANCE
-            </Text>
-            <Text
-              style={[
-                styles.totalValue,
-                { color: result.status === "safe" ? "#059669" : "#DC2626" },
-              ]}
-            >
-              {result.currentPercentage}%
-            </Text>
+          <View style={styles.priceRow}>
+            <Text style={styles.finalPriceText}>{result.percentage}</Text>
+            <Text style={styles.percentSymbol}>%</Text>
           </View>
 
-          <View
-            style={[
-              styles.statusBanner,
-              result.status === "safe"
-                ? styles.statusBannerSafe
-                : styles.statusBannerShortage,
-            ]}
-          >
-            {result.status === "safe" ? (
-              <ThumbsUp size={18} color="#059669" />
-            ) : (
-              <AlertTriangle size={18} color="#DC2626" />
-            )}
-            <Text
-              style={[
-                styles.statusText,
-                { color: result.status === "safe" ? "#065F46" : "#991B1B" },
-              ]}
-            >
-              {result.status === "safe"
-                ? `You can safely bunk ${result.classesDifference} upcoming classes without falling below ${target}%.`
-                : `You must attend the next ${result.classesDifference} consecutive classes to reach ${target}%.`}
-            </Text>
-          </View>
+          {result.valid ? (
+            <View style={styles.statusContainer}>
+              <View
+                style={[
+                  styles.statusCard,
+                  {
+                    borderLeftColor:
+                      result.alert === "shortage" ? "#EF4444" : "#10B981",
+                  },
+                ]}
+              >
+                <Text style={styles.statusMessage}>{result.statusMessage}</Text>
+                <View style={styles.breakdownBox}>
+                  <View style={styles.breakdownRow}>
+                    <Text style={styles.breakdownLabel}>Current Attendance:</Text>
+                    <Text style={styles.breakdownValue}>
+                      {result.a}/{result.t} ({result.percentage}%)
+                    </Text>
+                  </View>
+                  <View style={styles.breakdownRow}>
+                    <Text style={styles.breakdownLabel}>
+                      {result.alert === "shortage"
+                        ? "Attendance Required:"
+                        : "Attendance Then:"}
+                    </Text>
+                    <Text style={styles.breakdownValue}>
+                      {result.futureInfo.attended}/{result.futureInfo.total} (
+                      {result.futureInfo.percent}%)
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* Alert Badge */}
+              {result.alert === "shortage" ? (
+                <View style={[styles.alertBadge, { backgroundColor: "#EF4444" }]}>
+                  <AlertTriangle size={14} color="#FFFFFF" />
+                  <Text style={styles.alertBadgeText}>Shortage Alert</Text>
+                </View>
+              ) : (
+                <View style={[styles.alertBadge, { backgroundColor: "#10B981" }]}>
+                  <CheckCircle2 size={14} color="#FFFFFF" />
+                  <Text style={styles.alertBadgeText}>Criteria Met</Text>
+                </View>
+              )}
+            </View>
+          ) : (
+            <View style={styles.placeholderCard}>
+              <Text style={styles.placeholderText}>
+                Enter your attendance details above
+              </Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -174,64 +260,191 @@ export default function AttendanceCalculatorScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#F8FAFC" },
   scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
-  card: {
-    backgroundColor: "#ffffff",
+  inputCard: {
+    backgroundColor: "#FFF7ED",
     borderRadius: 20,
-    padding: 16,
+    padding: 18,
     borderWidth: 1,
-    borderColor: "#E2E8F0",
+    borderColor: "#FFEDD5",
     marginBottom: 16,
   },
-  inputLabel: { fontSize: 11, fontWeight: "800", color: "#64748B", marginBottom: 6 },
+  inputLabel: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#9A3412",
+    letterSpacing: 0.5,
+    marginBottom: 8,
+  },
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F8FAFC",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#CBD5E1",
     borderRadius: 14,
     paddingHorizontal: 14,
-    height: 50,
+    height: 52,
   },
-  suffix: { fontSize: 14, fontWeight: "700", color: "#94A3B8", marginLeft: 6 },
-  textInput: { flex: 1, fontSize: 18, fontWeight: "700", color: "#0F172A" },
-  resultCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
+  textInput: {
+    flex: 1,
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#0F172A",
   },
-  resultHeader: { flexDirection: "row", justifyContent: "space-between", marginBottom: 12 },
-  resultTitle: { fontSize: 14, fontWeight: "800", color: "#0F172A" },
-  actionButtons: { flexDirection: "row", gap: 6 },
-  iconBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#F1F5F9",
-    justifyContent: "center",
+  suffix: {
+    fontSize: 18,
+    fontWeight: "800",
+    color: "#94A3B8",
+    marginLeft: 6,
+  },
+  resultBox: {
+    backgroundColor: "#FFF7ED",
+    borderRadius: 22,
+    padding: 20,
+    borderWidth: 1.5,
+    borderColor: "#FED7AA",
     alignItems: "center",
+    shadowColor: "#EA580C",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 3,
   },
-  totalBlock: {
-    borderRadius: 16,
-    padding: 16,
+  resultHeader: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 14,
-    borderWidth: 1,
+    marginBottom: 8,
   },
-  safeBlock: { backgroundColor: "#ECFDF5", borderColor: "#D1FAE5" },
-  shortageBlock: { backgroundColor: "#FEF2F2", borderColor: "#FEE2E2" },
-  totalLabel: { fontSize: 11, fontWeight: "800", letterSpacing: 0.5, marginBottom: 4 },
-  totalValue: { fontSize: 32, fontWeight: "900" },
-  statusBanner: {
+  resultCategory: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#C2410C",
+    letterSpacing: 1,
+  },
+  actionButtons: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 12,
-    borderRadius: 14,
-    borderWidth: 1,
+    gap: 8,
   },
-  statusBannerSafe: { backgroundColor: "#F0FDF4", borderColor: "#BBF7D0" },
-  statusBannerShortage: { backgroundColor: "#FFF1F2", borderColor: "#FECDD3" },
-  statusText: { fontSize: 12, fontWeight: "700", marginLeft: 8, flex: 1, lineHeight: 17 },
+  copyBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#FED7AA",
+    gap: 4,
+  },
+  copyBtnText: {
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#C2410C",
+  },
+  resetBtn: {
+    width: 30,
+    height: 30,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#FED7AA",
+  },
+  priceRow: {
+    flexDirection: "row",
+    alignItems: "baseline",
+    marginTop: 6,
+    marginBottom: 14,
+  },
+  finalPriceText: {
+    fontSize: 52,
+    fontWeight: "900",
+    color: "#0F172A",
+    letterSpacing: -1,
+  },
+  percentSymbol: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "#EA580C",
+    marginLeft: 4,
+  },
+  statusContainer: {
+    width: "100%",
+    alignItems: "center",
+    gap: 12,
+  },
+  statusCard: {
+    width: "100%",
+    backgroundColor: "rgba(255,255,255,0.9)",
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#FED7AA",
+    borderLeftWidth: 5,
+    gap: 10,
+  },
+  statusMessage: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: "#1E293B",
+    textAlign: "center",
+    lineHeight: 18,
+  },
+  breakdownBox: {
+    backgroundColor: "#FFF7ED",
+    borderRadius: 10,
+    padding: 10,
+    gap: 6,
+  },
+  breakdownRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  breakdownLabel: {
+    fontSize: 11,
+    fontWeight: "600",
+    color: "#64748B",
+  },
+  breakdownValue: {
+    fontSize: 12,
+    fontWeight: "800",
+    color: "#0F172A",
+  },
+  alertBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 20,
+    gap: 6,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  alertBadgeText: {
+    color: "#FFFFFF",
+    fontSize: 12,
+    fontWeight: "800",
+  },
+  placeholderCard: {
+    width: "100%",
+    backgroundColor: "rgba(255,255,255,0.6)",
+    borderRadius: 14,
+    padding: 14,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#FED7AA",
+  },
+  placeholderText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#64748B",
+  },
 });
