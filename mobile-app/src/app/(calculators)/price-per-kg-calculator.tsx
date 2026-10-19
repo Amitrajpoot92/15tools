@@ -23,6 +23,25 @@ export default function PricePerKgCalculatorScreen() {
   const [grams, setGrams] = useState("250");
   const [copied, setCopied] = useState(false);
 
+  const formatGrams = (val: number) => {
+    if (isNaN(val) || !isFinite(val)) return "0";
+    return val.toLocaleString("en-US", {
+      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const formatCurrency = (val: number) => {
+    if (isNaN(val) || !isFinite(val)) return `${currency}0`;
+    return (
+      currency +
+      val.toLocaleString("en-IN", {
+        minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
+        maximumFractionDigits: 2,
+      })
+    );
+  };
+
   const calculate = () => {
     const pkg = parseFloat(pricePerKg);
     if (isNaN(pkg) || pkg <= 0) {
@@ -67,23 +86,6 @@ export default function PricePerKgCalculatorScreen() {
   };
 
   const { qty, price, formattedQty } = calculate();
-
-  const formatCurrency = (val: number) => {
-    return (
-      currency +
-      val.toLocaleString("en-IN", {
-        minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
-        maximumFractionDigits: 2,
-      })
-    );
-  };
-
-  const formatGrams = (val: number) => {
-    return val.toLocaleString("en-US", {
-      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
-      maximumFractionDigits: 2,
-    });
-  };
 
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);

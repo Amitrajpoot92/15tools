@@ -69,9 +69,8 @@ const styles = StyleSheet.create({
     zIndex: 99999,
   },
   splashLogo: {
-    width: 110,
-    height: 110,
-    borderRadius: 22,
+    width: 120,
+    height: 120,
     marginBottom: 16,
   },
   brandTitle: {

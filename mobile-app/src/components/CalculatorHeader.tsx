@@ -3,21 +3,18 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
 import { ArrowLeft } from "lucide-react-native";
-import { DynamicIcon } from "./DynamicIcon";
 
 interface CalculatorHeaderProps {
   title: string;
   subtitle: string;
-  iconName: string;
-  themeColor: string;
+  iconName?: string;
+  themeColor?: string;
   themeBg: string;
 }
 
 export function CalculatorHeader({
   title,
   subtitle,
-  iconName,
-  themeColor,
   themeBg,
 }: CalculatorHeaderProps) {
   const router = useRouter();
@@ -45,9 +42,6 @@ export function CalculatorHeader({
 
       {/* Styled Category Hero Card */}
       <View style={[styles.heroCard, { backgroundColor: themeBg }]}>
-        <View style={[styles.iconCircle, { backgroundColor: themeColor }]}>
-          <DynamicIcon name={iconName} size={22} color="#ffffff" />
-        </View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
@@ -88,24 +82,12 @@ const styles = StyleSheet.create({
   heroCard: {
     margin: 16,
     marginBottom: 0,
-    padding: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
     borderRadius: 20,
     alignItems: "center",
     borderWidth: 1,
     borderColor: "rgba(0,0,0,0.05)",
-  },
-  iconCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-    elevation: 3,
   },
   title: {
     fontSize: 18,
