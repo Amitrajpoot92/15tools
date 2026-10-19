@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { ShoppingCart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Cost Per Item Calculator - Find Unit Price Instantly | TopCalcBox",
+  title: "Cost Per Item Calculator – Compare Pack Prices",
   description: "Calculate the exact cost per single item when buying in bulk. Compare bulk pricing easily with our free cost per item calculator.",
 };
 

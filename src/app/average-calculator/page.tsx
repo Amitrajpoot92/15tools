@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Sigma } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Average Calculator - Mean, Median & Sum | TopCalcBox",
+  title: "Average Calculator – Find the Mean of Numbers",
   description: "Calculate the average (mean), median, sum, and count for any dataset. A free and fast online average calculator for students, teachers, and data analysis.",
 };
 

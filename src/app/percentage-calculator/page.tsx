@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Percent } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Percentage Calculator - Fast & Accurate Online Tool | TopCalcBox",
+  title: "Percentage Calculator – Find the Percentage of Any Number",
   description: "Use our free online percentage calculator to quickly find the percentage of a number, calculate discounts, and figure out ratio percentages.",
 };
 

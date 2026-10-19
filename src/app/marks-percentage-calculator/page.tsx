@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { GraduationCap } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Marks Percentage Calculator - Convert Exam Scores to % | TopCalcBox",
+  title: "Marks Percentage Calculator – Calculate Exam Percentage",
   description: "Free online marks percentage calculator for students and teachers. Instantly convert exam scores to percentages and estimate your grade.",
 };
 

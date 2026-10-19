@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Heart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Love Calculator",
+  title: "Love Calculator – Check Your Compatibility Score",
   description: "Enter two names and get a fun love compatibility percentage. Try our free online love calculator for an entertaining result.",
 };
 

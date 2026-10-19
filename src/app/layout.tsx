@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "TopCalcBox - Free Online Calculators",
+  title: "TopCalcBox – Free Online Calculators for Daily Use",
   description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
   icons: {
     icon: "/icon-96.webp",
@@ -26,13 +26,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "TopCalcBox",
-    title: "TopCalcBox - Free Online Calculators",
+    title: "TopCalcBox – Free Online Calculators for Daily Use",
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
     images: [{ url: "https://topcalcbox.com/icon.webp" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TopCalcBox - Free Online Calculators",
+    title: "TopCalcBox – Free Online Calculators for Daily Use",
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
     images: ["https://topcalcbox.com/icon.webp"],
   },

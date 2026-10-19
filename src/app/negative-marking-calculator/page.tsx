@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { TrendingDown } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Negative Marking Calculator - Calculate Exam Scores | TopCalcBox",
+  title: "Negative Marking Calculator – Calculate Your Exam Score",
   description: "Free online negative marking calculator for competitive exams. Instantly calculate your true score taking into account penalties for wrong answers.",
 };
 

@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { CalendarRange } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Date Difference Calculator - Days Between Two Dates | TopCalcBox",
+  title: "Date Difference Calculator – Days Between Two Dates",
   description: "Free online date difference calculator. Find out exactly how many days, weeks, months, or years exist between any two dates.",
 };
 

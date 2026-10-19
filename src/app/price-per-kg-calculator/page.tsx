@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Scale } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Price per Kg Calculator - Compare Costs Easily | TopCalcBox",
+  title: "Price per Kg Calculator – Compare Product Costs",
   description: "Calculate the exact price per kilogram to find the best deals while shopping. Compare products by price per kg instantly.",
 };
 

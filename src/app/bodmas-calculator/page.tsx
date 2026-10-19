@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Calculator } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BODMAS Calculator - Solve Math Expressions Online | TopCalcBox",
+  title: "BODMAS Calculator – Solve Maths Expressions Online",
   description: "Free online BODMAS calculator to solve complex mathematical expressions instantly using correct order of operations (Brackets, Orders, Division, Multiplication, Addition, Subtraction).",
 };
 

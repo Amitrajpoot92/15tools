@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Activity } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BMI Calculator",
+  title: "BMI Calculator – Calculate Your Body Mass Index",
   description: "Calculate your Body Mass Index using your height and weight. Get your BMI result instantly with our free online BMI calculator.",
 };
 

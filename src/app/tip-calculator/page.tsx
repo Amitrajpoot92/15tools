@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Banknote } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Tip Calculator - Split the Bill and Calculate Gratuity | TopCalcBox",
+  title: "Tip Calculator Online – Calculate Tips and Split Bills",
   description: "Free online tip calculator. Easily calculate restaurant tips, split the final bill among friends, and see exact per-person costs.",
 };
 

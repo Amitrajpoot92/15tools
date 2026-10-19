@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Receipt } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "GST Calculator - Calculate Goods and Services Tax | TopCalcBox",
+  title: "GST Calculator Online – Add or Remove GST Amount",
   description: "Free online GST calculator to easily add or remove Goods and Services Tax from your amounts. Supports 5%, 12%, 18%, and 28% GST rates.",
 };
 

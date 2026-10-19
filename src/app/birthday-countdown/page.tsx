@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Timer } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Birthday Countdown - How many days until my birthday? | TopCalcBox",
+  title: "Birthday Countdown – Days Until Your Next Birthday",
   description: "Free online birthday countdown timer. Find out exactly how many days, hours, minutes, and seconds are left until your next birthday.",
 };
 

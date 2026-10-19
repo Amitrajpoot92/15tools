@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { CalendarDays } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Age Calculator Online - Calculate Exact Age in Years, Months, Days | TopCalcBox",
+  title: "Age Calculator Online – Calculate Age from Date of Birth",
   description: "Free online age calculator to find your exact age in years, months, and days from your date of birth to today.",
 };
 

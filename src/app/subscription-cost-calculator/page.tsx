@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Calculator } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Subscription Cost Calculator - Track Monthly & Yearly Expenses | TopCalcBox",
+  title: "Subscription Cost Calculator – Monthly and Yearly Costs",
   description: "Free online subscription cost calculator. Add up all your monthly and yearly subscriptions to see exactly how much you are spending on services.",
 };
 

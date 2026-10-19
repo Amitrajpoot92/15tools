@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { CreditCard } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "EMI Calculator - Calculate Monthly Loan Installments | TopCalcBox",
+  title: "EMI Calculator Online – Calculate Monthly Loan Payments",
   description: "Use our free EMI calculator to easily calculate your Equated Monthly Installments for home loans, car loans, and personal loans.",
 };
 

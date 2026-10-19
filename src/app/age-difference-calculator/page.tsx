@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Age Difference Calculator - Compare Ages Instantly | TopCalcBox",
+  title: "Age Difference Calculator – Compare Two Birth Dates",
   description: "Free online age difference calculator. Compare the dates of birth of two individuals to find the exact age gap in years, months, and days.",
 };
 

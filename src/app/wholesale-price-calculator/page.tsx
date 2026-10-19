@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { PieChart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Wholesale Price Calculator - Calculate Retail Prices & Gross Profit | TopCalcBox",
+  title: "Wholesale Pricing Calculator – Find Your Selling Price",
   description: "Free online wholesale price calculator to find your selling price, gross profit, and markup based on your cost and desired Wholesale.",
 };
 

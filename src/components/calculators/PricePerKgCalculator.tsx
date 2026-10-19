@@ -19,6 +19,24 @@ export function PricePerKgCalculator() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const formatCurrency = (val: number) => {
+    if (isNaN(val) || !isFinite(val)) return currency + "0";
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: currency === '₹' ? 'INR' : 'USD',
+      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
+      maximumFractionDigits: 2
+    }).format(val).replace('INR', '₹').replace('USD', '$');
+  };
+
+  const formatGrams = (val: number) => {
+    if (isNaN(val) || !isFinite(val)) return "0";
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
+      maximumFractionDigits: 2
+    }).format(val);
+  };
+
   const calculate = () => {
     const pkg = parseFloat(pricePerKg);
     if (isNaN(pkg) || pkg <= 0) return { qty: 0, price: 0, formattedQty: "0 Grams" };
@@ -64,22 +82,6 @@ export function PricePerKgCalculator() {
   };
 
   const { qty, price, formattedQty } = calculate();
-
-  const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: currency === '₹' ? 'INR' : 'USD',
-      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
-      maximumFractionDigits: 2
-    }).format(val).replace('INR', '₹').replace('USD', '$');
-  };
-
-  const formatGrams = (val: number) => {
-    return new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: val % 1 !== 0 ? 2 : 0,
-      maximumFractionDigits: 2
-    }).format(val);
-  };
 
   return (
     <div className="w-full relative overflow-hidden">

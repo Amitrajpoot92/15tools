@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { LineChart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "SIP Calculator - Mutual Fund Returns Calculator | TopCalcBox",
+  title: "SIP Calculator Online – Estimate Monthly Investment Returns",
   description: "Calculate the future value of your Systematic Investment Plan (SIP) investments. Find out your expected returns and wealth gained over time.",
 };
 

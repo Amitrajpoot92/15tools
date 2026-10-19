@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Profit and Loss Calculator - Calculate Margins & Revenues | TopCalcBox",
+  title: "Profit and Loss Calculator – Calculate Profit or Loss",
   description: "Free online profit and loss calculator to easily find your business profit, loss amounts, and percentage margins.",
 };
 

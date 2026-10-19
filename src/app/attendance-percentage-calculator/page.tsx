@@ -4,7 +4,7 @@ import { SEOContent } from "@/components/SEOContent";
 import { ClipboardCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Attendance Percentage Calculator - Check Bunking Status | TopCalcBox",
+  title: "Attendance Percentage Calculator – Check Your Attendance",
   description: "Free online attendance percentage calculator. Find out your current attendance and exactly how many classes you can bunk or need to attend.",
 };
 
