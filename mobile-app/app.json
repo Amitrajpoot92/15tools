@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.topcalcbox.app",
+      "bundleIdentifier": "com.topcalcbox.allinone",
       "splash": {
         "image": "./assets/images/splash-icon.png",
         "resizeMode": "contain",
@@ -22,7 +22,7 @@
       }
     },
     "android": {
-      "package": "com.topcalcbox.app",
+      "package": "com.topcalcbox.allinone",
       "splash": {
         "image": "./assets/images/splash-icon.png",
         "resizeMode": "contain",
