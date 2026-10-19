@@ -7,9 +7,12 @@ import {
   StyleSheet,
   Pressable,
   Image,
+  Share,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
+import * as Haptics from "expo-haptics";
 import {
   MOBILE_TOOLS,
   CATEGORIES,
@@ -26,9 +29,14 @@ import {
   Zap,
   Smartphone,
   CheckCircle2,
+  CircleHelp,
+  Share2,
+  Info,
+  ChevronRight,
 } from "lucide-react-native";
 
 export default function HomeScreen() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredTools = useMemo(() => {
@@ -43,6 +51,19 @@ export default function HomeScreen() {
   }, [searchQuery]);
 
   const isSearching = searchQuery.trim().length > 0;
+
+  const handleShareApp = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    try {
+      await Share.share({
+        title: "TopCalcBox – Smart Calculators",
+        message:
+          "Check out TopCalcBox! 15+ smart, 100% free offline calculators for finance, shopping, health & daily calculations: https://topcalcbox.com",
+      });
+    } catch {
+      // User dismissed share dialog
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -195,6 +216,100 @@ export default function HomeScreen() {
             </View>
           );
         })}
+
+        {/* Settings & Info Menu (Help & FAQ, Share, Privacy, About) */}
+        {!isSearching && (
+          <View style={styles.settingsSection}>
+            <View style={styles.settingsCard}>
+              {/* Help & FAQ */}
+              <Pressable
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push("/help-faq" as any);
+                }}
+                style={({ pressed }) => [
+                  styles.menuRow,
+                  pressed && styles.menuRowPressed,
+                ]}
+              >
+                <View style={styles.menuLeft}>
+                  <View style={styles.menuIconBox}>
+                    <CircleHelp size={22} color="#EA580C" strokeWidth={2.2} />
+                  </View>
+                  <Text style={styles.menuLabel}>Help & FAQ</Text>
+                </View>
+                <ChevronRight size={18} color="#94A3B8" />
+              </Pressable>
+
+              {/* Share with friends */}
+              <Pressable
+                onPress={handleShareApp}
+                style={({ pressed }) => [
+                  styles.menuRow,
+                  pressed && styles.menuRowPressed,
+                ]}
+              >
+                <View style={styles.menuLeft}>
+                  <View style={styles.menuIconBox}>
+                    <Share2 size={22} color="#EA580C" strokeWidth={2.2} />
+                  </View>
+                  <Text style={styles.menuLabel}>Share with friends</Text>
+                </View>
+                <ChevronRight size={18} color="#94A3B8" />
+              </Pressable>
+
+              {/* Privacy policy */}
+              <Pressable
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push("/privacy-policy" as any);
+                }}
+                style={({ pressed }) => [
+                  styles.menuRow,
+                  pressed && styles.menuRowPressed,
+                ]}
+              >
+                <View style={styles.menuLeft}>
+                  <View style={styles.menuIconBox}>
+                    <ShieldCheck size={22} color="#EA580C" strokeWidth={2.2} />
+                  </View>
+                  <Text style={styles.menuLabel}>Privacy policy</Text>
+                </View>
+                <ChevronRight size={18} color="#94A3B8" />
+              </Pressable>
+
+              {/* About & updates */}
+              <Pressable
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push("/about" as any);
+                }}
+                style={({ pressed }) => [
+                  styles.menuRow,
+                  styles.menuRowLast,
+                  pressed && styles.menuRowPressed,
+                ]}
+              >
+                <View style={styles.menuLeft}>
+                  <View style={styles.menuIconBox}>
+                    <Info size={22} color="#EA580C" strokeWidth={2.2} />
+                  </View>
+                  <Text style={styles.menuLabel}>About & updates</Text>
+                </View>
+                <View style={styles.menuRight}>
+                  <Text style={styles.versionTag}>v1.0.0 (1)</Text>
+                  <ChevronRight size={18} color="#94A3B8" />
+                </View>
+              </Pressable>
+            </View>
+
+            <View style={styles.footerNotice}>
+              <Text style={styles.footerText}>
+                TopCalcBox • 100% Free & Offline Calculators
+              </Text>
+            </View>
+          </View>
+        )}
 
         {filteredTools.length === 0 && (
           <View style={styles.emptyState}>
@@ -455,5 +570,78 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#64748B",
     textAlign: "center",
+  },
+  settingsSection: {
+    marginTop: 12,
+    marginBottom: 20,
+  },
+  settingsCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    paddingHorizontal: 16,
+    paddingVertical: 4,
+    shadowColor: "#0F172A",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 2,
+  },
+  menuRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F1F5F9",
+  },
+  menuRowLast: {
+    borderBottomWidth: 0,
+  },
+  menuRowPressed: {
+    opacity: 0.7,
+  },
+  menuLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  menuIconBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: "#FFF7ED",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 14,
+  },
+  menuLabel: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0F172A",
+    letterSpacing: -0.2,
+  },
+  menuRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  versionTag: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#64748B",
+    marginRight: 2,
+  },
+  footerNotice: {
+    marginTop: 18,
+    marginBottom: 6,
+    alignItems: "center",
+  },
+  footerText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#94A3B8",
+    letterSpacing: 0.2,
   },
 });
