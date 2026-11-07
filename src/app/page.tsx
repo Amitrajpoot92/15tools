@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { HomeCalculatorSection } from "@/components/HomeCalculatorSection";
 import { 
   Sparkles, 
@@ -90,14 +91,14 @@ export default function Home() {
     <div className="space-y-10 pb-0">
       {/* Interactive Hero Search & Tool Grid */}
       <HomeCalculatorSection 
-        heroHeader={heroHeader} 
+         
         featureBadges={featureBadges} 
       />
 
       {/* Home Page SEO & Info Section */}
       <div className="mt-10 md:mt-12 space-y-6 md:space-y-8">
         
-        {/* Why Use TopCalcBox */}
+        {/* Why TopCalcBox Is Your Ultimate Hub for Everyday Calculations */}
         <section className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 border-[#fed7aa]/60 shadow-lg shadow-orange-500/5 relative overflow-hidden">
           <div 
             aria-hidden="true"
@@ -114,13 +115,27 @@ export default function Home() {
               <span>WHY CHOOSE US</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 leading-tight">
-              Why Use <span className="text-[#ff5400]">TopCalcBox</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black text-slate-900 tracking-tight mb-6 leading-tight">
+              Why <span className="text-[#ff5400]">TopCalcBox</span> Is Your Ultimate Hub for Everyday Calculations
             </h2>
             
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-              TopCalcBox is designed to make everyday calculations simple and convenient. With free calculators for finance, math, education, health, dates, and daily-life needs, you can find the right tool in one place. From percentages, GST, discounts, EMI and SIP to age, BMI and everyday calculations, TopCalcBox helps you get clear results quickly without complicated formulas. Our simple, mobile-friendly tools are easy to use whenever you need them.
-            </p>
+            <div className="space-y-4 sm:space-y-5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              <p>
+                Ever wondered how much you will save during a sale, how much GST you need to pay, or whether your business is making a profit? Everyday calculations can take time when you work them out manually. TopCalcBox makes these tasks easier with its <Link href="/percentage-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Percentage Calculator</Link>, <Link href="/discount-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Discount Calculator</Link>, <Link href="/gst-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">GST Calculator</Link>, <Link href="/profit-and-loss-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Profit and Loss Calculator</Link>, and <Link href="/wholesale-price-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Wholesale Price Calculator</Link>. You can also use the <Link href="/emi-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">EMI Calculator</Link> to estimate loan payments, the <Link href="/sip-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">SIP Calculator</Link> to explore potential investment growth, and the <Link href="/subscription-cost-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Subscription Cost Calculator</Link> to understand your monthly and yearly subscription expenses.
+              </p>
+
+              <p>
+                Shopping and daily budgeting become simpler when you know exactly what you are spending. The <Link href="/cost-per-item-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Cost Per Item Calculator</Link> helps you compare individual item prices, while the <Link href="/price-per-kg-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Price per Kg Calculator</Link> makes comparing products by weight easier. The <Link href="/grocery-bill-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Grocery Bill Calculator</Link> helps total your shopping expenses, the <Link href="/tip-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Tip Calculator</Link> helps calculate tips and split bills, and the <Link href="/fuel-cost-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Fuel Cost Calculator</Link> estimates the cost of your journey. These tools are useful when you want to compare prices, plan expenses, or make smarter everyday spending decisions.
+              </p>
+
+              <p>
+                Students can save time with the <Link href="/marks-percentage-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Marks Percentage Calculator</Link>, <Link href="/attendance-percentage-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Attendance Percentage Calculator</Link>, <Link href="/negative-marking-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Negative Marking Calculator</Link>, <Link href="/average-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Average Calculator</Link>, and <Link href="/bodmas-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">BODMAS Calculator</Link>. Whether you are checking exam results, tracking attendance, estimating a score after negative marking, finding an average, or solving a maths expression, these tools make calculations easier. For personal planning, the <Link href="/age-calculator-online" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Age Calculator Online</Link> calculates your age, the <Link href="/birthday-countdown" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Birthday Countdown</Link> counts the days until your birthday, the <Link href="/age-difference-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Age Difference Calculator</Link> compares two ages, and the <Link href="/date-difference-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Date Difference Calculator</Link> finds the time between two dates.
+              </p>
+
+              <p>
+                TopCalcBox also offers tools for health estimates and entertainment. The <Link href="/bmi-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">BMI Calculator</Link> estimates body mass index using height and weight, while the <Link href="/calorie-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Calorie Calculator</Link> estimates daily calorie needs based on personal details and activity level. These results are general estimates, not medical advice. The <Link href="/love-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Love Calculator</Link> adds a little fun by generating a playful compatibility result, not a scientific prediction of a relationship. With all 25 free online calculators in one place, TopCalcBox helps students, shoppers, families, and business owners solve common calculation problems without complicated formulas. Simply choose a tool, enter your values, and get a result to help with your next decision.
+              </p>
+            </div>
           </div>
         </section>
 

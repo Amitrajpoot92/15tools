@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/negative-marking-calculator',
     '/average-calculator',
     '/bodmas-calculator',
+    '/normal-calculator',
     '/age-calculator-online',
     '/birthday-countdown',
     '/age-difference-calculator',

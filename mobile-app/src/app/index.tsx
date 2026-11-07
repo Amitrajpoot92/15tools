@@ -17,9 +17,11 @@ import {
   MOBILE_TOOLS,
   CATEGORIES,
   CATEGORY_STYLES,
+  CLIENT_CATEGORY_STYLES,
   MobileTool,
 } from "@/constants/tools";
 import { ToolCard } from "@/components/ToolCard";
+import { SimpleHeroCalculator } from "@/components/SimpleHeroCalculator";
 import { DynamicIcon } from "@/components/DynamicIcon";
 import {
   Search,
@@ -88,34 +90,33 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {/* Dark Hero Banner */}
-        <View style={styles.heroCard}>
-          <View style={styles.heroBadge}>
-            <Sparkles size={12} color="#FED7AA" />
-            <Text style={styles.heroBadgeText}>FREE CALCULATOR TOOLS</Text>
-          </View>
+        {/* Hero Simple Calculator (Replaces dark blue box) */}
+        <SimpleHeroCalculator />
 
-          <Text style={styles.heroTitle}>
-            Calculate Anything.{"\n"}
-            <Text style={styles.heroTitleHighlight}>Instantly.</Text>
+        {/* High-Visibility Compact Banner Right Under Calculator */}
+        <View style={styles.heroHighlightBox}>
+          <Text style={styles.heroHighlightTitle}>
+            25 Free Online Calculators for Daily Use
           </Text>
-
-          <Text style={styles.heroSubtitle}>
-            Fast & accurate calculations for Finance, Math, Health, Age & Daily Life.
-          </Text>
-
-          {/* Search Bar */}
-          <View style={styles.searchContainer}>
-            <Search size={18} color="#94A3B8" style={styles.searchIcon} />
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search 25+ calculators..."
-              placeholderTextColor="#94A3B8"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              clearButtonMode="while-editing"
-            />
+          <View style={styles.heroHighlightBadge}>
+            <Sparkles size={12} color="#FFFFFF" />
+            <Text style={styles.heroHighlightText}>
+              100% Free, No Login Required
+            </Text>
           </View>
+        </View>
+
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+          <Search size={18} color="#94A3B8" style={styles.searchIcon} />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search 26+ calculators..."
+            placeholderTextColor="#94A3B8"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            clearButtonMode="while-editing"
+          />
         </View>
 
         {/* Feature Badges Row */}
@@ -144,78 +145,131 @@ export default function HomeScreen() {
           </ScrollView>
         )}
 
-        {/* All Calculators Header Banner */}
-        <View style={styles.sectionHeader}>
-          <View style={styles.sectionHeaderLeft}>
-            <View style={styles.allCalculatorsIcon}>
-              <Calculator size={20} color="#ffffff" strokeWidth={2.5} />
+        {/* Categories Section (Client Card Design) */}
+        {isSearching ? (
+          <View style={[styles.clientCategoryCard, { borderTopColor: "#F97316" }]}>
+            <View style={styles.clientCategoryHeader}>
+              <View style={styles.clientTitleRow}>
+                <DynamicIcon name="Search" size={18} color="#F97316" strokeWidth={2.5} />
+                <Text style={styles.clientCategoryTitle}>Search Results</Text>
+              </View>
+              <View style={[styles.clientCategoryBadge, { backgroundColor: "#FFF7ED" }]}>
+                <Text style={[styles.clientBadgeText, { color: "#C2410C" }]}>
+                  {filteredTools.length} found
+                </Text>
+              </View>
             </View>
-            <View>
-              <Text style={styles.sectionTitle}>
-                {isSearching ? "Search Results" : "All Calculators"}
-              </Text>
-              <Text style={styles.sectionSubtitle}>
-                {isSearching ? `Found ${filteredTools.length} matching tools` : "Explore all tools in one place"}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.toolCountBadge}>
-            <Text style={styles.toolCountNumber}>{filteredTools.length}</Text>
-            <Text style={styles.toolCountLabel}>Tools</Text>
-          </View>
-        </View>
 
-        {/* Category List & Tool Cards */}
-        {CATEGORIES.map((category) => {
-          const catTools = filteredTools.filter((t) => t.category === category);
-          if (catTools.length === 0) return null;
-          const styleInfo = CATEGORY_STYLES[category];
-
-          return (
-            <View key={category} style={styles.categoryBlock}>
-              {/* Category Header Banner */}
-              <View
-                style={[
-                  styles.categoryBanner,
-                  { backgroundColor: styleInfo.bg, borderColor: styleInfo.border },
-                ]}
-              >
-                <View style={styles.categoryTitleGroup}>
-                  <View
-                    style={[
-                      styles.categoryIconCircle,
-                      { backgroundColor: styleInfo.iconBg },
+            <View style={styles.clientToolList}>
+              {filteredTools.length > 0 ? (
+                filteredTools.map((tool) => (
+                  <Pressable
+                    key={tool.slug}
+                    onPress={() => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                      router.push(`/(calculators)/${tool.slug}` as any);
+                    }}
+                    style={({ pressed }) => [
+                      styles.clientToolItem,
+                      pressed && styles.clientToolItemPressedOrange,
                     ]}
                   >
-                    <DynamicIcon
-                      name={catTools[0].iconName}
-                      size={18}
-                      color="#ffffff"
-                    />
-                  </View>
-                  <Text style={[styles.categoryTitle, { color: styleInfo.text }]}>
-                    {category}
+                    <View style={styles.clientToolLeft}>
+                      <View style={[styles.clientToolDot, { backgroundColor: "#F97316" }]} />
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.clientToolText}>{tool.name}</Text>
+                        <Text style={styles.clientToolSubtext}>{tool.category.split("&")[0].trim()}</Text>
+                      </View>
+                    </View>
+                    <View style={[styles.clientToolArrowBox, { backgroundColor: "#FFF7ED" }]}>
+                      <ChevronRight size={15} color="#EA580C" strokeWidth={2.5} />
+                    </View>
+                  </Pressable>
+                ))
+              ) : (
+                <View style={styles.emptyState}>
+                  <Text style={styles.emptyStateTitle}>No calculators found</Text>
+                  <Text style={styles.emptyStateText}>
+                    Try searching for &quot;Percentage&quot;, &quot;BMI&quot;, or &quot;Age&quot;.
                   </Text>
                 </View>
-                <View
-                  style={[
-                    styles.categoryCountBadge,
-                    { backgroundColor: styleInfo.badgeBg },
-                  ]}
-                >
-                  <Text style={styles.categoryCountText}>{catTools.length}</Text>
+              )}
+            </View>
+          </View>
+        ) : (
+          CATEGORIES.map((category) => {
+            const catTools = filteredTools.filter((t) => t.category === category);
+            if (catTools.length === 0) return null;
+            const styleInfo = CLIENT_CATEGORY_STYLES[category] || CLIENT_CATEGORY_STYLES["DATE & AGE"];
+
+            return (
+              <View
+                key={category}
+                style={[
+                  styles.clientCategoryCard,
+                  { borderTopColor: styleInfo.topBorder },
+                ]}
+              >
+                {/* Category Card Header */}
+                <View style={styles.clientCategoryHeader}>
+                  <View style={styles.clientTitleRow}>
+                    <DynamicIcon
+                      name={styleInfo.iconName}
+                      size={18}
+                      color={styleInfo.iconColor}
+                      strokeWidth={2.5}
+                    />
+                    <Text style={styles.clientCategoryTitle}>{category}</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.clientCategoryBadge,
+                      { backgroundColor: styleInfo.badgeBg },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.clientBadgeText,
+                        { color: styleInfo.badgeText },
+                      ]}
+                    >
+                      {catTools.length}
+                    </Text>
+                  </View>
+                </View>
+
+                {/* Tool Items List (Matching Client Screenshot) */}
+                <View style={styles.clientToolList}>
+                  {catTools.map((tool) => (
+                    <Pressable
+                      key={tool.slug}
+                      onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        router.push(`/(calculators)/${tool.slug}` as any);
+                      }}
+                      style={({ pressed }) => [
+                        styles.clientToolItem,
+                        pressed && {
+                          backgroundColor: styleInfo.activeBg,
+                          borderColor: styleInfo.activeBorder,
+                          transform: [{ scale: 0.985 }],
+                        },
+                      ]}
+                    >
+                      <View style={styles.clientToolLeft}>
+                        <View style={[styles.clientToolDot, { backgroundColor: styleInfo.topBorder }]} />
+                        <Text style={styles.clientToolText}>{tool.name}</Text>
+                      </View>
+                      <View style={[styles.clientToolArrowBox, { backgroundColor: styleInfo.badgeBg }]}>
+                        <ChevronRight size={15} color={styleInfo.iconColor} strokeWidth={2.5} />
+                      </View>
+                    </Pressable>
+                  ))}
                 </View>
               </View>
-
-              {/* Cards Grid */}
-              <View style={styles.cardsContainer}>
-                {catTools.map((tool) => (
-                  <ToolCard key={tool.slug} tool={tool} />
-                ))}
-              </View>
-            </View>
-          );
-        })}
+            );
+          })
+        )}
 
         {/* Settings & Info Menu (Help & FAQ, Share, Privacy, About) */}
         {!isSearching && (
@@ -418,22 +472,69 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     marginBottom: 16,
   },
+  heroHighlightBox: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    borderWidth: 2,
+    borderColor: "#F97316",
+    paddingVertical: 11,
+    paddingHorizontal: 14,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 14,
+    marginBottom: 14,
+    shadowColor: "#EA580C",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.16,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  heroHighlightTitle: {
+    fontSize: 15,
+    fontWeight: "900",
+    color: "#0F172A",
+    textAlign: "center",
+    letterSpacing: -0.2,
+  },
+  heroHighlightBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#EA580C",
+    paddingHorizontal: 10,
+    paddingVertical: 3.5,
+    borderRadius: 16,
+    marginTop: 5,
+    gap: 5,
+  },
+  heroHighlightText: {
+    fontSize: 11,
+    fontWeight: "900",
+    color: "#FFFFFF",
+    textTransform: "uppercase",
+    letterSpacing: 0.3,
+  },
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.12)",
-    borderRadius: 14,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.18)",
-    paddingHorizontal: 12,
+    borderColor: "#E2E8F0",
+    paddingHorizontal: 14,
     height: 48,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   searchIcon: {
     marginRight: 8,
   },
   searchInput: {
     flex: 1,
-    color: "#ffffff",
+    color: "#0F172A",
     fontSize: 15,
     fontWeight: "500",
   },
@@ -643,5 +744,106 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#94A3B8",
     letterSpacing: 0.2,
+  },
+  clientCategoryCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 22,
+    borderTopWidth: 4,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    elevation: 2,
+  },
+  clientCategoryHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingBottom: 10,
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F1F5F9",
+  },
+  clientTitleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  clientCategoryTitle: {
+    fontSize: 16,
+    fontWeight: "900",
+    color: "#0F172A",
+    letterSpacing: 0.3,
+    textTransform: "uppercase",
+  },
+  clientCategoryBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 12,
+  },
+  clientBadgeText: {
+    fontSize: 12,
+    fontWeight: "800",
+  },
+  clientToolList: {
+    gap: 9,
+  },
+  clientToolItem: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderWidth: 1.5,
+    borderColor: "#E2E8F0",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    shadowColor: "#0F172A",
+    shadowOffset: { width: 0, height: 1.5 },
+    shadowOpacity: 0.04,
+    shadowRadius: 3,
+    elevation: 1.5,
+  },
+  clientToolItemPressedOrange: {
+    backgroundColor: "#FFF7ED",
+    borderColor: "#FB923C",
+    transform: [{ scale: 0.985 }],
+  },
+  clientToolLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    marginRight: 10,
+    gap: 10,
+  },
+  clientToolDot: {
+    width: 5,
+    height: 18,
+    borderRadius: 3,
+  },
+  clientToolArrowBox: {
+    width: 28,
+    height: 28,
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  clientToolText: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#0F172A",
+    letterSpacing: -0.2,
+    flexShrink: 1,
+  },
+  clientToolSubtext: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: "#94A3B8",
+    textTransform: "uppercase",
+    marginTop: 2,
   },
 });

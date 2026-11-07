@@ -55,17 +55,20 @@ export function Sidebar() {
     <>
       {/* Mobile Header (Only visible on small screens) */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-40 shadow-sm">
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2.5">
           <img 
             src="/icon-96.webp" 
             alt="TopCalcBox Logo" 
-            width="32" 
-            height="32" 
+            width="34" 
+            height="34" 
             loading="eager"
             decoding="async" 
-            className="w-8 h-8 rounded-[8px] shadow-sm" 
+            className="w-[34px] h-[34px] rounded-full shadow-sm shrink-0" 
           />
-          <span className="font-extrabold text-slate-800 text-lg">TopCalcBox</span>
+          <div className="flex flex-col leading-tight">
+            <span className="font-extrabold text-slate-900 text-base tracking-tight">TopCalcBox</span>
+            <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 tracking-tight">Free Online Calculators</span>
+          </div>
         </Link>
         <div className="flex items-center space-x-2">
           <button 
@@ -110,9 +113,12 @@ export function Sidebar() {
               width="40" 
               height="40" 
               decoding="async" 
-              className="w-10 h-10 rounded-xl shadow-sm group-hover:scale-105 transition-transform duration-300" 
+              className="w-10 h-10 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300 shrink-0" 
             />
-            <span className="text-xl font-extrabold text-slate-800 tracking-tight">TopCalcBox</span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-extrabold text-slate-800 tracking-tight group-hover:text-orange-600 transition-colors">TopCalcBox</span>
+              <span className="text-[11px] font-semibold text-slate-500 tracking-tight">Free Online Calculators</span>
+            </div>
           </Link>
           <button 
             className="md:hidden p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-md"

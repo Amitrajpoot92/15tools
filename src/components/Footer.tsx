@@ -10,7 +10,7 @@ export function Footer() {
           <div className="flex items-center space-x-3">
             <div className="relative">
               {/* Strong orange glow behind the logo */}
-              <div className="absolute inset-0 bg-orange-500 blur-xl opacity-40 rounded-xl" />
+              <div className="absolute inset-0 bg-orange-500 blur-xl opacity-40 rounded-full" />
               <img 
                 src="/icon-96.webp" 
                 alt="TopCalcBox Logo" 
@@ -18,7 +18,7 @@ export function Footer() {
                 height="40" 
                 loading="lazy" 
                 decoding="async" 
-                className="w-9 h-9 md:w-10 md:h-10 rounded-xl relative z-10 shadow-sm" 
+                className="w-9 h-9 md:w-10 md:h-10 rounded-full relative z-10 shadow-sm" 
               />
             </div>
             <span className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">

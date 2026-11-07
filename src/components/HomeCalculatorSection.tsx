@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
+import { SimpleHeroCalculator } from "@/components/SimpleHeroCalculator";
 import { TOOLS } from "@/lib/constants";
-import { ToolCard } from "@/components/ToolCard";
 import { 
   Search, 
   Sparkles, 
@@ -10,34 +11,100 @@ import {
   Banknote, 
   CalendarDays, 
   ShoppingCart, 
-  Heart 
+  Heart,
+  ChevronRight,
+  X
 } from "lucide-react";
 
 const CATEGORIES = [
-  "FINANCE & MONEY",
-  "MATH & EDUCATION",
   "DATE & AGE",
   "SHOPPING & DAILY LIFE",
+  "FINANCE & MONEY",
+  "MATH & EDUCATION",
   "HEALTH & FITNESS",
-  "FUN & LIFESTYLE"
+  "FUN & LIFESTYLE",
 ] as const;
 
-const CATEGORY_THEMES: Record<string, { lightBg: string, border: string, iconBg: string, badgeBg: string, titleColor: string, icon: any }> = {
-  "FINANCE & MONEY": { lightBg: "bg-orange-50/70", border: "border-orange-100", iconBg: "bg-gradient-to-br from-amber-400 to-orange-500", badgeBg: "bg-gradient-to-br from-orange-400 to-orange-600", titleColor: "text-slate-900", icon: Banknote },
-  "MATH & EDUCATION": { lightBg: "bg-blue-50/70", border: "border-blue-100", iconBg: "bg-gradient-to-br from-blue-400 to-blue-600", badgeBg: "bg-gradient-to-br from-blue-400 to-blue-600", titleColor: "text-blue-900", icon: Calculator },
-  "DATE & AGE": { lightBg: "bg-purple-50/70", border: "border-purple-100", iconBg: "bg-gradient-to-br from-purple-400 to-purple-600", badgeBg: "bg-gradient-to-br from-purple-400 to-purple-600", titleColor: "text-slate-900", icon: CalendarDays },
-  "SHOPPING & DAILY LIFE": { lightBg: "bg-emerald-50/70", border: "border-emerald-100", iconBg: "bg-gradient-to-br from-emerald-400 to-emerald-600", badgeBg: "bg-gradient-to-br from-emerald-400 to-emerald-600", titleColor: "text-emerald-900", icon: ShoppingCart },
-  "HEALTH & FITNESS": { lightBg: "bg-rose-50/70", border: "border-rose-100", iconBg: "bg-gradient-to-br from-rose-400 to-rose-600", badgeBg: "bg-gradient-to-br from-rose-400 to-rose-600", titleColor: "text-rose-900", icon: Heart },
-  "FUN & LIFESTYLE": { lightBg: "bg-amber-50/70", border: "border-amber-100", iconBg: "bg-gradient-to-br from-amber-400 to-amber-600", badgeBg: "bg-gradient-to-br from-amber-400 to-amber-600", titleColor: "text-amber-900", icon: Sparkles }
+interface CategoryConfig {
+  icon: React.ElementType;
+  topBorderClass: string;
+  dotColorClass: string;
+  iconColor: string;
+  badgeClass: string;
+  itemBorderHover: string;
+  arrowHoverColor: string;
+  arrowBgHover: string;
+}
+
+const CATEGORY_CONFIGS: Record<string, CategoryConfig> = {
+  "DATE & AGE": {
+    icon: CalendarDays,
+    topBorderClass: "border-t-[#00B4D8]",
+    dotColorClass: "bg-[#00B4D8]",
+    iconColor: "text-[#00B4D8]",
+    badgeClass: "bg-cyan-50 text-cyan-700 border border-cyan-200/70",
+    itemBorderHover: "hover:border-[#00B4D8] hover:bg-[#E6F8F9] hover:shadow-md hover:shadow-cyan-500/10",
+    arrowHoverColor: "group-hover:text-[#00B4D8]",
+    arrowBgHover: "group-hover:bg-cyan-100/70",
+  },
+  "SHOPPING & DAILY LIFE": {
+    icon: ShoppingCart,
+    topBorderClass: "border-t-[#0D9488]",
+    dotColorClass: "bg-[#0D9488]",
+    iconColor: "text-[#0D9488]",
+    badgeClass: "bg-teal-50 text-teal-700 border border-teal-200/70",
+    itemBorderHover: "hover:border-[#0D9488] hover:bg-[#E6F8F9] hover:shadow-md hover:shadow-teal-500/10",
+    arrowHoverColor: "group-hover:text-[#0D9488]",
+    arrowBgHover: "group-hover:bg-teal-100/70",
+  },
+  "FINANCE & MONEY": {
+    icon: Banknote,
+    topBorderClass: "border-t-[#F97316]",
+    dotColorClass: "bg-[#F97316]",
+    iconColor: "text-[#F97316]",
+    badgeClass: "bg-orange-50 text-orange-700 border border-orange-200/70",
+    itemBorderHover: "hover:border-[#F97316] hover:bg-[#FFF7ED] hover:shadow-md hover:shadow-orange-500/10",
+    arrowHoverColor: "group-hover:text-[#F97316]",
+    arrowBgHover: "group-hover:bg-orange-100/70",
+  },
+  "MATH & EDUCATION": {
+    icon: Calculator,
+    topBorderClass: "border-t-[#3B82F6]",
+    dotColorClass: "bg-[#3B82F6]",
+    iconColor: "text-[#3B82F6]",
+    badgeClass: "bg-blue-50 text-blue-700 border border-blue-200/70",
+    itemBorderHover: "hover:border-[#3B82F6] hover:bg-[#EFF6FF] hover:shadow-md hover:shadow-blue-500/10",
+    arrowHoverColor: "group-hover:text-[#3B82F6]",
+    arrowBgHover: "group-hover:bg-blue-100/70",
+  },
+  "HEALTH & FITNESS": {
+    icon: Heart,
+    topBorderClass: "border-t-[#F43F5E]",
+    dotColorClass: "bg-[#F43F5E]",
+    iconColor: "text-[#F43F5E]",
+    badgeClass: "bg-rose-50 text-rose-700 border border-rose-200/70",
+    itemBorderHover: "hover:border-[#F43F5E] hover:bg-[#FFF1F2] hover:shadow-md hover:shadow-rose-500/10",
+    arrowHoverColor: "group-hover:text-[#F43F5E]",
+    arrowBgHover: "group-hover:bg-rose-100/70",
+  },
+  "FUN & LIFESTYLE": {
+    icon: Sparkles,
+    topBorderClass: "border-t-[#F59E0B]",
+    dotColorClass: "bg-[#F59E0B]",
+    iconColor: "text-[#F59E0B]",
+    badgeClass: "bg-amber-50 text-amber-700 border border-amber-200/70",
+    itemBorderHover: "hover:border-[#F59E0B] hover:bg-[#FFFBEB] hover:shadow-md hover:shadow-amber-500/10",
+    arrowHoverColor: "group-hover:text-[#F59E0B]",
+    arrowBgHover: "group-hover:bg-amber-100/70",
+  },
 };
 
 interface HomeCalculatorSectionProps {
-  heroHeader: React.ReactNode;
-  featureBadges: React.ReactNode;
+  heroHeader?: React.ReactNode;
+  featureBadges?: React.ReactNode;
 }
 
 export function HomeCalculatorSection({
-  heroHeader,
   featureBadges,
 }: HomeCalculatorSectionProps) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,7 +115,8 @@ export function HomeCalculatorSection({
     return TOOLS.filter(
       (t) =>
         t.name.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q)
+        t.description.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q)
     );
   }, [searchQuery]);
 
@@ -56,179 +124,160 @@ export function HomeCalculatorSection({
 
   return (
     <>
-      {/* Hero Section Container */}
-      <section className="relative rounded-[2rem] md:rounded-[2.5rem] bg-slate-900 overflow-hidden px-5 py-8 md:px-6 md:py-12 text-center shadow-2xl mt-2 border border-slate-800">
-        {/* Background Ambient Glows */}
-        <div 
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none overflow-hidden"
-        >
-          <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 bg-orange-500/15 rounded-full blur-[90px]" />
-          <div className="absolute -bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-rose-500/15 rounded-full blur-[90px]" />
+      {/* Hero Interactive Simple Calculator */}
+      <section className="relative mt-2 mb-6">
+        <SimpleHeroCalculator />
+
+        {/* High-Visibility Compact Colored Banner Right Under Calculator */}
+        <div className="mt-4 mb-3 max-w-[390px] sm:max-w-md mx-auto rounded-2xl p-[2px] bg-gradient-to-r from-orange-500 via-amber-400 to-rose-500 shadow-md shadow-orange-500/15">
+          <div className="bg-white rounded-[14px] px-4 py-2.5 text-center flex flex-col items-center justify-center">
+            <h2 className="text-[15px] sm:text-base font-black text-slate-900 tracking-tight leading-snug">
+              25 Free Online Calculators for Daily Use
+            </h2>
+            <div className="inline-flex items-center justify-center gap-1.5 mt-1 px-3 py-0.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[11px] sm:text-xs font-black uppercase tracking-wider shadow-xs">
+              <Sparkles className="w-3 h-3 text-white" />
+              <span>100% Free, No Login Required</span>
+            </div>
+          </div>
         </div>
 
-        <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-          {/* Static SSR Hero Text (Instant LCP) */}
-          {heroHeader}
-
-          {/* Search Bar */}
-          <div className="relative w-full max-w-lg group">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-              <Search className="w-5 h-5 md:w-6 md:h-6 text-slate-400 group-focus-within:text-orange-400 transition-colors" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search for a calculator..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              aria-label="Search for a calculator"
-              className="w-full bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder-slate-400 rounded-xl md:rounded-2xl py-3 md:py-4 pl-11 md:pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all text-base md:text-lg shadow-lg"
-            />
+        {/* Clean Search Bar */}
+        <div className="relative w-full max-w-[390px] sm:max-w-md mx-auto mt-4 group">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none z-10">
+            <Search className="w-5 h-5 text-slate-400 group-focus-within:text-orange-500 transition-colors" />
           </div>
+          <input
+            type="text"
+            placeholder="Search 26+ calculators..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search for a calculator"
+            className="w-full bg-white border-2 border-slate-200 text-slate-800 placeholder-slate-400 rounded-2xl py-3 pl-11 pr-9 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all text-sm sm:text-base shadow-xs hover:border-slate-300"
+          />
+          {isSearching && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+              aria-label="Clear search"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </section>
 
       {/* Feature Badges (Server Rendered) */}
       {featureBadges}
 
-      {/* Calculators Grid Section */}
-      <section aria-label="Available Calculators">
-        {/* Main Header Banner */}
-        <div className="relative overflow-hidden rounded-[1.25rem] border border-orange-100 bg-orange-50/70 p-2 md:p-3 flex items-center justify-between shadow-sm mb-10">
-          <div className="flex items-center gap-3 md:gap-4">
-            <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center shadow-md bg-gradient-to-br from-amber-400 to-orange-500 text-white shrink-0 ml-1 md:ml-2">
-              <Calculator className="w-7 h-7 md:w-8 md:h-8" strokeWidth={2.5} />
+      {/* Categories & Tools Section */}
+      <section aria-label="Available Calculators" className="mt-8">
+        {isSearching ? (
+          /* Search Results Card */
+          <div className="bg-white rounded-2xl sm:rounded-3xl border-x border-b border-slate-200/80 border-t-4 border-t-orange-500 p-5 sm:p-6 shadow-sm">
+            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-100 mb-4">
+              <div className="flex items-center space-x-2.5">
+                <Search className="w-5 h-5 text-orange-500" strokeWidth={2.5} />
+                <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-wide uppercase">
+                  Search Results
+                </h3>
+              </div>
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-200">
+                {filteredTools.length} found
+              </span>
             </div>
 
-            <div className="flex flex-col justify-center">
-              <h2 className="text-xl md:text-3xl font-black text-slate-800 tracking-tight leading-none">
-                {isSearching ? (
-                  "Search Results"
-                ) : (
-                  <>
-                    All{" "}
-                    <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-                      Calculators
-                    </span>
-                  </>
-                )}
-              </h2>
-              {!isSearching && (
-                <p className="text-[11px] md:text-sm font-bold text-slate-600 mt-1 md:mt-1.5">
-                  Explore all tools in one place
+            {filteredTools.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                {filteredTools.map((tool) => (
+                  <Link
+                    key={tool.slug}
+                    href={`/${tool.slug}`}
+                    className="group flex items-center justify-between px-4 py-3.5 bg-white hover:bg-orange-50/70 border-2 border-slate-200/90 hover:border-orange-400 rounded-xl text-slate-800 font-bold text-sm sm:text-[15px] transition-all shadow-xs hover:shadow-md active:scale-[0.99] cursor-pointer"
+                  >
+                    <div className="flex items-center space-x-2.5 truncate mr-2">
+                      <div className="w-1.5 h-4 bg-orange-500 rounded-full opacity-60 group-hover:opacity-100 transition-all shrink-0" />
+                      <span className="truncate group-hover:text-slate-950">{tool.name}</span>
+                    </div>
+                    <div className="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-orange-100/80 flex items-center justify-center shrink-0 transition-colors">
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-orange-600 group-hover:translate-x-0.5 transition-all" strokeWidth={2.5} />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-slate-500 font-medium text-sm">
+                  No calculators found matching &quot;{searchQuery}&quot;
                 </p>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-
-          <div className="mr-1 md:mr-2 flex items-center justify-center gap-1.5 px-3 py-1.5 md:px-5 md:py-2.5 rounded-xl shadow-sm bg-gradient-to-br from-orange-400 to-orange-600 text-white shrink-0 border-2 md:border-[3px] border-white">
-            <div className="hidden sm:block">
-              <Sparkles className="w-4 h-4 md:w-5 md:h-5 fill-white/20" />
-            </div>
-            <span className="text-lg md:text-2xl font-black leading-none">
-              {filteredTools.length}
-            </span>
-            <span className="text-[9px] md:text-sm font-bold mt-0.5">Tools</span>
-          </div>
-        </div>
-
-        {filteredTools.length > 0 ? (
-          <div className="space-y-12">
-            {CATEGORIES.map((category, catIndex) => {
-              const categoryTools = filteredTools.filter(
-                (t) => t.category === category
-              );
+        ) : (
+          /* Client Card Design: Responsive Grid of Category Cards */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {CATEGORIES.map((category) => {
+              const categoryTools = TOOLS.filter((t) => t.category === category);
               if (categoryTools.length === 0) return null;
 
-              const cTheme =
-                CATEGORY_THEMES[category] || CATEGORY_THEMES["FINANCE & MONEY"];
-
-              // Apply content-visibility: auto for below-the-fold categories when not searching
-              const isBelowTheFold = !isSearching && catIndex >= 2;
+              const cConfig =
+                CATEGORY_CONFIGS[category] || CATEGORY_CONFIGS["DATE & AGE"];
+              const IconComp = cConfig.icon;
 
               return (
-                <div 
-                  key={category} 
-                  className="space-y-6"
-                  style={isBelowTheFold ? { contentVisibility: "auto", containIntrinsicSize: "1px 360px" } : undefined}
+                <div
+                  key={category}
+                  className={`bg-white rounded-2xl sm:rounded-3xl border-x border-b border-slate-200/80 border-t-4 ${cConfig.topBorderClass} p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between`}
                 >
-                  {/* Category Header Banner */}
-                  <div
-                    className={`relative overflow-hidden rounded-[1.25rem] border ${cTheme.border} ${cTheme.lightBg} p-1.5 md:p-2 flex items-center justify-between shadow-sm`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center shadow-md ${cTheme.iconBg} text-white shrink-0 ml-1 md:ml-2`}
-                      >
-                        <cTheme.icon
-                          className="w-6 h-6 md:w-7 md:h-7"
+                  <div>
+                    {/* Category Card Header */}
+                    <div className="flex items-center justify-between pb-3 sm:pb-3.5 border-b border-slate-100 mb-4">
+                      <div className="flex items-center space-x-2.5">
+                        <IconComp
+                          className={`w-5 h-5 sm:w-6 sm:h-6 ${cConfig.iconColor}`}
                           strokeWidth={2.5}
                         />
+                        <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-wide uppercase">
+                          {category}
+                        </h3>
                       </div>
-
-                      <h3
-                        className={`text-lg md:text-xl font-black ${cTheme.titleColor} uppercase tracking-tight`}
+                      <span
+                        className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${cConfig.badgeClass}`}
                       >
-                        {category}
-                      </h3>
-                    </div>
-
-                    <div
-                      className={`mr-1.5 md:mr-2 flex flex-col items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl shadow-sm ${cTheme.badgeBg} text-white shrink-0 border-2 md:border-[3px] border-white`}
-                    >
-                      <span className="text-xl md:text-2xl font-black leading-none">
                         {categoryTools.length}
                       </span>
-                      <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-wider mt-0.5">
-                        Tools
-                      </span>
                     </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {categoryTools.map((tool, idx) => (
-                      <ToolCard key={tool.slug} tool={tool} index={idx} />
-                    ))}
+                    {/* Interactive Button Items List */}
+                    <div className="space-y-2.5">
+                      {categoryTools.map((tool) => (
+                        <Link
+                          key={tool.slug}
+                          href={`/${tool.slug}`}
+                          className={`group flex items-center justify-between w-full px-4 py-3 sm:py-3.5 bg-white border-2 border-slate-200/90 rounded-xl text-slate-800 font-bold text-sm sm:text-[15px] transition-all duration-150 shadow-xs active:scale-[0.99] cursor-pointer ${cConfig.itemBorderHover}`}
+                        >
+                          {/* Left Accent & Title */}
+                          <div className="flex items-center space-x-3 truncate mr-2">
+                            <div className={`w-1.5 h-4 sm:h-5 rounded-full ${cConfig.dotColorClass} opacity-60 group-hover:opacity-100 group-hover:scale-y-110 transition-all shrink-0`} />
+                            <span className="truncate group-hover:text-slate-950 transition-colors">
+                              {tool.name}
+                            </span>
+                          </div>
+
+                          {/* Right Navigation Arrow Button */}
+                          <div className={`flex items-center justify-center w-7 h-7 rounded-lg bg-slate-100/90 ${cConfig.arrowBgHover} shrink-0 transition-colors duration-150`}>
+                            <ChevronRight
+                              className={`w-4 h-4 text-slate-400 ${cConfig.arrowHoverColor} group-hover:translate-x-0.5 transition-all`}
+                              strokeWidth={2.5}
+                            />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );
             })}
-
-            {/* Other categories fallback */}
-            {(() => {
-              const otherTools = filteredTools.filter(
-                (t) => !(CATEGORIES as readonly string[]).includes(t.category)
-              );
-              if (otherTools.length === 0) return null;
-
-              return (
-                <div key="other" className="space-y-6">
-                  <div className="flex items-center gap-3 border-b-2 border-slate-100 pb-3 pl-2">
-                    <h3 className="text-xl font-extrabold text-slate-800 tracking-tight">
-                      OTHER CALCULATORS
-                    </h3>
-                    <span className="text-xs font-bold text-orange-500 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100">
-                      {otherTools.length}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {otherTools.map((tool, idx) => (
-                      <ToolCard key={tool.slug} tool={tool} index={idx} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-        ) : (
-          <div className="text-center py-20 bg-white rounded-3xl border border-slate-100 shadow-sm">
-            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-10 h-10 text-slate-300" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-700">No calculators found</h3>
-            <p className="text-slate-500 mt-2">
-              Try searching for something else, like &quot;Percentage&quot; or &quot;Age&quot;.
-            </p>
           </div>
         )}
       </section>

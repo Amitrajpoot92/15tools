@@ -18,13 +18,80 @@ export interface MobileTool {
 }
 
 export const CATEGORIES: Category[] = [
-  "FINANCE & MONEY",
-  "MATH & EDUCATION",
   "DATE & AGE",
   "SHOPPING & DAILY LIFE",
+  "FINANCE & MONEY",
+  "MATH & EDUCATION",
   "HEALTH & FITNESS",
   "FUN & LIFESTYLE",
 ];
+
+export interface ClientCategoryStyle {
+  topBorder: string;
+  iconName: string;
+  iconColor: string;
+  badgeBg: string;
+  badgeText: string;
+  activeBg: string;
+  activeBorder: string;
+}
+
+export const CLIENT_CATEGORY_STYLES: Record<Category, ClientCategoryStyle> = {
+  "DATE & AGE": {
+    topBorder: "#00B4D8",
+    iconName: "CalendarDays",
+    iconColor: "#00B4D8",
+    badgeBg: "#ECFEFF",
+    badgeText: "#0E7490",
+    activeBg: "#E6F8F9",
+    activeBorder: "#22D3EE",
+  },
+  "SHOPPING & DAILY LIFE": {
+    topBorder: "#0D9488",
+    iconName: "ShoppingCart",
+    iconColor: "#0D9488",
+    badgeBg: "#F0FDFA",
+    badgeText: "#0F766E",
+    activeBg: "#E6F8F9",
+    activeBorder: "#2DD4BF",
+  },
+  "FINANCE & MONEY": {
+    topBorder: "#F97316",
+    iconName: "Banknote",
+    iconColor: "#F97316",
+    badgeBg: "#FFF7ED",
+    badgeText: "#C2410C",
+    activeBg: "#FFF7ED",
+    activeBorder: "#FB923C",
+  },
+  "MATH & EDUCATION": {
+    topBorder: "#3B82F6",
+    iconName: "Calculator",
+    iconColor: "#3B82F6",
+    badgeBg: "#EFF6FF",
+    badgeText: "#1D4ED8",
+    activeBg: "#EFF6FF",
+    activeBorder: "#60A5FA",
+  },
+  "HEALTH & FITNESS": {
+    topBorder: "#F43F5E",
+    iconName: "Heart",
+    iconColor: "#F43F5E",
+    badgeBg: "#FFF1F2",
+    badgeText: "#BE123C",
+    activeBg: "#FFF1F2",
+    activeBorder: "#FB7185",
+  },
+  "FUN & LIFESTYLE": {
+    topBorder: "#F59E0B",
+    iconName: "Sparkles",
+    iconColor: "#F59E0B",
+    badgeBg: "#FFFBEB",
+    badgeText: "#B45309",
+    activeBg: "#FFFBEB",
+    activeBorder: "#FBBF24",
+  },
+};
 
 export const CATEGORY_STYLES: Record<
   Category,
@@ -160,6 +227,16 @@ export const MOBILE_TOOLS: MobileTool[] = [
   },
 
   // MATH & EDUCATION
+  {
+    name: "Normal Calculator",
+    slug: "normal-calculator",
+    description: "Simple basic & scientific calculator for daily calculations.",
+    iconName: "Calculator",
+    color: "#0284C7",
+    bgColor: "#E0F2FE",
+    category: "MATH & EDUCATION",
+    popular: true,
+  },
   {
     name: "Marks Percentage Calculator",
     slug: "marks-percentage-calculator",
