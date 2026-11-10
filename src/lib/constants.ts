@@ -117,15 +117,6 @@ export const TOOLS: Tool[] = [
 
   // MATH & EDUCATION
   {
-    name: "Normal Calculator",
-    slug: "normal-calculator",
-    description: "A simple, fast online basic and scientific calculator for everyday math and calculations.",
-    icon: Calculator,
-    color: "text-sky-600",
-    category: "MATH & EDUCATION",
-    popular: true
-  },
-  {
     name: "Marks Percentage Calculator",
     slug: "marks-percentage-calculator",
     description: "Convert your exam scores and marks into an exact percentage instantly.",

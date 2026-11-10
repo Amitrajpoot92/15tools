@@ -99,14 +99,7 @@ const CATEGORY_CONFIGS: Record<string, CategoryConfig> = {
   },
 };
 
-interface HomeCalculatorSectionProps {
-  heroHeader?: React.ReactNode;
-  featureBadges?: React.ReactNode;
-}
-
-export function HomeCalculatorSection({
-  featureBadges,
-}: HomeCalculatorSectionProps) {
+export function HomeCalculatorSection() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredTools = useMemo(() => {
@@ -148,7 +141,7 @@ export function HomeCalculatorSection({
           </div>
           <input
             type="text"
-            placeholder="Search 26+ calculators..."
+            placeholder="Search 25 calculators..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             aria-label="Search for a calculator"
@@ -167,11 +160,8 @@ export function HomeCalculatorSection({
         </div>
       </section>
 
-      {/* Feature Badges (Server Rendered) */}
-      {featureBadges}
-
       {/* Categories & Tools Section */}
-      <section aria-label="Available Calculators" className="mt-8">
+      <section aria-label="Available Calculators" className="mt-6">
         {isSearching ? (
           /* Search Results Card */
           <div className="bg-white rounded-2xl sm:rounded-3xl border-x border-b border-slate-200/80 border-t-4 border-t-orange-500 p-5 sm:p-6 shadow-sm">

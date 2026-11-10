@@ -228,16 +228,6 @@ export const MOBILE_TOOLS: MobileTool[] = [
 
   // MATH & EDUCATION
   {
-    name: "Normal Calculator",
-    slug: "normal-calculator",
-    description: "Simple basic & scientific calculator for daily calculations.",
-    iconName: "Calculator",
-    color: "#0284C7",
-    bgColor: "#E0F2FE",
-    category: "MATH & EDUCATION",
-    popular: true,
-  },
-  {
     name: "Marks Percentage Calculator",
     slug: "marks-percentage-calculator",
     description: "Convert exam marks into accurate percentage & grade.",

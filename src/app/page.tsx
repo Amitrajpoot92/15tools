@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { HomeCalculatorSection } from "@/components/HomeCalculatorSection";
+import { HomeGuideSection } from "@/components/HomeGuideSection";
 import { 
-  Sparkles, 
-  ShieldCheck, 
-  MousePointer2, 
-  Zap, 
-  Smartphone, 
-  CheckCircle2, 
   Calculator, 
   HelpCircle, 
   ChevronDown 
@@ -19,56 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const heroHeader = (
-    <>
-      <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1.5 md:px-4 md:py-1.5 rounded-full text-orange-200 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 md:mb-5 shadow-sm">
-        <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
-        <span>FREE CALCULATOR TOOLS</span>
-      </div>
-      
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3 md:mb-4">
-        Calculate Anything. <br />{" "}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">
-          Instantly.
-        </span>
-      </h1>
-      
-      <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-xl font-medium px-2">
-        Free Online Calculators for Finance, Math, Education, Health, Age, Dates & Daily Life
-      </p>
-    </>
-  );
-
-  const featureBadges = (
-    <div className="flex flex-col items-center gap-2 md:gap-2.5 mt-4 mb-6 md:mt-5 md:mb-8 max-w-4xl mx-auto px-2">
-      {[
-        [
-          { icon: ShieldCheck, text: "100% Free to Use" },
-          { icon: MousePointer2, text: "No Sign-Up Required" }
-        ],
-        [
-          { icon: Zap, text: "Lightning Fast" },
-          { icon: Smartphone, text: "Mobile-Friendly" }
-        ],
-        [
-          { icon: CheckCircle2, text: "Easy to Understand" }
-        ]
-      ].map((row, rowIdx) => (
-        <div key={rowIdx} className="flex justify-center items-center gap-2 md:gap-2.5">
-          {row.map((feature, idx) => (
-            <div 
-              key={idx} 
-              className="inline-flex items-center space-x-1.5 bg-white border border-slate-200 text-slate-700 px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 md:px-4 md:py-2 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider md:tracking-widest shadow-sm hover:border-orange-300 hover:text-orange-600 hover:bg-orange-50 hover:shadow-md transition-all cursor-default"
-            >
-              <feature.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-orange-500 shrink-0" strokeWidth={2.5} />
-              <span className="whitespace-nowrap">{feature.text}</span>
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-
   const faqItems = [
     { q: "Are all TopCalcBox calculators free to use?", a: "Yes. All calculators available on TopCalcBox are free to use. No subscription or payment is required to use the available calculation tools." },
     { q: "Do I need to create an account to use the calculators?", a: "No. You can use the calculators without creating an account or signing in. Simply choose a calculator, enter your values, and get your result." },
@@ -88,56 +32,15 @@ export default function Home() {
   ];
 
   return (
-    <div className="space-y-10 pb-0">
+    <div className="space-y-6 pb-0">
       {/* Interactive Hero Search & Tool Grid */}
-      <HomeCalculatorSection 
-         
-        featureBadges={featureBadges} 
-      />
+      <HomeCalculatorSection />
 
       {/* Home Page SEO & Info Section */}
-      <div className="mt-10 md:mt-12 space-y-6 md:space-y-8">
+      <div className="space-y-6">
         
         {/* Why TopCalcBox Is Your Ultimate Hub for Everyday Calculations */}
-        <section className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 border-2 border-[#fed7aa]/60 shadow-lg shadow-orange-500/5 relative overflow-hidden">
-          <div 
-            aria-hidden="true"
-            className="absolute -top-12 -right-12 w-64 h-64 bg-gradient-to-br from-amber-300/20 to-orange-400/15 rounded-full blur-2xl pointer-events-none" 
-          />
-          <div 
-            aria-hidden="true"
-            className="absolute -bottom-10 -right-10 w-52 h-52 bg-amber-400/15 rounded-full blur-2xl pointer-events-none" 
-          />
-
-          <div className="relative z-10 max-w-4xl">
-            <div className="inline-flex items-center space-x-2 bg-[#fff6ea] text-[#c25e00] px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider mb-4 border border-[#fde4c3] shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-orange-500" />
-              <span>WHY CHOOSE US</span>
-            </div>
-            
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black text-slate-900 tracking-tight mb-6 leading-tight">
-              Why <span className="text-[#ff5400]">TopCalcBox</span> Is Your Ultimate Hub for Everyday Calculations
-            </h2>
-            
-            <div className="space-y-4 sm:space-y-5 text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-              <p>
-                Ever wondered how much you will save during a sale, how much GST you need to pay, or whether your business is making a profit? Everyday calculations can take time when you work them out manually. TopCalcBox makes these tasks easier with its <Link href="/percentage-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Percentage Calculator</Link>, <Link href="/discount-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Discount Calculator</Link>, <Link href="/gst-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">GST Calculator</Link>, <Link href="/profit-and-loss-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Profit and Loss Calculator</Link>, and <Link href="/wholesale-price-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Wholesale Price Calculator</Link>. You can also use the <Link href="/emi-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">EMI Calculator</Link> to estimate loan payments, the <Link href="/sip-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">SIP Calculator</Link> to explore potential investment growth, and the <Link href="/subscription-cost-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Subscription Cost Calculator</Link> to understand your monthly and yearly subscription expenses.
-              </p>
-
-              <p>
-                Shopping and daily budgeting become simpler when you know exactly what you are spending. The <Link href="/cost-per-item-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Cost Per Item Calculator</Link> helps you compare individual item prices, while the <Link href="/price-per-kg-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Price per Kg Calculator</Link> makes comparing products by weight easier. The <Link href="/grocery-bill-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Grocery Bill Calculator</Link> helps total your shopping expenses, the <Link href="/tip-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Tip Calculator</Link> helps calculate tips and split bills, and the <Link href="/fuel-cost-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Fuel Cost Calculator</Link> estimates the cost of your journey. These tools are useful when you want to compare prices, plan expenses, or make smarter everyday spending decisions.
-              </p>
-
-              <p>
-                Students can save time with the <Link href="/marks-percentage-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Marks Percentage Calculator</Link>, <Link href="/attendance-percentage-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Attendance Percentage Calculator</Link>, <Link href="/negative-marking-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Negative Marking Calculator</Link>, <Link href="/average-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Average Calculator</Link>, and <Link href="/bodmas-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">BODMAS Calculator</Link>. Whether you are checking exam results, tracking attendance, estimating a score after negative marking, finding an average, or solving a maths expression, these tools make calculations easier. For personal planning, the <Link href="/age-calculator-online" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Age Calculator Online</Link> calculates your age, the <Link href="/birthday-countdown" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Birthday Countdown</Link> counts the days until your birthday, the <Link href="/age-difference-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Age Difference Calculator</Link> compares two ages, and the <Link href="/date-difference-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Date Difference Calculator</Link> finds the time between two dates.
-              </p>
-
-              <p>
-                TopCalcBox also offers tools for health estimates and entertainment. The <Link href="/bmi-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">BMI Calculator</Link> estimates body mass index using height and weight, while the <Link href="/calorie-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Calorie Calculator</Link> estimates daily calorie needs based on personal details and activity level. These results are general estimates, not medical advice. The <Link href="/love-calculator" className="font-semibold text-slate-900 hover:text-orange-600 underline decoration-orange-300 underline-offset-2 transition-colors">Love Calculator</Link> adds a little fun by generating a playful compatibility result, not a scientific prediction of a relationship. With all 25 free online calculators in one place, TopCalcBox helps students, shoppers, families, and business owners solve common calculation problems without complicated formulas. Simply choose a tool, enter your values, and get a result to help with your next decision.
-              </p>
-            </div>
-          </div>
-        </section>
+        <HomeGuideSection />
 
         {/* How It Works & FAQ Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">

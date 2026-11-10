@@ -20,21 +20,21 @@ export const metadata: Metadata = {
   title: "TopCalcBox – Free Online Calculators for Daily Use",
   description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
   icons: {
-    icon: "/icon-96.webp",
-    apple: "/icon-96.webp",
+    icon: "/topcalcbox-logo-96.webp",
+    apple: "/topcalcbox-logo-192.png",
   },
   openGraph: {
     type: "website",
     siteName: "TopCalcBox",
     title: "TopCalcBox – Free Online Calculators for Daily Use",
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
-    images: [{ url: "https://topcalcbox.com/icon.webp" }],
+    images: [{ url: "https://topcalcbox.com/topcalcbox-logo.webp" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TopCalcBox – Free Online Calculators for Daily Use",
     description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
-    images: ["https://topcalcbox.com/icon.webp"],
+    images: ["https://topcalcbox.com/topcalcbox-logo.webp"],
   },
   appleWebApp: {
     capable: true,

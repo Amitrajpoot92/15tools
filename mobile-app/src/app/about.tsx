@@ -137,7 +137,7 @@ export default function AboutScreen() {
                 <Sparkles size={16} color="#EA580C" />
               </View>
               <View style={styles.featureTextBox}>
-                <Text style={styles.featureHeading}>25+ Purpose-Built Tools</Text>
+                <Text style={styles.featureHeading}>25 Purpose-Built Tools</Text>
                 <Text style={styles.featureSub}>
                   Covering Finance, Math, Date & Age, Shopping, Health & Daily Life.
                 </Text>

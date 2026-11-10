@@ -29,19 +29,19 @@ export async function GET(request: NextRequest) {
     theme_color: "#ffffff",
     icons: [
       {
-        src: "/icon-192.png",
+        src: "/topcalcbox-logo-192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any"
       },
       {
-        src: "/icon.png",
+        src: "/topcalcbox-logo.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any"
       },
       {
-        src: "/icon-maskable.png",
+        src: "/topcalcbox-logo-maskable.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable"

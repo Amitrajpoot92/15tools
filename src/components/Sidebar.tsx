@@ -57,7 +57,7 @@ export function Sidebar() {
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-40 shadow-sm">
         <Link href="/" className="flex items-center space-x-2.5">
           <img 
-            src="/icon-96.webp" 
+            src="/topcalcbox-logo-96.webp" 
             alt="TopCalcBox Logo" 
             width="34" 
             height="34" 
@@ -108,7 +108,7 @@ export function Sidebar() {
         <div className="p-6 border-b border-slate-100 bg-white flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-3 group" onClick={() => setIsOpen(false)}>
             <img 
-              src="/icon-96.webp" 
+              src="/topcalcbox-logo-96.webp" 
               alt="TopCalcBox Logo" 
               width="40" 
               height="40" 

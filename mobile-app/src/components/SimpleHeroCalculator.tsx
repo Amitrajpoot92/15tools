@@ -16,8 +16,144 @@ const PADDING = 14;
 const GAP = 10;
 const BTN_WIDTH = Math.floor((width - 32 - PADDING * 2 - GAP * 3) / 4);
 
+interface EvalTerm {
+  val: number;
+  isPct: boolean;
+}
+
+/**
+ * Evaluates an arithmetic expression with full support for standard calculator
+ * percentage semantics:
+ * - Standalone `50%` -> 0.5
+ * - Multiplicative `200 × 10%` -> 20, `200 ÷ 50%` -> 400
+ * - Additive `100 + 18%` -> 118, `500 − 20%` -> 400
+ */
+function evaluateCalcExpression(
+  rawInput: string,
+  isPreview = false
+): { value?: number; error?: boolean } {
+  let s = rawInput
+    .replace(/×/g, "*")
+    .replace(/÷/g, "/")
+    .replace(/−/g, "-")
+    .replace(/,/g, "")
+    .trim();
+
+  if (!s || s === "Error") return {};
+
+  if (isPreview) {
+    s = s.replace(/[+\-*/.\s]+$/, "").trim();
+    if (!s) return {};
+  }
+
+  // Normalize trailing dots right before operators or % (e.g. "50.%" -> "50%")
+  s = s.replace(/(\d+)\.(?=[+\-*/%]|$)/g, "$1");
+
+  const tokens: Array<EvalTerm | string> = [];
+  let i = 0;
+
+  while (i < s.length) {
+    const ch = s[i];
+    if (ch === " ") {
+      i++;
+      continue;
+    }
+
+    const prevToken = tokens[tokens.length - 1];
+    const expectsUnary = tokens.length === 0 || typeof prevToken === "string";
+
+    if (
+      (ch >= "0" && ch <= "9") ||
+      ch === "." ||
+      (expectsUnary && (ch === "-" || ch === "+"))
+    ) {
+      let numStr = "";
+      if (ch === "-" || ch === "+") {
+        numStr += ch;
+        i++;
+        while (i < s.length && s[i] === " ") i++;
+      }
+      let hasDigits = false;
+      while (i < s.length && ((s[i] >= "0" && s[i] <= "9") || s[i] === ".")) {
+        if (s[i] >= "0" && s[i] <= "9") hasDigits = true;
+        numStr += s[i];
+        i++;
+      }
+      if (!hasDigits) return { error: true };
+
+      const parsed = parseFloat(numStr);
+      if (isNaN(parsed) || !isFinite(parsed)) return { error: true };
+
+      let pctCount = 0;
+      while (i < s.length && s[i] === "%") {
+        pctCount++;
+        i++;
+      }
+
+      let val = parsed;
+      while (pctCount > 1) {
+        val /= 100;
+        pctCount--;
+      }
+
+      tokens.push({ val, isPct: pctCount === 1 });
+    } else if (ch === "+" || ch === "-" || ch === "*" || ch === "/") {
+      if (tokens.length === 0 || typeof prevToken === "string") {
+        return { error: true };
+      }
+      tokens.push(ch);
+      i++;
+    } else {
+      return { error: true };
+    }
+  }
+
+  if (tokens.length === 0 || typeof tokens[tokens.length - 1] === "string") {
+    return {};
+  }
+
+  // Pass 1: resolve * and / left-to-right
+  const terms: EvalTerm[] = [tokens[0] as EvalTerm];
+  const addOps: string[] = [];
+
+  for (let t = 1; t < tokens.length; t += 2) {
+    const op = tokens[t] as string;
+    const rightToken = tokens[t + 1] as EvalTerm;
+
+    if (op === "*" || op === "/") {
+      const leftToken = terms[terms.length - 1];
+      const leftVal = leftToken.isPct ? leftToken.val / 100 : leftToken.val;
+      const rightVal = rightToken.isPct ? rightToken.val / 100 : rightToken.val;
+
+      if (op === "/" && rightVal === 0) {
+        return { error: true };
+      }
+
+      const combined = op === "*" ? leftVal * rightVal : leftVal / rightVal;
+      terms[terms.length - 1] = { val: combined, isPct: false };
+    } else {
+      addOps.push(op);
+      terms.push(rightToken);
+    }
+  }
+
+  // Pass 2: resolve + and - left-to-right (with A ± B% semantics)
+  let acc = terms[0].isPct ? terms[0].val / 100 : terms[0].val;
+
+  for (let k = 0; k < addOps.length; k++) {
+    const op = addOps[k];
+    const nextTerm = terms[k + 1];
+    const delta = nextTerm.isPct ? acc * (nextTerm.val / 100) : nextTerm.val;
+    acc = op === "+" ? acc + delta : acc - delta;
+  }
+
+  if (!isFinite(acc) || isNaN(acc)) return { error: true };
+  const cleanVal = parseFloat(acc.toPrecision(12));
+  return { value: Object.is(cleanVal, -0) ? 0 : cleanVal };
+}
+
 export function SimpleHeroCalculator() {
-  const [input, setInput] = useState<string>("5 × 5");
+  const [input, setInput] = useState<string>("0");
   const [previousFormula, setPreviousFormula] = useState<string>("");
   const [justCalculated, setJustCalculated] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
@@ -28,51 +164,39 @@ export function SimpleHeroCalculator() {
 
   // Live real-time preview computation
   const preview = useMemo(() => {
-    if (justCalculated) return "";
-    try {
-      let s = input
-        .replace(/×/g, "*")
-        .replace(/÷/g, "/")
-        .replace(/−/g, "-")
-        .trim();
-
-      if (!s || s === "0") return "";
-
-      const openP = (s.match(/\(/g) || []).length;
-      const closeP = (s.match(/\)/g) || []).length;
-      if (openP > closeP) s += ")".repeat(openP - closeP);
-
-      if (/[+\-*/.]$/.test(s)) {
-        const trimmed = s.replace(/[+\-*/.]+$/, "").trim();
-        if (!trimmed) return "";
-        s = trimmed;
-      }
-
-      s = s.replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
-
-      if (!/^[0-9+\-*/(). ]+$/.test(s)) return "";
-
-      const res = Function('"use strict"; return (' + s + ")")();
-      if (typeof res === "number" && isFinite(res) && !isNaN(res)) {
-        const cleanVal = parseFloat(res.toPrecision(12));
-        return "= " + cleanVal.toLocaleString("en-US", { maximumFractionDigits: 8 });
-      }
-    } catch {
-      // Ignored for live typing
-    }
-    return "";
+    if (justCalculated || input === "0" || input === "Error") return "";
+    const res = evaluateCalcExpression(input, true);
+    if (res.error || res.value === undefined) return "";
+    return "= " + res.value.toLocaleString("en-US", { maximumFractionDigits: 8 });
   }, [input, justCalculated]);
 
   const handleDigit = (val: string) => {
     triggerHaptic();
-    if (justCalculated) {
+    if (input === "Error" || justCalculated) {
       setInput(val === "00" ? "0" : val);
       setPreviousFormula("");
       setJustCalculated(false);
       return;
     }
+
     if (input === "0") {
       setInput(val === "00" ? "0" : val);
+      return;
+    }
+
+    const trimmedEnd = input.trimEnd();
+    if (trimmedEnd.endsWith("%")) {
+      setInput(trimmedEnd + " × " + (val === "00" ? "0" : val));
+      return;
+    }
+
+    const parts = input.split(/[+\-−×÷]/);
+    const lastSeg = parts[parts.length - 1].trim();
+    if (lastSeg === "") {
+      setInput((prev) => prev + (val === "00" ? "0" : val));
+    } else if (lastSeg === "0") {
+      if (val === "0" || val === "00") return;
+      setInput((prev) => prev.slice(0, -1) + val);
     } else {
       setInput((prev) => prev + val);
     }
@@ -80,40 +204,64 @@ export function SimpleHeroCalculator() {
 
   const handleDecimal = () => {
     triggerHaptic();
-    if (justCalculated) {
+    if (input === "Error" || justCalculated) {
       setInput("0.");
       setPreviousFormula("");
       setJustCalculated(false);
       return;
     }
-    const parts = input.split(/[+\-×÷]/);
-    const lastPart = parts[parts.length - 1];
-    if (!lastPart.includes(".")) {
+
+    const trimmedEnd = input.trimEnd();
+    if (trimmedEnd.endsWith("%")) {
+      setInput(trimmedEnd + " × 0.");
+      return;
+    }
+
+    const parts = input.split(/[+\-−×÷]/);
+    const lastPart = parts[parts.length - 1].trim();
+
+    if (lastPart === "") {
+      setInput((prev) => prev + "0.");
+    } else if (!lastPart.includes(".")) {
       setInput((prev) => prev + ".");
     }
   };
 
   const handleOperator = (op: string) => {
     triggerHaptic();
+    if (input === "Error") {
+      setInput("0 " + op + " ");
+      setPreviousFormula("");
+      setJustCalculated(false);
+      return;
+    }
     setJustCalculated(false);
-    const lastChar = input.trim().slice(-1);
-    if (["+", "−", "×", "÷"].includes(lastChar)) {
-      setInput((prev) => prev.trim().slice(0, -1) + " " + op + " ");
+    setPreviousFormula("");
+    const trimmed = input.trim();
+    const lastChar = trimmed.slice(-1);
+    if (["+", "−", "-", "×", "÷"].includes(lastChar)) {
+      setInput(trimmed.slice(0, -1).trimEnd() + " " + op + " ");
     } else {
-      setInput((prev) => (prev === "0" ? "0 " + op + " " : prev + " " + op + " "));
+      const clean = trimmed.endsWith(".") ? trimmed.slice(0, -1) : trimmed;
+      setInput(clean + " " + op + " ");
     }
   };
 
   const handlePercent = () => {
     triggerHaptic();
+    if (input === "Error") return;
+    const trimmed = input.trim();
+    if (trimmed === "0" || /[+\-−×÷%]$/.test(trimmed)) return;
+
     setJustCalculated(false);
-    if (input === "0" || /[+\-×÷]$/.test(input.trim())) return;
-    setInput((prev) => prev + "%");
+    setPreviousFormula("");
+    const clean = trimmed.endsWith(".") ? trimmed.slice(0, -1) : trimmed;
+    setInput(clean + "%");
   };
 
   const handleBackspace = () => {
     triggerHaptic();
-    if (justCalculated) {
+    if (input === "Error" || justCalculated) {
       setInput("0");
       setPreviousFormula("");
       setJustCalculated(false);
@@ -121,12 +269,11 @@ export function SimpleHeroCalculator() {
     }
     if (input.length <= 1) {
       setInput("0");
+    } else if (input.endsWith(" ")) {
+      const updated = input.trimEnd().slice(0, -1).trimEnd();
+      setInput(updated || "0");
     } else {
-      if (input.endsWith(" ")) {
-        setInput((prev) => prev.trim().slice(0, -1).trim());
-      } else {
-        setInput((prev) => prev.slice(0, -1));
-      }
+      setInput((prev) => prev.slice(0, -1) || "0");
     }
   };
 
@@ -139,37 +286,38 @@ export function SimpleHeroCalculator() {
 
   const handleEquals = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    try {
-      let s = input
-        .replace(/×/g, "*")
-        .replace(/÷/g, "/")
-        .replace(/−/g, "-")
-        .trim();
+    if (input === "Error") return;
+    const cleanExpr = input.trim().replace(/[+\-−×÷.]+$/, "").trim();
+    if (!cleanExpr) return;
 
-      if (!s) return;
+    const res = evaluateCalcExpression(cleanExpr, false);
+    if (res.error) {
+      setPreviousFormula(cleanExpr + " =");
+      setInput("Error");
+      setJustCalculated(true);
+      return;
+    }
 
-      const openP = (s.match(/\(/g) || []).length;
-      const closeP = (s.match(/\)/g) || []).length;
-      if (openP > closeP) s += ")".repeat(openP - closeP);
-
-      s = s.replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
-
-      if (!/^[0-9+\-*/(). ]+$/.test(s)) return;
-
-      const res = Function('"use strict"; return (' + s + ")")();
-      if (typeof res === "number" && isFinite(res) && !isNaN(res)) {
-        const cleanVal = parseFloat(res.toPrecision(12));
-        setPreviousFormula(input + " =");
-        setInput(cleanVal.toString());
-        setJustCalculated(true);
-      }
-    } catch {
-      // Ignored
+    if (res.value !== undefined) {
+      setPreviousFormula(cleanExpr + " =");
+      setInput(res.value.toString());
+      setJustCalculated(true);
     }
   };
 
   const copyResult = async () => {
-    await Clipboard.setStringAsync(input);
+    let textToCopy = input;
+    if (justCalculated && previousFormula) {
+      textToCopy = `${previousFormula} ${input}`;
+    } else {
+      const cleanExpr = input.trim().replace(/[+\-−×÷.\s]+$/, "").trim();
+      const hasOperation = /[+\-−×÷%]/.test(cleanExpr);
+      if (preview && hasOperation) {
+        textToCopy = `${cleanExpr} ${preview}`;
+      }
+    }
+
+    await Clipboard.setStringAsync(textToCopy);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -209,6 +357,7 @@ export function SimpleHeroCalculator() {
           <Text
             style={[
               styles.mainText,
+              input === "Error" && styles.errorText,
               input.length > 12
                 ? styles.textSmall
                 : input.length > 7
@@ -224,7 +373,7 @@ export function SimpleHeroCalculator() {
         </View>
       </Pressable>
 
-      {/* 4x5 Keypad Grid (Exact Layout from Image) */}
+      {/* 4x5 Keypad Grid */}
       <View style={styles.keypadGrid}>
         
         {/* Row 1: AC, Back, %, ÷ */}
@@ -331,7 +480,7 @@ export function SimpleHeroCalculator() {
           <Text style={styles.orangeBtnText}>+</Text>
         </Pressable>
 
-        {/* Row 5: 00, 0, ., = */}
+        {/* Row 5: 00, 0, ., = (BLUE) */}
         <Pressable
           onPress={() => handleDigit("00")}
           style={({ pressed }) => [styles.numBtn, pressed && styles.btnPressed]}
@@ -352,7 +501,7 @@ export function SimpleHeroCalculator() {
         </Pressable>
         <Pressable
           onPress={handleEquals}
-          style={({ pressed }) => [styles.orangeBtn, pressed && styles.btnPressed]}
+          style={({ pressed }) => [styles.equalsBtn, pressed && styles.btnPressed]}
         >
           <Text style={styles.orangeBtnText}>=</Text>
         </Pressable>
@@ -390,6 +539,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: 8,
   },
   copyBtn: {
     flexDirection: "row",
@@ -427,6 +577,8 @@ const styles = StyleSheet.create({
     color: "#0F172A",
     fontFamily: "monospace",
     letterSpacing: -0.3,
+    flexShrink: 1,
+    textAlign: "right",
   },
   displayBottomRow: {
     flexDirection: "row",
@@ -439,6 +591,9 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     fontFamily: "monospace",
     textAlign: "right",
+  },
+  errorText: {
+    color: "#E11D48",
   },
   textLarge: {
     fontSize: 42,
@@ -500,6 +655,19 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
+  equalsBtn: {
+    width: BTN_WIDTH,
+    height: 56,
+    backgroundColor: "#2563EB",
+    borderRadius: 22,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#2563EB",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.28,
+    shadowRadius: 5,
+    elevation: 3,
+  },
   orangeBtnText: {
     color: "#FFFFFF",
     fontSize: 26,
@@ -535,4 +703,3 @@ const styles = StyleSheet.create({
     transform: [{ scale: 0.96 }],
   },
 });
-

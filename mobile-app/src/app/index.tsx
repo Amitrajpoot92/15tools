@@ -28,9 +28,6 @@ import {
   Sparkles,
   Calculator,
   ShieldCheck,
-  Zap,
-  Smartphone,
-  CheckCircle2,
   CircleHelp,
   Share2,
   Info,
@@ -111,39 +108,13 @@ export default function HomeScreen() {
           <Search size={18} color="#94A3B8" style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search 26+ calculators..."
+            placeholder="Search 25 calculators..."
             placeholderTextColor="#94A3B8"
             value={searchQuery}
             onChangeText={setSearchQuery}
             clearButtonMode="while-editing"
           />
         </View>
-
-        {/* Feature Badges Row */}
-        {!isSearching && (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.featureRow}
-          >
-            <View style={styles.featurePill}>
-              <ShieldCheck size={14} color="#EA580C" />
-              <Text style={styles.featureText}>100% Free</Text>
-            </View>
-            <View style={styles.featurePill}>
-              <Zap size={14} color="#EA580C" />
-              <Text style={styles.featureText}>Lightning Fast</Text>
-            </View>
-            <View style={styles.featurePill}>
-              <Smartphone size={14} color="#EA580C" />
-              <Text style={styles.featureText}>Offline Ready</Text>
-            </View>
-            <View style={styles.featurePill}>
-              <CheckCircle2 size={14} color="#EA580C" />
-              <Text style={styles.featureText}>Accurate</Text>
-            </View>
-          </ScrollView>
-        )}
 
         {/* Categories Section (Client Card Design) */}
         {isSearching ? (
@@ -358,8 +329,19 @@ export default function HomeScreen() {
             </View>
 
             <View style={styles.footerNotice}>
+              <View style={styles.footerBrandRow}>
+                <Image
+                  source={require("../../assets/images/splash-icon.png")}
+                  style={styles.footerLogo}
+                  resizeMode="contain"
+                />
+                <Text style={styles.footerBrandTitle}>TopCalcBox</Text>
+              </View>
               <Text style={styles.footerText}>
-                TopCalcBox • 100% Free & Offline Calculators
+                25 Free Calculators • 100% Private & Offline
+              </Text>
+              <Text style={styles.footerSubText}>
+                © 2026 TopCalcBox. All Rights Reserved.
               </Text>
             </View>
           </View>
@@ -538,29 +520,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "500",
   },
-  featureRow: {
-    flexDirection: "row",
-    gap: 8,
-    marginBottom: 16,
-    paddingVertical: 2,
-  },
-  featurePill: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    marginRight: 8,
-  },
-  featureText: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#334155",
-    marginLeft: 5,
-  },
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -735,15 +694,49 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   footerNotice: {
-    marginTop: 18,
-    marginBottom: 6,
+    marginTop: 20,
+    marginBottom: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 18,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
     alignItems: "center",
+    shadowColor: "#0F172A",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 6,
+    elevation: 1,
+  },
+  footerBrandRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 6,
+  },
+  footerLogo: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+  },
+  footerBrandTitle: {
+    fontSize: 15,
+    fontWeight: "900",
+    color: "#0F172A",
+    letterSpacing: -0.3,
   },
   footerText: {
     fontSize: 12,
-    fontWeight: "600",
-    color: "#94A3B8",
-    letterSpacing: 0.2,
+    fontWeight: "700",
+    color: "#EA580C",
+    letterSpacing: 0.1,
+    marginBottom: 4,
+  },
+  footerSubText: {
+    fontSize: 11,
+    fontWeight: "500",
+    color: "#64748B",
   },
   clientCategoryCard: {
     backgroundColor: "#FFFFFF",
