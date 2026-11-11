@@ -44,7 +44,7 @@ export default function AboutScreen() {
 
   const openEmail = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    Linking.openURL("mailto:help.rka@gmail.com?subject=TopCalcBox%20App%20Feedback");
+    Linking.openURL("mailto:help.rka@gmail.com?subject=Calculator%20All%20in%20One%20App%20Feedback");
   };
 
   return (
@@ -74,7 +74,7 @@ export default function AboutScreen() {
             style={styles.appIcon}
             resizeMode="contain"
           />
-          <Text style={styles.appName}>TopCalcBox</Text>
+          <Text style={styles.appName}>Calculator: All in One</Text>
           <Text style={styles.appTagline}>Free Online & Offline Calculators</Text>
 
           {/* Version & Package Badges */}
@@ -88,13 +88,13 @@ export default function AboutScreen() {
           </View>
 
           <Text style={styles.appDesc}>
-            TopCalcBox is your all-in-one daily calculation companion designed to make everyday math, finance, dates, shopping, and health calculations fast, effortless, and 100% private.
+            Calculator: All in One is your daily calculation companion designed to make everyday math, finance, dates, shopping, and health calculations fast, effortless, and 100% private.
           </Text>
         </View>
 
         {/* Feature Badges Grid */}
         <View style={styles.featuresCard}>
-          <Text style={styles.sectionTitle}>WHY TOPCALCBOX</Text>
+          <Text style={styles.sectionTitle}>WHY CALCULATOR: ALL IN ONE</Text>
           <View style={styles.featuresList}>
             <View style={styles.featureItem}>
               <View style={styles.featureIconBox}>
@@ -236,7 +236,7 @@ export default function AboutScreen() {
             <Heart size={12} color="#EF4444" fill="#EF4444" />
             <Text style={styles.footerText}>for everyday calculations</Text>
           </View>
-          <Text style={styles.copyrightText}>© 2026 TopCalcBox. All rights reserved.</Text>
+          <Text style={styles.copyrightText}>© 2026 Calculator: All in One. All rights reserved.</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

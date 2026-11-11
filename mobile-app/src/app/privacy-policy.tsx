@@ -35,7 +35,7 @@ export default function PrivacyPolicyScreen() {
 
   const handleEmail = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    Linking.openURL("mailto:help.rka@gmail.com?subject=Privacy%20Inquiry%20-%20TopCalcBox");
+    Linking.openURL("mailto:help.rka@gmail.com?subject=Privacy%20Inquiry%20-%20Calculator%20All%20in%20One");
   };
 
   return (
@@ -65,7 +65,7 @@ export default function PrivacyPolicyScreen() {
           </View>
           <Text style={styles.heroTitle}>Your Privacy Matters</Text>
           <Text style={styles.heroSubtitle}>
-            TopCalcBox is designed to be completely safe, private, and transparent. We do not track or sell your personal data.
+            Calculator: All in One is designed to be completely safe, private, and transparent. We do not track or sell your personal data.
           </Text>
           <View style={styles.dateBadge}>
             <Text style={styles.dateText}>LAST UPDATED: OCTOBER 2026</Text>
@@ -104,7 +104,7 @@ export default function PrivacyPolicyScreen() {
           <View style={styles.policyBlock}>
             <Text style={styles.sectionHeading}>1. INFORMATION WE DO NOT COLLECT</Text>
             <Text style={styles.bodyText}>
-              TopCalcBox does not require you to provide any personal identification information (such as your name, phone number, home address, or contacts). You can freely use all 25 calculators without logging in or providing personal credentials.
+              Calculator: All in One does not require you to provide any personal identification information (such as your name, phone number, home address, or contacts). You can freely use all 25 calculators without logging in or providing personal credentials.
             </Text>
           </View>
 
@@ -118,7 +118,7 @@ export default function PrivacyPolicyScreen() {
           <View style={styles.policyBlock}>
             <Text style={styles.sectionHeading}>3. DEVICE PERMISSIONS</Text>
             <Text style={styles.bodyText}>
-              The TopCalcBox mobile app operates with minimal device privileges. We do NOT ask for or access sensitive device features such as:
+              The Calculator: All in One mobile app operates with minimal device privileges. We do NOT ask for or access sensitive device features such as:
             </Text>
             <View style={styles.bulletList}>
               <Text style={styles.bulletItem}>• No camera or photo library access</Text>
@@ -137,7 +137,7 @@ export default function PrivacyPolicyScreen() {
           <View style={styles.policyBlock}>
             <Text style={styles.sectionHeading}>5. CHILDREN&apos;S PRIVACY</Text>
             <Text style={styles.bodyText}>
-              TopCalcBox is a family-friendly educational and utility app suitable for all age groups. We do not knowingly collect any personally identifiable information from children under 13.
+              Calculator: All in One is a family-friendly educational and utility app suitable for all age groups. We do not knowingly collect any personally identifiable information from children under 13.
             </Text>
           </View>
 

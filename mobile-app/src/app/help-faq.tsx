@@ -31,8 +31,8 @@ interface FAQItem {
 const FAQ_DATA: FAQItem[] = [
   {
     category: "GENERAL",
-    q: "Are all TopCalcBox calculators 100% free?",
-    a: "Yes! Every single calculator in TopCalcBox is completely free. There are no hidden fees, paid subscriptions, or locked features.",
+    q: "Are all Calculator: All in One tools 100% free?",
+    a: "Yes! Every single calculator in Calculator: All in One is completely free. There are no hidden fees, paid subscriptions, or locked features.",
   },
   {
     category: "GENERAL",
@@ -62,7 +62,7 @@ const FAQ_DATA: FAQItem[] = [
   {
     category: "PRIVACY & SECURITY",
     q: "Is my calculation data saved or uploaded anywhere?",
-    a: "Never. TopCalcBox calculates everything in local device memory. None of your entered numbers, dates, prices, or personal values are ever sent to a server or stored.",
+    a: "Never. Calculator: All in One calculates everything in local device memory. None of your entered numbers, dates, prices, or personal values are ever sent to a server or stored.",
   },
   {
     category: "SUPPORT & UPDATES",
@@ -82,7 +82,7 @@ export default function HelpFaqScreen() {
 
   const handleContact = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    Linking.openURL("mailto:help.rka@gmail.com?subject=TopCalcBox%20Help%20%26%20Inquiry");
+    Linking.openURL("mailto:help.rka@gmail.com?subject=Calculator%20All%20in%20One%20Help%20%26%20Inquiry");
   };
 
   const handleBack = () => {

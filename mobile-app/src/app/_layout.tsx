@@ -46,11 +46,11 @@ export default function RootLayout() {
             style={styles.splashLogo}
             resizeMode="contain"
           />
-          <Text style={styles.brandTitle}>TopCalcBox</Text>
-          <Text style={styles.brandSubtitle}>Free Online Calculators</Text>
+          <Text style={styles.brandTitle}>Calculator: All in One</Text>
+          <Text style={styles.brandSubtitle}>25 Free Offline Calculators</Text>
           <ActivityIndicator
             size="small"
-            color="#EA580C"
+            color="#DC2626"
             style={styles.loader}
           />
         </View>

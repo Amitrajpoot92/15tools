@@ -55,9 +55,9 @@ export default function HomeScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     try {
       await Share.share({
-        title: "TopCalcBox – Smart Calculators",
+        title: "Calculator: All in One – Smart Calculators",
         message:
-          "Check out TopCalcBox! 15+ smart, 100% free offline calculators for finance, shopping, health & daily calculations: https://topcalcbox.com",
+          "Check out Calculator: All in One! 25 smart, 100% free offline calculators for finance, shopping, health & daily calculations: https://topcalcbox.com",
       });
     } catch {
       // User dismissed share dialog
@@ -76,9 +76,9 @@ export default function HomeScreen() {
             style={styles.logoImage}
             resizeMode="contain"
           />
-          <View>
-            <Text style={styles.brandTitle}>TopCalcBox</Text>
-            <Text style={styles.brandSubtitle}>Free Online Calculators</Text>
+          <View style={{ flexShrink: 1 }}>
+            <Text style={styles.brandTitle} numberOfLines={1}>Calculator: All in One</Text>
+            <Text style={styles.brandSubtitle}>25 Free Offline Calculators</Text>
           </View>
         </View>
       </View>
@@ -335,13 +335,13 @@ export default function HomeScreen() {
                   style={styles.footerLogo}
                   resizeMode="contain"
                 />
-                <Text style={styles.footerBrandTitle}>TopCalcBox</Text>
+                <Text style={styles.footerBrandTitle}>Calculator: All in One</Text>
               </View>
               <Text style={styles.footerText}>
                 25 Free Calculators • 100% Private & Offline
               </Text>
               <Text style={styles.footerSubText}>
-                © 2026 TopCalcBox. All Rights Reserved.
+                © 2026 Calculator: All in One. All Rights Reserved.
               </Text>
             </View>
           </View>
