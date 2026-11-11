@@ -99,21 +99,21 @@ export function SubscriptionCostCalculator() {
         <div className="bg-slate-50 border border-slate-100 p-1 rounded-lg flex items-center shadow-sm">
           <button 
             onClick={() => setCurrency("$")}
-            className={`px-3 py-1.5 rounded-md transition-all font-bold text-sm ${currency === "$" ? "bg-white shadow-sm text-rose-600" : "text-slate-500 hover:text-slate-700"}`}
+            className={`px-3 py-1.5 rounded-md transition-all font-bold text-sm ${currency === "$" ? "bg-white shadow-sm text-rose-600" : "text-slate-700 hover:text-slate-700"}`}
           >
             <DollarSign className="w-4 h-4" />
           </button>
           <button 
             onClick={() => setCurrency("₹")}
-            className={`px-3 py-1.5 rounded-md transition-all font-bold text-sm ${currency === "₹" ? "bg-white shadow-sm text-rose-600" : "text-slate-500 hover:text-slate-700"}`}
+            className={`px-3 py-1.5 rounded-md transition-all font-bold text-sm ${currency === "₹" ? "bg-white shadow-sm text-rose-600" : "text-slate-700 hover:text-slate-700"}`}
           >
             <IndianRupee className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4 bg-rose-50/50 border border-rose-100/50 p-5 md:p-6 rounded-2xl">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2.5 bg-rose-50/90 border-2 border-rose-200 p-3.5 sm:p-4 rounded-2xl">
           <div className="flex justify-between items-end mb-2">
             <label className="text-sm font-bold text-slate-700">Your Subscriptions</label>
             <button 
@@ -132,33 +132,33 @@ export function SubscriptionCostCalculator() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="flex flex-wrap gap-2 p-3 bg-slate-50/80 border border-slate-200 rounded-xl items-center shadow-sm"
+                  className="flex flex-wrap gap-2 p-3 bg-white border-2 border-slate-300/90 rounded-xl items-center shadow-sm"
                 >
                   <input
                     type="text"
                     value={sub.name}
                     onChange={(e) => updateSub(sub.id, "name", e.target.value)}
                     placeholder={`Subscription ${index + 1}`}
-                    className="flex-1 min-w-[120px] bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="flex-1 min-w-[120px] bg-white border-2 border-slate-300/90 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
                   />
                   <input
                     type="number"
                     value={sub.cost}
                     onChange={(e) => updateSub(sub.id, "cost", e.target.value)}
                     placeholder="Cost"
-                    className="w-24 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                    className="w-24 bg-white border-2 border-slate-300/90 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50"
                   />
                   <select
                     value={sub.frequency}
                     onChange={(e) => updateSub(sub.id, "frequency", e.target.value)}
-                    className="w-[100px] bg-white border border-slate-200 rounded-lg px-2 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 appearance-none"
+                    className="w-[100px] bg-white border-2 border-slate-300/90 rounded-lg px-2 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 appearance-none"
                   >
                     <option value="monthly">Monthly</option>
                     <option value="yearly">Yearly</option>
                   </select>
                   <button 
                     onClick={() => removeSub(sub.id)}
-                    className={`p-2 rounded-lg transition-colors ${subs.length > 1 ? "text-slate-400 hover:text-red-500 hover:bg-red-50" : "text-slate-300 cursor-not-allowed"}`}
+                    className={`p-2 rounded-lg transition-colors ${subs.length > 1 ? "text-slate-600 hover:text-red-500 hover:bg-red-50" : "text-slate-300 cursor-not-allowed"}`}
                     disabled={subs.length === 1}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -169,7 +169,7 @@ export function SubscriptionCostCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl h-full min-h-[300px] shadow-sm border border-rose-300 relative">
+        <div className="flex flex-col items-center justify-center p-4 pt-11 sm:p-5 sm:pt-11 bg-rose-100 rounded-2xl h-full min-h-[220px] shadow-sm border-2 border-rose-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
@@ -195,7 +195,7 @@ Calculate Online: https://topcalcbox.com/subscription-cost-calculator/`;
             <Calculator className="w-8 h-8 text-rose-600" />
           </div>
           
-          <p className="text-sm text-rose-800/70 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-rose-900 uppercase tracking-widest font-bold mb-1">
             Total Monthly Cost
           </p>
           
@@ -210,8 +210,8 @@ Calculate Online: https://topcalcbox.com/subscription-cost-calculator/`;
 
           <div className="w-full border-t border-rose-300 my-3" />
 
-          <div className="w-full flex justify-between items-center mt-2 px-4 py-3 bg-white shadow-sm rounded-xl border border-white/10 backdrop-blur-sm">
-            <span className="text-rose-800/70 font-medium">Total Yearly Cost:</span>
+          <div className="w-full flex justify-between items-center mt-2 px-4 py-2.5 bg-white shadow-sm rounded-xl border border-rose-200 backdrop-blur-sm">
+            <span className="text-rose-900 font-medium">Total Yearly Cost:</span>
             <span className="text-slate-900 font-bold text-xl">{currency}{result.yearly}</span>
           </div>
         </div>

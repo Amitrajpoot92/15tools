@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PricePerKgCalculator } from "@/components/calculators/PricePerKgCalculator";
 import { SEOContent } from "@/components/SEOContent";
+import { ToolHeaderBanner } from "@/components/ToolHeaderBanner";
 import { Scale } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PricePerKgCalculatorPage() {
   return (
-    <div className="pb-8">
+    <div className="pb-2 sm:pb-4">
       {/* Schema Markup for SEO */}
       <script
         type="application/ld+json"
@@ -31,17 +32,14 @@ export default function PricePerKgCalculatorPage() {
       />
 
     
-      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+      <div className="max-w-4xl mx-auto mb-4 sm:mb-5 bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-md shadow-slate-200/60 border-2 border-slate-200/90">
         {/* Compact Header */}
-        {/* Compact Header */}
-        <div className="flex flex-col items-center text-center bg-amber-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-amber-200/80">
-          <h1 className="text-xl md:text-2xl font-extrabold text-amber-950 tracking-tight mb-1">
-            Price Per Kg Calculator
-          </h1>
-          <p className="text-amber-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Calculate quantity in grams or total price from a price per kilogram.
-          </p>
-        </div>
+        <ToolHeaderBanner
+          title="Price Per Kg Calculator"
+          description="Calculate quantity in grams or total price from a price per kilogram."
+          color="amber"
+          icon={<Scale className="w-5 h-5" strokeWidth={2.5} />}
+        />
 
         {/* Interactive Tool */}
         <div className="w-full">

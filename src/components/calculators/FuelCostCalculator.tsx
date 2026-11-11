@@ -67,7 +67,7 @@ export function FuelCostCalculator() {
         <button
           onClick={() => setUnitSystem("metric")}
           className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-            unitSystem === "metric" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"
+            unitSystem === "metric" ? "bg-white text-slate-900 shadow-sm border border-slate-300" : "text-slate-900 hover:text-slate-700"
           }`}
         >
           Metric (KM / Liters)
@@ -75,41 +75,41 @@ export function FuelCostCalculator() {
         <button
           onClick={() => setUnitSystem("us")}
           className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-            unitSystem === "us" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"
+            unitSystem === "us" ? "bg-white text-slate-900 shadow-sm border border-slate-300" : "text-slate-900 hover:text-slate-700"
           }`}
         >
           US (Miles / Gallons)
         </button>
       </div>
 
-      <div className="space-y-5 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
-        <div className="space-y-4">
+      <div className="space-y-3.5 bg-indigo-50/90 border-2 border-indigo-200 p-3.5 sm:p-4 rounded-2xl">
+        <div className="space-y-2.5">
           {/* Trip Distance */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Trip Distance ({distanceLabel})</label>
             <input
               type="number"
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
               placeholder="240"
-              className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+              className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
             />
           </div>
           
           {/* Fuel Efficiency */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Efficiency / Mileage ({effLabel})</label>
             <input
               type="number"
               value={efficiency}
               onChange={(e) => setEfficiency(e.target.value)}
               placeholder="60"
-              className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+              className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
             />
           </div>
 
           {/* Fuel Price */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Price Per {priceLabel} ({currencySymbol})</label>
             <div className="relative">
               <input
@@ -117,7 +117,7 @@ export function FuelCostCalculator() {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="100"
-                className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 pl-12 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+                className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 pl-12 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all"
               />
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">{currencySymbol}</span>
             </div>
@@ -125,7 +125,7 @@ export function FuelCostCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="bg-blue-100 border border-blue-300 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden shadow-sm">
+        <div className="bg-blue-100 border-2 border-blue-300 rounded-2xl p-3.5 sm:p-4 mt-4 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold text-slate-900">Total Fuel Cost</span>
             <div className="flex items-center gap-1.5">
@@ -140,7 +140,7 @@ Cost Per ${distLabelSingle}: ${formatCurrency(costPerUnit)}
 
 Calculate Online: https://topcalcbox.com/fuel-cost-calculator`;
                 copyToClipboard(text);
-              }} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
+              }} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border-2 border-slate-300/90 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>
@@ -157,11 +157,11 @@ Calculate Online: https://topcalcbox.com/fuel-cost-calculator`;
           </div>
 
           <div className="grid grid-cols-2 gap-3 mt-4">
-            <div className="bg-white/60 rounded-xl p-3 text-center">
+            <div className="bg-white rounded-xl p-3 text-center">
               <p className="text-slate-600 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-1">Fuel Required</p>
               <p className="text-lg sm:text-xl font-extrabold text-slate-900">{needed.toFixed(2)} {volUnit}</p>
             </div>
-            <div className="bg-white/60 rounded-xl p-3 text-center">
+            <div className="bg-white rounded-xl p-3 text-center">
               <p className="text-slate-600 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-1">Cost Per {distLabelSingle}</p>
               <p className="text-lg sm:text-xl font-extrabold text-slate-900">{formatCurrency(costPerUnit)}</p>
             </div>

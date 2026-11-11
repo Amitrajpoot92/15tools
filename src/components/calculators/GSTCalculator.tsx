@@ -73,55 +73,55 @@ export function GSTCalculator() {
       <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-2 gap-1 mb-5">
         <button
           onClick={() => setMode("add")}
-          className={`py-2 px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center ${mode === "add" ? "bg-white text-purple-700 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center ${mode === "add" ? "bg-white text-purple-700 shadow-sm border border-slate-300" : "text-slate-700 hover:text-slate-700"}`}
         >
           <span>Exclusive GST</span>
           <span className="font-medium opacity-80">(Add GST)</span>
         </button>
         <button
           onClick={() => setMode("remove")}
-          className={`py-2 px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center ${mode === "remove" ? "bg-white text-purple-700 shadow-sm border border-slate-200/50" : "text-slate-500 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex flex-col items-center justify-center ${mode === "remove" ? "bg-white text-purple-700 shadow-sm border border-slate-300" : "text-slate-700 hover:text-slate-700"}`}
         >
           <span>Inclusive GST</span>
           <span className="font-medium opacity-80">(Remove GST)</span>
         </button>
       </div>
 
-      <div className="space-y-4 bg-purple-50/50 border border-purple-100/50 p-4 md:p-5 rounded-2xl">
+      <div className="space-y-2.5 bg-purple-50/90 border-2 border-purple-200 p-3.5 sm:p-4 rounded-2xl">
         <div className="flex flex-col gap-4">
           {/* Amount */}
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
               {mode === "add" ? "Net Amount (₹)" : "Total Amount (₹)"}
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 font-bold">₹</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-600 font-bold">₹</span>
               <input 
                 type="number" 
                 value={amount} 
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="1000"
-                className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/10 transition-all text-slate-900"
+                className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/10 transition-all text-slate-900"
               />
             </div>
           </div>
 
           {/* GST Rate */}
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">GST Rate (%)</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">GST Rate (%)</label>
             <div className="relative">
               <input 
                 type="number" 
                 value={rate} 
                 onChange={(e) => setRate(e.target.value)}
                 placeholder="28"
-                className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/10 transition-all pr-10 text-slate-900"
+                className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/10 transition-all pr-10 text-slate-900"
               />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-base text-slate-400 font-bold">%</span>
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-base text-slate-600 font-bold">%</span>
             </div>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {[5, 12, 18, 28].map(v => (
-                <button key={v} onClick={() => setRate(v.toString())} className="flex-1 py-2 bg-slate-100 hover:bg-slate-200 text-slate-500 text-xs font-bold rounded-lg transition-colors">
+                <button key={v} onClick={() => setRate(v.toString())} className="flex-1 py-2 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 shadow-xs cursor-pointer text-xs font-bold rounded-lg transition-colors">
                   {v}%
                 </button>
               ))}
@@ -130,8 +130,8 @@ export function GSTCalculator() {
         </div>
 
         {/* State Type Radio */}
-        <div className="mt-5">
-          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">GST Type</label>
+        <div className="mt-3.5">
+          <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">GST Type</label>
           <div className="grid grid-cols-2 gap-3">
             <button 
               onClick={() => setStateType("intra")} 
@@ -139,7 +139,7 @@ export function GSTCalculator() {
             >
               <div>
                 <p className={`text-[13px] font-bold ${stateType === "intra" ? "text-purple-700" : "text-slate-800"}`}>Intra-State</p>
-                <p className="text-[10px] text-slate-500 font-medium mt-0.5">CGST + SGST</p>
+                <p className="text-[10px] text-slate-700 font-medium mt-0.5">CGST + SGST</p>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center ${stateType === "intra" ? "bg-purple-600 text-white" : "border-2 border-slate-200"}`}>
                 {stateType === "intra" && <Check className="w-3 h-3" strokeWidth={3} />}
@@ -151,7 +151,7 @@ export function GSTCalculator() {
             >
               <div>
                 <p className={`text-[13px] font-bold ${stateType === "inter" ? "text-purple-700" : "text-slate-800"}`}>Inter-State</p>
-                <p className="text-[10px] text-slate-500 font-medium mt-0.5">IGST</p>
+                <p className="text-[10px] text-slate-700 font-medium mt-0.5">IGST</p>
               </div>
               <div className={`w-5 h-5 rounded-full flex items-center justify-center ${stateType === "inter" ? "bg-purple-600 text-white" : "border-2 border-slate-200"}`}>
                 {stateType === "inter" && <Check className="w-3 h-3" strokeWidth={3} />}
@@ -161,10 +161,10 @@ export function GSTCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-purple-50/40 rounded-3xl shadow-[0_8px_30px_rgb(168,85,247,0.12)] border border-purple-200/60 relative overflow-hidden mt-4">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-purple-50/85 to-purple-100/70 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(168,85,247,0.12)] border-2 border-purple-300/80 relative overflow-hidden mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#a855f708_1px,transparent_1px),linear-gradient(to_bottom,#a855f708_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+          <div className="w-full flex justify-between items-center mb-3.5 z-10 flex-wrap gap-4">
             <div className="flex items-center gap-2 text-purple-800">
                <Receipt className="w-4 h-4 text-purple-500" />
                <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">{mode === "add" ? "Total Price (Incl. GST)" : "Net Price (Excl. GST)"}</h3>
@@ -181,13 +181,13 @@ ${mode === 'add' ? 'Final Amount: ₹' + formatNumber(res.total) : 'Net Amount: 
 Calculate Online: https://topcalcbox.com/gst-calculator/`;
                   copyToClipboard(text);
                 }} 
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-purple-200 rounded-xl text-[11px] font-bold text-purple-700 hover:bg-white transition-all shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-purple-300 rounded-xl text-[11px] font-extrabold text-purple-800 hover:bg-purple-50 cursor-pointer transition-all shadow-sm"
               >
                 <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
               <button 
                 onClick={reset}
-                className="p-1.5 bg-white/80 backdrop-blur-md border border-purple-200 rounded-xl text-purple-700 hover:bg-white transition-all shadow-sm"
+                className="p-1.5 bg-white border-2 border-purple-300 rounded-xl text-purple-800 hover:bg-purple-50 cursor-pointer transition-all shadow-sm"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -199,12 +199,12 @@ Calculate Online: https://topcalcbox.com/gst-calculator/`;
               key={`${amount}-${rate}-${mode}`}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full space-y-4"
+              className="w-full space-y-2.5"
             >
-              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                <p className="text-[10px] text-purple-800/70 font-bold uppercase tracking-widest mb-1">Final Amount</p>
+              <div className="bg-white shadow-sm border-2 border-purple-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <p className="text-[10px] text-purple-900 font-bold uppercase tracking-widest mb-1">Final Amount</p>
                 <div className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tighter mb-2 drop-shadow-sm w-full break-all px-2">
-                  <span className="text-xl md:text-3xl font-bold text-slate-400 mr-1">₹</span>{formatNumber(mode === "add" ? res.total : res.net)}
+                  <span className="text-xl md:text-3xl font-bold text-slate-600 mr-1">₹</span>{formatNumber(mode === "add" ? res.total : res.net)}
                 </div>
                 <div className="bg-purple-100/50 border border-purple-200 text-purple-800 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
                   {rate}% GST {mode === "add" ? "Included" : "Excluded"}
@@ -212,8 +212,8 @@ Calculate Online: https://topcalcbox.com/gst-calculator/`;
               </div>
 
               {/* Target Cards */}
-              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-purple-200/50 rounded-2xl p-4">
-                <div className="space-y-2">
+              <div className="bg-white shadow-sm border-2 border-purple-200/90 rounded-2xl p-4">
+                <div className="space-y-1.5">
                   <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50/80 border border-slate-100 gap-2">
                     <span className="text-slate-600 font-bold text-xs sm:text-sm shrink-0">Net Amount</span>
                     <span className="text-slate-900 font-black text-sm sm:text-base break-all text-right">₹{formatNumber(res.net)}</span>

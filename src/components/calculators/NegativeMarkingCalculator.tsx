@@ -62,61 +62,61 @@ export function NegativeMarkingCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-4 bg-amber-50/50 border border-amber-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="space-y-2">
+      <div className="relative z-10 space-y-3.5">
+        <div className="space-y-2.5 bg-amber-50/90 border-2 border-amber-200 p-3.5 sm:p-4 rounded-2xl">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Total Questions in Exam</label>
             <input
               type="number"
               value={totalQuestions}
               onChange={(e) => setTotalQuestions(e.target.value)}
               placeholder="e.g. 100"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-xs font-bold"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Total Questions Attempted</label>
             <input
               type="number"
               value={attempted}
               onChange={(e) => setAttempted(e.target.value)}
               placeholder="e.g. 85"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-xs font-bold"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Correct Answers</label>
             <input
               type="number"
               value={correct}
               onChange={(e) => setCorrect(e.target.value)}
               placeholder="e.g. 70"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-emerald-700 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-emerald-700 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-xs font-bold"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Marks for Correct (+VE)</label>
             <input
               type="number"
               value={marksPerCorrect}
               onChange={(e) => setMarksPerCorrect(e.target.value)}
               placeholder="e.g. 4"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-xs font-bold"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Penalty for Wrong (-VE)</label>
             <input
               type="number"
               value={penaltyPerWrong}
               onChange={(e) => setPenaltyPerWrong(e.target.value)}
               placeholder="e.g. 1"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-rose-700 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-rose-700 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-xs font-bold"
             />
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-12 bg-gradient-to-b from-amber-50 to-amber-100/80 rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border border-amber-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 pt-11 sm:p-5 sm:pt-11 bg-gradient-to-b from-amber-50 to-amber-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border-2 border-amber-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b10_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b10_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           
@@ -124,16 +124,16 @@ export function NegativeMarkingCalculator() {
             <button onClick={() => {
               const text = `Negative Marking Calculator\nTotal Questions in Exam: ${totalQuestions || 0}\nQuestions Attempted: ${attempted || 0}\nCorrect Answers: ${correct || 0}\nMarks per Correct: ${marksPerCorrect || 0}\nPenalty per Wrong: ${penaltyPerWrong || 0}\nFinal Score: ${result.score} / ${result.maxPossible}\nWrong Answers: ${result.wrong}\nPenalty Deducted: ${result.penalty}\nUnattempted: ${result.unattempted}\nAccuracy: ${result.accuracy}%\n\nCalculate Online: https://topcalcbox.com/negative-marking-calculator/`;
               copyToClipboard(text);
-            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm">
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-amber-300 rounded-xl text-[11px] font-extrabold text-amber-800 hover:bg-amber-50 cursor-pointer transition-all shadow-sm">
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-amber-700 hover:bg-white transition-all shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-white border-2 border-amber-300 rounded-xl text-amber-800 hover:bg-amber-50 cursor-pointer transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
           
-          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-1 z-10">
+          <p className="text-sm text-amber-900 uppercase tracking-widest font-extrabold mb-1 z-10">
             Final Score
           </p>
           
@@ -147,20 +147,20 @@ export function NegativeMarkingCalculator() {
           </motion.div>
 
           <div className="w-full grid grid-cols-2 gap-3 text-center text-sm z-10 mt-1 max-w-sm">
-            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Wrong Answers</span>
+            <div className="flex flex-col bg-white p-3 rounded-2xl border-2 border-amber-200/90 shadow-sm">
+              <span className="text-amber-900 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Wrong Answers</span>
               <span className="text-slate-900 font-extrabold text-xl md:text-2xl">{result.wrong}</span>
             </div>
-            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Accuracy</span>
+            <div className="flex flex-col bg-white p-3 rounded-2xl border-2 border-amber-200/90 shadow-sm">
+              <span className="text-amber-900 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Accuracy</span>
               <span className="text-slate-900 font-extrabold text-xl md:text-2xl">{result.accuracy}%</span>
             </div>
-            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Unattempted</span>
+            <div className="flex flex-col bg-white p-3 rounded-2xl border-2 border-amber-200/90 shadow-sm">
+              <span className="text-amber-900 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Unattempted</span>
               <span className="text-slate-900 font-extrabold text-xl md:text-2xl">{result.unattempted}</span>
             </div>
-            <div className="flex flex-col bg-white/60 backdrop-blur-sm p-3 rounded-2xl border border-amber-200/50 shadow-sm">
-              <span className="text-amber-800/70 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Penalty Deducted</span>
+            <div className="flex flex-col bg-white p-3 rounded-2xl border-2 border-amber-200/90 shadow-sm">
+              <span className="text-amber-900 font-bold mb-0.5 text-[10px] md:text-[11px] uppercase tracking-wider">Penalty Deducted</span>
               <span className="text-rose-600 font-extrabold text-xl md:text-2xl">-{result.penalty}</span>
             </div>
           </div>

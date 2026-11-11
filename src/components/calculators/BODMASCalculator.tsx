@@ -176,22 +176,22 @@ export function BODMASCalculator() {
       {/* Premium Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-6 bg-amber-50/50 border border-amber-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="space-y-2">
+      <div className="relative z-10 space-y-3.5">
+        <div className="space-y-3.5 bg-amber-50/90 border-2 border-amber-200 p-3.5 sm:p-4 rounded-2xl">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Math Expression</label>
             <input
               type="text"
               value={expression}
               onChange={handleChange}
               placeholder="e.g. 5 + (3 * 2)"
-              className={`w-full bg-slate-50/80 border rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-inner ${error ? 'border-red-300 focus:ring-red-500/50' : 'border-slate-200'}`}
+              className={`w-full bg-slate-50/80 border rounded-xl px-4 py-2.5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all shadow-xs font-bold ${error ? 'border-red-300 focus:ring-red-500/50' : 'border-slate-200'}`}
             />
             {error && <p className="text-xs font-bold text-red-500 mt-1">{error}</p>}
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 pt-16 md:p-8 md:pt-16 bg-gradient-to-b from-amber-50 to-amber-100/80 rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border border-amber-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 pt-12 sm:p-5 sm:pt-12 bg-gradient-to-b from-amber-50 to-amber-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border-2 border-amber-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b10_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b10_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
@@ -212,18 +212,18 @@ ${stepsText}Result: ${finalRes}
 
 Calculate Online: https://topcalcbox.com/bodmas-calculator/`;
               copyToClipboard(text);
-            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-white transition-all shadow-sm">
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-amber-300 rounded-xl text-[11px] font-extrabold text-amber-800 hover:bg-amber-50 cursor-pointer transition-all shadow-sm">
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-amber-200 rounded-xl text-amber-700 hover:bg-white transition-all shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-white border-2 border-amber-300 rounded-xl text-amber-800 hover:bg-amber-50 cursor-pointer transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
           
           {steps.length > 0 && (
-            <div className="w-full bg-white/70 backdrop-blur-md rounded-2xl shadow-sm border border-amber-200/60 p-5 mb-6 text-left relative z-10">
-              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Step-by-Step Solution</h4>
+            <div className="w-full bg-white rounded-2xl shadow-sm border-2 border-amber-200/90 p-5 mb-3.5 text-left relative z-10">
+              <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-4">Step-by-Step Solution</h4>
               <div className="space-y-2.5 font-mono text-base md:text-lg text-slate-700 overflow-x-auto pb-2">
                 {steps.map((step, index) => (
                    <div key={index} className="flex items-center gap-3 min-w-max">
@@ -236,7 +236,7 @@ Calculate Online: https://topcalcbox.com/bodmas-calculator/`;
           )}
 
 
-          <p className="text-sm text-amber-800/70 uppercase tracking-widest font-extrabold mb-2 z-10">
+          <p className="text-sm text-amber-900 uppercase tracking-widest font-extrabold mb-2 z-10">
             Final Result
           </p>
           <motion.div 

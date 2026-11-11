@@ -85,78 +85,78 @@ export function PercentageCalculator() {
       <div className="bg-slate-50 p-1.5 rounded-2xl grid grid-cols-1 sm:grid-cols-3 gap-1 mb-5">
         <button
           onClick={() => setMode("what_is_x_percent_of_y")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "what_is_x_percent_of_y" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "what_is_x_percent_of_y" ? "bg-white text-slate-900 shadow-sm border border-slate-300" : "text-slate-900 hover:text-slate-700"}`}
         >
           What is X% of Y?
         </button>
         <button
           onClick={() => setMode("x_is_what_percent_of_y")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "x_is_what_percent_of_y" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "x_is_what_percent_of_y" ? "bg-white text-slate-900 shadow-sm border border-slate-300" : "text-slate-900 hover:text-slate-700"}`}
         >
           X is what % of Y?
         </button>
         <button
           onClick={() => setMode("percentage_change")}
-          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "percentage_change" ? "bg-white text-slate-900 shadow-sm border border-slate-200/50" : "text-slate-900 hover:text-slate-700"}`}
+          className={`py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${mode === "percentage_change" ? "bg-white text-slate-900 shadow-sm border border-slate-300" : "text-slate-900 hover:text-slate-700"}`}
         >
           % Change
         </button>
       </div>
 
-      <div className="space-y-5 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
+      <div className="space-y-3.5 bg-indigo-50/90 border-2 border-indigo-200 p-3.5 sm:p-4 rounded-2xl">
         <AnimatePresence mode="wait">
           {mode === "what_is_x_percent_of_y" && (
             <motion.div key="what" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Percentage (%)</label>
                 <div className="relative">
-                  <input type="number" value={percX} onChange={(e)=>setPercX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all pr-10" />
+                  <input type="number" value={percX} onChange={(e)=>setPercX(e.target.value)} className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all pr-10" />
                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-lg text-slate-800 font-bold">%</span>
                 </div>
                 <div className="flex gap-1 pt-1 w-full">
                   {[5, 10, 15, 20, 25, 50].map(v => (
-                    <button key={v} onClick={() => setPercX(v.toString())} className="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors">
+                    <button key={v} onClick={() => setPercX(v.toString())} className="flex-1 py-1.5 bg-white hover:bg-slate-100 text-slate-900 border border-slate-300 shadow-xs cursor-pointer text-[10px] sm:text-[11px] font-bold rounded-md transition-colors">
                       {v}%
                     </button>
                   ))}
                 </div>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Total Value (Of Y)</label>
-                <input type="number" value={percY} onChange={(e)=>setPercY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
+                <input type="number" value={percY} onChange={(e)=>setPercY(e.target.value)} className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>
           )}
 
           {mode === "x_is_what_percent_of_y" && (
             <motion.div key="x_is" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Value (X)</label>
-                <input type="number" value={whatX} onChange={(e)=>setWhatX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
+                <input type="number" value={whatX} onChange={(e)=>setWhatX(e.target.value)} className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Total Value (Of Y)</label>
-                <input type="number" value={whatY} onChange={(e)=>setWhatY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
+                <input type="number" value={whatY} onChange={(e)=>setWhatY(e.target.value)} className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>
           )}
 
           {mode === "percentage_change" && (
             <motion.div key="change" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">Original Value</label>
-                <input type="number" value={changeX} onChange={(e)=>setChangeX(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
+                <input type="number" value={changeX} onChange={(e)=>setChangeX(e.target.value)} className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-900 uppercase tracking-wider">New Value</label>
-                <input type="number" value={changeY} onChange={(e)=>setChangeY(e.target.value)} className="w-full text-xl font-bold bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
+                <input type="number" value={changeY} onChange={(e)=>setChangeY(e.target.value)} className="w-full text-xl font-bold bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition-all" />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Result Box */}
-        <div className="bg-blue-100 border border-blue-300 rounded-2xl p-5 md:p-6 mt-4 relative overflow-hidden shadow-sm">
+        <div className="bg-blue-100 border-2 border-blue-300 rounded-2xl p-3.5 sm:p-4 mt-4 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold text-slate-900">{result.text}</span>
             <div className="flex items-center gap-1.5">
@@ -166,7 +166,7 @@ Result: ${result.text} = ${result.value}${result.symbol ? result.symbol : ""}
 
 Calculate Online: https://topcalcbox.com/percentage-calculator/`;
                 copyToClipboard(text);
-              }} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
+              }} className="flex items-center gap-1 px-2.5 py-1.5 bg-white border-2 border-slate-300/90 rounded-md text-xs font-bold text-slate-900 hover:bg-indigo-50 transition-colors shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? "Copied" : "Copy"}
               </button>

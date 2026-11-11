@@ -81,22 +81,22 @@ export function CalorieCalculator() {
     <div className="w-full relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
+      <div className="relative z-10 space-y-3.5">
         {/* Input Section */}
-        <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-4 md:p-5 relative">
+        <div className="bg-emerald-50/90 border-2 border-emerald-200 rounded-2xl p-3.5 sm:p-4 relative">
           
           {/* Toggles Container */}
           <div className="grid grid-cols-2 gap-3 mb-4">
             {/* Unit System Toggle */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left">Unit System</label>
-              <div className="flex bg-white/80 p-1 rounded-xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-700 block text-center sm:text-left">Unit System</label>
+              <div className="flex bg-white p-1 rounded-xl border-2 border-emerald-200/90 shadow-sm backdrop-blur-sm">
                 <button
                   onClick={() => setUnitSystem("metric")}
                   className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     unitSystem === "metric" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
-                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                      : "text-slate-700 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   Metric
@@ -106,7 +106,7 @@ export function CalorieCalculator() {
                   className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     unitSystem === "us" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
-                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                      : "text-slate-700 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   Imperial
@@ -116,14 +116,14 @@ export function CalorieCalculator() {
 
             {/* Gender Toggle */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left">Gender</label>
-              <div className="flex bg-white/80 p-1 rounded-xl border border-emerald-200/50 shadow-sm backdrop-blur-sm">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-slate-700 block text-center sm:text-left">Gender</label>
+              <div className="flex bg-white p-1 rounded-xl border-2 border-emerald-200/90 shadow-sm backdrop-blur-sm">
                 <button
                   onClick={() => setGender("male")}
                   className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     gender === "male" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
-                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                      : "text-slate-700 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   Male
@@ -133,7 +133,7 @@ export function CalorieCalculator() {
                   className={`flex-1 py-1.5 px-1 rounded-lg text-xs font-bold transition-all ${
                     gender === "female" 
                       ? "bg-emerald-100 text-emerald-800 shadow-sm" 
-                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                      : "text-slate-700 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   Female
@@ -142,7 +142,7 @@ export function CalorieCalculator() {
             </div>
           </div>
 
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3 sm:space-y-2.5">
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {/* Age */}
               <div className="space-y-1.5">
@@ -152,7 +152,7 @@ export function CalorieCalculator() {
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                   placeholder="30"
-                  className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                  className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                 />
               </div>
 
@@ -164,7 +164,7 @@ export function CalorieCalculator() {
                     value={weightKg}
                     onChange={(e) => setWeightKg(e.target.value)}
                     placeholder="70"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                   />
                 </div>
               ) : (
@@ -175,7 +175,7 @@ export function CalorieCalculator() {
                     value={weightLb}
                     onChange={(e) => setWeightLb(e.target.value)}
                     placeholder="154"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                   />
                 </div>
               )}
@@ -189,7 +189,7 @@ export function CalorieCalculator() {
                   value={heightCm}
                   onChange={(e) => setHeightCm(e.target.value)}
                   placeholder="175"
-                  className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                  className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                 />
               </div>
             ) : (
@@ -201,14 +201,14 @@ export function CalorieCalculator() {
                     value={heightFt}
                     onChange={(e) => setHeightFt(e.target.value)}
                     placeholder="Feet"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                   />
                   <input
                     type="number"
                     value={heightIn}
                     onChange={(e) => setHeightIn(e.target.value)}
                     placeholder="Inches"
-                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                    className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                   />
                 </div>
               </div>
@@ -220,7 +220,7 @@ export function CalorieCalculator() {
               <select
                 value={activity}
                 onChange={(e) => setActivity(e.target.value)}
-                className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-[13px] sm:text-base text-slate-900 font-bold focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm cursor-pointer"
+                className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-[13px] sm:text-base text-slate-900 font-bold focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm cursor-pointer"
               >
                 <option value="1.2">Sedentary (Little/no exercise)</option>
                 <option value="1.375">Lightly Active (1-3 days/week)</option>
@@ -233,10 +233,10 @@ export function CalorieCalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border border-emerald-200/60 relative overflow-hidden mt-4">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-emerald-50/85 to-emerald-100/70 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border-2 border-emerald-300/80 relative overflow-hidden mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+          <div className="w-full flex justify-between items-center mb-3.5 z-10 flex-wrap gap-4">
             <div className="flex items-center gap-2 text-emerald-800">
                <h3 className="font-bold text-sm md:text-base uppercase tracking-wider">Calorie Result</h3>
             </div>
@@ -246,13 +246,13 @@ export function CalorieCalculator() {
                   const text = `Calorie Calculator\n${unitSystem === 'metric' ? `Weight: ${weightKg} kg\nHeight: ${heightCm} cm` : `Weight: ${weightLb} lbs\nHeight: ${heightFt} ft ${heightIn} in`}\nAge: ${age}\nGender: ${gender}\nMaintain Weight: ${maintenance} kcal/day\nWeight Loss: ${weightLoss} kcal/day\nWeight Gain: ${weightGain} kcal/day\n\nCalculate Online: https://topcalcbox.com/calorie-calculator`;
                   copyToClipboard(text);
                 }} 
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-[11px] font-bold text-emerald-700 hover:bg-white transition-all shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-emerald-300 rounded-xl text-[11px] font-extrabold text-emerald-800 hover:bg-emerald-50 cursor-pointer transition-all shadow-sm"
               >
                 <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
               <button 
                 onClick={reset}
-                className="p-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-emerald-700 hover:bg-white transition-all shadow-sm"
+                className="p-1.5 bg-white border-2 border-emerald-300 rounded-xl text-emerald-800 hover:bg-emerald-50 cursor-pointer transition-all shadow-sm"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -264,10 +264,10 @@ export function CalorieCalculator() {
               key={maintenance}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full space-y-4"
+              className="w-full space-y-2.5"
             >
-              <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-                <p className="text-[10px] text-emerald-800/70 font-bold uppercase tracking-widest mb-2">Maintain Weight</p>
+              <div className="bg-white shadow-sm border-2 border-emerald-200/90 rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center text-center">
+                <p className="text-[10px] text-emerald-900 font-bold uppercase tracking-widest mb-2">Maintain Weight</p>
                 <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-1 drop-shadow-sm w-full break-all px-2">
                   {maintenance.toLocaleString('en-IN')} <span className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-600/80">kcal</span>
                 </div>
@@ -278,14 +278,14 @@ export function CalorieCalculator() {
 
               {/* Target Cards */}
               <div className="grid grid-cols-2 gap-3 mt-4">
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <div className="bg-white shadow-sm border-2 border-emerald-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                   <span className="text-lg md:text-xl font-extrabold text-slate-800 w-full break-all">
                     {weightLoss.toLocaleString('en-IN')}
                   </span>
                   <span className="text-[10px] text-slate-700 font-bold uppercase tracking-wider mt-1">Weight Loss</span>
                   <span className="text-[10px] text-emerald-700 font-bold leading-tight mt-1">(-0.5kg/week)</span>
                 </div>
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <div className="bg-white shadow-sm border-2 border-emerald-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                   <span className="text-lg md:text-xl font-extrabold text-slate-800 w-full break-all">
                     {weightGain.toLocaleString('en-IN')}
                   </span>
@@ -298,7 +298,7 @@ export function CalorieCalculator() {
         </div>
 
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-          <p className="text-xs text-slate-500 text-center leading-relaxed">
+          <p className="text-xs text-slate-700 text-center leading-relaxed">
             <strong className="text-slate-700">Disclaimer:</strong> This calorie calculator provides an estimate for general informational purposes and is not medical advice. Actual calorie needs can vary based on body composition, health, lifestyle and other factors. Consult a qualified healthcare professional or registered dietitian for personalized advice.
           </p>
         </div>

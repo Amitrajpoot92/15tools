@@ -49,32 +49,32 @@ export function MarksPercentageCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-6 bg-rose-50/50 border border-rose-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="space-y-2">
+      <div className="relative z-10 space-y-3.5">
+        <div className="space-y-3.5 bg-rose-50/90 border-2 border-rose-200 p-3.5 sm:p-4 rounded-2xl">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Marks Obtained</label>
             <input
               type="number"
               value={obtained}
               onChange={(e) => setObtained(e.target.value)}
               placeholder="e.g. 450"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-xs font-bold"
             />
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Total / Maximum Marks</label>
             <input
               type="number"
               value={total}
               onChange={(e) => setTotal(e.target.value)}
               placeholder="e.g. 500"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all shadow-xs font-bold"
             />
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-8 bg-rose-100 rounded-2xl shadow-sm border border-rose-300 relative">
+        <div className="flex flex-col items-center justify-center p-4 pt-11 sm:p-5 sm:pt-11 bg-rose-100 rounded-2xl shadow-sm border-2 border-rose-300 relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
             <button onClick={() => {
@@ -98,7 +98,7 @@ Calculate Online: https://topcalcbox.com/marks-percentage-calculator/`;
             <GraduationCap className="w-8 h-8 text-rose-600" />
           </div>
           
-          <p className="text-sm text-rose-800/70 uppercase tracking-widest font-bold mb-1">
+          <p className="text-sm text-rose-900 uppercase tracking-widest font-bold mb-1">
             Final Percentage
           </p>
           
@@ -114,7 +114,7 @@ Calculate Online: https://topcalcbox.com/marks-percentage-calculator/`;
           <div className="w-full border-t border-rose-300 my-3" />
 
           <div className="w-full flex justify-center text-sm mt-2">
-            <span className="text-rose-800/70 font-medium mr-2">Estimated Grade:</span>
+            <span className="text-rose-900 font-medium mr-2">Estimated Grade:</span>
             <span className="text-slate-900 font-bold px-2 py-0.5 bg-white shadow-sm rounded-md">{result.grade}</span>
           </div>
         </div>

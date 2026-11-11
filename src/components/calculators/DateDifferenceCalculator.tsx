@@ -83,9 +83,9 @@ export function DateDifferenceCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-6 bg-indigo-50/50 border border-indigo-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="space-y-2">
+      <div className="relative z-10 space-y-3.5">
+        <div className="space-y-3.5 bg-indigo-50/90 border-2 border-indigo-200 p-3.5 sm:p-4 rounded-2xl">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Start Date</label>
             <input
               type="text"
@@ -93,7 +93,7 @@ export function DateDifferenceCalculator() {
               value={date1Input}
               onChange={(e) => setDate1Input(formatInputDate(e.target.value))}
               placeholder="DD/MM/YYYY"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-xs font-bold"
             />
             {d1Date && (
               <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
@@ -104,7 +104,7 @@ export function DateDifferenceCalculator() {
               </motion.div>
             )}
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">End Date</label>
             <input
               type="text"
@@ -112,7 +112,7 @@ export function DateDifferenceCalculator() {
               value={date2Input}
               onChange={(e) => setDate2Input(formatInputDate(e.target.value))}
               placeholder="DD/MM/YYYY"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-xs font-bold"
             />
             {d2Date && (
               <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-indigo-100/70 border border-indigo-200 text-indigo-800 rounded-md">
@@ -125,10 +125,10 @@ export function DateDifferenceCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-gradient-to-b from-slate-50 to-indigo-50/40 rounded-3xl shadow-[0_8px_30px_rgb(79,70,229,0.12)] border border-indigo-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 sm:p-5 bg-gradient-to-b from-indigo-50/85 to-indigo-100/70 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(79,70,229,0.12)] border-2 border-indigo-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e508_1px,transparent_1px),linear-gradient(to_bottom,#4f46e508_1px,transparent_1px)] bg-[size:24px_24px]" />
           
-          <div className="w-full flex justify-between items-center mb-6 z-10 flex-wrap gap-4">
+          <div className="w-full flex justify-between items-center mb-3.5 z-10 flex-wrap gap-4">
             <div className="flex items-center gap-2 text-indigo-800">
                <Clock className="w-5 h-5" />
                <h3 className="font-bold text-sm md:text-base">Date Duration Overview</h3>
@@ -142,11 +142,11 @@ Duration: ${diff ? `${diff.totalDays} Days (${diff.totalWeeks} weeks & ${diff.re
 
 Calculate Online: https://topcalcbox.com/date-difference-calculator/`;
                 copyToClipboard(text);
-              }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-indigo-200 rounded-xl text-[11px] font-bold text-indigo-700 hover:bg-white transition-all shadow-sm">
+              }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-indigo-300 rounded-xl text-[11px] font-extrabold text-indigo-800 hover:bg-indigo-50 cursor-pointer transition-all shadow-sm">
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
-              <button onClick={() => { setDate1Input(""); setDate2Input(""); }} className="p-1.5 bg-white/80 backdrop-blur-md border border-indigo-200 rounded-xl text-indigo-700 hover:bg-white transition-all shadow-sm">
+              <button onClick={() => { setDate1Input(""); setDate2Input(""); }} className="p-1.5 bg-white border-2 border-indigo-300 rounded-xl text-indigo-800 hover:bg-indigo-50 cursor-pointer transition-all shadow-sm">
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -160,7 +160,7 @@ Calculate Online: https://topcalcbox.com/date-difference-calculator/`;
                 animate={{ scale: 1, opacity: 1 }}
                 className="w-full space-y-3"
               >
-                <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2">
+                <div className="bg-white shadow-sm border-2 border-indigo-200/90 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-2">
                   <div className="flex items-baseline justify-center sm:justify-start gap-2">
                     <span className="text-4xl md:text-5xl font-extrabold text-slate-900">{diff.totalDays.toLocaleString()}</span>
                     <span className="text-xl md:text-2xl font-bold text-indigo-700">Days</span>
@@ -173,27 +173,27 @@ Calculate Online: https://topcalcbox.com/date-difference-calculator/`;
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                  <div className="bg-white shadow-sm border-2 border-indigo-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                     <div className="flex items-center gap-1.5 mb-1">
                       <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
-                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider text-indigo-800/80">Working Days</span>
+                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider text-indigo-900">Working Days</span>
                     </div>
                     <span className="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">{diff.workingDays.toLocaleString()}</span>
-                    <span className="text-[10px] text-slate-400 mt-1 font-medium">Mon-Fri</span>
+                    <span className="text-[10px] text-slate-600 mt-1 font-medium">Mon-Fri</span>
                   </div>
 
-                  <div className="bg-white/80 backdrop-blur-sm shadow-sm border border-indigo-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                  <div className="bg-white shadow-sm border-2 border-indigo-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                     <div className="flex items-center gap-1.5 mb-1">
                       <Calendar className="w-3.5 h-3.5 text-amber-500" />
-                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider text-indigo-800/80">Weekend Days</span>
+                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider text-indigo-900">Weekend Days</span>
                     </div>
                     <span className="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">{diff.weekendDays.toLocaleString()}</span>
-                    <span className="text-[10px] text-slate-400 mt-1 font-medium">Sat & Sun</span>
+                    <span className="text-[10px] text-slate-600 mt-1 font-medium">Sat & Sun</span>
                   </div>
                 </div>
               </motion.div>
             ) : (
-              <div className="text-center text-lg text-indigo-700/70 font-bold mt-4 bg-white/50 backdrop-blur-sm px-6 py-8 rounded-xl border border-indigo-200/50">
+              <div className="text-center text-lg text-indigo-800 font-bold mt-4 bg-white px-6 py-5 rounded-xl border-2 border-indigo-200/90">
                 Enter start and end dates
               </div>
             )}

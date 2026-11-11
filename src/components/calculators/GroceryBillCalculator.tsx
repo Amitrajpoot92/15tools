@@ -98,22 +98,22 @@ export function GroceryBillCalculator() {
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
       {/* Grid container taking full width without extra top margin */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        <div className="space-y-2 bg-orange-50/50 border border-orange-100/50 p-3 md:p-5 rounded-2xl">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-4">
+        <div className="space-y-1.5 bg-orange-50/90 border-2 border-orange-200 p-3 md:p-5 rounded-2xl">
           <div className="flex justify-between items-center mb-1">
             <div className="flex items-center gap-2 md:gap-4">
               <label className="text-sm font-bold text-slate-700 hidden sm:block">Shopping List</label>
               {/* Currency Toggle moved inline */}
-              <div className="bg-white border border-slate-200 p-0.5 rounded-lg flex items-center shadow-sm">
+              <div className="bg-white border-2 border-slate-300/90 p-0.5 rounded-lg flex items-center shadow-sm">
                 <button 
                   onClick={() => setCurrency("$")}
-                  className={`px-2 py-1 rounded-md transition-all font-bold text-xs ${currency === "$" ? "bg-orange-100 shadow-sm text-orange-700" : "text-slate-500 hover:text-slate-700"}`}
+                  className={`px-2 py-1 rounded-md transition-all font-bold text-xs ${currency === "$" ? "bg-orange-100 shadow-sm text-orange-700" : "text-slate-700 hover:text-slate-700"}`}
                 >
                   <DollarSign className="w-3.5 h-3.5" />
                 </button>
                 <button 
                   onClick={() => setCurrency("₹")}
-                  className={`px-2 py-1 rounded-md transition-all font-bold text-xs ${currency === "₹" ? "bg-orange-100 shadow-sm text-orange-700" : "text-slate-500 hover:text-slate-700"}`}
+                  className={`px-2 py-1 rounded-md transition-all font-bold text-xs ${currency === "₹" ? "bg-orange-100 shadow-sm text-orange-700" : "text-slate-700 hover:text-slate-700"}`}
                 >
                   <IndianRupee className="w-3.5 h-3.5" />
                 </button>
@@ -121,13 +121,13 @@ export function GroceryBillCalculator() {
             </div>
             <button 
               onClick={addItem}
-              className="text-[10px] sm:text-xs font-bold text-orange-600 bg-orange-50 hover:bg-orange-100 px-2 py-1.5 rounded-lg flex items-center transition-colors border border-orange-200/50"
+              className="text-[10px] sm:text-xs font-bold text-orange-600 bg-orange-50 hover:bg-orange-100 px-2 py-1.5 rounded-lg flex items-center transition-colors border-2 border-orange-200/90"
             >
               <Plus className="w-3 h-3 mr-1" /> Add
             </button>
           </div>
 
-          <div className="max-h-[250px] md:max-h-[350px] overflow-y-auto pr-1 space-y-2 scrollbar-thin scrollbar-thumb-slate-200">
+          <div className="max-h-[250px] md:max-h-[350px] overflow-y-auto pr-1 space-y-1.5 scrollbar-thin scrollbar-thumb-slate-200">
             <AnimatePresence>
               {items.map((item, index) => (
                 <motion.div 
@@ -135,7 +135,7 @@ export function GroceryBillCalculator() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="flex gap-1.5 p-1.5 bg-white border border-slate-200 rounded-xl items-center shadow-sm overflow-hidden"
+                  className="flex gap-1.5 p-1.5 bg-white border-2 border-slate-300/90 rounded-xl items-center shadow-sm overflow-hidden"
                 >
                   <input
                     type="text"
@@ -145,7 +145,7 @@ export function GroceryBillCalculator() {
                     className="flex-1 min-w-0 w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/10"
                   />
                   <div className="relative w-16 md:w-20 shrink-0">
-                    <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[9px] text-slate-400 font-bold">{currency}</span>
+                    <span className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[9px] text-slate-600 font-bold">{currency}</span>
                     <input
                       type="number"
                       value={item.price}
@@ -155,7 +155,7 @@ export function GroceryBillCalculator() {
                     />
                   </div>
                   <div className="flex items-center gap-0.5 bg-slate-50 border border-slate-200 rounded-lg px-1 shrink-0">
-                    <span className="text-[9px] text-slate-400 font-bold hidden sm:block">Qty:</span>
+                    <span className="text-[9px] text-slate-600 font-bold hidden sm:block">Qty:</span>
                     <input
                       type="number"
                       value={item.quantity}
@@ -166,7 +166,7 @@ export function GroceryBillCalculator() {
                   </div>
                   <button 
                     onClick={() => removeItem(item.id)}
-                    className={`p-1 shrink-0 rounded-lg transition-colors ${items.length > 1 ? "text-slate-400 hover:text-red-500 hover:bg-red-50" : "text-slate-300 cursor-not-allowed"}`}
+                    className={`p-1 shrink-0 rounded-lg transition-colors ${items.length > 1 ? "text-slate-600 hover:text-red-500 hover:bg-red-50" : "text-slate-300 cursor-not-allowed"}`}
                     disabled={items.length === 1}
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -177,7 +177,7 @@ export function GroceryBillCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-orange-100 rounded-2xl h-full min-h-[180px] md:min-h-[250px] shadow-sm border border-orange-300 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-orange-100 rounded-2xl h-full min-h-[160px] md:min-h-[210px] shadow-sm border-2 border-orange-300 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           
           <div className="absolute top-3 right-3 flex items-center gap-1.5 z-10">
@@ -210,7 +210,7 @@ export function GroceryBillCalculator() {
             <ShoppingCart className="w-5 h-5 text-orange-600" />
           </div>
           
-          <p className="text-[10px] md:text-xs text-orange-800/80 uppercase tracking-widest font-bold mb-1">
+          <p className="text-[10px] md:text-xs text-orange-900 uppercase tracking-widest font-bold mb-1">
             Total Bill
           </p>
           
@@ -229,7 +229,7 @@ export function GroceryBillCalculator() {
           <div className="w-full border-t border-orange-300 my-2" />
 
           <div className="w-full flex justify-between items-center mt-1 px-3 py-2 bg-white shadow-sm rounded-xl border border-orange-100">
-            <span className="text-orange-800/80 font-bold uppercase text-[9px] tracking-wider">Total Items</span>
+            <span className="text-orange-900 font-bold uppercase text-[9px] tracking-wider">Total Items</span>
             <span className="text-slate-900 font-extrabold text-lg">{formatNumber(result.totalItems, 0)}</span>
           </div>
         </div>

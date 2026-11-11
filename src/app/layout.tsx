@@ -83,7 +83,7 @@ export default function RootLayout({
               className="fixed inset-0 -z-10 pointer-events-none opacity-40 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(244,114,182,0.12),rgba(255,255,255,0)),radial-gradient(ellipse_60%_60%_at_100%_50%,rgba(147,197,253,0.12),rgba(255,255,255,0))]" 
             />
             
-            <div className="relative z-10 px-4 sm:px-6 md:px-10 pt-4 sm:pt-6 md:pt-10 pb-0 max-w-7xl mx-auto flex-1 w-full">
+            <div className="relative z-10 px-3 sm:px-6 md:px-8 pt-2 sm:pt-4 md:pt-5 pb-0 max-w-7xl mx-auto flex-1 w-full">
               {children}
             </div>
             

@@ -47,7 +47,7 @@ export function AttendanceCalculator() {
                <div className="font-extrabold text-center text-slate-800 text-[13px] md:text-sm">
                   You need to attend {needed} more classes to attain {targetPercent}% attendance.
                </div>
-               <div className="bg-orange-50/80 p-3 rounded-xl border border-orange-200/60 text-left space-y-1.5">
+               <div className="bg-orange-50/80 p-3 rounded-xl border-2 border-orange-200/90 text-left space-y-1.5">
                   <div className="flex justify-between items-center text-xs md:text-[13px] text-slate-600">
                     <span className="font-semibold">Current Attendance:</span>
                     <span className="font-extrabold text-slate-900">{a}/{t} ({currentPercent.toFixed(2)}%)</span>
@@ -72,7 +72,7 @@ export function AttendanceCalculator() {
                <div className="font-extrabold text-center text-slate-800 text-[13px] md:text-sm">
                   You can bunk for {canSkip} more days.
                </div>
-               <div className="bg-orange-50/80 p-3 rounded-xl border border-orange-200/60 text-left space-y-1.5">
+               <div className="bg-orange-50/80 p-3 rounded-xl border-2 border-orange-200/90 text-left space-y-1.5">
                   <div className="flex justify-between items-center text-xs md:text-[13px] text-slate-600">
                     <span className="font-semibold">Current Attendance:</span>
                     <span className="font-extrabold text-slate-900">{a}/{t} ({currentPercent.toFixed(2)}%)</span>
@@ -105,43 +105,43 @@ export function AttendanceCalculator() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-6 bg-orange-50/50 border border-orange-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="space-y-2">
+      <div className="relative z-10 space-y-3.5">
+        <div className="space-y-3.5 bg-orange-50/90 border-2 border-orange-200 p-3.5 sm:p-4 rounded-2xl">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Classes Held (Total)</label>
             <input
               type="number"
               value={total}
               onChange={(e) => setTotal(e.target.value)}
               placeholder="e.g. 50"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-xs font-bold"
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Classes Attended</label>
             <input
               type="number"
               value={attended}
               onChange={(e) => setAttended(e.target.value)}
               placeholder="e.g. 35"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-xs font-bold"
             />
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Target Attendance (%)</label>
             <input
               type="number"
               value={target}
               onChange={(e) => setTarget(e.target.value)}
               placeholder="e.g. 75"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all shadow-xs font-bold"
             />
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-12 bg-gradient-to-b from-orange-50 to-orange-100/80 rounded-3xl shadow-[0_8px_30px_rgb(249,115,22,0.15)] border border-orange-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-4 pt-11 sm:p-5 sm:pt-11 bg-gradient-to-b from-orange-50 to-orange-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(249,115,22,0.15)] border-2 border-orange-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f9731610_1px,transparent_1px),linear-gradient(to_bottom,#f9731610_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
 
@@ -149,16 +149,16 @@ export function AttendanceCalculator() {
             <button onClick={() => {
               const text = `Attendance Percentage Calculator\nClasses Held (Total): ${total || 0}\nClasses Attended: ${attended || 0}\nTarget Attendance: ${target || 0}%\nCurrent Attendance: ${result.percentage}%\n\n${result.statusString}\n\nCalculate Online: https://topcalcbox.com/attendance-percentage-calculator/`;
               copyToClipboard(text);
-            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-orange-200 rounded-xl text-[11px] font-bold text-orange-700 hover:bg-white transition-all shadow-sm">
+            }} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-orange-300 rounded-xl text-[11px] font-extrabold text-orange-800 hover:bg-orange-50 cursor-pointer transition-all shadow-sm">
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Copy"}</span>
             </button>
-            <button onClick={reset} className="p-1.5 bg-white/80 backdrop-blur-md border border-orange-200 rounded-xl text-orange-700 hover:bg-white transition-all shadow-sm">
+            <button onClick={reset} className="p-1.5 bg-white border-2 border-orange-300 rounded-xl text-orange-800 hover:bg-orange-50 cursor-pointer transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
           
-          <p className="text-sm text-orange-800/70 uppercase tracking-widest font-extrabold mb-1 z-10">
+          <p className="text-sm text-orange-900 uppercase tracking-widest font-extrabold mb-1 z-10">
             Current Attendance
           </p>
           
@@ -173,7 +173,7 @@ export function AttendanceCalculator() {
 
           {result.statusNode ? (
              <div className="w-full flex flex-col items-center z-10 max-w-sm gap-3">
-                <div className="w-full bg-white/80 backdrop-blur-md p-4 rounded-2xl border border-orange-200/60 shadow-sm relative overflow-hidden flex flex-col gap-3">
+                <div className="w-full bg-white p-4 rounded-2xl border-2 border-orange-200/90 shadow-sm relative overflow-hidden flex flex-col gap-3">
                   <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${result.alert === 'shortage' ? 'bg-rose-500' : 'bg-emerald-500'}`} />
                   {result.statusNode}
                 </div>
@@ -189,7 +189,7 @@ export function AttendanceCalculator() {
                 )}
              </div>
           ) : (
-            <div className="w-full flex justify-center text-center text-sm mt-2 z-10 bg-white/50 backdrop-blur-sm p-3 rounded-xl border border-orange-200/50">
+            <div className="w-full flex justify-center text-center text-sm mt-2 z-10 bg-white p-3 rounded-xl border-2 border-orange-200/90">
               <span className="text-slate-700 font-bold">Enter your attendance details above</span>
             </div>
           )}

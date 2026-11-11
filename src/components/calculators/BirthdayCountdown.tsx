@@ -140,19 +140,19 @@ export function BirthdayCountdown() {
     <div className="w-full md: relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-fuchsia-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-6">
-        <div className="space-y-6 bg-fuchsia-50/50 border border-fuchsia-100/50 p-5 md:p-6 rounded-2xl">
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-700">Name <span className="text-slate-400 font-medium normal-case">(Optional)</span></label>
+      <div className="relative z-10 space-y-3.5">
+        <div className="space-y-3.5 bg-fuchsia-50/90 border-2 border-fuchsia-200 p-3.5 sm:p-4 rounded-2xl">
+          <div className="space-y-1.5">
+            <label className="text-sm font-bold text-slate-700">Name <span className="text-slate-600 font-medium normal-case">(Optional)</span></label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Alex"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500/50 transition-all shadow-xs font-bold"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Date of Birth</label>
             <input
               type="text"
@@ -160,7 +160,7 @@ export function BirthdayCountdown() {
               value={dobInput}
               onChange={(e) => setDobInput(formatInputDate(e.target.value))}
               placeholder="DD/MM/YYYY"
-              className="w-full bg-slate-50/80 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500/50 transition-all shadow-inner"
+              className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-500/50 transition-all shadow-xs font-bold"
             />
             {dobDateObj && (
               <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-1.5 mt-2 ml-1 px-2.5 py-1 bg-fuchsia-100/70 border border-fuchsia-200 text-fuchsia-800 rounded-md">
@@ -173,7 +173,7 @@ export function BirthdayCountdown() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-14 bg-gradient-to-b from-fuchsia-50 to-fuchsia-100/80 rounded-3xl shadow-[0_8px_30px_rgb(217,70,239,0.15)] border border-fuchsia-200/60 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-6 pt-12 md:p-8 md:pt-14 bg-gradient-to-b from-fuchsia-50 to-fuchsia-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(217,70,239,0.15)] border-2 border-fuchsia-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#d946ef10_1px,transparent_1px),linear-gradient(to_bottom,#d946ef10_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           
@@ -194,7 +194,7 @@ export function BirthdayCountdown() {
           
           <div className="absolute top-4 right-4 flex items-center gap-2 z-10 w-full justify-end px-4">
             <div className="hidden sm:flex items-center gap-2">
-              <button onClick={handleConfetti} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-fuchsia-200 rounded-xl text-[11px] font-bold text-fuchsia-700 hover:bg-white transition-all shadow-sm">
+              <button onClick={handleConfetti} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-fuchsia-300 rounded-xl text-[11px] font-extrabold text-fuchsia-800 hover:bg-fuchsia-50 cursor-pointer transition-all shadow-sm">
                 <PartyPopper className="w-3.5 h-3.5" />
                 <span className="inline">Confetti</span>
               </button>
@@ -208,7 +208,7 @@ export function BirthdayCountdown() {
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="inline">{copied ? "Copied" : "Share"}</span>
             </button>
-            <button onClick={() => { setDobInput(""); setName(""); }} className="p-1.5 bg-white/80 backdrop-blur-md border border-fuchsia-200 rounded-xl text-fuchsia-700 hover:bg-white transition-all shadow-sm">
+            <button onClick={() => { setDobInput(""); setName(""); }} className="p-1.5 bg-white border-2 border-fuchsia-300 rounded-xl text-fuchsia-800 hover:bg-fuchsia-50 cursor-pointer transition-all shadow-sm">
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -234,7 +234,7 @@ export function BirthdayCountdown() {
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="p-5 md:p-6 bg-white/70 border border-fuchsia-200/60 rounded-2xl backdrop-blur-sm shadow-sm text-center flex flex-col items-center justify-center gap-3"
+                className="p-3.5 sm:p-4 bg-white border-2 border-fuchsia-200/90 rounded-2xl backdrop-blur-sm shadow-sm text-center flex flex-col items-center justify-center gap-3"
               >
                 <motion.div 
                   animate={{ scale: [1, 1.2, 1] }}
@@ -247,25 +247,25 @@ export function BirthdayCountdown() {
               </motion.div>
             ) : timeLeft ? (
               <div className="grid grid-cols-4 gap-3 text-center text-slate-900">
-                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                <div className="flex flex-col items-center p-3 bg-white border-2 border-fuchsia-200/90 rounded-2xl backdrop-blur-md shadow-md">
                   <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{String(timeLeft.days).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Days</span>
+                  <span className="text-[10px] text-fuchsia-900 font-extrabold uppercase tracking-widest mt-1">Days</span>
                 </div>
-                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                <div className="flex flex-col items-center p-3 bg-white border-2 border-fuchsia-200/90 rounded-2xl backdrop-blur-md shadow-md">
                   <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{String(timeLeft.hours).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Hrs</span>
+                  <span className="text-[10px] text-fuchsia-900 font-extrabold uppercase tracking-widest mt-1">Hrs</span>
                 </div>
-                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                <div className="flex flex-col items-center p-3 bg-white border-2 border-fuchsia-200/90 rounded-2xl backdrop-blur-md shadow-md">
                   <span className="text-3xl md:text-4xl font-extrabold text-slate-900">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Mins</span>
+                  <span className="text-[10px] text-fuchsia-900 font-extrabold uppercase tracking-widest mt-1">Mins</span>
                 </div>
-                <div className="flex flex-col items-center p-3 bg-white/80 border border-fuchsia-200/60 rounded-2xl backdrop-blur-md shadow-md">
+                <div className="flex flex-col items-center p-3 bg-white border-2 border-fuchsia-200/90 rounded-2xl backdrop-blur-md shadow-md">
                   <span className="text-3xl md:text-4xl font-extrabold text-fuchsia-600">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                  <span className="text-[10px] text-fuchsia-800/80 font-extrabold uppercase tracking-widest mt-1">Secs</span>
+                  <span className="text-[10px] text-fuchsia-900 font-extrabold uppercase tracking-widest mt-1">Secs</span>
                 </div>
               </div>
             ) : (
-              <div className="text-center text-lg font-bold text-fuchsia-700/70 bg-white/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-fuchsia-200/50 mt-2">
+              <div className="text-center text-lg font-bold text-fuchsia-800 bg-white px-6 py-2.5 rounded-xl border-2 border-fuchsia-200/90 mt-2">
                 Enter your date of birth
               </div>
             )}

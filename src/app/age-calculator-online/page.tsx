@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AgeCalculator } from "@/components/calculators/AgeCalculator";
 import { SEOContent } from "@/components/SEOContent";
+import { ToolHeaderBanner } from "@/components/ToolHeaderBanner";
 import { CalendarDays } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AgeCalculatorPage() {
   return (
-    <div className="pb-8">
+    <div className="pb-2 sm:pb-4">
 
       {/* Schema Markup for SEO */}
       <script
@@ -33,16 +34,14 @@ export default function AgeCalculatorPage() {
       />
 
     
-      <div className="max-w-4xl mx-auto mb-10 bg-white rounded-3xl p-4 md:p-6 shadow-sm border border-slate-200 mt-2">
+      <div className="max-w-4xl mx-auto mb-4 sm:mb-5 bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-md shadow-slate-200/60 border-2 border-slate-200/90">
         {/* Compact Header */}
-        <div className="flex flex-col items-center text-center bg-indigo-50/70 rounded-2xl p-4 md:p-6 mb-6 border border-indigo-200/80">
-          <h1 className="text-xl md:text-2xl font-extrabold text-indigo-950 tracking-tight mb-1">
-            Age Calculator Online
-          </h1>
-          <p className="text-indigo-900/75 text-xs md:text-sm max-w-2xl font-medium leading-relaxed">
-            Find your exact age in years, months, and days based on your date of birth.
-          </p>
-        </div>
+        <ToolHeaderBanner
+          title="Age Calculator Online"
+          description="Find your exact age in years, months, and days based on your date of birth."
+          color="indigo"
+          icon={<CalendarDays className="w-5 h-5" strokeWidth={2.5} />}
+        />
 
         {/* Interactive Tool */}
         <div className="w-full">

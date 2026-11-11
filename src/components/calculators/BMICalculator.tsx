@@ -71,20 +71,20 @@ export function BMICalculator() {
     <div className="w-full relative overflow-hidden">
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
       
-      <div className="relative z-10 space-y-4 sm:space-y-6">
+      <div className="relative z-10 space-y-2.5 sm:space-y-3.5">
         {/* Input Section */}
-        <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-2xl p-4 md:p-5 relative">
+        <div className="bg-emerald-50/90 border-2 border-emerald-200 rounded-2xl p-3.5 sm:p-4 relative">
           
           {/* Unit System Toggle */}
           <div className="mb-4">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block text-center sm:text-left mb-1.5">Unit System</label>
+            <label className="text-[10px] font-bold uppercase tracking-widest text-slate-700 block text-center sm:text-left mb-1.5">Unit System</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setUnitSystem("metric")}
                 className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border shadow-sm ${
                   unitSystem === "metric" 
                     ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                    : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
+                    : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                 }`}
               >
                 Metric (kg/cm)
@@ -94,7 +94,7 @@ export function BMICalculator() {
                 className={`flex-1 py-2 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all border shadow-sm flex items-center justify-center text-center ${
                   unitSystem === "us" 
                     ? "bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-500/20" 
-                    : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50"
+                    : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                 }`}
               >
                 US (lb/ft)
@@ -102,7 +102,7 @@ export function BMICalculator() {
             </div>
           </div>
 
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-3 sm:space-y-2.5">
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {unitSystem === "metric" ? (
                 <>
@@ -114,7 +114,7 @@ export function BMICalculator() {
                       value={weightKg}
                       onChange={(e) => setWeightKg(e.target.value)}
                       placeholder="70"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                      className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                     />
                   </div>
                   
@@ -125,7 +125,7 @@ export function BMICalculator() {
                       value={heightCm}
                       onChange={(e) => setHeightCm(e.target.value)}
                       placeholder="175"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                      className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                     />
                   </div>
                 </>
@@ -139,7 +139,7 @@ export function BMICalculator() {
                       value={weightLb}
                       onChange={(e) => setWeightLb(e.target.value)}
                       placeholder="154"
-                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                      className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                     />
                   </div>
                   
@@ -151,14 +151,14 @@ export function BMICalculator() {
                         value={heightFt}
                         onChange={(e) => setHeightFt(e.target.value)}
                         placeholder="Feet"
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                        className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                       />
                       <input
                         type="number"
                         value={heightIn}
                         onChange={(e) => setHeightIn(e.target.value)}
                         placeholder="Inches"
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
+                        className="w-full bg-white border-2 border-slate-300/90 rounded-xl px-3 py-2 text-base text-slate-900 font-bold placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all shadow-sm"
                       />
                     </div>
                   </div>
@@ -169,7 +169,7 @@ export function BMICalculator() {
         </div>
 
         {/* Result Box */}
-        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border border-emerald-200/60 relative overflow-hidden mt-4">
+        <div className="flex flex-col items-center justify-center p-4 md:p-6 bg-gradient-to-b from-emerald-50/85 to-emerald-100/70 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(16,185,129,0.12)] border-2 border-emerald-300/80 relative overflow-hidden mt-4">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:24px_24px]" />
           
           <div className="w-full flex justify-between items-center mb-4 z-10 flex-wrap gap-4">
@@ -182,13 +182,13 @@ export function BMICalculator() {
                   const text = `BMI Calculator\n${unitSystem === 'metric' ? `Weight: ${weightKg} kg\nHeight: ${heightCm} cm` : `Weight: ${weightLb} lbs\nHeight: ${heightFt} ft ${heightIn} in`}\nBMI: ${bmiStr}\nCategory: ${category}\n\nCalculate Online: https://topcalcbox.com/bmi-calculator`;
                   copyToClipboard(text);
                 }} 
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-[11px] font-bold text-emerald-700 hover:bg-white transition-all shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-white border-2 border-emerald-300 rounded-xl text-[11px] font-extrabold text-emerald-800 hover:bg-emerald-50 cursor-pointer transition-all shadow-sm"
               >
                 <span className="inline">{copied ? "Copied" : "Copy"}</span>
               </button>
               <button 
                 onClick={reset}
-                className="p-1.5 bg-white/80 backdrop-blur-md border border-emerald-200 rounded-xl text-emerald-700 hover:bg-white transition-all shadow-sm"
+                className="p-1.5 bg-white border-2 border-emerald-300 rounded-xl text-emerald-800 hover:bg-emerald-50 cursor-pointer transition-all shadow-sm"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -202,7 +202,7 @@ export function BMICalculator() {
               animate={{ scale: 1, opacity: 1 }}
               className="w-full flex flex-col md:flex-row gap-3"
             >
-              <div className="flex-1 bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+              <div className="flex-1 bg-white shadow-sm border-2 border-emerald-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                 <p className="text-[10px] text-emerald-800 font-bold uppercase tracking-widest mb-1">Your BMI</p>
                 <div className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-2 drop-shadow-sm truncate px-2">
                   {bmiStr}
@@ -212,7 +212,7 @@ export function BMICalculator() {
                 </div>
               </div>
 
-              <div className="w-full md:w-1/3 bg-white/80 backdrop-blur-sm shadow-sm border border-emerald-200/50 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+              <div className="w-full md:w-1/3 bg-white shadow-sm border-2 border-emerald-200/90 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
                 <p className="text-[10px] text-emerald-800 font-bold uppercase tracking-widest mb-1">Healthy BMI Range</p>
                 <p className="text-xl md:text-2xl font-extrabold text-slate-800">18.5 – 24.9</p>
               </div>
@@ -221,9 +221,9 @@ export function BMICalculator() {
         </div>
         
         {/* Categories Table */}
-        <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-slate-200">
+        <div className="bg-white rounded-2xl p-3.5 sm:p-4 shadow-sm border border-slate-200">
           <h3 className="text-lg font-bold text-slate-900 text-center mb-4">Adult BMI Categories</h3>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-100">
               <span className="text-slate-700 font-bold">Underweight</span>
               <span className="text-slate-900 font-bold">Below 18.5</span>
@@ -244,7 +244,7 @@ export function BMICalculator() {
         </div>
 
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-          <p className="text-xs text-slate-500 text-center leading-relaxed">
+          <p className="text-xs text-slate-700 text-center leading-relaxed">
             <strong className="text-slate-700">Disclaimer:</strong> This BMI calculator is for general informational purposes and is not a medical diagnosis. BMI is a screening measure and does not directly measure body fat. Results may not be suitable for children, teenagers, pregnant people, or some athletes. Consult a qualified healthcare professional for personal medical advice.
           </p>
         </div>
