@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Disclaimer | TopCalcBox",
+  alternates: {
+    canonical: "https://topcalcbox.com/disclaimer",
+  },
 };
 
 export default function Page() {

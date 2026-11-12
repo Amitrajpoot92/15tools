@@ -7,6 +7,15 @@ import { ShoppingCart } from "lucide-react";
 export const metadata: Metadata = {
   title: "Cost Per Item Calculator – Compare Pack Prices",
   description: "Calculate the exact cost per single item when buying in bulk. Compare bulk pricing easily with our free cost per item calculator.",
+  alternates: {
+    canonical: "https://topcalcbox.com/cost-per-item-calculator",
+  },
+  openGraph: {
+    title: "Cost Per Item Calculator – Compare Pack Prices",
+    description: "Calculate the exact cost per single item when buying in bulk. Compare bulk pricing easily with our free cost per item calculator.",
+    url: "https://topcalcbox.com/cost-per-item-calculator",
+    type: "website",
+  },
 };
 
 export default function CostPerItemCalculatorPage() {

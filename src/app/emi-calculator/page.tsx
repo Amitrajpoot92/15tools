@@ -7,6 +7,15 @@ import { CreditCard } from "lucide-react";
 export const metadata: Metadata = {
   title: "EMI Calculator Online – Calculate Monthly Loan Payments",
   description: "Use our free EMI calculator to easily calculate your Equated Monthly Installments for home loans, car loans, and personal loans.",
+  alternates: {
+    canonical: "https://topcalcbox.com/emi-calculator",
+  },
+  openGraph: {
+    title: "EMI Calculator Online – Calculate Monthly Loan Payments",
+    description: "Use our free EMI calculator to easily calculate your Equated Monthly Installments for home loans, car loans, and personal loans.",
+    url: "https://topcalcbox.com/emi-calculator",
+    type: "website",
+  },
 };
 
 export default function Page() {

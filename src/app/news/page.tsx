@@ -3,6 +3,9 @@ import { SEOContent } from "@/components/SEOContent";
 
 export const metadata: Metadata = {
   title: "News | TopCalcBox",
+  alternates: {
+    canonical: "https://topcalcbox.com/news",
+  },
 };
 
 export default function Page() {

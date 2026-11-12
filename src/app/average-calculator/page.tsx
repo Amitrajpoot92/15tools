@@ -7,6 +7,15 @@ import { Sigma } from "lucide-react";
 export const metadata: Metadata = {
   title: "Average Calculator – Find the Mean of Numbers",
   description: "Calculate the average (mean), median, sum, and count for any dataset. A free and fast online average calculator for students, teachers, and data analysis.",
+  alternates: {
+    canonical: "https://topcalcbox.com/average-calculator",
+  },
+  openGraph: {
+    title: "Average Calculator – Find the Mean of Numbers",
+    description: "Calculate the average (mean), median, sum, and count for any dataset. A free and fast online average calculator for students, teachers, and data analysis.",
+    url: "https://topcalcbox.com/average-calculator",
+    type: "website",
+  },
 };
 
 export default function AverageCalculatorPage() {

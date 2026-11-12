@@ -7,6 +7,15 @@ import { TrendingUp } from "lucide-react";
 export const metadata: Metadata = {
   title: "Profit and Loss Calculator – Calculate Profit or Loss",
   description: "Free online profit and loss calculator to easily find your business profit, loss amounts, and percentage margins.",
+  alternates: {
+    canonical: "https://topcalcbox.com/profit-and-loss-calculator",
+  },
+  openGraph: {
+    title: "Profit and Loss Calculator – Calculate Profit or Loss",
+    description: "Free online profit and loss calculator to easily find your business profit, loss amounts, and percentage margins.",
+    url: "https://topcalcbox.com/profit-and-loss-calculator",
+    type: "website",
+  },
 };
 
 export default function ProfitLossPage() {

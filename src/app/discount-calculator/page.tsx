@@ -7,6 +7,15 @@ import { Tag } from "lucide-react";
 export const metadata: Metadata = {
   title: "Discount Calculator – Find Final Price and Savings",
   description: "Calculate exactly how much you'll save during sales and promotions. Our free online discount calculator shows the final price and amount saved instantly.",
+  alternates: {
+    canonical: "https://topcalcbox.com/discount-calculator",
+  },
+  openGraph: {
+    title: "Discount Calculator – Find Final Price and Savings",
+    description: "Calculate exactly how much you'll save during sales and promotions. Our free online discount calculator shows the final price and amount saved instantly.",
+    url: "https://topcalcbox.com/discount-calculator",
+    type: "website",
+  },
 };
 
 export default function DiscountCalculatorPage() {

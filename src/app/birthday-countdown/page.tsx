@@ -7,6 +7,15 @@ import { Timer } from "lucide-react";
 export const metadata: Metadata = {
   title: "Birthday Countdown – Days Until Your Next Birthday",
   description: "Free online birthday countdown timer. Find out exactly how many days, hours, minutes, and seconds are left until your next birthday.",
+  alternates: {
+    canonical: "https://topcalcbox.com/birthday-countdown",
+  },
+  openGraph: {
+    title: "Birthday Countdown – Days Until Your Next Birthday",
+    description: "Free online birthday countdown timer. Find out exactly how many days, hours, minutes, and seconds are left until your next birthday.",
+    url: "https://topcalcbox.com/birthday-countdown",
+    type: "website",
+  },
 };
 
 export default function BirthdayCountdownPage() {

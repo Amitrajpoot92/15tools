@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | TopCalcBox",
+  alternates: {
+    canonical: "https://topcalcbox.com/privacy-policy",
+  },
 };
 
 export default function Page() {

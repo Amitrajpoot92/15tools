@@ -7,6 +7,15 @@ import { PieChart } from "lucide-react";
 export const metadata: Metadata = {
   title: "Wholesale Pricing Calculator – Find Your Selling Price",
   description: "Free online wholesale price calculator to find your selling price, gross profit, and markup based on your cost and desired Wholesale.",
+  alternates: {
+    canonical: "https://topcalcbox.com/wholesale-price-calculator",
+  },
+  openGraph: {
+    title: "Wholesale Pricing Calculator – Find Your Selling Price",
+    description: "Free online wholesale price calculator to find your selling price, gross profit, and markup based on your cost and desired Wholesale.",
+    url: "https://topcalcbox.com/wholesale-price-calculator",
+    type: "website",
+  },
 };
 
 export default function WholesalePage() {

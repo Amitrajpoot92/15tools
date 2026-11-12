@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | TopCalcBox",
+  alternates: {
+    canonical: "https://topcalcbox.com/terms-and-conditions",
+  },
 };
 
 export default function Page() {

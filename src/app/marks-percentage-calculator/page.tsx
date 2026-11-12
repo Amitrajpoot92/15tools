@@ -7,6 +7,15 @@ import { GraduationCap } from "lucide-react";
 export const metadata: Metadata = {
   title: "Marks Percentage Calculator – Calculate Exam Percentage",
   description: "Free online marks percentage calculator for students and teachers. Instantly convert exam scores to percentages and estimate your grade.",
+  alternates: {
+    canonical: "https://topcalcbox.com/marks-percentage-calculator",
+  },
+  openGraph: {
+    title: "Marks Percentage Calculator – Calculate Exam Percentage",
+    description: "Free online marks percentage calculator for students and teachers. Instantly convert exam scores to percentages and estimate your grade.",
+    url: "https://topcalcbox.com/marks-percentage-calculator",
+    type: "website",
+  },
 };
 
 export default function MarksPercentagePage() {

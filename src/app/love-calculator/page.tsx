@@ -7,6 +7,15 @@ import { Heart } from "lucide-react";
 export const metadata: Metadata = {
   title: "Love Calculator – Check Your Compatibility Score",
   description: "Enter two names and get a fun love compatibility percentage. Try our free online love calculator for an entertaining result.",
+  alternates: {
+    canonical: "https://topcalcbox.com/love-calculator",
+  },
+  openGraph: {
+    title: "Love Calculator – Check Your Compatibility Score",
+    description: "Enter two names and get a fun love compatibility percentage. Try our free online love calculator for an entertaining result.",
+    url: "https://topcalcbox.com/love-calculator",
+    type: "website",
+  },
 };
 
 export default function LoveCalculatorPage() {

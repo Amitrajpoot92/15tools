@@ -7,6 +7,15 @@ import { Scale } from "lucide-react";
 export const metadata: Metadata = {
   title: "Price per Kg Calculator – Compare Product Costs",
   description: "Calculate the exact price per kilogram to find the best deals while shopping. Compare products by price per kg instantly.",
+  alternates: {
+    canonical: "https://topcalcbox.com/price-per-kg-calculator",
+  },
+  openGraph: {
+    title: "Price per Kg Calculator – Compare Product Costs",
+    description: "Calculate the exact price per kilogram to find the best deals while shopping. Compare products by price per kg instantly.",
+    url: "https://topcalcbox.com/price-per-kg-calculator",
+    type: "website",
+  },
 };
 
 export default function PricePerKgCalculatorPage() {

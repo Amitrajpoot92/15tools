@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-  Pressable,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { Copy, RotateCcw, Check, Calendar, Clock, Briefcase } from "lucide-react-native";
+import {
+  OuterToolCard,
+  FormPanel,
+  ResultPanel,
+  CopyResetActions,
+  StatTile,
+  sharedStyles,
+} from "@/components/CalculatorUI";
+import { Calendar, Clock } from "lucide-react-native";
 
 export default function DateDifferenceCalculatorScreen() {
   const [date1Input, setDate1Input] = useState("");
@@ -21,12 +22,8 @@ export default function DateDifferenceCalculatorScreen() {
 
   const formatInputDate = (val: string) => {
     let cleaned = val.replace(/\D/g, "");
-    if (cleaned.length > 2) {
-      cleaned = cleaned.slice(0, 2) + "/" + cleaned.slice(2);
-    }
-    if (cleaned.length > 5) {
-      cleaned = cleaned.slice(0, 5) + "/" + cleaned.slice(5, 9);
-    }
+    if (cleaned.length > 2) cleaned = cleaned.slice(0, 2) + "/" + cleaned.slice(2);
+    if (cleaned.length > 5) cleaned = cleaned.slice(0, 5) + "/" + cleaned.slice(5, 9);
     return cleaned;
   };
 
@@ -38,52 +35,31 @@ export default function DateDifferenceCalculatorScreen() {
     const m = parseInt(parts[1], 10) - 1;
     const y = parseInt(parts[2], 10);
     const date = new Date(y, m, d);
-    if (
-      date.getDate() === d &&
-      date.getMonth() === m &&
-      date.getFullYear() === y
-    ) {
-      return date;
-    }
+    if (date.getDate() === d && date.getMonth() === m && date.getFullYear() === y) return date;
     return null;
   };
 
-  const formatFriendlyDate = (date: Date | null) => {
-    if (!date) return "";
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
-  };
+  const formatFriendlyDate = (date: Date | null) =>
+    date ? date.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }) : "";
 
   const calculateDifference = () => {
     const d1 = parseDateStr(date1Input);
     const d2 = parseDateStr(date2Input);
-
     if (!d1 || !d2) return null;
 
     const startDate = d1 < d2 ? d1 : d2;
     const endDate = d1 < d2 ? d2 : d1;
-
-    const timeDiff = endDate.getTime() - startDate.getTime();
-    const totalDays = Math.round(timeDiff / (1000 * 3600 * 24));
-
+    const totalDays = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
     const totalWeeks = Math.floor(totalDays / 7);
     const remainingDays = totalDays % 7;
 
     let weekendDays = totalWeeks * 2;
-
     const startDayOfWeek = startDate.getDay();
     for (let i = 1; i <= remainingDays; i++) {
       const currentDay = (startDayOfWeek + i) % 7;
-      if (currentDay === 0 || currentDay === 6) {
-        weekendDays++;
-      }
+      if (currentDay === 0 || currentDay === 6) weekendDays++;
     }
-
     const workingDays = totalDays - weekendDays;
-
     return { totalDays, totalWeeks, remainingDays, workingDays, weekendDays };
   };
 
@@ -114,338 +90,149 @@ export default function DateDifferenceCalculatorScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={sharedStyles.safeArea} edges={["top", "bottom"]}>
       <StatusBar style="dark" />
       <CalculatorHeader
         title="Date Difference Calculator"
-        subtitle="Calculate the exact number of days, weeks, and months between two calendar dates."
+        subtitle="Calculate the exact number of days, weeks, months, and years between any two calendar dates."
         iconName="CalendarRange"
-        themeColor="#4F46E5"
-        themeBg="#EEF2FF"
+        color="indigo"
       />
 
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={sharedStyles.scrollContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Input Card */}
-        <View style={styles.inputCard}>
-          <Text style={styles.inputLabel}>START DATE</Text>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              value={date1Input}
-              onChangeText={(val) => setDate1Input(formatInputDate(val))}
-              placeholder="DD/MM/YYYY"
-              placeholderTextColor="#94A3B8"
-              maxLength={10}
-            />
-          </View>
-          {d1Date && (
-            <View style={styles.friendlyDateBadge}>
-              <Calendar size={13} color="#4F46E5" />
-              <Text style={styles.friendlyDateText}>
-                {formatFriendlyDate(d1Date)}
-              </Text>
+        <OuterToolCard>
+          <FormPanel theme="indigo">
+            <Text style={sharedStyles.fieldLabel}>Start Date (DD/MM/YYYY)</Text>
+            <View style={sharedStyles.inputBox}>
+              <TextInput
+                style={sharedStyles.textInput}
+                keyboardType="numeric"
+                value={date1Input}
+                onChangeText={(val) => setDate1Input(formatInputDate(val))}
+                placeholder="DD/MM/YYYY"
+                placeholderTextColor="#94A3B8"
+                maxLength={10}
+              />
             </View>
-          )}
-
-          <Text style={[styles.inputLabel, { marginTop: 16 }]}>END DATE</Text>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              value={date2Input}
-              onChangeText={(val) => setDate2Input(formatInputDate(val))}
-              placeholder="DD/MM/YYYY"
-              placeholderTextColor="#94A3B8"
-              maxLength={10}
-            />
-          </View>
-          {d2Date && (
-            <View style={styles.friendlyDateBadge}>
-              <Calendar size={13} color="#4F46E5" />
-              <Text style={styles.friendlyDateText}>
-                {formatFriendlyDate(d2Date)}
-              </Text>
-            </View>
-          )}
-        </View>
-
-        {/* Result Box */}
-        <View style={styles.resultBox}>
-          <View style={styles.resultHeader}>
-            <View style={styles.headerGroup}>
-              <Clock size={16} color="#4338CA" />
-              <Text style={styles.resultCategory}>DATE DURATION OVERVIEW</Text>
-            </View>
-            <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.copyBtn}>
-                {copied ? <Check size={14} color="#059669" /> : <Copy size={14} color="#4338CA" />}
-                <Text style={[styles.copyBtnText, copied && { color: "#059669" }]}>
-                  {copied ? "Copied" : "Copy"}
-                </Text>
-              </Pressable>
-              <Pressable onPress={handleReset} style={styles.resetBtn}>
-                <RotateCcw size={15} color="#4338CA" />
-              </Pressable>
-            </View>
-          </View>
-
-          {diff ? (
-            <View style={styles.resultContent}>
-              {/* Main Total Days Hero Card */}
-              <View style={styles.heroDurationCard}>
-                <View style={styles.heroPriceRow}>
-                  <Text style={styles.heroDaysNum}>{diff.totalDays.toLocaleString("en-US")}</Text>
-                  <Text style={styles.heroDaysLabel}>Days</Text>
-                </View>
-                {diff.totalDays > 0 && (
-                  <View style={styles.weeksBadge}>
-                    <Text style={styles.weeksBadgeText}>
-                      {diff.totalWeeks} {diff.totalWeeks === 1 ? "week" : "weeks"} &{" "}
-                      {diff.remainingDays}{" "}
-                      {diff.remainingDays === 1 ? "day" : "days"}
-                    </Text>
-                  </View>
-                )}
+            {d1Date && (
+              <View style={styles.dateBadge}>
+                <Calendar size={13} color="#4F46E5" />
+                <Text style={styles.dateBadgeText}>{formatFriendlyDate(d1Date)}</Text>
               </View>
+            )}
 
-              {/* Working vs Weekend Days */}
-              <View style={styles.breakdownGrid}>
-                <View style={styles.breakdownCard}>
-                  <View style={styles.breakdownHeaderRow}>
-                    <Briefcase size={14} color="#4F46E5" />
-                    <Text style={styles.breakdownCardLabel}>WORKING DAYS</Text>
+            <Text style={[sharedStyles.fieldLabel, { marginTop: 14 }]}>End Date (DD/MM/YYYY)</Text>
+            <View style={sharedStyles.inputBox}>
+              <TextInput
+                style={sharedStyles.textInput}
+                keyboardType="numeric"
+                value={date2Input}
+                onChangeText={(val) => setDate2Input(formatInputDate(val))}
+                placeholder="DD/MM/YYYY"
+                placeholderTextColor="#94A3B8"
+                maxLength={10}
+              />
+            </View>
+            {d2Date && (
+              <View style={styles.dateBadge}>
+                <Calendar size={13} color="#4F46E5" />
+                <Text style={styles.dateBadgeText}>{formatFriendlyDate(d2Date)}</Text>
+              </View>
+            )}
+          </FormPanel>
+
+          <ResultPanel theme="indigo">
+            <View style={sharedStyles.resultHeaderRow}>
+              <View style={styles.kickerRow}>
+                <Clock size={15} color="#4F46E5" />
+                <Text style={sharedStyles.resultKicker}>Date Duration Overview</Text>
+              </View>
+              <CopyResetActions copied={copied} onCopy={handleCopy} onReset={handleReset} theme="indigo" />
+            </View>
+
+            {diff ? (
+              <View style={{ gap: 10 }}>
+                <View style={styles.heroCard}>
+                  <View style={styles.daysRow}>
+                    <Text style={styles.daysNum}>{diff.totalDays.toLocaleString("en-US")}</Text>
+                    <Text style={styles.daysUnit}>Days</Text>
                   </View>
-                  <Text style={styles.breakdownCardValue}>
-                    {diff.workingDays.toLocaleString("en-US")}
-                  </Text>
-                  <Text style={styles.breakdownSub}>Mon - Fri</Text>
+                  {diff.totalDays > 0 && (
+                    <View style={styles.weeksPill}>
+                      <Text style={styles.weeksText}>
+                        {diff.totalWeeks} {diff.totalWeeks === 1 ? "week" : "weeks"} &{" "}
+                        {diff.remainingDays} {diff.remainingDays === 1 ? "day" : "days"}
+                      </Text>
+                    </View>
+                  )}
                 </View>
 
-                <View style={styles.breakdownCard}>
-                  <View style={styles.breakdownHeaderRow}>
-                    <Calendar size={14} color="#D97706" />
-                    <Text style={styles.breakdownCardLabel}>WEEKEND DAYS</Text>
-                  </View>
-                  <Text style={styles.breakdownCardValue}>
-                    {diff.weekendDays.toLocaleString("en-US")}
-                  </Text>
-                  <Text style={styles.breakdownSub}>Sat & Sun</Text>
+                <View style={sharedStyles.grid2}>
+                  <StatTile
+                    label="Working Days"
+                    value={diff.workingDays.toLocaleString("en-US")}
+                    valueColor="#4338CA"
+                    subtext="Mon - Fri"
+                    borderColor="#C7D2FE"
+                  />
+                  <StatTile
+                    label="Weekend Days"
+                    value={diff.weekendDays.toLocaleString("en-US")}
+                    valueColor="#0F172A"
+                    subtext="Sat - Sun"
+                    borderColor="#C7D2FE"
+                  />
                 </View>
               </View>
-            </View>
-          ) : (
-            <View style={styles.placeholderBox}>
-              <Text style={styles.placeholderText}>
-                Enter start and end dates
-              </Text>
-            </View>
-          )}
-        </View>
+            ) : (
+              <Text style={styles.emptyHint}>Enter both start and end dates (DD/MM/YYYY).</Text>
+            )}
+          </ResultPanel>
+        </OuterToolCard>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F8FAFC" },
-  scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
-  inputCard: {
-    backgroundColor: "#EEF2FF",
-    borderRadius: 20,
-    padding: 18,
-    borderWidth: 1,
-    borderColor: "#E0E7FF",
-    marginBottom: 16,
-  },
-  inputLabel: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#3730A3",
-    letterSpacing: 0.5,
-    marginBottom: 8,
-  },
-  inputWrapper: {
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    height: 52,
-    justifyContent: "center",
-  },
-  textInput: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0F172A",
-  },
-  friendlyDateBadge: {
+  dateBadge: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#E0E7FF",
+    gap: 6,
+    marginTop: 6,
+    alignSelf: "flex-start",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#C7D2FE",
     paddingHorizontal: 10,
     paddingVertical: 4,
-    borderRadius: 8,
-    alignSelf: "flex-start",
-    marginTop: 6,
-    gap: 6,
+    borderRadius: 999,
   },
-  friendlyDateText: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#4338CA",
-  },
-  resultBox: {
-    backgroundColor: "#EEF2FF",
-    borderRadius: 22,
-    padding: 18,
+  dateBadgeText: { fontSize: 11, fontWeight: "700", color: "#3730A3" },
+  kickerRow: { flexDirection: "row", alignItems: "center", gap: 6, flex: 1 },
+  heroCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
     borderWidth: 1.5,
-    borderColor: "#C7D2FE",
-    shadowColor: "#4F46E5",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  resultHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    borderColor: "#93C5FD",
+    paddingVertical: 14,
+    paddingHorizontal: 14,
     alignItems: "center",
-    marginBottom: 14,
   },
-  headerGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-  },
-  resultCategory: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#3730A3",
-    letterSpacing: 0.5,
-  },
-  actionButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  copyBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#C7D2FE",
-    gap: 4,
-  },
-  copyBtnText: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#3730A3",
-  },
-  resetBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 8,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#C7D2FE",
-  },
-  resultContent: {
-    gap: 12,
-  },
-  heroDurationCard: {
-    backgroundColor: "rgba(255,255,255,0.9)",
-    borderRadius: 16,
-    padding: 16,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#C7D2FE",
-  },
-  heroPriceRow: {
-    flexDirection: "row",
-    alignItems: "baseline",
-    gap: 6,
-  },
-  heroDaysNum: {
-    fontSize: 44,
-    fontWeight: "900",
-    color: "#0F172A",
-  },
-  heroDaysLabel: {
-    fontSize: 22,
-    fontWeight: "800",
-    color: "#4338CA",
-  },
-  weeksBadge: {
-    backgroundColor: "#E0E7FF",
-    borderWidth: 1,
-    borderColor: "#C7D2FE",
+  daysRow: { flexDirection: "row", alignItems: "baseline", gap: 6 },
+  daysNum: { fontSize: 36, fontWeight: "900", color: "#1E1B4B" },
+  daysUnit: { fontSize: 18, fontWeight: "800", color: "#4F46E5" },
+  weeksPill: {
+    marginTop: 6,
+    backgroundColor: "#EEF2FF",
+    borderRadius: 999,
     paddingHorizontal: 12,
     paddingVertical: 4,
-    borderRadius: 12,
-    marginTop: 8,
   },
-  weeksBadgeText: {
-    fontSize: 12,
-    fontWeight: "800",
-    color: "#3730A3",
-  },
-  breakdownGrid: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  breakdownCard: {
-    flex: 1,
-    backgroundColor: "rgba(255,255,255,0.85)",
-    borderRadius: 14,
-    padding: 12,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#C7D2FE",
-  },
-  breakdownHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    marginBottom: 4,
-  },
-  breakdownCardLabel: {
-    fontSize: 10,
-    fontWeight: "800",
-    color: "#3730A3",
-    letterSpacing: 0.5,
-  },
-  breakdownCardValue: {
-    fontSize: 26,
-    fontWeight: "900",
-    color: "#0F172A",
-    marginVertical: 2,
-  },
-  breakdownSub: {
-    fontSize: 10,
-    fontWeight: "600",
-    color: "#94A3B8",
-  },
-  placeholderBox: {
-    backgroundColor: "rgba(255,255,255,0.6)",
-    padding: 24,
-    borderRadius: 14,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#C7D2FE",
-  },
-  placeholderText: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#4338CA",
-  },
+  weeksText: { fontSize: 12, fontWeight: "800", color: "#3730A3" },
+  emptyHint: { fontSize: 13, fontWeight: "600", color: "#1E1B4B", marginTop: 4 },
 });

@@ -7,6 +7,15 @@ import { Activity } from "lucide-react";
 export const metadata: Metadata = {
   title: "BMI Calculator – Calculate Your Body Mass Index",
   description: "Calculate your Body Mass Index using your height and weight. Get your BMI result instantly with our free online BMI calculator.",
+  alternates: {
+    canonical: "https://topcalcbox.com/bmi-calculator",
+  },
+  openGraph: {
+    title: "BMI Calculator – Calculate Your Body Mass Index",
+    description: "Calculate your Body Mass Index using your height and weight. Get your BMI result instantly with our free online BMI calculator.",
+    url: "https://topcalcbox.com/bmi-calculator",
+    type: "website",
+  },
 };
 
 export default function Page() {

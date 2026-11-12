@@ -7,6 +7,15 @@ import { CalendarDays } from "lucide-react";
 export const metadata: Metadata = {
   title: "Age Calculator Online – Calculate Age from Date of Birth",
   description: "Free online age calculator to find your exact age in years, months, and days from your date of birth to today.",
+  alternates: {
+    canonical: "https://topcalcbox.com/age-calculator-online",
+  },
+  openGraph: {
+    title: "Age Calculator Online – Calculate Age from Date of Birth",
+    description: "Free online age calculator to find your exact age in years, months, and days from your date of birth to today.",
+    url: "https://topcalcbox.com/age-calculator-online",
+    type: "website",
+  },
 };
 
 export default function AgeCalculatorPage() {

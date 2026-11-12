@@ -7,6 +7,15 @@ import { LineChart } from "lucide-react";
 export const metadata: Metadata = {
   title: "SIP Calculator Online – Estimate Monthly Investment Returns",
   description: "Calculate the future value of your Systematic Investment Plan (SIP) investments. Find out your expected returns and wealth gained over time.",
+  alternates: {
+    canonical: "https://topcalcbox.com/sip-calculator",
+  },
+  openGraph: {
+    title: "SIP Calculator Online – Estimate Monthly Investment Returns",
+    description: "Calculate the future value of your Systematic Investment Plan (SIP) investments. Find out your expected returns and wealth gained over time.",
+    url: "https://topcalcbox.com/sip-calculator",
+    type: "website",
+  },
 };
 
 export default function Page() {

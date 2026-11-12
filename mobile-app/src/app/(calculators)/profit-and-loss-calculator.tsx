@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-  Pressable,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { Copy, RotateCcw, Check, TrendingUp, TrendingDown } from "lucide-react-native";
+import {
+  OuterToolCard,
+  FormPanel,
+  ResultPanel,
+  CurrencyToggle,
+  CopyResetActions,
+  StatTile,
+  sharedStyles,
+} from "@/components/CalculatorUI";
+import { TrendingUp, TrendingDown } from "lucide-react-native";
 
 export default function ProfitLossCalculatorScreen() {
   const [costPrice, setCostPrice] = useState("");
@@ -42,22 +44,23 @@ export default function ProfitLossCalculatorScreen() {
   };
 
   const result = calculate();
+  const isLoss = result.type === "loss";
+  const resultTheme = isLoss ? "rose" : "emerald";
+  const activeColor = isLoss ? "#E11D48" : "#059669";
 
-  const formatNumber = (num: number, maxDigits = 2) => {
-    return num.toLocaleString(currency === "₹" ? "en-IN" : "en-US", {
+  const formatNumber = (num: number, maxDigits = 2) =>
+    num.toLocaleString(currency === "₹" ? "en-IN" : "en-US", {
       maximumFractionDigits: maxDigits,
     });
-  };
 
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const text = `Profit and Loss Calculator\nCost Price: ${currency}${
-      costPrice || 0
-    }\nSelling Price: ${currency}${sellingPrice || 0}\n${
-      expenses ? `Other Costs / Expenses: ${currency}${expenses}\n` : ""
-    }${result.type === "loss" ? "Loss" : "Profit"}: ${currency}${formatNumber(
+    const label = isLoss ? "Loss" : "Profit";
+    const text = `Profit & Loss Calculator\nCost Price: ${currency}${costPrice || 0}\nSelling Price: ${currency}${
+      sellingPrice || 0
+    }\n${expenses ? `Other Expenses: ${currency}${expenses}\n` : ""}${label}: ${currency}${formatNumber(
       result.amount
-    )}\n${result.type === "loss" ? "Loss" : "Profit"} Percentage: ${formatNumber(
+    )}\n${label} Percentage: ${formatNumber(
       result.margin
     )}%\n\nCalculate Online: https://topcalcbox.com/profit-and-loss-calculator/`;
     await Clipboard.setStringAsync(text);
@@ -72,383 +75,106 @@ export default function ProfitLossCalculatorScreen() {
     setExpenses("");
   };
 
-  const isLoss = result.type === "loss";
-  const themeColor = isLoss ? "#E11D48" : "#059669";
-  const themeBg = isLoss ? "#FFF1F2" : "#ECFDF5";
-
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={sharedStyles.safeArea} edges={["top", "bottom"]}>
       <StatusBar style="dark" />
       <CalculatorHeader
-        title="Profit and Loss Calculator"
-        subtitle="Determine your profit margins, gross profit, and total loss for your business."
+        title="Profit & Loss Calculator"
+        subtitle="Calculate your profit or loss, total cost, and profit on cost from your selling price."
         iconName="TrendingUp"
-        themeColor="#F97316"
-        themeBg="#FFF7ED"
+        color="emerald"
       />
 
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={sharedStyles.scrollContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Currency Toggle */}
-        <View style={styles.currencyRow}>
-          <View style={styles.currencyToggle}>
-            <Pressable
-              onPress={() => {
-                Haptics.selectionAsync();
-                setCurrency("₹");
-              }}
-              style={[
-                styles.currencyBtn,
-                currency === "₹" && styles.currencyBtnActive,
-              ]}
-            >
-              <Text
-                style={[
-                  styles.currencyText,
-                  currency === "₹" && styles.currencyTextActive,
-                ]}
-              >
-                ₹
-              </Text>
-            </Pressable>
-            <Pressable
-              onPress={() => {
-                Haptics.selectionAsync();
-                setCurrency("$");
-              }}
-              style={[
-                styles.currencyBtn,
-                currency === "$" && styles.currencyBtnActive,
-              ]}
-            >
-              <Text
-                style={[
-                  styles.currencyText,
-                  currency === "$" && styles.currencyTextActive,
-                ]}
-              >
-                $
-              </Text>
-            </Pressable>
-          </View>
-        </View>
+        <OuterToolCard>
+          <CurrencyToggle currency={currency} onChange={setCurrency} theme="emerald" />
 
-        {/* Inputs Card */}
-        <View style={styles.inputCard}>
-          <Text style={styles.inputLabel}>COST PRICE (CP)</Text>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.prefix}>{currency}</Text>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              value={costPrice}
-              onChangeText={setCostPrice}
-              placeholder="500"
-              placeholderTextColor="#94A3B8"
-            />
-          </View>
-
-          <Text style={[styles.inputLabel, { marginTop: 16 }]}>SELLING PRICE (SP)</Text>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.prefix}>{currency}</Text>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              value={sellingPrice}
-              onChangeText={setSellingPrice}
-              placeholder="600"
-              placeholderTextColor="#94A3B8"
-            />
-          </View>
-
-          <Text style={[styles.inputLabel, { marginTop: 16 }]}>
-            OTHER COSTS / EXPENSES <Text style={styles.optionalText}>(OPTIONAL)</Text>
-          </Text>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.prefix}>{currency}</Text>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              value={expenses}
-              onChangeText={setExpenses}
-              placeholder="e.g. 50"
-              placeholderTextColor="#94A3B8"
-            />
-          </View>
-        </View>
-
-        {/* Result Box */}
-        <View style={[styles.resultBox, { backgroundColor: themeBg, borderColor: isLoss ? "#FECDD3" : "#A7F3D0" }]}>
-          <View style={styles.resultHeader}>
-            <View style={styles.titleGroup}>
-              {isLoss ? (
-                <TrendingDown size={16} color="#E11D48" />
-              ) : (
-                <TrendingUp size={16} color="#059669" />
-              )}
-              <Text style={[styles.resultCategory, { color: themeColor }]}>
-                {isLoss ? "LOSS RESULT" : "PROFIT RESULT"}
-              </Text>
+          <FormPanel theme="emerald">
+            <Text style={sharedStyles.fieldLabel}>Cost Price (CP)</Text>
+            <View style={sharedStyles.inputBox}>
+              <Text style={[sharedStyles.affix, { marginRight: 6 }]}>{currency}</Text>
+              <TextInput
+                style={sharedStyles.textInput}
+                keyboardType="numeric"
+                value={costPrice}
+                onChangeText={setCostPrice}
+                placeholder="500"
+                placeholderTextColor="#94A3B8"
+              />
             </View>
-            <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.copyBtn}>
-                {copied ? <Check size={14} color="#059669" /> : <Copy size={14} color={themeColor} />}
-                <Text style={[styles.copyBtnText, copied && { color: "#059669" }]}>
-                  {copied ? "Copied" : "Copy"}
-                </Text>
-              </Pressable>
-              <Pressable onPress={handleReset} style={styles.resetBtn}>
-                <RotateCcw size={15} color={themeColor} />
-              </Pressable>
-            </View>
-          </View>
 
-          {/* Main Hero Amount Card */}
-          <View style={styles.heroAmountCard}>
-            <Text style={[styles.heroAmountLabel, { color: themeColor }]}>
-              {isLoss ? "TOTAL LOSS" : "TOTAL PROFIT"}
+            <Text style={[sharedStyles.fieldLabel, { marginTop: 14 }]}>Selling Price (SP)</Text>
+            <View style={sharedStyles.inputBox}>
+              <Text style={[sharedStyles.affix, { marginRight: 6 }]}>{currency}</Text>
+              <TextInput
+                style={sharedStyles.textInput}
+                keyboardType="numeric"
+                value={sellingPrice}
+                onChangeText={setSellingPrice}
+                placeholder="600"
+                placeholderTextColor="#94A3B8"
+              />
+            </View>
+
+            <Text style={[sharedStyles.fieldLabel, { marginTop: 14 }]}>
+              Other Costs / Expenses <Text style={styles.opt}>(Optional)</Text>
             </Text>
-            <View style={styles.heroPriceRow}>
-              <Text style={styles.heroSymbol}>{currency}</Text>
-              <Text style={[styles.heroPrice, { color: isLoss ? "#E11D48" : "#059669" }]}>
-                {formatNumber(result.amount)}
-              </Text>
+            <View style={sharedStyles.inputBox}>
+              <Text style={[sharedStyles.affix, { marginRight: 6 }]}>{currency}</Text>
+              <TextInput
+                style={sharedStyles.textInput}
+                keyboardType="numeric"
+                value={expenses}
+                onChangeText={setExpenses}
+                placeholder="e.g. 50"
+                placeholderTextColor="#94A3B8"
+              />
             </View>
-            {result.amount !== 0 && (
-              <View style={[styles.badge, { backgroundColor: isLoss ? "#FFE4E6" : "#DCFCE7", borderColor: isLoss ? "#FECDD3" : "#BBF7D0" }]}>
-                <Text style={[styles.badgeText, { color: themeColor }]}>
-                  {formatNumber(result.margin)}% {isLoss ? "Loss on Cost" : "Profit on Cost"}
+          </FormPanel>
+
+          <ResultPanel theme={resultTheme}>
+            <View style={sharedStyles.resultHeaderRow}>
+              <View style={styles.kickerRow}>
+                {isLoss ? <TrendingDown size={16} color="#E11D48" /> : <TrendingUp size={16} color="#059669" />}
+                <Text style={[sharedStyles.resultKicker, { color: activeColor }]}>
+                  {isLoss ? "Loss Result" : "Profit Result"}
                 </Text>
               </View>
-            )}
-          </View>
+              <CopyResetActions copied={copied} onCopy={handleCopy} onReset={handleReset} theme={resultTheme} />
+            </View>
 
-          {/* Target Cards */}
-          <View style={styles.targetCards}>
-            <View style={styles.targetRow}>
-              <Text style={styles.targetLabel}>Total Cost</Text>
-              <Text style={styles.targetValue}>
-                {currency}{formatNumber(result.totalCost)}
-              </Text>
+            <View style={styles.heroRow}>
+              <Text style={[styles.heroCurr, { color: activeColor }]}>{currency}</Text>
+              <Text style={[sharedStyles.heroValue, { color: activeColor }]}>{formatNumber(result.amount)}</Text>
             </View>
-            <View style={styles.targetRow}>
-              <Text style={styles.targetLabel}>Selling Price</Text>
-              <Text style={styles.targetValue}>
-                {currency}{formatNumber(parseFloat(sellingPrice) || 0)}
-              </Text>
+
+            <View style={[sharedStyles.grid2, { marginTop: 12 }]}>
+              <StatTile
+                label="Total Cost"
+                value={`${currency}${formatNumber(result.totalCost)}`}
+                borderColor={isLoss ? "#FDA4AF" : "#6EE7B7"}
+              />
+              <StatTile
+                label={isLoss ? "Loss %" : "Profit on Cost"}
+                value={`${formatNumber(result.margin)}%`}
+                valueColor={activeColor}
+                borderColor={isLoss ? "#FDA4AF" : "#6EE7B7"}
+              />
             </View>
-          </View>
-        </View>
+          </ResultPanel>
+        </OuterToolCard>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F8FAFC" },
-  scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
-  currencyRow: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginBottom: 12,
-  },
-  currencyToggle: {
-    flexDirection: "row",
-    backgroundColor: "#F1F5F9",
-    padding: 3,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-  },
-  currencyBtn: {
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 7,
-  },
-  currencyBtnActive: {
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  currencyText: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#64748B",
-  },
-  currencyTextActive: {
-    color: "#059669",
-    fontWeight: "900",
-  },
-  inputCard: {
-    backgroundColor: "#ECFDF5",
-    borderRadius: 20,
-    padding: 18,
-    borderWidth: 1,
-    borderColor: "#D1FAE5",
-    marginBottom: 16,
-  },
-  inputLabel: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#065F46",
-    letterSpacing: 0.5,
-    marginBottom: 8,
-  },
-  optionalText: {
-    color: "#94A3B8",
-    fontWeight: "500",
-    fontSize: 10,
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    height: 52,
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0F172A",
-  },
-  prefix: {
-    fontSize: 18,
-    fontWeight: "800",
-    color: "#94A3B8",
-    marginRight: 6,
-  },
-  resultBox: {
-    borderRadius: 22,
-    padding: 18,
-    borderWidth: 1.5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  resultHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 14,
-  },
-  titleGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-  },
-  resultCategory: {
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 0.5,
-  },
-  actionButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  copyBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
-    gap: 4,
-  },
-  copyBtnText: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#0F172A",
-  },
-  resetBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 8,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
-  },
-  heroAmountCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 16,
-    padding: 18,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "rgba(0,0,0,0.06)",
-    marginBottom: 12,
-  },
-  heroAmountLabel: {
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 1,
-    marginBottom: 6,
-  },
-  heroPriceRow: {
-    flexDirection: "row",
-    alignItems: "baseline",
-    marginBottom: 10,
-  },
-  heroSymbol: {
-    fontSize: 26,
-    fontWeight: "800",
-    color: "#94A3B8",
-    marginRight: 4,
-  },
-  heroPrice: {
-    fontSize: 42,
-    fontWeight: "900",
-    letterSpacing: -1,
-  },
-  badge: {
-    borderWidth: 1,
-    paddingHorizontal: 14,
-    paddingVertical: 4,
-    borderRadius: 20,
-  },
-  badgeText: {
-    fontSize: 11,
-    fontWeight: "800",
-  },
-  targetCards: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 16,
-    padding: 14,
-    borderWidth: 1,
-    borderColor: "rgba(0,0,0,0.06)",
-    gap: 8,
-  },
-  targetRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#F8FAFC",
-    padding: 12,
-    borderRadius: 10,
-  },
-  targetLabel: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: "#475569",
-  },
-  targetValue: {
-    fontSize: 14,
-    fontWeight: "900",
-    color: "#0F172A",
-  },
+  opt: { fontWeight: "600", color: "#64748B" },
+  kickerRow: { flexDirection: "row", alignItems: "center", gap: 6, flex: 1 },
+  heroRow: { flexDirection: "row", alignItems: "baseline", marginTop: 4 },
+  heroCurr: { fontSize: 24, fontWeight: "800", marginRight: 2 },
 });

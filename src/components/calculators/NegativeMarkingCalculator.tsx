@@ -116,11 +116,11 @@ export function NegativeMarkingCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-4 pt-11 sm:p-5 sm:pt-11 bg-gradient-to-b from-amber-50 to-amber-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border-2 border-amber-300/80 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-3.5 sm:p-5 bg-gradient-to-b from-amber-50 to-amber-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(251,191,36,0.15)] border-2 border-amber-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f59e0b10_1px,transparent_1px),linear-gradient(to_bottom,#f59e0b10_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
           
-          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+          <div className="w-full flex items-center justify-end gap-2 mb-2.5 z-10">
             <button onClick={() => {
               const text = `Negative Marking Calculator\nTotal Questions in Exam: ${totalQuestions || 0}\nQuestions Attempted: ${attempted || 0}\nCorrect Answers: ${correct || 0}\nMarks per Correct: ${marksPerCorrect || 0}\nPenalty per Wrong: ${penaltyPerWrong || 0}\nFinal Score: ${result.score} / ${result.maxPossible}\nWrong Answers: ${result.wrong}\nPenalty Deducted: ${result.penalty}\nUnattempted: ${result.unattempted}\nAccuracy: ${result.accuracy}%\n\nCalculate Online: https://topcalcbox.com/negative-marking-calculator/`;
               copyToClipboard(text);

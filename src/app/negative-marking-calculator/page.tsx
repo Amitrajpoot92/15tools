@@ -7,6 +7,15 @@ import { TrendingDown } from "lucide-react";
 export const metadata: Metadata = {
   title: "Negative Marking Calculator – Calculate Your Exam Score",
   description: "Free online negative marking calculator for competitive exams. Instantly calculate your true score taking into account penalties for wrong answers.",
+  alternates: {
+    canonical: "https://topcalcbox.com/negative-marking-calculator",
+  },
+  openGraph: {
+    title: "Negative Marking Calculator – Calculate Your Exam Score",
+    description: "Free online negative marking calculator for competitive exams. Instantly calculate your true score taking into account penalties for wrong answers.",
+    url: "https://topcalcbox.com/negative-marking-calculator",
+    type: "website",
+  },
 };
 
 export default function NegativeMarkingPage() {

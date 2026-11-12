@@ -7,6 +7,15 @@ import { Fuel } from "lucide-react";
 export const metadata: Metadata = {
   title: "Fuel Cost Calculator – Estimate Your Trip Expenses",
   description: "Calculate your fuel cost for a trip using distance, mileage, and fuel price. Estimate your travel expenses quickly and easily.",
+  alternates: {
+    canonical: "https://topcalcbox.com/fuel-cost-calculator",
+  },
+  openGraph: {
+    title: "Fuel Cost Calculator – Estimate Your Trip Expenses",
+    description: "Calculate your fuel cost for a trip using distance, mileage, and fuel price. Estimate your travel expenses quickly and easily.",
+    url: "https://topcalcbox.com/fuel-cost-calculator",
+    type: "website",
+  },
 };
 
 export default function FuelCostPage() {

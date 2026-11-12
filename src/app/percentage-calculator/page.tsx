@@ -7,6 +7,15 @@ import { Percent } from "lucide-react";
 export const metadata: Metadata = {
   title: "Percentage Calculator – Find the Percentage of Any Number",
   description: "Use our free online percentage calculator to quickly find the percentage of a number, calculate discounts, and figure out ratio percentages.",
+  alternates: {
+    canonical: "https://topcalcbox.com/percentage-calculator",
+  },
+  openGraph: {
+    title: "Percentage Calculator – Find the Percentage of Any Number",
+    description: "Use our free online percentage calculator to quickly find the percentage of a number, calculate discounts, and figure out ratio percentages.",
+    url: "https://topcalcbox.com/percentage-calculator",
+    type: "website",
+  },
 };
 
 export default function PercentageCalculatorPage() {

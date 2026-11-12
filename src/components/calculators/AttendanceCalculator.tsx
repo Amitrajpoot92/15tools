@@ -141,11 +141,11 @@ export function AttendanceCalculator() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center p-4 pt-11 sm:p-5 sm:pt-11 bg-gradient-to-b from-orange-50 to-orange-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(249,115,22,0.15)] border-2 border-orange-300/80 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center p-3.5 sm:p-5 bg-gradient-to-b from-orange-50 to-orange-100/90 rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(249,115,22,0.15)] border-2 border-orange-300/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#f9731610_1px,transparent_1px),linear-gradient(to_bottom,#f9731610_1px,transparent_1px)] bg-[size:24px_24px]" />
           <div className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-white/40 to-transparent" />
 
-          <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
+          <div className="w-full flex items-center justify-end gap-2 mb-2.5 z-10">
             <button onClick={() => {
               const text = `Attendance Percentage Calculator\nClasses Held (Total): ${total || 0}\nClasses Attended: ${attended || 0}\nTarget Attendance: ${target || 0}%\nCurrent Attendance: ${result.percentage}%\n\n${result.statusString}\n\nCalculate Online: https://topcalcbox.com/attendance-percentage-calculator/`;
               copyToClipboard(text);

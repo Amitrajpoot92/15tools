@@ -7,6 +7,15 @@ import { CalendarRange } from "lucide-react";
 export const metadata: Metadata = {
   title: "Date Difference Calculator – Days Between Two Dates",
   description: "Free online date difference calculator. Find out exactly how many days, weeks, months, or years exist between any two dates.",
+  alternates: {
+    canonical: "https://topcalcbox.com/date-difference-calculator",
+  },
+  openGraph: {
+    title: "Date Difference Calculator – Days Between Two Dates",
+    description: "Free online date difference calculator. Find out exactly how many days, weeks, months, or years exist between any two dates.",
+    url: "https://topcalcbox.com/date-difference-calculator",
+    type: "website",
+  },
 };
 
 export default function DateDifferencePage() {

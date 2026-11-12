@@ -6,6 +6,15 @@ import { BLOG_POSTS } from "@/lib/blog-data";
 export const metadata: Metadata = {
   title: "TopCalcBox Blog - Math, Finance & Productivity Tips",
   description: "Read the latest tutorials, financial tips, and mathematical hacks from the TopCalcBox editorial team.",
+  alternates: {
+    canonical: "https://topcalcbox.com/blog",
+  },
+  openGraph: {
+    title: "TopCalcBox Blog - Math, Finance & Productivity Tips",
+    description: "Read the latest tutorials, financial tips, and mathematical hacks from the TopCalcBox editorial team.",
+    url: "https://topcalcbox.com/blog",
+    type: "website",
+  },
 };
 
 export default function BlogPage() {

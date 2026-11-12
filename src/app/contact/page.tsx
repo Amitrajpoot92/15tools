@@ -3,6 +3,9 @@ import { Mail, MessageSquare } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us | TopCalcBox",
+  alternates: {
+    canonical: "https://topcalcbox.com/contact",
+  },
 };
 
 export default function Page() {

@@ -23,9 +23,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | TopCalcBox Blog`,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://topcalcbox.com/blog/${post.slug}`,
+    },
     openGraph: {
       title: `${post.title} | TopCalcBox Blog`,
       description: post.excerpt,
+      url: `https://topcalcbox.com/blog/${post.slug}`,
       type: "article",
     },
     twitter: {

@@ -7,6 +7,15 @@ import { Banknote } from "lucide-react";
 export const metadata: Metadata = {
   title: "Tip Calculator Online – Calculate Tips and Split Bills",
   description: "Free online tip calculator. Easily calculate restaurant tips, split the final bill among friends, and see exact per-person costs.",
+  alternates: {
+    canonical: "https://topcalcbox.com/tip-calculator",
+  },
+  openGraph: {
+    title: "Tip Calculator Online – Calculate Tips and Split Bills",
+    description: "Free online tip calculator. Easily calculate restaurant tips, split the final bill among friends, and see exact per-person costs.",
+    url: "https://topcalcbox.com/tip-calculator",
+    type: "website",
+  },
 };
 
 export default function TipCalculatorPage() {

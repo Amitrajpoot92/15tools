@@ -7,6 +7,15 @@ import { Calculator } from "lucide-react";
 export const metadata: Metadata = {
   title: "Subscription Cost Calculator – Monthly and Yearly Costs",
   description: "Free online subscription cost calculator. Add up all your monthly and yearly subscriptions to see exactly how much you are spending on services.",
+  alternates: {
+    canonical: "https://topcalcbox.com/subscription-cost-calculator",
+  },
+  openGraph: {
+    title: "Subscription Cost Calculator – Monthly and Yearly Costs",
+    description: "Free online subscription cost calculator. Add up all your monthly and yearly subscriptions to see exactly how much you are spending on services.",
+    url: "https://topcalcbox.com/subscription-cost-calculator",
+    type: "website",
+  },
 };
 
 export default function SubscriptionCostPage() {

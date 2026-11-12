@@ -47,28 +47,31 @@ export function CostPerItemCalculator() {
       
       <div className="relative z-10 space-y-3.5">
         {/* Input Section */}
-        <div className="space-y-3.5 bg-rose-50/90 border-2 border-rose-200 p-3.5 sm:p-4 rounded-2xl relative">
+        <div className="space-y-3.5 bg-rose-50/90 border-2 border-rose-200 p-3.5 sm:p-4 rounded-2xl">
           {/* Currency Toggle */}
-          <div className="absolute top-4 right-4 flex items-center bg-white border border-rose-100 p-1 rounded-xl shadow-sm">
-            <button
-              onClick={() => setCurrency("$")}
-              className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
-                currency === "$" ? "bg-rose-50 text-rose-700" : "text-slate-600 hover:text-slate-600"
-              }`}
-            >
-              $
-            </button>
-            <button
-              onClick={() => setCurrency("₹")}
-              className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
-                currency === "₹" ? "bg-rose-50 text-rose-700" : "text-slate-600 hover:text-slate-600"
-              }`}
-            >
-              ₹
-            </button>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-700">Currency</span>
+            <div className="flex items-center bg-white border border-rose-200 p-1 rounded-xl shadow-sm">
+              <button
+                onClick={() => setCurrency("$")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
+                  currency === "$" ? "bg-rose-100 text-rose-800" : "text-slate-600 hover:text-slate-800"
+                }`}
+              >
+                $
+              </button>
+              <button
+                onClick={() => setCurrency("₹")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
+                  currency === "₹" ? "bg-rose-100 text-rose-800" : "text-slate-600 hover:text-slate-800"
+                }`}
+              >
+                ₹
+              </button>
+            </div>
           </div>
 
-          <div className="space-y-1.5 mt-6">
+          <div className="space-y-1.5">
             <label className="text-sm font-bold text-slate-700">Total Purchase Cost</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

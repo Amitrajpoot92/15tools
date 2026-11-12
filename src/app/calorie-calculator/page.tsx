@@ -7,6 +7,15 @@ import { Flame } from "lucide-react";
 export const metadata: Metadata = {
   title: "Calorie Calculator – Estimate Daily Calorie Needs",
   description: "Calculate your estimated daily calorie needs based on your age, gender, height, weight, and activity level with our free calculator.",
+  alternates: {
+    canonical: "https://topcalcbox.com/calorie-calculator",
+  },
+  openGraph: {
+    title: "Calorie Calculator – Estimate Daily Calorie Needs",
+    description: "Calculate your estimated daily calorie needs based on your age, gender, height, weight, and activity level with our free calculator.",
+    url: "https://topcalcbox.com/calorie-calculator",
+    type: "website",
+  },
 };
 
 export default function Page() {

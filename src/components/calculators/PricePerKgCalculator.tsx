@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { Copy, RotateCcw } from "lucide-react";
 
 export function PricePerKgCalculator() {
-  const [mode, setMode] = useState<"quantity" | "price">("price");
+  const [mode, setMode] = useState<"quantity" | "price">("quantity");
   const [currency, setCurrency] = useState<"$" | "₹">("₹");
   const [pricePerKg, setPricePerKg] = useState<string>("80");
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<string>("20");
   const [kg, setKg] = useState<string>("");
   const [grams, setGrams] = useState<string>("250");
   const [copied, setCopied] = useState(false);
@@ -89,29 +89,32 @@ export function PricePerKgCalculator() {
       
       <div className="relative z-10 space-y-3.5">
         {/* Main Section */}
-        <div className="bg-amber-50/90 border-2 border-amber-200 rounded-2xl p-3.5 sm:p-4 relative space-y-3.5">
+        <div className="bg-amber-50/90 border-2 border-amber-200 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
           {/* Currency Toggle */}
-          <div className="absolute top-4 right-4 flex items-center bg-white p-1 rounded-xl shadow-sm border border-amber-100">
-            <button
-              onClick={() => setCurrency("$")}
-              className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
-                currency === "$" ? "bg-amber-50 text-amber-700" : "text-slate-600 hover:text-slate-600"
-              }`}
-            >
-              $
-            </button>
-            <button
-              onClick={() => setCurrency("₹")}
-              className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
-                currency === "₹" ? "bg-amber-50 text-amber-700" : "text-slate-600 hover:text-slate-600"
-              }`}
-            >
-              ₹
-            </button>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-slate-700">Currency</span>
+            <div className="flex items-center bg-white p-1 rounded-xl shadow-sm border border-amber-200">
+              <button
+                onClick={() => setCurrency("$")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
+                  currency === "$" ? "bg-amber-100 text-amber-800" : "text-slate-600 hover:text-slate-800"
+                }`}
+              >
+                $
+              </button>
+              <button
+                onClick={() => setCurrency("₹")}
+                className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${
+                  currency === "₹" ? "bg-amber-100 text-amber-800" : "text-slate-600 hover:text-slate-800"
+                }`}
+              >
+                ₹
+              </button>
+            </div>
           </div>
 
           {/* Mode Toggle */}
-          <div className="flex bg-white p-1.5 rounded-2xl border-2 border-amber-200/90 mt-10 mb-1 shadow-sm backdrop-blur-sm">
+          <div className="flex bg-white p-1.5 rounded-2xl border-2 border-amber-200/90 shadow-sm backdrop-blur-sm">
             <button
               onClick={() => setMode("quantity")}
               className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-bold transition-all ${

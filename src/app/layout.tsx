@@ -17,8 +17,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://topcalcbox.com"),
   title: "TopCalcBox – Free Online Calculators for Daily Use",
   description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/topcalcbox-logo-96.webp",
     apple: "/topcalcbox-logo-192.png",

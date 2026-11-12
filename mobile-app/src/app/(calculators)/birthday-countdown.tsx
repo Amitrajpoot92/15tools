@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-  Pressable,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import * as Clipboard from "expo-clipboard";
 import { CalculatorHeader } from "@/components/CalculatorHeader";
-import { Copy, RotateCcw, Check, Calendar } from "lucide-react-native";
+import {
+  OuterToolCard,
+  FormPanel,
+  ResultPanel,
+  CopyResetActions,
+  sharedStyles,
+} from "@/components/CalculatorUI";
+import { Calendar } from "lucide-react-native";
 
 export default function BirthdayCountdownScreen() {
   const [name, setName] = useState("");
@@ -29,12 +29,8 @@ export default function BirthdayCountdownScreen() {
 
   const formatInputDate = (val: string) => {
     let cleaned = val.replace(/\D/g, "");
-    if (cleaned.length > 2) {
-      cleaned = cleaned.slice(0, 2) + "/" + cleaned.slice(2);
-    }
-    if (cleaned.length > 5) {
-      cleaned = cleaned.slice(0, 5) + "/" + cleaned.slice(5, 9);
-    }
+    if (cleaned.length > 2) cleaned = cleaned.slice(0, 2) + "/" + cleaned.slice(2);
+    if (cleaned.length > 5) cleaned = cleaned.slice(0, 5) + "/" + cleaned.slice(5, 9);
     return cleaned;
   };
 
@@ -46,24 +42,12 @@ export default function BirthdayCountdownScreen() {
     const m = parseInt(parts[1], 10) - 1;
     const y = parseInt(parts[2], 10);
     const date = new Date(y, m, d);
-    if (
-      date.getDate() === d &&
-      date.getMonth() === m &&
-      date.getFullYear() === y
-    ) {
-      return date;
-    }
+    if (date.getDate() === d && date.getMonth() === m && date.getFullYear() === y) return date;
     return null;
   };
 
-  const formatFriendlyDate = (date: Date | null) => {
-    if (!date) return "";
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
-  };
+  const formatFriendlyDate = (date: Date | null) =>
+    date ? date.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }) : "";
 
   const dobDateObj = parseDateStr(dobInput);
 
@@ -75,14 +59,13 @@ export default function BirthdayCountdownScreen() {
       return;
     }
 
-    const interval = setInterval(() => {
+    const updateTick = () => {
       const now = new Date();
-      let nextBday = new Date(dobDateObj.getTime());
+      const nextBday = new Date(dobDateObj.getTime());
       nextBday.setFullYear(now.getFullYear());
 
       const isToday =
-        now.getMonth() === dobDateObj.getMonth() &&
-        now.getDate() === dobDateObj.getDate();
+        now.getMonth() === dobDateObj.getMonth() && now.getDate() === dobDateObj.getDate();
 
       if (isToday) {
         setIsBirthday(true);
@@ -98,24 +81,25 @@ export default function BirthdayCountdownScreen() {
       }
 
       const diff = nextBday.getTime() - now.getTime();
-      const ageWillBe = nextBday.getFullYear() - dobDateObj.getFullYear();
-      setTurningAge(ageWillBe);
+      setTurningAge(nextBday.getFullYear() - dobDateObj.getFullYear());
 
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / 1000 / 60) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
 
-      setTimeLeft({ days, hours, minutes, seconds });
-    }, 1000);
-
+    updateTick();
+    const interval = setInterval(updateTick, 1000);
     return () => clearInterval(interval);
-  }, [dobDateObj]);
+  }, [dobInput]);
 
   const handleCopy = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
@@ -124,9 +108,7 @@ export default function BirthdayCountdownScreen() {
       : `Next milestone celebration: Turning ${turningAge} years old!`;
     const text = `Birthday Countdown${name ? ` for ${name}` : ""}\nDate of Birth: ${dobInput} ${
       dobDateObj ? `(${formatFriendlyDate(dobDateObj)})` : ""
-    }\n${
-      dobDateObj ? bdayText : ""
-    }\nTime Left: ${
+    }\n${dobDateObj ? bdayText : ""}\nTime Left: ${
       timeLeft && !isBirthday
         ? `${timeLeft.days} Days, ${timeLeft.hours} Hrs, ${timeLeft.minutes} Min, ${timeLeft.seconds} Sec`
         : isBirthday
@@ -145,320 +127,143 @@ export default function BirthdayCountdownScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={sharedStyles.safeArea} edges={["top", "bottom"]}>
       <StatusBar style="dark" />
       <CalculatorHeader
         title="Birthday Countdown"
-        subtitle="Find out exactly how many days, hours, and minutes are left until your next birthday."
+        subtitle="Excited for your special day? Start a live countdown to see exactly how much time is left."
         iconName="Timer"
-        themeColor="#C026D3"
-        themeBg="#FDF4FF"
+        color="fuchsia"
       />
 
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={sharedStyles.scrollContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Input Card */}
-        <View style={styles.inputCard}>
-          <Text style={styles.inputLabel}>
-            NAME <Text style={styles.optionalText}>(OPTIONAL)</Text>
-          </Text>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.textInput}
-              value={name}
-              onChangeText={setName}
-              placeholder="e.g. Alex"
-              placeholderTextColor="#94A3B8"
-            />
-          </View>
-
-          <Text style={[styles.inputLabel, { marginTop: 16 }]}>DATE OF BIRTH</Text>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="numeric"
-              value={dobInput}
-              onChangeText={(val) => setDobInput(formatInputDate(val))}
-              placeholder="DD/MM/YYYY"
-              placeholderTextColor="#94A3B8"
-              maxLength={10}
-            />
-          </View>
-          {dobDateObj && (
-            <View style={styles.friendlyDateBadge}>
-              <Calendar size={13} color="#C026D3" />
-              <Text style={styles.friendlyDateText}>
-                {formatFriendlyDate(dobDateObj)}
-              </Text>
-            </View>
-          )}
-        </View>
-
-        {/* Result Box */}
-        <View style={styles.resultBox}>
-          <View style={styles.resultHeader}>
-            <View />
-            <View style={styles.actionButtons}>
-              <Pressable onPress={handleCopy} style={styles.copyBtn}>
-                {copied ? <Check size={14} color="#059669" /> : <Copy size={14} color="#C026D3" />}
-                <Text style={[styles.copyBtnText, copied && { color: "#059669" }]}>
-                  {copied ? "Copied" : "Share"}
-                </Text>
-              </Pressable>
-              <Pressable onPress={handleReset} style={styles.resetBtn}>
-                <RotateCcw size={15} color="#C026D3" />
-              </Pressable>
-            </View>
-          </View>
-
-          <Text style={styles.headlineTitle}>
-            🎉 {name ? `${name.trim()}'s Next Birthday` : "Your Next Birthday"}
-          </Text>
-
-          {turningAge !== null && (
-            <Text style={styles.turningAgeText}>
-              {isBirthday ? (
-                "Happy Birthday! You are exactly " + turningAge + " years old today!"
-              ) : (
-                <>Next milestone celebration: Turning <Text style={styles.turningAgeHighlight}>{turningAge}</Text> years old!</>
-              )}
+        <OuterToolCard>
+          <FormPanel theme="fuchsia">
+            <Text style={sharedStyles.fieldLabel}>
+              Name <Text style={styles.opt}>(Optional)</Text>
             </Text>
-          )}
+            <View style={sharedStyles.inputBox}>
+              <TextInput
+                style={sharedStyles.textInput}
+                value={name}
+                onChangeText={setName}
+                placeholder="e.g. Alex"
+                placeholderTextColor="#94A3B8"
+              />
+            </View>
 
-          {isBirthday ? (
-            <View style={styles.bdayHeroCard}>
-              <Text style={styles.cakeEmoji}>🎂</Text>
-              <Text style={styles.celebrateTitle}>TIME TO CELEBRATE!</Text>
+            <Text style={[sharedStyles.fieldLabel, { marginTop: 14 }]}>Date of Birth (DD/MM/YYYY)</Text>
+            <View style={sharedStyles.inputBox}>
+              <TextInput
+                style={sharedStyles.textInput}
+                keyboardType="numeric"
+                value={dobInput}
+                onChangeText={(val) => setDobInput(formatInputDate(val))}
+                placeholder="DD/MM/YYYY"
+                placeholderTextColor="#94A3B8"
+                maxLength={10}
+              />
             </View>
-          ) : timeLeft ? (
-            <View style={styles.countdownGrid}>
-              <View style={styles.timeCard}>
-                <Text style={styles.timeVal}>
-                  {String(timeLeft.days).padStart(2, "0")}
-                </Text>
-                <Text style={styles.timeUnit}>DAYS</Text>
+            {dobDateObj && (
+              <View style={styles.dateBadge}>
+                <Calendar size={13} color="#C026D3" />
+                <Text style={styles.dateBadgeText}>{formatFriendlyDate(dobDateObj)}</Text>
               </View>
-              <View style={styles.timeCard}>
-                <Text style={styles.timeVal}>
-                  {String(timeLeft.hours).padStart(2, "0")}
-                </Text>
-                <Text style={styles.timeUnit}>HRS</Text>
-              </View>
-              <View style={styles.timeCard}>
-                <Text style={styles.timeVal}>
-                  {String(timeLeft.minutes).padStart(2, "0")}
-                </Text>
-                <Text style={styles.timeUnit}>MINS</Text>
-              </View>
-              <View style={styles.timeCard}>
-                <Text style={[styles.timeVal, { color: "#C026D3" }]}>
-                  {String(timeLeft.seconds).padStart(2, "0")}
-                </Text>
-                <Text style={styles.timeUnit}>SECS</Text>
-              </View>
-            </View>
-          ) : (
-            <View style={styles.placeholderBox}>
-              <Text style={styles.placeholderText}>
-                Enter your date of birth above
+            )}
+          </FormPanel>
+
+          <ResultPanel theme="fuchsia">
+            <View style={sharedStyles.resultHeaderRow}>
+              <Text style={sharedStyles.resultKicker}>
+                {name ? `${name.trim()}'s Next Birthday` : "Your Next Birthday"}
               </Text>
+              <CopyResetActions copied={copied} onCopy={handleCopy} onReset={handleReset} theme="fuchsia" />
             </View>
-          )}
-        </View>
+
+            {turningAge !== null && (
+              <Text style={styles.turningText}>
+                {isBirthday
+                  ? `Happy Birthday! You are ${turningAge} years old today!`
+                  : `Turning ${turningAge} years old`}
+              </Text>
+            )}
+
+            {isBirthday ? (
+              <View style={styles.bdayHeroCard}>
+                <Text style={styles.cakeEmoji}>🎂🎉</Text>
+                <Text style={styles.celebrateTitle}>TIME TO CELEBRATE!</Text>
+              </View>
+            ) : timeLeft ? (
+              <View style={styles.grid4}>
+                <View style={styles.timeCard}>
+                  <Text style={styles.timeVal}>{String(timeLeft.days).padStart(2, "0")}</Text>
+                  <Text style={styles.timeUnit}>DAYS</Text>
+                </View>
+                <View style={styles.timeCard}>
+                  <Text style={styles.timeVal}>{String(timeLeft.hours).padStart(2, "0")}</Text>
+                  <Text style={styles.timeUnit}>HRS</Text>
+                </View>
+                <View style={styles.timeCard}>
+                  <Text style={styles.timeVal}>{String(timeLeft.minutes).padStart(2, "0")}</Text>
+                  <Text style={styles.timeUnit}>MINS</Text>
+                </View>
+                <View style={styles.timeCard}>
+                  <Text style={styles.timeVal}>{String(timeLeft.seconds).padStart(2, "0")}</Text>
+                  <Text style={styles.timeUnit}>SECS</Text>
+                </View>
+              </View>
+            ) : (
+              <Text style={styles.emptyHint}>Enter your birth date (DD/MM/YYYY) to start the live timer.</Text>
+            )}
+          </ResultPanel>
+        </OuterToolCard>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F8FAFC" },
-  scrollContent: { paddingHorizontal: 16, paddingBottom: 40 },
-  inputCard: {
-    backgroundColor: "#FDF4FF",
-    borderRadius: 20,
-    padding: 18,
-    borderWidth: 1,
-    borderColor: "#FAE8FF",
-    marginBottom: 16,
-  },
-  inputLabel: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#A21CAF",
-    letterSpacing: 0.5,
-    marginBottom: 8,
-  },
-  optionalText: {
-    color: "#94A3B8",
-    fontWeight: "500",
-    fontSize: 10,
-  },
-  inputWrapper: {
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1,
-    borderColor: "#CBD5E1",
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    height: 52,
-    justifyContent: "center",
-  },
-  textInput: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0F172A",
-  },
-  friendlyDateBadge: {
+  opt: { fontWeight: "600", color: "#64748B" },
+  dateBadge: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FAE8FF",
+    gap: 6,
+    marginTop: 6,
+    alignSelf: "flex-start",
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#F0ABFC",
     paddingHorizontal: 10,
     paddingVertical: 4,
-    borderRadius: 8,
-    alignSelf: "flex-start",
-    marginTop: 6,
-    gap: 6,
+    borderRadius: 999,
   },
-  friendlyDateText: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#C026D3",
-  },
-  resultBox: {
-    backgroundColor: "#FDF4FF",
-    borderRadius: 22,
-    padding: 20,
-    borderWidth: 1.5,
-    borderColor: "#F0ABFC",
-    alignItems: "center",
-    shadowColor: "#C026D3",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  resultHeader: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 4,
-  },
-  actionButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  copyBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#F0ABFC",
-    gap: 4,
-  },
-  copyBtnText: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#C026D3",
-  },
-  resetBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 8,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#F0ABFC",
-  },
-  headlineTitle: {
-    fontSize: 18,
-    fontWeight: "900",
-    color: "#86198F",
-    textAlign: "center",
-    marginTop: 6,
-  },
-  turningAgeText: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#64748B",
-    textAlign: "center",
-    marginTop: 6,
-    marginBottom: 16,
-  },
-  turningAgeHighlight: {
-    color: "#C026D3",
-    fontWeight: "900",
-    fontSize: 15,
-  },
+  dateBadgeText: { fontSize: 11, fontWeight: "700", color: "#86198F" },
+  turningText: { fontSize: 13, fontWeight: "800", color: "#A21CAF", marginBottom: 10 },
   bdayHeroCard: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 18,
-    padding: 24,
-    alignItems: "center",
-    borderWidth: 1,
+    borderRadius: 14,
+    borderWidth: 1.5,
     borderColor: "#F0ABFC",
-    width: "100%",
+    paddingVertical: 18,
+    alignItems: "center",
   },
-  cakeEmoji: {
-    fontSize: 54,
-  },
-  celebrateTitle: {
-    fontSize: 16,
-    fontWeight: "900",
-    color: "#C026D3",
-    letterSpacing: 1,
-    marginTop: 8,
-  },
-  countdownGrid: {
-    flexDirection: "row",
-    gap: 8,
-    width: "100%",
-  },
+  cakeEmoji: { fontSize: 34 },
+  celebrateTitle: { fontSize: 16, fontWeight: "900", color: "#86198F", marginTop: 6 },
+  grid4: { flexDirection: "row", gap: 6 },
   timeCard: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    borderRadius: 16,
-    paddingVertical: 14,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#FAE8FF",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  timeVal: {
-    fontSize: 28,
-    fontWeight: "900",
-    color: "#0F172A",
-  },
-  timeUnit: {
-    fontSize: 10,
-    fontWeight: "800",
-    color: "#A21CAF",
-    letterSpacing: 1,
-    marginTop: 4,
-  },
-  placeholderBox: {
-    backgroundColor: "rgba(255,255,255,0.6)",
-    padding: 24,
-    borderRadius: 14,
-    alignItems: "center",
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: "#F0ABFC",
-    width: "100%",
+    borderRadius: 12,
+    paddingVertical: 12,
+    alignItems: "center",
   },
-  placeholderText: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#C026D3",
-  },
+  timeVal: { fontSize: 24, fontWeight: "900", color: "#701A75" },
+  timeUnit: { fontSize: 10, fontWeight: "800", color: "#C026D3", marginTop: 2 },
+  emptyHint: { fontSize: 13, fontWeight: "600", color: "#701A75" },
 });

@@ -7,6 +7,15 @@ import { Calculator } from "lucide-react";
 export const metadata: Metadata = {
   title: "BODMAS Calculator – Solve Maths Expressions Online",
   description: "Free online BODMAS calculator to solve complex mathematical expressions instantly using correct order of operations (Brackets, Orders, Division, Multiplication, Addition, Subtraction).",
+  alternates: {
+    canonical: "https://topcalcbox.com/bodmas-calculator",
+  },
+  openGraph: {
+    title: "BODMAS Calculator – Solve Maths Expressions Online",
+    description: "Free online BODMAS calculator to solve complex mathematical expressions instantly using correct order of operations (Brackets, Orders, Division, Multiplication, Addition, Subtraction).",
+    url: "https://topcalcbox.com/bodmas-calculator",
+    type: "website",
+  },
 };
 
 export default function BODMASCalculatorPage() {
