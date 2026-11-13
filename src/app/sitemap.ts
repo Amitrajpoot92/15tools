@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { BLOG_POSTS } from "@/lib/blog-data";
 
 export const dynamic = "force-static";
 
@@ -7,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://topcalcbox.com";
   const now = new Date();
 
+  // 25 Calculator Tools
   const calculatorRoutes = [
     "/percentage-calculator",
     "/discount-calculator",
@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/love-calculator",
   ];
 
+  // 5 Essential Info Pages
   const infoRoutes = [
     "/about",
     "/contact",
@@ -43,31 +44,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/disclaimer",
   ];
 
-  const editorialRoutes = [
-    "/blog",
-    "/news",
-    ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
-  ];
-
   return [
+    // 1 Homepage
     {
       url: `${baseUrl}/`,
       lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
     },
+    // 25 Tools
     ...calculatorRoutes.map((route) => ({
       url: `${baseUrl}${route}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
-    ...editorialRoutes.map((route) => ({
-      url: `${baseUrl}${route}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    })),
+    // 5 Pages
     ...infoRoutes.map((route) => ({
       url: `${baseUrl}${route}`,
       lastModified: now,
