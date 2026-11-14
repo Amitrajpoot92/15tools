@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "TopCalcBox – Free Online Calculators for Daily Use",
   description: "Use free online calculators for finance, math, education, age, dates, health, shopping, and everyday calculations. Get fast and accurate results.",
   alternates: {
-    canonical: "https://topcalcbox.com/",
+    canonical: "https://topcalcbox.com",
   },
 };
 

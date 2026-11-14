@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     // 1 Homepage
     {
-      url: `${baseUrl}/`,
+      url: baseUrl,
       lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
