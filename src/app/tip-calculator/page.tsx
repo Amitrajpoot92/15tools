@@ -58,76 +58,158 @@ export default function TipCalculatorPage() {
       </div>
 
       <SEOContent>
-        <h2>What is a Tip Calculator</h2>
-        <p>A Tip Calculator is an online tool that helps you quickly calculate the tip amount, total bill including tip, and amount each person should pay. It is useful when dining at a restaurant, ordering food, or splitting a bill with friends, family, or colleagues.</p>
-        <p>Simply enter the bill amount, choose or enter a tip percentage, and select the number of people. The calculator automatically works out the total tip, bill plus tip, tip per person, and total amount payable by each person.</p>
-        <p>Example: If your bill is ₹10,000 and you add a 20% tip, the tip is ₹2,000 and the total bill becomes ₹12,000. If 2 people split the bill equally, each person pays ₹6,000.</p>
-        <p>This makes it easier to calculate tips, split restaurant bills, and avoid manual calculations.</p>
+        <h2>About Tip Calculator</h2>
+        <p>
+          The <strong>Tip Calculator</strong> on TopCalcBox is an elegant dining gratuity and bill-splitting tool designed to compute customary tip amounts, total dining bills, and individual per-person shares effortlessly. Whether you are enjoying a weekend dinner with friends, hosting a corporate business lunch, ordering food delivery, or traveling abroad where tipping conventions are strictly observed, this calculator takes the awkwardness out of post-meal bill splitting.
+        </p>
+        <p>
+          Tipping norms vary dramatically across cultures. In the United States and Canada, gratuity of 15% to 20% is practically mandatory and constitutes the primary livelihood of waitstaff. In India and the UK, restaurants often append an optional &ldquo;Service Charge,&rdquo; while discretionary tips of 5% to 10% are standard for attentive hospitality. Our calculator adapts to any custom percentage, ensuring transparent, fair payments for both diners and service staff.
+        </p>
 
-        <h2>How to Use a Tip Calculator</h2>
-        <p>A Tip Calculator makes it easy to calculate the tip, add it to your bill, and split the final amount between multiple people. You only need to enter your bill amount, choose the tip percentage, and select how many people are sharing the bill.</p>
+        <h2>How to Use the Tip Calculator</h2>
+        <p>
+          Splitting a dining check takes just a few clicks:
+        </p>
         <ol>
-          <li><strong>Select Currency:</strong> Choose your preferred currency, such as ₹ or $.</li>
-          <li><strong>Enter Bill Amount:</strong> Enter the total restaurant or service bill.</li>
-          <li><strong>Enter Tip Percentage:</strong> Add your desired tip percentage or choose a suggested rate such as 10%, 15%, 18%, or 20%.</li>
-          <li><strong>Select Number of People:</strong> Use the + / − buttons to enter the number of people sharing the bill.</li>
-          <li><strong>Check the Result:</strong> The calculator shows the total tip, bill + tip, tip per person, and total payable per person.</li>
-          <li><strong>Copy or Reset:</strong> Copy the result or reset the calculator for a new calculation.</li>
+          <li><strong>Select Preferred Currency:</strong> Choose ₹ (Rupees), $ (USD), or other standard currency formats.</li>
+          <li><strong>Enter Food Bill Subtotal:</strong> Input the total food and beverage charge shown on your restaurant check.</li>
+          <li><strong>Select or Input Tip Percentage:</strong> Choose standard quick buttons (e.g., <code>10%</code>, <code>15%</code>, <code>18%</code>, <code>20%</code>) or enter a custom rate based on service quality.</li>
+          <li><strong>Adjust Number of Diners:</strong> Use the <code>+</code> / <code>&minus;</code> counter to set the number of people sharing the expense equally.</li>
+          <li><strong>Review Itemized Split:</strong> The calculator immediately provides:
+            <ul>
+              <li><strong>Total Tip Amount:</strong> Aggregate gratuity for the waitstaff.</li>
+              <li><strong>Grand Total Bill:</strong> Combined cost (Subtotal + Gratuity).</li>
+              <li><strong>Tip Per Person:</strong> Each diner&rsquo;s individual contribution to the server&rsquo;s tip.</li>
+              <li><strong>Total Payable Per Person:</strong> The exact amount each diner transfers or pays.</li>
+            </ul>
+          </li>
+          <li><strong>Copy or Reset:</strong> Click &ldquo;Copy Result&rdquo; to send the exact split amount directly into your group chat.</li>
         </ol>
-        <p>Example: For a ₹10,000 bill with a 20% tip shared by 2 people, the total tip is ₹2,000, the final bill is ₹12,000, and each person pays ₹6,000.</p>
 
-        <h2>Calculation Formula</h2>
-        <p>The Tip Calculator uses simple formulas to calculate the tip, total bill, and amount per person.</p>
-        
-        <h3>1. Tip Amount</h3>
-        <p>Tip = Bill Amount × Tip % ÷ 100</p>
-        <p>Example: ₹10,000 × 20 ÷ 100 = ₹2,000</p>
-        
-        <h3>2. Bill + Tip</h3>
-        <p>Total Bill = Bill Amount + Tip</p>
-        <p>Example: ₹10,000 + ₹2,000 = ₹12,000</p>
-        
-        <h3>3. Amount Per Person</h3>
-        <p>Amount Per Person = Total Bill ÷ Number of People</p>
-        <p>Example: ₹12,000 ÷ 2 = ₹6,000 per person</p>
-        
-        <h3>4. Tip Per Person</h3>
-        <p>Tip Per Person = Total Tip ÷ Number of People</p>
-        <p>Example: ₹2,000 ÷ 2 = ₹1,000 per person</p>
+        <h2>Tip Calculation Formulas &amp; Bill-Splitting Mathematics</h2>
+        <p>
+          The mathematics behind proportional gratuity and per-person allocations:
+        </p>
 
-        <h2>Who Can Use a Tip Calculator</h2>
-        <p>A Tip Calculator is useful for anyone who wants to quickly calculate a tip, add it to the bill, or split the final amount between multiple people.</p>
+        <h3>1. Total Tip Amount Formula</h3>
+        <p>
+          <code>Total Gratuity = Bill Subtotal × (Tip Percentage ÷ 100)</code>
+        </p>
+
+        <h3>2. Grand Total Bill Formula</h3>
+        <p>
+          <code>Grand Total = Bill Subtotal + Total Gratuity</code>
+        </p>
+
+        <h3>3. Total Payable Per Person Formula</h3>
+        <p>
+          <code>Share Per Person = Grand Total ÷ Number of Diners</code>
+        </p>
+
+        <h3>4. Tip Contribution Per Person Formula</h3>
+        <p>
+          <code>Tip Per Person = Total Gratuity ÷ Number of Diners</code>
+        </p>
+
+        <h2>Practical Real-World Dining Examples</h2>
+
+        <h3>Example 1: Casual Bistro Dinner Split Among 4 Friends</h3>
+        <p>
+          <strong>Scenario:</strong> 4 friends dine at an Italian cafe in Mumbai. The food bill comes to ₹3,600. The group agrees on a 10% gratuity for great service.
+        </p>
         <ul>
-          <li><strong>Restaurant Customers</strong> – Calculate the tip and final bill after dining out.</li>
-          <li><strong>Friends & Groups</strong> – Easily split a restaurant bill among several people.</li>
-          <li><strong>Families</strong> – Calculate the total amount and each person’s share when dining together.</li>
-          <li><strong>Travelers</strong> – Quickly work out tips when eating at restaurants in different places.</li>
-          <li><strong>CafÃ© & Food Customers</strong> – Calculate tips for cafÃ©s, food deliveries, and other services.</li>
-          <li><strong>Event & Party Groups</strong> – Split a shared food or service bill without manual calculations.</li>
-          <li><strong>Students & Friends</strong> – Divide bills fairly when eating or ordering food together.</li>
-          <li><strong>Everyday Users</strong> – Quickly calculate any percentage-based tip and the final amount to pay.</li>
+          <li><strong>Total Tip:</strong> ₹3,600 × 0.10 = <strong>₹360.00</strong>.</li>
+          <li><strong>Grand Total:</strong> ₹3,600 + ₹360 = <strong>₹3,960.00</strong>.</li>
+          <li><strong>Per Person Total Share:</strong> ₹3,960 ÷ 4 = <strong>₹990.00 each</strong>.</li>
+          <li><strong>Tip Component Per Person:</strong> ₹360 ÷ 4 = <strong>₹90.00 each</strong>.</li>
         </ul>
 
-        <h2>Frequently Asked Questions</h2>
-        <h3>1. What is a Tip Calculator?</h3>
-        <p>A Tip Calculator helps you quickly calculate the tip amount, total bill including tip, and amount each person should pay.</p>
-        <h3>2. How do I split a restaurant bill with a tip?</h3>
-        <p>Enter the bill amount, tip percentage, and number of people. The calculator shows the total amount per person, including the tip.</p>
-        <h3>3. Can I choose my own tip percentage?</h3>
-        <p>Yes. You can enter the tip percentage you want instead of using the suggested tip options.</p>
-        <h3>4. How much should I tip at a restaurant?</h3>
-        <p>The appropriate tip percentage depends on the country, restaurant, service, and local tipping customs. You can enter the percentage you want to calculate.</p>
-        <h3>5. Can I calculate a tip without splitting the bill?</h3>
-        <p>Yes. Simply enter the bill amount and tip percentage. You can ignore the number of people if you are paying the bill yourself.</p>
-
-        <h2>Related Calculators</h2>
+        <h3>Example 2: Corporate Executive Team Dinner</h3>
+        <p>
+          <strong>Scenario:</strong> A team of 6 colleagues celebrates a project launch. The restaurant invoice is ₹16,500. They allocate a 15% tip.
+        </p>
         <ul>
-          <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
-          <li><a href="/cost-per-item-calculator" className="text-blue-600 hover:underline">Cost Per Item Calculator</a></li>
-          <li><a href="/price-per-kg-calculator" className="text-blue-600 hover:underline">Price per Kg Calculator</a></li>
-          <li><a href="/fuel-cost-calculator" className="text-blue-600 hover:underline">Fuel Cost Calculator</a></li>
-          <li><a href="/grocery-bill-calculator" className="text-blue-600 hover:underline">Grocery Bill Calculator</a></li>
+          <li><strong>Total Tip:</strong> ₹16,500 × 0.15 = <strong>₹2,475.00</strong>.</li>
+          <li><strong>Grand Total:</strong> ₹16,500 + ₹2,475 = <strong>₹18,975.00</strong>.</li>
+          <li><strong>Per Person Share:</strong> ₹18,975 ÷ 6 = <strong>₹3,162.50 each</strong>.</li>
+        </ul>
+
+        <h3>Example 3: International Travel in New York (US Gratuity)</h3>
+        <p>
+          <strong>Scenario:</strong> Two tourists order dinner at a Manhattan steakhouse. The subtotal is $120.00. Standard US tipping standard of 18% is applied.
+        </p>
+        <ul>
+          <li><strong>Gratuity:</strong> $120.00 × 0.18 = <strong>$21.60</strong>.</li>
+          <li><strong>Total Bill:</strong> $120.00 + $21.60 = <strong>$141.60</strong>.</li>
+          <li><strong>Each Diner Pays:</strong> $141.60 ÷ 2 = <strong>$70.80</strong>.</li>
+        </ul>
+
+        <h3>Example 4: Food Delivery App Rider Gratuity</h3>
+        <p>
+          <strong>Scenario:</strong> An individual orders late-night groceries or food during heavy rain for ₹650 and wants to add a generous 12% tip for the rider.
+        </p>
+        <ul>
+          <li><strong>Rider Tip:</strong> ₹650 × 0.12 = <strong>₹78.00</strong>.</li>
+          <li><strong>Total Deduction:</strong> ₹650 + ₹78 = <strong>₹728.00</strong>.</li>
+        </ul>
+
+        <h2>Who Can Use This Calculator?</h2>
+        <p>
+          The Tip Calculator is built for anyone dining out or sharing group hospitality costs:
+        </p>
+        <ul>
+          <li><strong>Restaurant Diners &amp; Foodies:</strong> Quickly verify gratuity math and avoid recalculating in front of waitstaff.</li>
+          <li><strong>Friends &amp; College Groups:</strong> Split weekend brunch, party, and cafe bills transparently via UPI or Splitwise.</li>
+          <li><strong>International Business Travelers:</strong> Navigate unfamiliar tipping etiquette in North America, Europe, or Asia without overpaying or offending staff.</li>
+          <li><strong>Event Hosts &amp; Caterers:</strong> Estimate waitstaff service gratuities for private banquets, wedding receptions, and anniversary parties.</li>
+          <li><strong>Delivery App Users:</strong> Calculate fair tips for doorstep delivery couriers based on order size and weather conditions.</li>
+        </ul>
+
+        <h2>Frequently Asked Questions (FAQs)</h2>
+
+        <h3>1. Is tipping mandatory in Indian restaurants?</h3>
+        <p>
+          No. In India, tipping is entirely voluntary. Furthermore, the Central Consumer Protection Authority (CCPA) issued guidelines stating that restaurants cannot automatically levy a mandatory &ldquo;Service Charge&rdquo; on bills without consumer consent. If a service charge is already added, you are not obligated to pay an additional cash tip.
+        </p>
+
+        <h3>2. What is the difference between Service Charge, Service Tax, and Tipping?</h3>
+        <p>
+          A <strong>Service Charge</strong> is an internal fee added by the restaurant (usually 5% to 10%) that goes to management and staff. <strong>GST (Goods and Services Tax)</strong> is a government tax (typically 5% for standalone eateries or 18% for luxury hotel dining). A <strong>Tip / Gratuity</strong> is a voluntary personal gift handed directly to your server in recognition of exceptional service.
+        </p>
+
+        <h3>3. Should tip percentage be calculated before or after GST?</h3>
+        <p>
+          Proper dining etiquette dictates calculating gratuity on the <strong>pre-tax subtotal</strong> (the cost of food and drinks alone). You should not tip on government taxes.
+        </p>
+
+        <h3>4. What are standard tipping percentages worldwide?</h3>
+        <ul>
+          <li><strong>United States &amp; Canada:</strong> 15% (fair), 18% (good), 20%+ (exceptional).</li>
+          <li><strong>United Kingdom &amp; Europe:</strong> 10% to 12.5% (often included as discretionary service charge).</li>
+          <li><strong>India &amp; Southeast Asia:</strong> 5% to 10% for good service (optional).</li>
+          <li><strong>Japan:</strong> Tipping is not customary and can sometimes be considered impolite.</li>
+        </ul>
+
+        <h3>5. How do we handle uneven bill splits when someone ordered expensive items?</h3>
+        <p>
+          If one diner ordered an expensive dish (e.g., wine or seafood), have them pay their exact item cost plus their share of tip and tax. The remaining diners can then use the calculator to split the balanced remainder equally.
+        </p>
+
+        <h3>6. Can I split the bill among up to 20 or more people?</h3>
+        <p>
+          Yes. Use the diner counter to adjust the headcount to any party size for group feasts, birthday dinners, and team outings.
+        </p>
+
+        <h2>Related Hospitality &amp; Personal Finance Calculators</h2>
+        <p>
+          Explore these additional budgeting tools to keep your personal expenses organized:
+        </p>
+        <ul>
+          <li><a href="/fuel-cost-calculator" className="text-orange-600 hover:underline font-medium">Fuel Cost Calculator</a> &ndash; Calculate travel fuel costs and divide road trip carpools.</li>
+          <li><a href="/grocery-bill-calculator" className="text-orange-600 hover:underline font-medium">Grocery Bill Calculator</a> &ndash; Tally household food baskets and shopping budgets.</li>
+          <li><a href="/cost-per-item-calculator" className="text-orange-600 hover:underline font-medium">Cost Per Item Calculator</a> &ndash; Compare bulk multipack unit prices.</li>
+          <li><a href="/discount-calculator" className="text-orange-600 hover:underline font-medium">Discount Calculator</a> &ndash; Calculate restaurant promotional deals and dining app discounts.</li>
+          <li><a href="/gst-calculator" className="text-orange-600 hover:underline font-medium">GST Calculator</a> &ndash; Verify 5% or 18% restaurant food GST calculations.</li>
         </ul>
       </SEOContent>
     </div>

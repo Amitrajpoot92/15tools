@@ -59,111 +59,139 @@ export default function DiscountCalculatorPage() {
       </div>
 
       <SEOContent>
-        <h2>What is Discount Calculator</h2>
-        <p>A Discount Calculator is an online tool that helps you quickly calculate the discount amount, total savings, and final price of a product. It makes discount calculations easier by allowing you to calculate percentage discounts as well as flat discounts without doing the maths manually. It is useful when you want to know exactly how much you will save and how much you need to pay after the discount.</p>
-        <p>For example, if a product costs ₹1,000 and has a 20% discount, you save ₹200 and pay ₹800.</p>
-        <p>For a flat discount, you can enter a fixed amount instead. For example, if the original price is ₹1,000 and the flat discount is ₹150, the final price will be ₹850.</p>
-        <p>A Discount Calculator is useful for checking shopping offers, sale prices, coupon discounts and promotional deals. It can help you compare different offers, understand your actual savings, and quickly calculate the final payable price before making a purchase. Whether you are shopping online or in a store, you can use it to make discount calculations simple and accurate.</p>
+        <h2>About Discount Calculator</h2>
+        <p>
+          The <strong>Discount Calculator</strong> by TopCalcBox is a powerful shopping and retail utility created to help consumers and business merchants instantly compute final discounted prices, cash savings, and stacked promotional deals. Whether you are navigating Black Friday mega-sales, Diwali festival promotions, e-commerce flash deals, or clearance racks, this free online tool eliminates guesswork and ensures you know the exact final payable amount.
+        </p>
+        <p>
+          Discounts are typically offered in two major forms: <strong>Percentage Off (%)</strong> (such as 30% off apparel) and <strong>Flat Cash Off (₹ / $)</strong> (such as ₹500 off on orders above ₹2,000). Many modern retailers also allow stacking coupon promo codes on top of existing marked-down prices. Our discount calculator handles both primary discount modes and stacked coupon codes effortlessly in real time.
+        </p>
 
-        <h2>How to Use Discount Calculator</h2>
-        <p>Using the Discount Calculator is quick and easy. Follow these simple steps:</p>
+        <h2>How to Use Discount Calculator (Step-by-Step)</h2>
+        <p>
+          Finding your savings with our discount calculator takes only a few seconds:
+        </p>
         <ol>
-          <li><strong>Enter the original price:</strong> Add the product’s original price.</li>
-          <li><strong>Choose the discount type:</strong> Select Percentage (%) or Flat (₹) discount.</li>
-          <li><strong>Enter the discount:</strong> Add the discount percentage or fixed amount.</li>
-          <li><strong>Add coupon discount:</strong> If you have an extra coupon, enter its discount value.</li>
-          <li><strong>Get your result:</strong> The calculator instantly shows the discount amount, total savings, and final price.</li>
+          <li><strong>Enter the Original Price:</strong> Input the regular retail list price or MRP before any reductions.</li>
+          <li><strong>Select Discount Mode:</strong> Choose between <em>Percentage (%)</em> discount or <em>Flat Amount</em> cash discount.</li>
+          <li><strong>Enter Primary Discount Rate:</strong> Input the discount percentage or exact cash reduction amount.</li>
+          <li><strong>Add Extra Coupon Code (Optional):</strong> If you hold an additional promo voucher or bank card cashback, enter the additional percentage.</li>
+          <li><strong>Inspect Your Net Savings:</strong> View the detailed breakdown showing the discount value, additional coupon deduction, total money saved, and final price to pay.</li>
         </ol>
 
-        <h2>Discount Calculation Formula</h2>
-        <p>The Discount Calculator uses simple formulas to calculate the discount amount, savings, and final price. It supports percentage discount, flat discount, and additional coupon discount.</p>
-
-        <h3>1. Percentage Discount</h3>
+        <h2>Discount Calculation Formulas & Working Method</h2>
         <p>
-          <strong>Discount Amount</strong> = Original Price × Discount Percentage ÷ 100<br/>
-          <strong>Final Price</strong> = Original Price − Discount Amount
-        </p>
-        <p>
-          <strong>Example:</strong><br/>
-          Original Price = ₹2,000<br/>
-          Discount = 20%<br/>
-          <br/>
-          ₹2,000 × 20 ÷ 100 = ₹400 discount<br/>
-          ₹2,000 − ₹400 = ₹1,600 final price
+          Our calculator uses standard accounting principles to determine reductions accurately:
         </p>
 
-        <h3>2. Flat Discount</h3>
+        <h3>1. Standard Percentage Discount Formula</h3>
         <p>
-          For a fixed-amount discount, the calculation is:<br/>
-          <strong>Final Price</strong> = Original Price − Flat Discount
+          When an item has a percentage reduction off its original price:
         </p>
         <p>
-          <strong>Example:</strong><br/>
-          Original Price = ₹2,000<br/>
-          Flat Discount = ₹300<br/>
-          <br/>
-          ₹2,000 − ₹300 = ₹1,700 final price
+          <code>Discount Amount = (Original Price × Discount Rate) ÷ 100</code><br />
+          <code>Final Price = Original Price − Discount Amount</code>
         </p>
 
-        <h3>3. Additional Coupon Discount</h3>
+        <h3>2. Flat Cash Discount Formula</h3>
         <p>
-          If an additional coupon is applied after the first discount, the coupon is calculated on the discounted price:<br/>
-          <strong>Coupon Amount</strong> = Discounted Price × Coupon Percentage ÷ 100<br/>
-          <strong>Final Price</strong> = Discounted Price − Coupon Amount
+          When an item receives a fixed dollar or rupee markdown:
         </p>
         <p>
-          <strong>Example:</strong><br/>
-          Original Price = ₹2,000<br/>
-          First Discount = 20%<br/>
-          <br/>
-          ₹2,000 − ₹400 = ₹1,600<br/>
-          <br/>
-          Additional Coupon = 10%<br/>
-          <br/>
-          ₹1,600 × 10 ÷ 100 = ₹160<br/>
-          <br/>
-          ₹1,600 − ₹160 = ₹1,440 final price<br/>
-          Total Savings = ₹2,000 − ₹1,440 = ₹560
+          <code>Final Price = Original Price − Flat Discount Amount</code><br />
+          <code>Effective Savings Percentage = (Flat Discount ÷ Original Price) × 100</code>
         </p>
 
-        <h2>Who Can Use a Discount Calculator</h2>
-        <p>A Discount Calculator is useful for anyone who wants to quickly understand a discount, calculate savings, or find the final price of a product.</p>
+        <h3>3. Stacked / Compounded Coupon Discount Formula</h3>
+        <p>
+          When an additional promotional coupon is applied after the primary sale discount, it applies to the already discounted subtotal, not the original MRP:
+        </p>
+        <p>
+          <code>Subtotal = Original Price − Primary Discount</code><br />
+          <code>Coupon Savings = (Subtotal × Coupon Rate) ÷ 100</code><br />
+          <code>Final Payable Price = Subtotal − Coupon Savings</code><br />
+          <code>Total Savings = Primary Discount + Coupon Savings</code>
+        </p>
+
+        <h2>Practical Real-World Examples</h2>
+        <p>
+          Here are 4 everyday shopping scenarios showing how discount math works:
+        </p>
         <ul>
-          <li><strong>Shoppers:</strong> Calculate sale prices, percentage discounts, and flat discounts before buying.</li>
-          <li><strong>Online Buyers:</strong> Check the actual price after applying a discount and an additional coupon.</li>
-          <li><strong>Shopkeepers & Sellers:</strong> Quickly calculate discounted prices for customers and promotional offers.</li>
-          <li><strong>Business Owners:</strong> Work out discounts, special offers, and selling prices more easily.</li>
-          <li><strong>Students & Learners:</strong> Practice and verify discount calculations using real-world examples.</li>
-          <li><strong>Everyday Users:</strong> Compare different deals and understand how much they can save.</li>
+          <li>
+            <strong>Example 1: End-of-Season Clothing Sale (Percentage Off)</strong><br />
+            A designer jacket priced at ₹5,000 is marked down by 40%:<br />
+            <code>Discount = (5,000 × 40) ÷ 100 = ₹2,000</code>.<br />
+            The customer pays ₹3,000 and saves ₹2,000.
+          </li>
+          <li>
+            <strong>Example 2: Supermarket Grocery Voucher (Flat Off)</strong><br />
+            A grocery cart total comes to ₹3,450, and you apply a flat ₹500 off supermarket voucher:<br />
+            <code>Final Bill = 3,450 − 500 = ₹2,950</code>.<br />
+            Your effective savings rate is <code>(500 ÷ 3,450) × 100 = 14.49%</code>.
+          </li>
+          <li>
+            <strong>Example 3: Stacked Online Sale + Credit Card Coupon</strong><br />
+            A smartphone listed at ₹20,000 has a 15% platform discount, plus an extra 10% instant bank card discount:<br />
+            Step 1 (Platform): <code>20,000 − 15% (₹3,000) = ₹17,000</code>.<br />
+            Step 2 (Bank Coupon): <code>17,000 − 10% (₹1,700) = ₹15,300 final price</code>.<br />
+            Total money saved = <code>₹3,000 + ₹1,700 = ₹4,700 (23.5% effective total savings)</code>.
+          </li>
+          <li>
+            <strong>Example 4: Clearance Markdown vs. Original Price</strong><br />
+            A pair of running shoes originally tagged at ₹4,200 is sold on clearance for ₹2,310:<br />
+            Total discount amount = <code>4,200 − 2,310 = ₹1,890</code>.<br />
+            Discount percentage = <code>(1,890 ÷ 4,200) × 100 = 45% off</code>.
+          </li>
         </ul>
 
-        <h3>Frequently Asked Questions (FAQ)</h3>
-        
-        <h4>1. How do I calculate a discount?</h4>
-        <p>Multiply the original price by the discount percentage and divide by 100. Then subtract the discount amount from the original price to get the final price.</p>
-
-        <h4>2. Can I calculate a flat discount?</h4>
-        <p>Yes. You can calculate a fixed or flat discount by subtracting the discount amount from the original price.<br/>Example: ₹2,000 − ₹300 flat discount = ₹1,700.</p>
-
-        <h4>3. How much money will I save with a discount?</h4>
-        <p>Your savings depend on the discount percentage or flat discount you enter. The calculator shows the discount amount and final price, making it easy to see your total savings.</p>
-
-        <h4>4. Can I use a discount calculator for online shopping?</h4>
-        <p>Yes. You can use it to calculate sale prices, percentage discounts, flat discounts, coupon offers and final payable amounts before making a purchase.</p>
-
-        <h4>5. Is a 20% discount followed by a 10% discount equal to 30% off?</h4>
-        <p>No. Two discounts applied one after another are not equal to a 30% discount. The second discount is calculated on the price after the first discount.</p>
-        <p>For example, ₹1,000 after a 20% discount becomes ₹800. A further 10% discount on ₹800 is ₹80, making the final price ₹720. The total saving is ₹280, which is equal to a 28% discount.</p>
-
-        <h2>Related Calculators</h2>
+        <h2>Who Can Use This Calculator?</h2>
+        <p>
+          The discount calculator is an essential everyday financial companion for:
+        </p>
         <ul>
-          <li><a href="/percentage-calculator" className="text-emerald-600 hover:underline">Percentage Calculator</a></li>
-          <li><a href="/gst-calculator" className="text-emerald-600 hover:underline">GST Calculator</a></li>
-          <li><a href="/profit-and-loss-calculator" className="text-emerald-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/wholesale-price-calculator" className="text-emerald-600 hover:underline">Wholesale Price Calculator</a></li>
-          <li><a href="/emi-calculator" className="text-emerald-600 hover:underline">EMI Calculator</a></li>
-          <li><a href="/sip-calculator" className="text-emerald-600 hover:underline">SIP Calculator</a></li>
-          <li><a href="/subscription-cost-calculator" className="text-emerald-600 hover:underline">Subscription Cost Calculator</a></li>
+          <li><strong>Everyday Shoppers:</strong> Check whether in-store flash sales and clearance racks offer genuine savings.</li>
+          <li><strong>Online Shoppers:</strong> Verify stacked voucher codes, promo coupons, and bank card cashbacks on Amazon, Flipkart, or Myntra.</li>
+          <li><strong>Retail Shopkeepers & Merchants:</strong> Quickly provide customer quotes, clear seasonal inventory, and calculate promotional margins.</li>
+          <li><strong>Budget-Conscious Families:</strong> Plan festival shopping, back-to-school purchases, and holiday gifts within budget.</li>
+        </ul>
+
+        <h2>Frequently Asked Questions (FAQs)</h2>
+        <h3>1. Is 50% + 50% discount the same as 100% free?</h3>
+        <p>
+          No! When retailers advertise &quot;50% off plus an extra 50% off&quot;, the second 50% applies to the remaining balance. If an item costs ₹1,000, 50% off makes it ₹500. The extra 50% off on ₹500 saves ₹250, making the final price ₹250 (a total 75% discount, not free).
+        </p>
+        <h3>2. How do I calculate a 20% discount in my head?</h3>
+        <p>
+          Find 10% of the price by moving the decimal point one place to the left, then double that number. For instance, for ₹800, 10% is ₹80, and doubling it gives ₹160 discount. Subtract ₹160 from ₹800 to get ₹640.
+        </p>
+        <h3>3. Does this calculator consider GST or sales tax?</h3>
+        <p>
+          This tool computes the discounted base price. If your purchase incurs additional sales tax or GST, you can pass the discounted total into our <a href="/gst-calculator">GST Calculator</a> to see the post-tax invoice amount.
+        </p>
+        <h3>4. Can I calculate flat discounts in any currency?</h3>
+        <p>
+          Yes. The math works universally for Indian Rupees (₹), US Dollars ($), Euros (€), British Pounds (£), or any other local currency.
+        </p>
+        <h3>5. What is the difference between markup and discount?</h3>
+        <p>
+          Markup is the percentage added to the cost price to determine selling price, whereas discount is the percentage deducted from the marked retail price to arrive at the final payable sum.
+        </p>
+        <h3>6. Can I use this discount calculator on my mobile phone offline?</h3>
+        <p>
+          Yes, TopCalcBox is fully responsive and functions as a progressive web app (PWA) with complete offline calculation capabilities.
+        </p>
+
+        <h2>Explore Related Calculators</h2>
+        <p>
+          Maximize your purchasing power with our related shopping and money calculators:
+        </p>
+        <ul>
+          <li><a href="/percentage-calculator">Percentage Calculator</a> – Compute general ratios, increases, and fractional percentages.</li>
+          <li><a href="/gst-calculator">GST Calculator</a> – Calculate 5%, 12%, 18%, and 28% GST inclusive and exclusive rates.</li>
+          <li><a href="/cost-per-item-calculator">Cost Per Item Calculator</a> – Compare unit prices across multipacks to find true value.</li>
+          <li><a href="/price-per-kg-calculator">Price Per Kg Calculator</a> – Convert bulk kilogram rates into grams and custom packaging prices.</li>
+          <li><a href="/grocery-bill-calculator">Grocery Bill Calculator</a> – Tally multiple shopping items into an organized household budget.</li>
         </ul>
       </SEOContent>
     </div>

@@ -59,85 +59,127 @@ export default function WholesalePage() {
       </div>
 
       <SEOContent>
-        <h2>What is Wholesale Price Calculator</h2>
-        <p>A Wholesale Price Calculator is an online tool that helps you work out the right wholesale selling price for products sold in bulk. It uses your total cost, target profit percentage, and quantity to calculate how much you should charge while keeping your desired profit.</p>
-        <p>It is useful for wholesalers, manufacturers, distributors, retailers, resellers, and small business owners who need to set prices for bulk orders. The calculator can show the wholesale price per unit, profit per unit, total profit, and total revenue, making pricing decisions easier.</p>
-        <p><strong>Example:</strong> Suppose your Total Cost Price is ₹1,000, your Target Profit is 10%, and you have 10 units. Your target profit is ₹100, making the required revenue ₹1,100. The wholesale price would be ₹110 per unit, giving you a ₹100 total profit.</p>
+        <h2>About Wholesale Price Calculator</h2>
+        <p>
+          The <strong>Wholesale Price Calculator</strong> by TopCalcBox is a dedicated B2B pricing and margin strategy tool for manufacturers, brand creators, wholesale merchants, and distributors. It enables you to determine competitive per-unit wholesale prices, projected gross revenues, and target profit margins when selling merchandise in bulk volume to retail stockists.
+        </p>
+        <p>
+          Wholesale pricing sits at the strategic center of the supply chain between direct cost of goods sold (COGS) and the recommended retail price (RRP). If your wholesale quote is too high, retail stores will not stock your products; if it is too low, your business will fail to cover production overhead, freight, and working capital interest. Our tool helps you balance volume discounts with sustainable commercial profitability.
+        </p>
 
-        <h2>How to Use Wholesale Price Calculator</h2>
-        <p>Using the Wholesale Price Calculator is simple. Enter your cost, target profit, and quantity to get the recommended wholesale price.</p>
+        <h2>How to Use Wholesale Price Calculator (Step-by-Step)</h2>
+        <p>
+          Calculating your bulk wholesale pricing is straightforward:
+        </p>
         <ol>
-          <li><strong>Enter the Total Cost Price:</strong> Add the complete cost of all the products.</li>
-          <li><strong>Enter the Target Profit (%):</strong> Enter the profit percentage you want to earn.</li>
-          <li><strong>Enter the Quantity:</strong> Add the total number of units in the order.</li>
-          <li><strong>Get your result:</strong> The calculator instantly shows the wholesale price per unit, profit per unit, total profit, and total revenue.</li>
+          <li><strong>Enter Total Cost Price (COGS):</strong> Input the combined manufacturing, material, labor, and packaging expenditure for the entire production lot.</li>
+          <li><strong>Set Target Profit Margin (%):</strong> Enter the wholesale profit margin percentage you require on this production run.</li>
+          <li><strong>Specify Batch Quantity:</strong> Input the total number of finished units included in the bulk consignment.</li>
+          <li><strong>Review Strategic Pricing Outputs:</strong> Instantly inspect Wholesale Price Per Unit, Unit Profit, Total Order Revenue, and Gross Earnings.</li>
+          <li><strong>Copy or Export:</strong> Copy the quotation figures directly into client B2B proposals or commercial purchase invoices.</li>
         </ol>
-        <p>Use Copy to save the result or Reset to start a new calculation.</p>
 
-        <h2>Wholesale Price Calculation Formula</h2>
-        <p>The Wholesale Price Calculator uses your total cost, target profit, and quantity to work out the selling price you should charge per unit.</p>
-        
+        <h2>Wholesale Pricing Formulas &amp; Mathematical Logic</h2>
         <p>
-          <strong>Target Profit</strong> = Total Cost × Target Profit % ÷ 100<br/>
-          <strong>Example:</strong> ₹1,000 × 10 ÷ 100 = ₹100
-        </p>
-        <p>
-          <strong>Total Revenue</strong> = Total Cost + Target Profit<br/>
-          <strong>Example:</strong> ₹1,000 + ₹100 = ₹1,100
-        </p>
-        <p>
-          <strong>Wholesale Price Per Unit</strong> = Total Revenue ÷ Quantity<br/>
-          <strong>Example:</strong> ₹1,100 ÷ 10 = ₹110 per unit
-        </p>
-        <p>
-          <strong>Profit Per Unit</strong> = Wholesale Price Per Unit − Cost Per Unit<br/>
-          <strong>Example:</strong> ₹110 − ₹100 = ₹10 profit per unit
-        </p>
-        <p>
-          <strong>Final Result:</strong> ₹110 wholesale price per unit | ₹10 profit per unit | ₹100 total profit
+          Our calculator uses established supply chain accounting formulas to establish fair bulk rates:
         </p>
 
-        <h2>Who Can Use a Wholesale Price Calculator</h2>
-        <p>A Wholesale Price Calculator is useful for anyone who sells products in bulk and wants to set a price that covers the total cost while keeping a target profit.</p>
+        <h3>1. Total Production Cost Per Unit</h3>
+        <p>
+          <code>Unit Cost = Total Batch Production Cost ÷ Total Batch Quantity</code>
+        </p>
+
+        <h3>2. Wholesale Profit Determination</h3>
+        <p>
+          <code>Total Target Profit = Total Batch Cost × (Target Profit % ÷ 100)</code><br />
+          <code>Total Order Revenue = Total Batch Cost + Total Target Profit</code>
+        </p>
+
+        <h3>3. Recommended Wholesale Unit Price</h3>
+        <p>
+          <code>Wholesale Price Per Unit = Total Order Revenue ÷ Total Batch Quantity</code><br />
+          <code>Profit Margin Per Unit = Wholesale Price Per Unit − Unit Cost</code>
+        </p>
+
+        <h2>Practical Real-World Examples</h2>
+        <p>
+          Here are 4 realistic wholesale scenarios demonstrating bulk unit pricing:
+        </p>
         <ul>
-          <li><strong>Wholesalers:</strong> Set profitable prices for bulk orders and large quantities.</li>
-          <li><strong>Manufacturers:</strong> Calculate selling prices based on production and other costs.</li>
-          <li><strong>Distributors:</strong> Work out suitable prices when supplying products to retailers.</li>
-          <li><strong>Retailers:</strong> Compare wholesale costs and calculate expected earnings on bulk purchases.</li>
-          <li><strong>Resellers:</strong> Set a selling price after considering purchase costs and desired profit.</li>
-          <li><strong>Online Sellers:</strong> Calculate prices for bulk enquiries and wholesale orders.</li>
-          <li><strong>Small Business Owners:</strong> Quickly work out per-unit pricing, total revenue, and expected profit.</li>
+          <li>
+            <strong>Example 1: Apparel Factory T-Shirt Run</strong><br />
+            A textile workshop produces 500 premium cotton t-shirts with total production costs (fabric, stitching, labels, packing) of ₹1,00,000 (Unit Cost = ₹200). They target a 25% wholesale profit:<br />
+            <code>Target Profit = (1,00,000 × 25) ÷ 100 = ₹25,000</code>.<br />
+            <code>Total Wholesale Lot Price = ₹1,25,000</code>.<br />
+            <code>Wholesale Price Per Shirt = 1,25,000 ÷ 500 = ₹250</code> (Retailers sell at ₹499 RRP).
+          </li>
+          <li>
+            <strong>Example 2: Packaged Food / Snack Distributor</strong><br />
+            A food manufacturer bakes 1,000 packs of artisanal cookies at a total factory cost of ₹40,000 (Unit Cost = ₹40). They apply a 15% wholesale margin for regional supermarkets:<br />
+            <code>Total Revenue = 40,000 + 15% (₹6,000) = ₹46,000</code>.<br />
+            <code>Wholesale Rate Per Pack = 46,000 ÷ 1,000 = ₹46</code> (Profit = ₹6/pack).
+          </li>
+          <li>
+            <strong>Example 3: Handmade Soap &amp; Cosmetics Brand</strong><br />
+            An artisan crafts 200 organic soap bars costing ₹12,000 total (₹60/bar). Targeting a 40% wholesale margin for boutique gift shops:<br />
+            <code>Total Revenue = 12,000 + 40% (₹4,800) = ₹16,800</code>.<br />
+            <code>Wholesale Rate = 16,800 ÷ 200 = ₹84 per bar</code>.
+          </li>
+          <li>
+            <strong>Example 4: Mobile Accessories Importer Lot</strong><br />
+            An importer lands 2,000 USB-C charging cables at a total landed cost (including customs duty and shipping) of ₹1,20,000 (Unit Cost = ₹60). They require an 18% profit margin:<br />
+            <code>Total Required Revenue = 1,20,000 × 1.18 = ₹1,41,600</code>.<br />
+            <code>Wholesale Unit Price = 1,41,600 ÷ 2,000 = ₹70.80 per cable</code>.
+          </li>
         </ul>
 
-        <h3>Frequently Asked Questions (FAQ)</h3>
-        
-        <h4>1. What is a wholesale price?</h4>
-        <p>A wholesale price is the amount charged when products are sold in bulk, usually at a lower per-unit price than the retail price.</p>
-
-        <h4>2. How much profit should I add to a wholesale price?</h4>
-        <p>The profit percentage depends on your product, costs, market conditions, competition, and business goals. Use your target profit percentage to calculate the required wholesale price.</p>
-
-        <h4>3. What is the difference between wholesale price and retail price?</h4>
-        <p>Wholesale price is generally used for bulk sales, while retail price is the amount charged to individual customers. Retail prices are usually higher because they may include additional selling and operating costs.</p>
-
-        <h4>4. Does wholesale price include other expenses?</h4>
-        <p>It can. Costs such as packaging, transportation, production, platform fees, or other business expenses should be included in the total cost if they apply to the order.</p>
-
-        <h4>5. Can I use a wholesale price calculator for reselling?</h4>
-        <p>Yes. Resellers can include their purchase cost, additional expenses, quantity, and target profit to work out a suitable wholesale selling price.</p>
-
-        <h4>6. Can I use a wholesale price calculator for small businesses?</h4>
-        <p>Yes. Small business owners can use it to quickly calculate per-unit prices, expected profit, total revenue, and pricing for bulk orders.</p>
-
-        <h2>Related Calculators</h2>
+        <h2>Who Can Use This Calculator?</h2>
+        <p>
+          The wholesale price calculator is engineered for B2B supply chain participants:
+        </p>
         <ul>
-          <li><a href="/percentage-calculator" className="text-blue-600 hover:underline">Percentage Calculator</a></li>
-          <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
-          <li><a href="/gst-calculator" className="text-blue-600 hover:underline">GST Calculator</a></li>
-          <li><a href="/profit-and-loss-calculator" className="text-blue-600 hover:underline">Profit and Loss Calculator</a></li>
-          <li><a href="/emi-calculator" className="text-blue-600 hover:underline">EMI Calculator</a></li>
-          <li><a href="/sip-calculator" className="text-blue-600 hover:underline">SIP Calculator</a></li>
-          <li><a href="/subscription-cost-calculator" className="text-blue-600 hover:underline">Subscription Cost Calculator</a></li>
+          <li><strong>Product Manufacturers &amp; Factories:</strong> Establish baseline wholesale tiers from raw material and shop-floor operating budgets.</li>
+          <li><strong>Distributors &amp; Stockists:</strong> Formulate multi-case volume discounts when supplying independent retailers and departmental chains.</li>
+          <li><strong>Artisans &amp; D2C Brands:</strong> Transition from selling directly to consumers to pitching bulk orders to retail gift shops and marketplaces.</li>
+          <li><strong>Retail Store Buyers:</strong> Evaluate supplier quotes to ensure wholesale unit costs leave adequate headroom for retail gross margins.</li>
+        </ul>
+
+        <h2>Frequently Asked Questions (FAQs)</h2>
+        <h3>1. What is the standard ratio between Cost, Wholesale Price, and Retail Price (Keystone Pricing)?</h3>
+        <p>
+          A widely used industry benchmark is Keystone Pricing: Wholesale Price is typically 2× Cost Price (a 100% markup), and Retail Price (RRP/MRP) is typically 2× Wholesale Price. For example, if an item costs ₹100 to make, wholesale is ₹200, and retail is ₹400.
+        </p>
+        <h3>2. What is a healthy wholesale profit margin?</h3>
+        <p>
+          Typical wholesale margins range between 15% and 40% depending on the industry. Fast-moving consumer goods (FMCG) operate on leaner margins (10%–20%), whereas apparel, specialty cosmetics, and jewelry often sustain margins between 30% and 50%.
+        </p>
+        <h3>3. Should shipping and freight be included in the wholesale cost?</h3>
+        <p>
+          Yes. If you provide &quot;Free On Board&quot; (FOB) or delivered pricing, freight, palletizing, insurance, and handling charges must be added to your total baseline cost before applying your target margin.
+        </p>
+        <h3>4. How do minimum order quantities (MOQ) affect wholesale pricing?</h3>
+        <p>
+          Higher MOQs reduce unit manufacturing and packaging expenses through economies of scale. You can create tiered pricing where orders exceeding certain quantities receive lower wholesale unit rates.
+        </p>
+        <h3>5. How does this calculator differ from the Profit and Loss Calculator?</h3>
+        <p>
+          Our <a href="/profit-and-loss-calculator">Profit and Loss Calculator</a> evaluates individual product sales and existing revenue lines, whereas this tool specifically solves for the optimal per-unit selling price across a multi-unit bulk manufacturing lot.
+        </p>
+        <h3>6. Can I use this wholesale tool on mobile devices?</h3>
+        <p>
+          Yes, TopCalcBox is fully responsive, lightweight, and works seamlessly on mobile phones and tablets during vendor meetings and trade shows.
+        </p>
+
+        <h2>Explore Related Calculators</h2>
+        <p>
+          Optimize your commercial operations with our related business calculation tools:
+        </p>
+        <ul>
+          <li><a href="/profit-and-loss-calculator">Profit and Loss Calculator</a> – Analyze product margins, markups, and net profit.</li>
+          <li><a href="/cost-per-item-calculator">Cost Per Item Calculator</a> – Compare multi-unit purchase bundles and find unit costs.</li>
+          <li><a href="/discount-calculator">Discount Calculator</a> – Calculate bulk trade discounts and client promotional markdowns.</li>
+          <li><a href="/gst-calculator">GST Calculator</a> – Determine commercial invoice tax and inter-state IGST amounts.</li>
+          <li><a href="/price-per-kg-calculator">Price Per Kg Calculator</a> – Calculate bulk kilogram rates into grams and custom packaging sizes.</li>
         </ul>
       </SEOContent>
     </div>

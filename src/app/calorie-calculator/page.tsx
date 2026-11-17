@@ -59,72 +59,175 @@ export default function Page() {
       </div>
 
       <SEOContent>
-        <h2>What is a Calorie Calculator</h2>
-        <p>A Calorie Calculator is an online tool that helps estimate how many calories you may need each day based on your age, sex, weight, height, and activity level. It gives you an estimated daily calorie target for maintaining your current weight.</p>
-        <p>You can choose between Metric and Imperial units, select your sex, enter your body details, and choose your activity level such as sedentary, lightly active, or moderately active. The calculator then provides estimated calorie targets for weight maintenance, weight loss, and weight gain.</p>
-        <p>Calorie needs are estimates because actual energy requirements can vary from person to person. Physical activity, body composition, health conditions, lifestyle, and other factors can affect daily calorie needs.</p>
+        <h2>About Calorie Calculator</h2>
+        <p>
+          The <strong>Calorie Calculator</strong> on TopCalcBox is a comprehensive nutritional and energy expenditure planning tool designed to compute your <strong>Basal Metabolic Rate (BMR)</strong> and <strong>Total Daily Energy Expenditure (TDEE)</strong>. According to the foundational first law of thermodynamics, human body composition is governed by the energy balance equation: <em>Energy In vs. Energy Out</em>. Consuming fewer calories than your body burns creates a caloric deficit, driving your body to mobilize stored adipose fat for fuel. Conversely, consuming a surplus provides the necessary surplus energy to synthesize new skeletal muscle tissue.
+        </p>
+        <p>
+          Generic diet plans often fail because they assign arbitrary calorie caps (such as 1,200 or 1,500 kcal) without accounting for an individual&rsquo;s biological reality. Our calculator implements the clinically recognized <strong>Mifflin-St Jeor Equation</strong>&mdash;acknowledged by the Academy of Nutrition and Dietetics as the most accurate standard for non-obese and obese individuals alike. By entering your age, biological sex, height, current weight, and weekly activity habits, you receive customized caloric targets tailored for safe fat loss, lean muscle hypertrophy, or steady weight maintenance.
+        </p>
 
         <h2>How to Use the Calorie Calculator</h2>
-        <p>The Calorie Calculator uses your basic body details and activity level to estimate your daily calorie needs. Enter the required information and get your calorie targets instantly.</p>
+        <p>
+          Determine your personalized nutritional targets in a few easy steps:
+        </p>
         <ol>
-          <li><strong>Select Unit System</strong> – Choose Metric or Imperial.</li>
-          <li><strong>Select Gender</strong> – Choose Male or Female.</li>
-          <li><strong>Enter Age</strong> – Enter your age in years.</li>
-          <li><strong>Enter Weight</strong> – Add your current weight in kg or lb.</li>
-          <li><strong>Enter Height</strong> – Enter your height in cm or feet and inches.</li>
-          <li><strong>Select Activity Level</strong> – Choose the option that best matches your usual physical activity.</li>
-          <li><strong>Check Your Results</strong> – View your estimated calories for maintaining, losing, or gaining weight.</li>
-          <li><strong>Copy or Reset</strong> – Copy the result or reset the calculator for a new calculation.</li>
+          <li><strong>Select Measurement Unit:</strong> Choose between Metric (Kilograms &amp; Centimeters) or Imperial (Pounds &amp; Feet/Inches).</li>
+          <li><strong>Select Biological Sex:</strong> Choose Male or Female (men have greater baseline lean muscle mass, which influences resting metabolic rate).</li>
+          <li><strong>Enter Age:</strong> Input your current chronological age in years.</li>
+          <li><strong>Input Current Weight &amp; Height:</strong> Enter your body mass and stature.</li>
+          <li><strong>Choose Your Physical Activity Level:</strong> Select the descriptor that best mirrors your lifestyle:
+            <ul>
+              <li><em>Sedentary:</em> Desk job with little to no formal exercise.</li>
+              <li><em>Lightly Active:</em> Light exercise or sports 1&ndash;3 days per week.</li>
+              <li><em>Moderately Active:</em> Moderate exercise or gym workouts 3&ndash;5 days per week.</li>
+              <li><em>Very Active:</em> Hard training or athletic sports 6&ndash;7 days per week.</li>
+              <li><em>Extra / Extremely Active:</em> Heavy physical labor or two-a-day rigorous athletic training.</li>
+            </ul>
+          </li>
+          <li><strong>Review Your Calorie Targets:</strong> The calculator outputs:
+            <ul>
+              <li><strong>Maintenance Calories (TDEE):</strong> Daily intake to maintain your exact current weight.</li>
+              <li><strong>Weight Loss Target:</strong> A sustainable 500 kcal deficit designed for ~0.5 kg (1 lb) fat loss per week.</li>
+              <li><strong>Weight Gain Target:</strong> A 500 kcal lean surplus designed for gradual muscular bulking.</li>
+            </ul>
+          </li>
+          <li><strong>Copy or Reset:</strong> Save your nutritional macro baselines or recalculate as your body weight shifts.</li>
         </ol>
 
-        <h2>Understanding the Results</h2>
-        <p>After entering your details, the calculator provides estimated daily calorie targets based on your age, sex, weight, height, and activity level. The results help you understand the approximate calories associated with maintaining, losing, or gaining weight.</p>
-        <p><strong>Maintain Weight:</strong> This is your estimated daily calorie target for maintaining your current weight based on the information you entered.</p>
-        <p><strong>Weight Loss (-0.5 kg/week):</strong> This shows an estimated daily calorie target designed around a gradual weight-loss goal of approximately 0.5 kg per week.</p>
-        <p><strong>Weight Gain (+0.5 kg/week):</strong> This shows an estimated daily calorie target designed around a gradual weight-gain goal of approximately 0.5 kg per week.</p>
-        <p>These values are estimates, not exact calorie requirements. Actual results can vary depending on activity, body composition, health, lifestyle, and other individual factors.</p>
+        <h2>Calorie Calculation Formulas &amp; Biophysical Energy Equations</h2>
+        <p>
+          Daily energy requirements are determined by first calculating your resting baseline (BMR) and then scaling it by your physical activity multiplier (TDEE):
+        </p>
 
-        <h2>Calorie Calculation Formula</h2>
-        <p>The Calorie Calculator first calculates your Basal Metabolic Rate (BMR) using the Mifflin-St Jeor Equation. BMR is the estimated number of calories your body needs at rest to perform basic functions such as breathing, circulation, and maintaining body temperature.</p>
-        
-        <h3>Mifflin-St Jeor Equation</h3>
-        <p>Where:<br />W = Weight in kg<br />H = Height in cm<br />A = Age in years</p>
-        <p>For Men BMR = 10W + 6.25H - 5A + 5</p>
-        <p>For Women BMR = 10W + 6.25H - 5A - 161</p>
+        <h3>1. Basal Metabolic Rate (BMR) &ndash; Mifflin-St Jeor Equation</h3>
+        <p>
+          <strong>For Men:</strong><br />
+          <code>BMR = (10 × Weight in kg) + (6.25 × Height in cm) − (5 × Age in years) + 5</code>
+        </p>
+        <p>
+          <strong>For Women:</strong><br />
+          <code>BMR = (10 × Weight in kg) + (6.25 × Height in cm) − (5 × Age in years) − 161</code>
+        </p>
 
-        <h2>Who Can Use a Calorie Calculator</h2>
-        <p>A Calorie Calculator can be useful for adults who want to estimate their daily calorie needs based on their personal details and activity level.</p>
+        <h3>2. Total Daily Energy Expenditure (TDEE) Multipliers</h3>
+        <p>
+          To find total calories burned per day, multiply BMR by your Physical Activity Level (PAL) coefficient:
+        </p>
         <ul>
-          <li><strong>People Managing Their Weight</strong> – Estimate daily calories for maintaining, losing, or gaining weight.</li>
-          <li><strong>Fitness Enthusiasts</strong> – Get an approximate calorie target to support their fitness routine.</li>
-          <li><strong>Gym Users</strong> – Understand their estimated daily energy needs based on activity level.</li>
-          <li><strong>People Planning Their Diet</strong> – Use calorie estimates when planning daily food intake.</li>
-          <li><strong>Athletes & Active Individuals</strong> – Get a general estimate of calorie requirements based on physical activity.</li>
-          <li><strong>Busy Professionals</strong> – Quickly check their estimated daily calorie needs without manual calculations.</li>
-          <li><strong>Students & Learners</strong> – Understand how BMR, activity level, and calorie needs are calculated.</li>
+          <li><strong>Sedentary (Little or no exercise):</strong> TDEE = BMR × 1.200</li>
+          <li><strong>Lightly Active (1&ndash;3 days/week):</strong> TDEE = BMR × 1.375</li>
+          <li><strong>Moderately Active (3&ndash;5 days/week):</strong> TDEE = BMR × 1.550</li>
+          <li><strong>Very Active (6&ndash;7 days/week hard workout):</strong> TDEE = BMR × 1.725</li>
+          <li><strong>Extremely Active (Hard physical job or athlete):</strong> TDEE = BMR × 1.900</li>
         </ul>
-        <p>Note: Calorie results are estimates and should not be treated as personalised medical or dietary advice.</p>
 
-        <h2>Frequently Asked Questions</h2>
-        <h3>1. What is a Calorie Calculator?</h3>
-        <p>A Calorie Calculator estimates your daily calorie needs using details such as age, sex, weight, height, and activity level.</p>
-        <h3>2. Does activity level affect calorie requirements?</h3>
-        <p>Yes. A higher activity level generally results in a higher estimated daily calorie requirement.</p>
-        <h3>3. What does Weight Loss (-0.5 kg/week) mean?</h3>
-        <p>It is an estimated calorie target designed around a gradual weight-loss goal of approximately 0.5 kg per week.</p>
-        <h3>4. Can I use pounds and feet?</h3>
-        <p>Yes. Select Imperial to enter your weight in pounds and height in feet and inches.</p>
-        <h3>5. How accurate are the calorie estimates from this calculator?</h3>
-        <p>The results provide an estimated daily calorie requirement based on your age, sex, weight, height, and activity level. Your actual calorie needs may be different because factors such as body composition, daily activity, metabolism, lifestyle, and overall health can affect how many calories your body uses.</p>
+        <h3>3. The 3,500 Kilocalorie Fat Loss Rule</h3>
+        <p>
+          One pound (~0.454 kg) of stored human adipose fat represents approximately 3,500 kcal of chemical energy. Creating a daily deficit of 500 kcal results in:
+        </p>
+        <p>
+          <code>500 kcal/day deficit × 7 days = 3,500 kcal deficit per week ≈ 0.45–0.50 kg fat lost</code>
+        </p>
 
-        <h2>Related Calculators</h2>
+        <h2>Practical Real-World Caloric Target Examples</h2>
+
+        <h3>Example 1: Sedentary Male Office Professional Aiming for Fat Loss</h3>
+        <p>
+          <strong>Profile:</strong> 32-year-old male, 82 kg, 175 cm, sedentary desk job.
+        </p>
         <ul>
-          <li><a href="/percentage-calculator" className="text-blue-600 hover:underline">Percentage Calculator</a></li>
-          <li><a href="/discount-calculator" className="text-blue-600 hover:underline">Discount Calculator</a></li>
-          <li><a href="/age-calculator-online" className="text-blue-600 hover:underline">Age Calculator Online</a></li>
-          <li><a href="/fuel-cost-calculator" className="text-blue-600 hover:underline">Fuel Cost Calculator</a></li>
-          <li><a href="/bmi-calculator" className="text-blue-600 hover:underline">BMI Calculator</a></li>
-          <li><a href="/love-calculator" className="text-blue-600 hover:underline">Love Calculator</a></li>
+          <li><strong>BMR:</strong> (10 × 82) + (6.25 × 175) − (5 × 32) + 5 = 820 + 1,093.75 − 160 + 5 = <strong>1,758.75 kcal</strong>.</li>
+          <li><strong>TDEE (Sedentary × 1.2):</strong> 1,758.75 × 1.2 = <strong>2,110.5 kcal/day</strong>.</li>
+          <li><strong>Maintenance Target:</strong> 2,111 kcal/day.</li>
+          <li><strong>Weight Loss Target (−500 kcal):</strong> <strong>1,611 kcal/day</strong> (Steady loss of ~2 kg of pure fat per month).</li>
+        </ul>
+
+        <h3>Example 2: Moderately Active Female Targeting Body Recomposition</h3>
+        <p>
+          <strong>Profile:</strong> 27-year-old female, 60 kg, 165 cm, works out at gym 4 days a week.
+        </p>
+        <ul>
+          <li><strong>BMR:</strong> (10 × 60) + (6.25 × 165) − (5 × 27) − 161 = 600 + 1,031.25 − 135 − 161 = <strong>1,335.25 kcal</strong>.</li>
+          <li><strong>TDEE (Moderate × 1.55):</strong> 1,335.25 × 1.55 = <strong>2,069.6 kcal/day</strong>.</li>
+          <li><strong>Maintenance Target:</strong> 2,070 kcal/day.</li>
+          <li><strong>Mild Fat Loss Deficit (−300 kcal):</strong> <strong>1,770 kcal/day</strong>.</li>
+        </ul>
+
+        <h3>Example 3: Young Athletic Lifter in a Muscle Hypertrophy Phase</h3>
+        <p>
+          <strong>Profile:</strong> 21-year-old male, 70 kg, 180 cm, trains with weights 6 days a week (Very Active).
+        </p>
+        <ul>
+          <li><strong>BMR:</strong> (10 × 70) + (6.25 × 180) − (5 × 21) + 5 = 700 + 1,125 − 105 + 5 = 1,725 kcal.</li>
+          <li><strong>TDEE (Very Active × 1.725):</strong> 1,725 × 1.725 = <strong>2,975.6 kcal/day</strong>.</li>
+          <li><strong>Lean Bulking Target (+350 kcal):</strong> <strong>3,325 kcal/day</strong> with high protein intake.</li>
+        </ul>
+
+        <h3>Example 4: Crash Dieting Hazard &ndash; The Starvation Mode Trap</h3>
+        <p>
+          <strong>Scenario:</strong> Eating below your resting BMR (e.g., dropping to 1,000 kcal when BMR is 1,600 kcal) triggers adaptive thermogenesis, muscle catabolism, thyroid downregulation, and chronic fatigue. Sustainable fat loss requires eating <em>between</em> your BMR and your TDEE.
+        </p>
+
+        <h2>Who Can Use This Calculator?</h2>
+        <p>
+          The Calorie Calculator provides critical daily guidance across various health and athletic disciplines:
+        </p>
+        <ul>
+          <li><strong>Weight Loss Seekers:</strong> Establish a realistic, non-starvation daily calorie ceiling to shed body fat permanently.</li>
+          <li><strong>Bodybuilders &amp; Gym Lifters:</strong> Calibrate precise lean surpluses (+250 to +500 kcal) for muscle hypertrophy without excessive fat gain.</li>
+          <li><strong>Endurance Athletes &amp; Runners:</strong> Ensure sufficient daily energy replenishment to prevent overtraining syndrome and athletic burnout.</li>
+          <li><strong>Certified Nutritionists &amp; Personal Trainers:</strong> Establish scientific baseline meal planning targets for private coaching clients.</li>
+          <li><strong>Individuals Managing Diabetes or PCOS:</strong> Structure portion control and macronutrient distributions to stabilize insulin sensitivity.</li>
+        </ul>
+
+        <h2>Frequently Asked Questions (FAQs)</h2>
+
+        <h3>1. What is the difference between BMR and TDEE?</h3>
+        <p>
+          <strong>BMR (Basal Metabolic Rate)</strong> is the bare minimum energy your body requires to stay alive at complete rest (fueling your brain, heart, lungs, and cellular repair). <strong>TDEE (Total Daily Energy Expenditure)</strong> is your total daily calorie burn including BMR, the thermic effect of food (digestion), and all physical activities like walking, fidgeting, and exercising.
+        </p>
+
+        <h3>2. Can I lose weight without exercising just by eating in a calorie deficit?</h3>
+        <p>
+          Yes. Fat loss is fundamentally dictated by energy balance. Eating 500 calories below your maintenance TDEE will result in fat loss even without formal exercise. However, incorporating resistance exercise prevents muscle loss, preserving your metabolic rate and improving body aesthetics.
+        </p>
+
+        <h3>3. What should my macronutrient breakdown (protein, carbs, fat) look like?</h3>
+        <p>
+          A balanced dietary framework for fat loss typically incorporates:
+        </p>
+        <ul>
+          <li><strong>Protein:</strong> 1.6 to 2.2 grams per kg of body weight (preserves lean muscle and increases satiety).</li>
+          <li><strong>Fats:</strong> 20% to 30% of total daily calories (essential for hormonal balance and cellular health).</li>
+          <li><strong>Carbohydrates:</strong> The remaining calorie balance (fuels high-intensity workouts and brain function).</li>
+        </ul>
+
+        <h3>4. Why have I stopped losing weight despite being on a diet?</h3>
+        <p>
+          Weight loss plateaus usually result from three common causes: (1) As you lose weight, your smaller body burns fewer calories, lowering your TDEE; (2) Unconscious calorie tracking errors (underestimating cooking oils, dressings, and snacks); or (3) Metabolic adaptation. Recalculating your calories every 5 kg lost will restore progress.
+        </p>
+
+        <h3>5. Why is the Mifflin-St Jeor equation preferred over Harris-Benedict?</h3>
+        <p>
+          The original Harris-Benedict equation was formulated over a century ago and tends to overestimate energy requirements by 5% to 15%. Modern validation studies consistently confirm that Mifflin-St Jeor provides the closest approximation to clinical indirect calorimetry.
+        </p>
+
+        <h3>6. How many calories are in 1 gram of protein, carbs, and fat?</h3>
+        <p>
+          Protein contains 4 kcal per gram; Carbohydrates contain 4 kcal per gram; Dietary Fat contains 9 kcal per gram; and Alcohol contains 7 kcal per gram.
+        </p>
+
+        <h2>Related Health &amp; Wellness Calculators</h2>
+        <p>
+          Optimize your total wellness journey with our companion fitness and lifestyle tools:
+        </p>
+        <ul>
+          <li><a href="/bmi-calculator" className="text-emerald-600 hover:underline font-medium">BMI Calculator</a> &ndash; Check your Body Mass Index and international WHO weight classification.</li>
+          <li><a href="/age-calculator-online" className="text-emerald-600 hover:underline font-medium">Age Calculator Online</a> &ndash; Calculate your exact biological age in years, months, and days.</li>
+          <li><a href="/percentage-calculator" className="text-emerald-600 hover:underline font-medium">Percentage Calculator</a> &ndash; Calculate percentage drops in body fat and weight loss milestones.</li>
+          <li><a href="/grocery-bill-calculator" className="text-emerald-600 hover:underline font-medium">Grocery Bill Calculator</a> &ndash; Plan healthy whole food grocery shopping lists within budget.</li>
+          <li><a href="/love-calculator" className="text-emerald-600 hover:underline font-medium">Love Calculator</a> &ndash; Explore playful relationship and name compatibility metrics.</li>
         </ul>
       </SEOContent>
     </div>
