@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HomeCalculatorSection } from "@/components/HomeCalculatorSection";
 import { HomeGuideSection } from "@/components/HomeGuideSection";
+import HomeJsonLd from "@/components/HomeJsonLd";
 import { 
   Calculator, 
   HelpCircle, 
@@ -36,6 +37,9 @@ export default function Home() {
 
   return (
     <div className="space-y-6 pb-0">
+      {/* Homepage Structured Data (JSON-LD) */}
+      <HomeJsonLd />
+
       {/* Interactive Hero Search & Tool Grid */}
       <HomeCalculatorSection />
 

@@ -69,23 +69,6 @@ export default function RootLayout({
           {/* Deferred non-blocking Analytics & AdSense */}
           <ThirdPartyScripts />
 
-          {/* Structured Data */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "name": "TopCalcBox",
-                "url": "https://topcalcbox.com",
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "https://topcalcbox.com/search?q={search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
-              })
-            }}
-          />
           <Sidebar />
           <main className="flex-1 md:ml-64 min-h-screen relative flex flex-col bg-white pt-16 md:pt-0">
             {/* GPU-efficient subtle background ambiance (zero CPU/blur re-rasterization) */}
