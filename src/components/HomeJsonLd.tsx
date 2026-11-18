@@ -7,9 +7,12 @@ export default function HomeJsonLd() {
         "@id": "https://topcalcbox.com/#organization",
         "name": "TopCalcBox",
         "url": "https://topcalcbox.com/",
+        "description": "Free Online Calculators for Everyday Needs",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://topcalcbox.com/topcalcbox-logo.png"
+          "url": "https://topcalcbox.com/topcalcbox-logo.png",
+          "width": 512,
+          "height": 512
         }
       },
       {
