@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, ViewStyle } from "react-native";
-import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { AD_UNITS } from "@/lib/adConfig";
+import { getGoogleMobileAds, isAdMobNativeAvailable } from "@/lib/adMobSafe";
 
 interface BannerAdComponentProps {
   style?: ViewStyle;
 }
 
 export function BannerAdComponent({ style }: BannerAdComponentProps) {
-  const [adLoaded, setAdLoaded] = useState(false);
   const [adFailed, setAdFailed] = useState(false);
 
-  // If ad failed to load (e.g. offline, no internet, or no fill), hide completely
-  if (adFailed) {
+  // If running in Expo Go or Web, or if ad failed to load, collapse completely with zero whitespace
+  if (!isAdMobNativeAvailable() || adFailed) {
     return null;
   }
+
+  const gma = getGoogleMobileAds();
+  if (!gma || !gma.BannerAd || !gma.BannerAdSize) {
+    return null;
+  }
+
+  const { BannerAd, BannerAdSize } = gma;
 
   return (
     <View style={[styles.container, style]}>
@@ -30,16 +36,11 @@ export function BannerAdComponent({ style }: BannerAdComponentProps) {
           requestOptions={{
             requestNonPersonalizedAdsOnly: false,
           }}
-          onAdLoaded={() => {
-            setAdLoaded(true);
-            setAdFailed(false);
-          }}
-          onAdFailedToLoad={(error) => {
+          onAdFailedToLoad={(error: any) => {
             if (__DEV__) {
               console.warn("[BannerAd] Failed to load:", error);
             }
             setAdFailed(true);
-            setAdLoaded(false);
           }}
         />
       </View>

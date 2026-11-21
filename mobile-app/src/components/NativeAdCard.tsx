@@ -1,18 +1,35 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, ViewStyle } from "react-native";
-import {
-  useNativeAd,
-  NativeAdView,
-  NativeAsset,
-  NativeAssetType,
-} from "react-native-google-mobile-ads";
 import { AD_UNITS } from "@/lib/adConfig";
+import { getGoogleMobileAds, isAdMobNativeAvailable } from "@/lib/adMobSafe";
 
 interface NativeAdCardProps {
   style?: ViewStyle;
 }
 
 export function NativeAdCard({ style }: NativeAdCardProps) {
+  // If running in Expo Go or Web, native ads cannot run — render null
+  if (!isAdMobNativeAvailable()) {
+    return null;
+  }
+
+  return <NativeAdCardContent style={style} />;
+}
+
+function NativeAdCardContent({ style }: NativeAdCardProps) {
+  const gma = getGoogleMobileAds();
+  if (
+    !gma ||
+    !gma.useNativeAd ||
+    !gma.NativeAdView ||
+    !gma.NativeAsset ||
+    !gma.NativeAssetType
+  ) {
+    return null;
+  }
+
+  const { useNativeAd, NativeAdView, NativeAsset, NativeAssetType } = gma;
+
   const { status, nativeAd } = useNativeAd({
     adUnitId: AD_UNITS.NATIVE,
   });

@@ -1,16 +1,12 @@
-import mobileAds, {
-  InterstitialAd,
-  AdEventType,
-  MaxAdContentRating,
-} from "react-native-google-mobile-ads";
 import { AD_UNITS, AD_THRESHOLDS } from "./adConfig";
+import { getGoogleMobileAds, isAdMobNativeAvailable } from "./adMobSafe";
 
 class AdManagerService {
   private static instance: AdManagerService;
   private isInitialized = false;
 
   // Interstitial management
-  private interstitial: InterstitialAd | null = null;
+  private interstitial: any = null;
   private isInterstitialLoaded = false;
   private isInterstitialLoading = false;
   private actionCount = 0;
@@ -28,24 +24,35 @@ class AdManagerService {
 
   /**
    * Initializes the Google Mobile Ads SDK safely.
+   * If running in Expo Go or Web, gracefully exits with zero errors.
    */
   public async initialize(): Promise<void> {
     if (this.isInitialized) return;
+    if (!isAdMobNativeAvailable()) {
+      return;
+    }
+
+    const gma = getGoogleMobileAds();
+    if (!gma) return;
 
     try {
-      await mobileAds().setRequestConfiguration({
-        maxAdContentRating: MaxAdContentRating.G,
-        tagForChildDirectedTreatment: false,
-        tagForUnderAgeOfConsent: false,
-      });
+      const mobileAds = gma.default || gma.MobileAds;
+      const MaxAdContentRating = gma.MaxAdContentRating;
 
-      await mobileAds().initialize();
-      this.isInitialized = true;
+      if (mobileAds && typeof mobileAds === "function") {
+        await mobileAds().setRequestConfiguration({
+          maxAdContentRating: MaxAdContentRating?.G,
+          tagForChildDirectedTreatment: false,
+          tagForUnderAgeOfConsent: false,
+        });
 
-      // Preload the first interstitial ad in the background
-      this.loadInterstitial();
+        await mobileAds().initialize();
+        this.isInitialized = true;
+
+        // Preload the first interstitial ad in the background
+        this.loadInterstitial();
+      }
     } catch (error) {
-      // Graceful error logging so the app continues working completely offline
       if (__DEV__) {
         console.warn("[AdManager] Initialization error:", error);
       }
@@ -60,8 +67,18 @@ class AdManagerService {
       return;
     }
 
+    if (!isAdMobNativeAvailable()) {
+      return;
+    }
+
+    const gma = getGoogleMobileAds();
+    if (!gma || !gma.InterstitialAd || !gma.AdEventType) {
+      return;
+    }
+
     try {
       this.isInterstitialLoading = true;
+      const { InterstitialAd, AdEventType } = gma;
       const ad = InterstitialAd.createForAdRequest(AD_UNITS.INTERSTITIAL, {
         requestNonPersonalizedAdsOnly: false,
       });
@@ -72,7 +89,7 @@ class AdManagerService {
         this.isInterstitialLoading = false;
       });
 
-      ad.addAdEventListener(AdEventType.ERROR, (error) => {
+      ad.addAdEventListener(AdEventType.ERROR, (error: any) => {
         this.isInterstitialLoaded = false;
         this.isInterstitialLoading = false;
         this.interstitial = null;
@@ -116,11 +133,16 @@ class AdManagerService {
 
   /**
    * Checks if an interstitial ad is eligible to be shown based on:
-   * 1. Ad is loaded and ready
-   * 2. Enough actions have occurred (default: >= 3)
-   * 3. Cooldown time has elapsed (default: >= 2.5 minutes)
+   * 1. Native binary module is available
+   * 2. Ad is loaded and ready
+   * 3. Enough actions have occurred (default: >= 3)
+   * 4. Cooldown time has elapsed (default: >= 2.5 minutes)
    */
   public isInterstitialEligible(): boolean {
+    if (!isAdMobNativeAvailable()) {
+      return false;
+    }
+
     if (!this.isInterstitialLoaded || !this.interstitial) {
       return false;
     }
