@@ -55,12 +55,21 @@ export default function HomeScreen() {
   const isSearching = searchQuery.trim().length > 0;
 
   const handleShareApp = async () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     try {
       await Share.share({
-        title: "Calculator: All in One – Smart Calculators",
+        title: "Calculator: All-in-One",
         message:
-          "Check out Calculator: All in One! 25 smart, 100% free offline calculators for finance, shopping, health & daily calculations: https://topcalcbox.com",
+`Try Calculator: All-in-One!
+
+25 smart, 100% FREE calculators for Finance, Education, Age, Travel, Shopping, Health and Daily Calculation.
+
+✅ Works Offline
+✅ Fast and Easy to Use
+✅ All-in-One Solution
+
+📲 Download Now:
+https://play.google.com/store/apps/details?id=com.topcalcbox.allinone`,
       });
     } catch {
       // User dismissed share dialog
