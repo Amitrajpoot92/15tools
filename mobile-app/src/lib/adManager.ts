@@ -14,7 +14,7 @@ class AdManagerService {
   private isInterstitialLoaded = false;
   private isInterstitialLoading = false;
   private actionCount = 0;
-  private lastInterstitialTime = Date.now(); // Prevents ads immediately on app launch
+  private lastInterstitialTime = 0; // Allows eligible exit ad after user interaction
   private onDismissCallback: (() => void) | null = null;
 
   private constructor() {}
@@ -135,6 +135,10 @@ class AdManagerService {
         if (__DEV__) {
           console.warn("[AdManager] Interstitial load error:", error);
         }
+        // Retry preload after 15 seconds
+        setTimeout(() => {
+          this.loadInterstitial();
+        }, 15000);
       });
 
       ad.addAdEventListener(AdEventType.CLOSED, () => {

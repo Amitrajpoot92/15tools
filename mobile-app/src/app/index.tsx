@@ -254,7 +254,7 @@ https://play.google.com/store/apps/details?id=com.topcalcbox.allinone`,
                 </View>
 
                 {/* Balanced Native Ad Recommendation nestled between categories */}
-                {catIndex === 1 && !isSearching && <NativeAdCard />}
+                {(catIndex === 1 || catIndex === 3) && !isSearching && <NativeAdCard />}
               </React.Fragment>
             );
           })

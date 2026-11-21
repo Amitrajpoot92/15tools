@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, Pressable, StyleSheet, BackHandler } from "react-native";
 import { useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
 import { ArrowLeft } from "lucide-react-native";
@@ -32,7 +32,7 @@ export function CalculatorHeader({
   const iconBg = theme ? theme.iconBg : themeColor || "#4F46E5";
 
   const handleBack = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     const navigate = () => {
       if (router.canGoBack()) {
         router.back();
@@ -46,6 +46,19 @@ export function CalculatorHeader({
       navigate();
     }
   };
+
+  useEffect(() => {
+    const onHardwareBack = () => {
+      handleBack();
+      return true;
+    };
+
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onHardwareBack
+    );
+    return () => subscription.remove();
+  }, [router]);
 
   return (
     <View style={styles.container}>

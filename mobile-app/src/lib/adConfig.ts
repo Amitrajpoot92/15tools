@@ -61,8 +61,8 @@ export const AD_UNITS = {
  * Ensures ads never annoy users or disrupt calculations.
  */
 export const AD_THRESHOLDS = {
-  // Minimum time (in milliseconds) between interstitial ads (2.5 minutes)
-  INTERSTITIAL_COOLDOWN_MS: 150 * 1000,
+  // Minimum time (in milliseconds) between interstitial ads (40 seconds)
+  INTERSTITIAL_COOLDOWN_MS: 40 * 1000,
   // Minimum user calculation / tool interaction actions before an interstitial is eligible
-  MIN_ACTIONS_BEFORE_INTERSTITIAL: 3,
+  MIN_ACTIONS_BEFORE_INTERSTITIAL: 1,
 };
