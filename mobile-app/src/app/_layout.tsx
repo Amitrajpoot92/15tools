@@ -4,6 +4,10 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { adManager } from "@/lib/adManager";
+import { initSafeHaptics } from "@/lib/safeHaptics";
+
+// Initialize global safe haptics to prevent UnavailabilityError on unsupported devices
+initSafeHaptics();
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 

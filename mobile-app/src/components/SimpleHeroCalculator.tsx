@@ -159,7 +159,11 @@ export function SimpleHeroCalculator() {
   const [copied, setCopied] = useState<boolean>(false);
 
   const triggerHaptic = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    try {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+    } catch {
+      // Ignored if haptics is unsupported
+    }
   };
 
   // Live real-time preview computation
@@ -278,14 +282,18 @@ export function SimpleHeroCalculator() {
   };
 
   const handleClear = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    try {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+    } catch {}
     setInput("0");
     setPreviousFormula("");
     setJustCalculated(false);
   };
 
   const handleEquals = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    try {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+    } catch {}
     if (input === "Error") return;
     const cleanExpr = input.trim().replace(/[+\-−×÷.]+$/, "").trim();
     if (!cleanExpr) return;
@@ -318,7 +326,9 @@ export function SimpleHeroCalculator() {
     }
 
     await Clipboard.setStringAsync(textToCopy);
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    try {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+    } catch {}
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
