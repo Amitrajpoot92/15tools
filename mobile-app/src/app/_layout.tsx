@@ -4,10 +4,6 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { adManager } from "@/lib/adManager";
-import { initSafeHaptics } from "@/lib/safeHaptics";
-
-// Initialize global safe haptics to prevent UnavailabilityError on unsupported devices
-initSafeHaptics();
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -15,9 +11,6 @@ export default function RootLayout() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
-    // Initialize Google Mobile Ads SDK safely in background
-    adManager.initialize();
-
     async function prepare() {
       try {
         // Small delay so JS bundle and components mount smoothly
@@ -27,6 +20,11 @@ export default function RootLayout() {
       } finally {
         setAppIsReady(true);
         await SplashScreen.hideAsync().catch(() => {});
+
+        // Safely initialize AdMob in background after splash screen hides
+        setTimeout(() => {
+          adManager.initialize().catch(() => {});
+        }, 800);
       }
     }
     prepare();

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Calculator: All in One",
     "slug": "topcalcbox",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "topcalcbox",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.topcalcbox.allinone",
-      "buildNumber": "2",
+      "buildNumber": "3",
       "splash": {
         "image": "./assets/images/splash-icon.png",
         "resizeMode": "contain",
@@ -24,7 +24,7 @@
     },
     "android": {
       "package": "com.topcalcbox.allinone",
-      "versionCode": 2,
+      "versionCode": 3,
       "splash": {
         "image": "./assets/images/splash-icon.png",
         "resizeMode": "contain",
@@ -67,10 +67,6 @@
         }
       ]
     ],
-    "react-native-google-mobile-ads": {
-      "android_app_id": "ca-app-pub-9267692450432886~2829965350",
-      "ios_app_id": "ca-app-pub-9267692450432886~2829965350"
-    },
     "experiments": {
       "typedRoutes": true
     },
@@ -81,5 +77,9 @@
       }
     },
     "owner": "support.attendancetrackers"
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-9267692450432886~2829965350",
+    "ios_app_id": "ca-app-pub-9267692450432886~2829965350"
   }
 }

@@ -32,25 +32,19 @@ class AdManagerService {
       return;
     }
 
-    const gma = getGoogleMobileAds();
-    if (!gma) return;
-
     try {
+      const gma = getGoogleMobileAds();
+      if (!gma) return;
+
       const mobileAds = gma.default || gma.MobileAds;
-      const MaxAdContentRating = gma.MaxAdContentRating;
-
       if (mobileAds && typeof mobileAds === "function") {
-        await mobileAds().setRequestConfiguration({
-          maxAdContentRating: MaxAdContentRating?.G,
-          tagForChildDirectedTreatment: false,
-          tagForUnderAgeOfConsent: false,
-        });
-
         await mobileAds().initialize();
         this.isInitialized = true;
 
-        // Preload the first interstitial ad in the background
-        this.loadInterstitial();
+        // Preload the first interstitial ad in the background after a short delay
+        setTimeout(() => {
+          this.loadInterstitial();
+        }, 1500);
       }
     } catch (error) {
       if (__DEV__) {
