@@ -2,7 +2,7 @@
   "expo": {
     "name": "Calculator: All in One",
     "slug": "topcalcbox",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "topcalcbox",
@@ -15,6 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.topcalcbox.allinone",
+      "buildNumber": "2",
       "splash": {
         "image": "./assets/images/splash-icon.png",
         "resizeMode": "contain",
@@ -23,6 +24,7 @@
     },
     "android": {
       "package": "com.topcalcbox.allinone",
+      "versionCode": 2,
       "splash": {
         "image": "./assets/images/splash-icon.png",
         "resizeMode": "contain",

@@ -80,7 +80,7 @@ export default function AboutScreen() {
           {/* Version & Package Badges */}
           <View style={styles.badgeRow}>
             <View style={styles.versionBadge}>
-              <Text style={styles.versionText}>v1.0.0 (1)</Text>
+              <Text style={styles.versionText}>v1.0.1 (2)</Text>
             </View>
             <View style={styles.packageBadge}>
               <Text style={styles.packageText}>com.topcalcbox.allinone</Text>
@@ -152,21 +152,21 @@ export default function AboutScreen() {
             <View style={styles.updateBadge}>
               <Text style={styles.updateBadgeText}>CURRENT RELEASE</Text>
             </View>
-            <Text style={styles.updateVersion}>v1.0.0 Release Notes</Text>
+            <Text style={styles.updateVersion}>v1.0.1 Release Notes</Text>
           </View>
 
           <View style={styles.notesList}>
             <View style={styles.noteRow}>
               <CheckCircle2 size={16} color="#10B981" style={{ marginTop: 2 }} />
               <Text style={styles.noteText}>
-                Initial launch featuring 25 interactive calculators across 6 categories.
+                Integrated Google AdMob support (Banner, Interstitial & Native cards).
               </Text>
             </View>
 
             <View style={styles.noteRow}>
               <CheckCircle2 size={16} color="#10B981" style={{ marginTop: 2 }} />
               <Text style={styles.noteText}>
-                1-tap Copy calculation results with formatted breakdown summaries.
+                Optimized offline calculation performance and enhanced touch responsiveness.
               </Text>
             </View>
 
