@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, ErrorInfo, ReactNode, useEffect, useState } from "react";
 import { View, Image, ActivityIndicator, StyleSheet, Text } from "react-native";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -7,31 +7,67 @@ import { adManager } from "@/lib/adManager";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
+interface RootErrorBoundaryProps {
+  children: ReactNode;
+}
+
+interface RootErrorBoundaryState {
+  hasError: boolean;
+}
+
+class RootErrorBoundary extends Component<RootErrorBoundaryProps, RootErrorBoundaryState> {
+  constructor(props: RootErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error): RootErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    if (__DEV__) {
+      console.warn("[RootErrorBoundary] Caught unhandled app error:", error, info);
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorTitle}>Something went wrong</Text>
+          <Text style={styles.errorSubtitle}>Please restart the app</Text>
+        </View>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function RootLayout() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
     async function prepare() {
       try {
-        // Small delay so JS bundle and components mount smoothly
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        // Initialize AdMob safely while splash screen is displaying.
+        // Cap with a 1200ms timeout so the splash screen never hangs offline.
+        await Promise.race([
+          adManager.initialize(),
+          new Promise((resolve) => setTimeout(resolve, 1200)),
+        ]).catch(() => {});
       } catch {
-        // Ignored
+        // Safe ignore
       } finally {
         setAppIsReady(true);
         await SplashScreen.hideAsync().catch(() => {});
-
-        // Safely initialize AdMob in background after splash screen hides
-        setTimeout(() => {
-          adManager.initialize().catch(() => {});
-        }, 800);
       }
     }
     prepare();
   }, []);
 
   return (
-    <>
+    <RootErrorBoundary>
       <StatusBar style="dark" />
       <Stack
         screenOptions={{
@@ -61,7 +97,7 @@ export default function RootLayout() {
           />
         </View>
       )}
-    </>
+    </RootErrorBoundary>
   );
 }
 
@@ -97,5 +133,22 @@ const styles = StyleSheet.create({
   },
   loader: {
     marginTop: 10,
+  },
+  errorContainer: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+  },
+  errorTitle: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#0F172A",
+    marginBottom: 8,
+  },
+  errorSubtitle: {
+    fontSize: 14,
+    color: "#64748B",
   },
 });

@@ -1,9 +1,13 @@
 import { AD_UNITS, AD_THRESHOLDS } from "./adConfig";
 import { getGoogleMobileAds, isAdMobNativeAvailable } from "./adMobSafe";
 
+type ReadyListener = () => void;
+
 class AdManagerService {
   private static instance: AdManagerService;
   private isInitialized = false;
+  private isInitializing = false;
+  private readyListeners: Set<ReadyListener> = new Set();
 
   // Interstitial management
   private interstitial: any = null;
@@ -23,30 +27,71 @@ class AdManagerService {
   }
 
   /**
+   * Returns true only when Google Mobile Ads SDK has completed its native initialization.
+   */
+  public isReady(): boolean {
+    return this.isInitialized;
+  }
+
+  /**
+   * Subscribe to when AdMob finishes initialization so UI components can safely render ads.
+   */
+  public onReady(listener: ReadyListener): () => void {
+    if (this.isInitialized) {
+      listener();
+      return () => {};
+    }
+    this.readyListeners.add(listener);
+    return () => {
+      this.readyListeners.delete(listener);
+    };
+  }
+
+  /**
    * Initializes the Google Mobile Ads SDK safely.
    * If running in Expo Go or Web, gracefully exits with zero errors.
    */
   public async initialize(): Promise<void> {
     if (this.isInitialized) return;
+    if (this.isInitializing) return;
+
     if (!isAdMobNativeAvailable()) {
       return;
     }
 
     try {
+      this.isInitializing = true;
       const gma = getGoogleMobileAds();
-      if (!gma) return;
+      if (!gma) {
+        this.isInitializing = false;
+        return;
+      }
 
       const mobileAds = gma.default || gma.MobileAds;
       if (mobileAds && typeof mobileAds === "function") {
         await mobileAds().initialize();
         this.isInitialized = true;
+        this.isInitializing = false;
+
+        // Notify all waiting components (e.g. BannerAdComponent) that native SDK is ready
+        this.readyListeners.forEach((listener) => {
+          try {
+            listener();
+          } catch {
+            // Safe ignore
+          }
+        });
+        this.readyListeners.clear();
 
         // Preload the first interstitial ad in the background after a short delay
         setTimeout(() => {
           this.loadInterstitial();
-        }, 1500);
+        }, 2500);
+      } else {
+        this.isInitializing = false;
       }
     } catch (error) {
+      this.isInitializing = false;
       if (__DEV__) {
         console.warn("[AdManager] Initialization error:", error);
       }
@@ -61,7 +106,7 @@ class AdManagerService {
       return;
     }
 
-    if (!isAdMobNativeAvailable()) {
+    if (!this.isInitialized || !isAdMobNativeAvailable()) {
       return;
     }
 
@@ -106,7 +151,7 @@ class AdManagerService {
         // Preload next interstitial ad with a short delay
         setTimeout(() => {
           this.loadInterstitial();
-        }, 1000);
+        }, 2000);
       });
 
       ad.load();
@@ -119,21 +164,21 @@ class AdManagerService {
   }
 
   /**
-   * Increment the user activity / calculation counter.
+   * Records a user interaction (e.g. calculation, copy result, reset).
    */
-  public recordAction(count = 1): void {
+  public recordAction(count: number = 1): void {
     this.actionCount += count;
   }
 
   /**
    * Checks if an interstitial ad is eligible to be shown based on:
-   * 1. Native binary module is available
+   * 1. Native binary module is available and SDK initialized
    * 2. Ad is loaded and ready
    * 3. Enough actions have occurred (default: >= 3)
    * 4. Cooldown time has elapsed (default: >= 2.5 minutes)
    */
   public isInterstitialEligible(): boolean {
-    if (!isAdMobNativeAvailable()) {
+    if (!this.isInitialized || !isAdMobNativeAvailable()) {
       return false;
     }
 
