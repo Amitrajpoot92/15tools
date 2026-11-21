@@ -33,6 +33,9 @@ import {
   Info,
   ChevronRight,
 } from "lucide-react-native";
+import { BannerAdComponent } from "@/components/BannerAdComponent";
+import { NativeAdCard } from "@/components/NativeAdCard";
+import { recordUserAction } from "@/lib/adManager";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -137,6 +140,7 @@ export default function HomeScreen() {
                   <Pressable
                     key={tool.slug}
                     onPress={() => {
+                      recordUserAction();
                       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                       router.push(`/(calculators)/${tool.slug}` as any);
                     }}
@@ -168,76 +172,81 @@ export default function HomeScreen() {
             </View>
           </View>
         ) : (
-          CATEGORIES.map((category) => {
+          CATEGORIES.map((category, catIndex) => {
             const catTools = filteredTools.filter((t) => t.category === category);
             if (catTools.length === 0) return null;
             const styleInfo = CLIENT_CATEGORY_STYLES[category] || CLIENT_CATEGORY_STYLES["DATE & AGE"];
 
             return (
-              <View
-                key={category}
-                style={[
-                  styles.clientCategoryCard,
-                  { borderTopColor: styleInfo.topBorder },
-                ]}
-              >
-                {/* Category Card Header */}
-                <View style={styles.clientCategoryHeader}>
-                  <View style={styles.clientTitleRow}>
-                    <DynamicIcon
-                      name={styleInfo.iconName}
-                      size={18}
-                      color={styleInfo.iconColor}
-                      strokeWidth={2.5}
-                    />
-                    <Text style={styles.clientCategoryTitle}>{category}</Text>
-                  </View>
-                  <View
-                    style={[
-                      styles.clientCategoryBadge,
-                      { backgroundColor: styleInfo.badgeBg },
-                    ]}
-                  >
-                    <Text
+              <React.Fragment key={category}>
+                <View
+                  style={[
+                    styles.clientCategoryCard,
+                    { borderTopColor: styleInfo.topBorder },
+                  ]}
+                >
+                  {/* Category Card Header */}
+                  <View style={styles.clientCategoryHeader}>
+                    <View style={styles.clientTitleRow}>
+                      <DynamicIcon
+                        name={styleInfo.iconName}
+                        size={18}
+                        color={styleInfo.iconColor}
+                        strokeWidth={2.5}
+                      />
+                      <Text style={styles.clientCategoryTitle}>{category}</Text>
+                    </View>
+                    <View
                       style={[
-                        styles.clientBadgeText,
-                        { color: styleInfo.badgeText },
+                        styles.clientCategoryBadge,
+                        { backgroundColor: styleInfo.badgeBg },
                       ]}
                     >
-                      {catTools.length}
-                    </Text>
+                      <Text
+                        style={[
+                          styles.clientBadgeText,
+                          { color: styleInfo.badgeText },
+                        ]}
+                      >
+                        {catTools.length}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Tool Items List (Matching Client Screenshot) */}
+                  <View style={styles.clientToolList}>
+                    {catTools.map((tool) => (
+                      <Pressable
+                        key={tool.slug}
+                        onPress={() => {
+                          recordUserAction();
+                          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                          router.push(`/(calculators)/${tool.slug}` as any);
+                        }}
+                        style={({ pressed }) => [
+                          styles.clientToolItem,
+                          pressed && {
+                            backgroundColor: styleInfo.activeBg,
+                            borderColor: styleInfo.activeBorder,
+                            transform: [{ scale: 0.985 }],
+                          },
+                        ]}
+                      >
+                        <View style={styles.clientToolLeft}>
+                          <View style={[styles.clientToolDot, { backgroundColor: styleInfo.topBorder }]} />
+                          <Text style={styles.clientToolText}>{tool.name}</Text>
+                        </View>
+                        <View style={[styles.clientToolArrowBox, { backgroundColor: styleInfo.badgeBg }]}>
+                          <ChevronRight size={15} color={styleInfo.iconColor} strokeWidth={2.5} />
+                        </View>
+                      </Pressable>
+                    ))}
                   </View>
                 </View>
 
-                {/* Tool Items List (Matching Client Screenshot) */}
-                <View style={styles.clientToolList}>
-                  {catTools.map((tool) => (
-                    <Pressable
-                      key={tool.slug}
-                      onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        router.push(`/(calculators)/${tool.slug}` as any);
-                      }}
-                      style={({ pressed }) => [
-                        styles.clientToolItem,
-                        pressed && {
-                          backgroundColor: styleInfo.activeBg,
-                          borderColor: styleInfo.activeBorder,
-                          transform: [{ scale: 0.985 }],
-                        },
-                      ]}
-                    >
-                      <View style={styles.clientToolLeft}>
-                        <View style={[styles.clientToolDot, { backgroundColor: styleInfo.topBorder }]} />
-                        <Text style={styles.clientToolText}>{tool.name}</Text>
-                      </View>
-                      <View style={[styles.clientToolArrowBox, { backgroundColor: styleInfo.badgeBg }]}>
-                        <ChevronRight size={15} color={styleInfo.iconColor} strokeWidth={2.5} />
-                      </View>
-                    </Pressable>
-                  ))}
-                </View>
-              </View>
+                {/* Balanced Native Ad Recommendation nestled between categories */}
+                {catIndex === 1 && !isSearching && <NativeAdCard />}
+              </React.Fragment>
             );
           })
         )}
@@ -327,6 +336,9 @@ export default function HomeScreen() {
                 </View>
               </Pressable>
             </View>
+
+            {/* Bottom Banner Ad */}
+            <BannerAdComponent />
 
             <View style={styles.footerNotice}>
               <View style={styles.footerBrandRow}>

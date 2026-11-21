@@ -22,6 +22,8 @@ import {
 import { calculateCostPerItem, calculateFuelCost, calculateTip } from "@/lib/calculations/shopping";
 import { calculateMarks } from "@/lib/calculations/math";
 import { Copy, RotateCcw, Check } from "lucide-react-native";
+import { BannerAdComponent } from "@/components/BannerAdComponent";
+import { recordUserAction } from "@/lib/adManager";
 
 export default function GenericCalculatorScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -114,6 +116,7 @@ export default function GenericCalculatorScreen() {
   }
 
   const handleCopy = async () => {
+    recordUserAction();
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     const summary = `${tool.name} Result:\n${resultTitle}: ${primaryValue}`;
     await Clipboard.setStringAsync(summary);
@@ -122,6 +125,7 @@ export default function GenericCalculatorScreen() {
   };
 
   const handleReset = () => {
+    recordUserAction();
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setInput1("1000");
     setInput2("20");
@@ -248,6 +252,8 @@ export default function GenericCalculatorScreen() {
             </View>
           ))}
         </View>
+
+        <BannerAdComponent style={{ marginTop: 16 }} />
       </ScrollView>
     </SafeAreaView>
   );

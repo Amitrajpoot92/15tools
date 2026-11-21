@@ -5,6 +5,7 @@ import * as Haptics from "expo-haptics";
 import { ArrowLeft } from "lucide-react-native";
 import { DynamicIcon } from "./DynamicIcon";
 import { THEMES, ThemeKey } from "./CalculatorUI";
+import { showInterstitialIfEligible } from "@/lib/adManager";
 
 interface CalculatorHeaderProps {
   title: string;
@@ -32,10 +33,17 @@ export function CalculatorHeader({
 
   const handleBack = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.replace("/");
+    const navigate = () => {
+      if (router.canGoBack()) {
+        router.back();
+      } else {
+        router.replace("/");
+      }
+    };
+
+    const shown = showInterstitialIfEligible(navigate);
+    if (!shown) {
+      navigate();
     }
   };
 

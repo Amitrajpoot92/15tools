@@ -3,6 +3,7 @@ import { View, Image, ActivityIndicator, StyleSheet, Text } from "react-native";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { adManager } from "@/lib/adManager";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -10,6 +11,9 @@ export default function RootLayout() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
+    // Initialize Google Mobile Ads SDK safely in background
+    adManager.initialize();
+
     async function prepare() {
       try {
         // Small delay so JS bundle and components mount smoothly

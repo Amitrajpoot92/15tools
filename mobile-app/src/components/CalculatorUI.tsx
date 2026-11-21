@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet, ViewStyle } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Copy, Check, RotateCcw } from "lucide-react-native";
+import { BannerAdComponent } from "./BannerAdComponent";
+import { recordUserAction } from "@/lib/adManager";
 
 export type ThemeKey =
   | "indigo"
@@ -139,11 +141,18 @@ export const THEMES: Record<ThemeKey, ThemeTokens> = {
 export function OuterToolCard({
   children,
   style,
+  showAd = true,
 }: {
   children: React.ReactNode;
   style?: ViewStyle;
+  showAd?: boolean;
 }) {
-  return <View style={[uiStyles.outerCard, style]}>{children}</View>;
+  return (
+    <View style={[uiStyles.outerCard, style]}>
+      {children}
+      {showAd && <BannerAdComponent style={{ marginTop: 16 }} />}
+    </View>
+  );
 }
 
 export function FormPanel({
@@ -291,10 +300,18 @@ export function CopyResetActions({
   theme: ThemeKey;
 }) {
   const t = THEMES[theme];
+  const handleCopy = () => {
+    recordUserAction();
+    onCopy();
+  };
+  const handleReset = () => {
+    recordUserAction();
+    onReset();
+  };
   return (
     <View style={uiStyles.actionRow}>
       <Pressable
-        onPress={onCopy}
+        onPress={handleCopy}
         style={({ pressed }) => [
           uiStyles.copyBtn,
           { borderColor: t.copyBorder },

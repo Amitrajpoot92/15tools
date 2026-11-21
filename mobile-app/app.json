@@ -54,8 +54,20 @@
       "expo-font",
       "expo-image",
       "expo-status-bar",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-9267692450432886~2829965350",
+          "iosAppId": "ca-app-pub-9267692450432886~2829965350",
+          "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
     ],
+    "react-native-google-mobile-ads": {
+      "android_app_id": "ca-app-pub-9267692450432886~2829965350",
+      "ios_app_id": "ca-app-pub-9267692450432886~2829965350"
+    },
     "experiments": {
       "typedRoutes": true
     },
