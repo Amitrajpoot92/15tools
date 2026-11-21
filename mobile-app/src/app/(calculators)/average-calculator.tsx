@@ -41,8 +41,25 @@ export default function AverageCalculatorScreen() {
 
   const stats = calculateStats();
 
+  const handleChangeText = (text: string) => {
+    let val = text;
+
+    if (val.length > input.length) {
+      if (val.endsWith(" ") && /[0-9]$/.test(val.slice(0, -1))) {
+        val = val.slice(0, -1) + ", ";
+      } else if (val.endsWith(",") && /[0-9]$/.test(val.slice(0, -1))) {
+        val = val + " ";
+      }
+
+      val = val.replace(/([0-9])\s+([0-9])/g, "$1, $2");
+      val = val.replace(/([0-9]),([0-9])/g, "$1, $2");
+    }
+
+    setInput(val);
+  };
+
   const handleCopy = async () => {
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
     const text = `Average Calculator\nNumbers: ${input}\nAverage (Mean): ${stats.mean}\nMedian: ${stats.median}\nSum: ${stats.sum}\nCount: ${stats.count}\n\nCalculate Online: https://topcalcbox.com/average-calculator/`;
     await Clipboard.setStringAsync(text);
     setCopied(true);
@@ -50,7 +67,7 @@ export default function AverageCalculatorScreen() {
   };
 
   const handleReset = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     setInput("");
   };
 
@@ -79,7 +96,7 @@ export default function AverageCalculatorScreen() {
                 numberOfLines={4}
                 textAlignVertical="top"
                 value={input}
-                onChangeText={setInput}
+                onChangeText={handleChangeText}
                 placeholder="e.g. 10, 20, 30, 40"
                 placeholderTextColor="#94A3B8"
               />
