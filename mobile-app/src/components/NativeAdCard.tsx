@@ -101,14 +101,16 @@ function NativeAdCardInner({ style }: NativeAdCardProps) {
     return null;
   }
 
-  const { NativeAdView, NativeAsset, NativeAssetType } = gma;
+  const { NativeAdView, NativeAsset, NativeAssetType, NativeMediaView } = gma;
   if (!NativeAdView || !NativeAsset || !NativeAssetType) {
     return null;
   }
 
+  const hasMedia = nativeAd.mediaContent?.hasVideoContent || (nativeAd.images && nativeAd.images.length > 0);
+
   return (
     <NativeAdView nativeAd={nativeAd} style={[styles.card, style]}>
-      {/* Top Header Row with Ad badge and Advertiser */}
+      {/* 1. Top Row: [Ad] badge + Sponsored text */}
       <View style={styles.topRow}>
         <View style={styles.adBadge}>
           <Text style={styles.adBadgeText}>Ad</Text>
@@ -123,8 +125,8 @@ function NativeAdCardInner({ style }: NativeAdCardProps) {
         ) : null}
       </View>
 
-      {/* Main Content: Icon + Headline + Body */}
-      <View style={styles.contentRow}>
+      {/* 2. Header Row: App Icon (Left) + Headline (Right) */}
+      <View style={styles.headerRow}>
         {nativeAd.icon?.url ? (
           <NativeAsset assetType={NativeAssetType.ICON}>
             <Image
@@ -133,41 +135,54 @@ function NativeAdCardInner({ style }: NativeAdCardProps) {
               resizeMode="cover"
             />
           </NativeAsset>
-        ) : nativeAd.images?.[0]?.url ? (
-          <NativeAsset assetType={NativeAssetType.IMAGE}>
-            <Image
-              source={{ uri: nativeAd.images[0].url }}
-              style={styles.iconImage}
-              resizeMode="cover"
-            />
-          </NativeAsset>
         ) : null}
 
-        <View style={styles.textCol}>
+        <View style={styles.titleCol}>
           <NativeAsset assetType={NativeAssetType.HEADLINE}>
             <Text style={styles.headlineText} numberOfLines={2}>
               {nativeAd.headline}
             </Text>
           </NativeAsset>
-
-          {nativeAd.body ? (
-            <NativeAsset assetType={NativeAssetType.BODY}>
-              <Text style={styles.bodyText} numberOfLines={2}>
-                {nativeAd.body}
-              </Text>
-            </NativeAsset>
+          {nativeAd.price || nativeAd.store ? (
+            <Text style={styles.metaText} numberOfLines={1}>
+              {[nativeAd.price, nativeAd.store].filter(Boolean).join(" • ")}
+            </Text>
           ) : null}
         </View>
       </View>
 
-      {/* Call to Action Button */}
-      {nativeAd.callToAction ? (
-        <NativeAsset assetType={NativeAssetType.CALL_TO_ACTION}>
-          <View style={styles.ctaButton}>
-            <Text style={styles.ctaText}>{nativeAd.callToAction}</Text>
-          </View>
+      {/* 3. Body text description */}
+      {nativeAd.body ? (
+        <NativeAsset assetType={NativeAssetType.BODY}>
+          <Text style={styles.bodyText} numberOfLines={3}>
+            {nativeAd.body}
+          </Text>
         </NativeAsset>
       ) : null}
+
+      {/* 4. Large Media Graphic (Matching Image 2 Reference) */}
+      {NativeMediaView && hasMedia ? (
+        <View style={styles.mediaContainer}>
+          <NativeMediaView style={styles.mediaView} resizeMode="contain" />
+        </View>
+      ) : nativeAd.images?.[0]?.url ? (
+        <NativeAsset assetType={NativeAssetType.IMAGE}>
+          <Image
+            source={{ uri: nativeAd.images[0].url }}
+            style={styles.largeImage}
+            resizeMode="contain"
+          />
+        </NativeAsset>
+      ) : null}
+
+      {/* 5. Full-width Orange Call To Action button (Matching Image 2 Reference) */}
+      <NativeAsset assetType={NativeAssetType.CALL_TO_ACTION}>
+        <View style={styles.ctaButton}>
+          <Text style={styles.ctaText}>
+            {nativeAd.callToAction ? nativeAd.callToAction.toUpperCase() : "INSTALL"}
+          </Text>
+        </View>
+      </NativeAsset>
     </NativeAdView>
   );
 }
@@ -187,86 +202,117 @@ export function NativeAdCard(props: NativeAdCardProps) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 14,
+    borderRadius: 18,
     borderWidth: 1.5,
     borderColor: "#E2E8F0",
-    padding: 14,
-    marginVertical: 10,
+    padding: 16,
+    marginVertical: 14,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
     elevation: 2,
   },
   topRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 8,
-    gap: 6,
+    marginBottom: 10,
+    gap: 8,
   },
   adBadge: {
-    backgroundColor: "#F59E0B",
-    paddingHorizontal: 6,
-    paddingVertical: 1.5,
-    borderRadius: 4,
+    backgroundColor: "#FEF3C7",
+    borderWidth: 1,
+    borderColor: "#FDE68A",
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 6,
   },
   adBadgeText: {
-    color: "#FFFFFF",
-    fontSize: 10,
+    color: "#D97706",
+    fontSize: 11,
     fontWeight: "800",
     letterSpacing: 0.5,
   },
   sponsoredLabel: {
-    fontSize: 11,
+    fontSize: 13,
     fontWeight: "600",
     color: "#64748B",
   },
   advertiserText: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: "600",
     color: "#475569",
     flex: 1,
   },
-  contentRow: {
+  headerRow: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: 12,
+    marginBottom: 10,
   },
   iconImage: {
-    width: 48,
-    height: 48,
+    width: 44,
+    height: 44,
     borderRadius: 10,
     backgroundColor: "#F1F5F9",
   },
-  textCol: {
+  titleCol: {
     flex: 1,
   },
   headlineText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "700",
     color: "#0F172A",
-    lineHeight: 19,
-    marginBottom: 3,
+    lineHeight: 20,
   },
-  bodyText: {
-    fontSize: 12,
+  metaText: {
+    fontSize: 11,
     fontWeight: "500",
     color: "#64748B",
-    lineHeight: 16,
+    marginTop: 2,
+  },
+  bodyText: {
+    fontSize: 13,
+    fontWeight: "500",
+    color: "#334155",
+    lineHeight: 18,
+    marginBottom: 12,
+  },
+  mediaContainer: {
+    width: "100%",
+    height: 200,
+    borderRadius: 14,
+    overflow: "hidden",
+    backgroundColor: "#F8FAFC",
+    marginBottom: 14,
+  },
+  mediaView: {
+    width: "100%",
+    height: "100%",
+  },
+  largeImage: {
+    width: "100%",
+    height: 200,
+    borderRadius: 14,
+    backgroundColor: "#F8FAFC",
+    marginBottom: 14,
   },
   ctaButton: {
-    marginTop: 12,
-    backgroundColor: "#2563EB",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 10,
+    backgroundColor: "#EA580C",
+    borderRadius: 14,
+    paddingVertical: 14,
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "#EA580C",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    elevation: 3,
   },
   ctaText: {
     color: "#FFFFFF",
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: "800",
-    letterSpacing: 0.3,
+    letterSpacing: 0.6,
   },
 });

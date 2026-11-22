@@ -34,7 +34,6 @@ import {
   ChevronRight,
 } from "lucide-react-native";
 import { BannerAdComponent } from "@/components/BannerAdComponent";
-import { NativeAdCard } from "@/components/NativeAdCard";
 import { recordUserAction } from "@/lib/adManager";
 
 export default function HomeScreen() {
@@ -114,6 +113,9 @@ https://play.google.com/store/apps/details?id=com.topcalcbox.allinone`,
             </Text>
           </View>
         </View>
+
+        {/* Top Banner Ad on Homepage */}
+        <BannerAdComponent style={{ marginVertical: 4 }} />
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
@@ -252,9 +254,6 @@ https://play.google.com/store/apps/details?id=com.topcalcbox.allinone`,
                     ))}
                   </View>
                 </View>
-
-                {/* Balanced Native Ad Recommendation nestled between categories */}
-                {(catIndex === 1 || catIndex === 3) && !isSearching && <NativeAdCard />}
               </React.Fragment>
             );
           })
@@ -340,7 +339,7 @@ https://play.google.com/store/apps/details?id=com.topcalcbox.allinone`,
                   <Text style={styles.menuLabel}>About & updates</Text>
                 </View>
                 <View style={styles.menuRight}>
-                  <Text style={styles.versionTag}>v1.0.5 (6)</Text>
+                  <Text style={styles.versionTag}>v1.0.6 (7)</Text>
                   <ChevronRight size={18} color="#94A3B8" />
                 </View>
               </Pressable>

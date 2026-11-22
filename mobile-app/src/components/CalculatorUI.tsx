@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet, ViewStyle } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Copy, Check, RotateCcw } from "lucide-react-native";
-import { BannerAdComponent } from "./BannerAdComponent";
+import { NativeAdCard } from "./NativeAdCard";
 import { recordUserAction } from "@/lib/adManager";
 
 export type ThemeKey =
@@ -148,9 +148,9 @@ export function OuterToolCard({
   showAd?: boolean;
 }) {
   return (
-    <View style={[uiStyles.outerCard, style]}>
-      {children}
-      {showAd && <BannerAdComponent style={{ marginTop: 16 }} />}
+    <View style={uiStyles.toolContainer}>
+      <View style={[uiStyles.outerCard, style]}>{children}</View>
+      {showAd && <NativeAdCard style={{ marginTop: 14, marginBottom: 20 }} />}
     </View>
   );
 }
@@ -474,6 +474,9 @@ export const sharedStyles = StyleSheet.create({
 });
 
 const uiStyles = StyleSheet.create({
+  toolContainer: {
+    width: "100%",
+  },
   outerCard: {
     backgroundColor: "#FFFFFF",
     borderRadius: 20,

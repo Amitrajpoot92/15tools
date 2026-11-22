@@ -80,7 +80,7 @@ export default function AboutScreen() {
           {/* Version & Package Badges */}
           <View style={styles.badgeRow}>
             <View style={styles.versionBadge}>
-              <Text style={styles.versionText}>v1.0.5 (6)</Text>
+              <Text style={styles.versionText}>v1.0.6 (7)</Text>
             </View>
             <View style={styles.packageBadge}>
               <Text style={styles.packageText}>com.topcalcbox.allinone</Text>

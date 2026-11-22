@@ -22,7 +22,7 @@ import {
 import { calculateCostPerItem, calculateFuelCost, calculateTip } from "@/lib/calculations/shopping";
 import { calculateMarks } from "@/lib/calculations/math";
 import { Copy, RotateCcw, Check } from "lucide-react-native";
-import { BannerAdComponent } from "@/components/BannerAdComponent";
+import { NativeAdCard } from "@/components/NativeAdCard";
 import { recordUserAction } from "@/lib/adManager";
 
 export default function GenericCalculatorScreen() {
@@ -253,7 +253,7 @@ export default function GenericCalculatorScreen() {
           ))}
         </View>
 
-        <BannerAdComponent style={{ marginTop: 16 }} />
+        <NativeAdCard style={{ marginTop: 16, marginBottom: 20 }} />
       </ScrollView>
     </SafeAreaView>
   );

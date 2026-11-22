@@ -86,7 +86,7 @@ class AdManagerService {
         // Preload the first interstitial ad in the background after a short delay
         setTimeout(() => {
           this.loadInterstitial();
-        }, 2500);
+        }, 1000);
       } else {
         this.isInitializing = false;
       }
