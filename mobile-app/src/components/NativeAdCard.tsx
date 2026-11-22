@@ -133,6 +133,14 @@ function NativeAdCardInner({ style }: NativeAdCardProps) {
               resizeMode="cover"
             />
           </NativeAsset>
+        ) : nativeAd.images?.[0]?.url ? (
+          <NativeAsset assetType={NativeAssetType.IMAGE}>
+            <Image
+              source={{ uri: nativeAd.images[0].url }}
+              style={styles.iconImage}
+              resizeMode="cover"
+            />
+          </NativeAsset>
         ) : null}
 
         <View style={styles.textCol}>

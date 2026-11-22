@@ -132,6 +132,11 @@ class AdManagerService {
         this.isInterstitialLoaded = false;
         this.isInterstitialLoading = false;
         this.interstitial = null;
+        if (this.onDismissCallback) {
+          const cb = this.onDismissCallback;
+          this.onDismissCallback = null;
+          cb();
+        }
         if (__DEV__) {
           console.warn("[AdManager] Interstitial load error:", error);
         }
