@@ -340,7 +340,7 @@ https://play.google.com/store/apps/details?id=com.topcalcbox.allinone`,
                   <Text style={styles.menuLabel}>About & updates</Text>
                 </View>
                 <View style={styles.menuRight}>
-                  <Text style={styles.versionTag}>v1.0.4 (5)</Text>
+                  <Text style={styles.versionTag}>v1.0.5 (6)</Text>
                   <ChevronRight size={18} color="#94A3B8" />
                 </View>
               </Pressable>
