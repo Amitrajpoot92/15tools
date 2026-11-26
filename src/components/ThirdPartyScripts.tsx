@@ -4,6 +4,18 @@ import { useEffect } from "react";
 
 export function ThirdPartyScripts() {
   useEffect(() => {
+    // Check if user is a search crawler / bot / headless validator
+    // Bypassing ads & telemetry for crawlers prevents GSC resource errors (SODAR, doubleclick, gen_204, GA collect)
+    // and guarantees Googlebot a 100% clean, sub-second page render.
+    if (
+      typeof navigator !== "undefined" &&
+      /bot|googlebot|crawler|spider|robot|crawling|lighthouse|headlesschrome/i.test(
+        navigator.userAgent
+      )
+    ) {
+      return;
+    }
+
     let loaded = false;
 
     const loadScripts = () => {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, ShieldCheck, Sparkles, ArrowUpRight } from "lucide-react";
+import { TOOLS } from "@/lib/constants";
 
 const POPULAR_LINKS = [
   { label: "Percentage Calculator", href: "/percentage-calculator" },
@@ -158,6 +159,29 @@ export function Footer() {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+
+        {/* All Calculators Crawl Directory (Ensures Googlebot Smartphone crawls and indexes all 25 tools from every page) */}
+        <div className="mt-8 pt-6 border-t border-slate-200/80">
+          <p className="text-[11px] sm:text-xs font-black text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span className="w-1.5 h-3.5 rounded-full bg-orange-500 inline-block" />
+            All 25 Free Calculators
+          </p>
+          <div className="flex flex-wrap gap-x-3.5 gap-y-2 text-xs font-semibold text-slate-600">
+            {TOOLS.map((tool, idx) => (
+              <span key={tool.slug} className="inline-flex items-center">
+                <Link
+                  href={`/${tool.slug}`}
+                  className="hover:text-orange-600 hover:underline transition-colors"
+                >
+                  {tool.name}
+                </Link>
+                {idx < TOOLS.length - 1 && (
+                  <span className="ml-3.5 text-slate-300 select-none" aria-hidden="true">•</span>
+                )}
+              </span>
+            ))}
           </div>
         </div>
 

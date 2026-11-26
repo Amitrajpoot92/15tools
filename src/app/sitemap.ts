@@ -4,7 +4,9 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://topcalcbox.com";
-  const now = new Date();
+  // Stable lastmod timestamps: Google requires reliable lastmod dates.
+  // Constantly returning new Date() on every request causes Googlebot to distrust lastmod.
+  const lastUpdated = new Date("2026-11-20T00:00:00.000Z");
 
   // 25 Calculator Tools
   const calculatorRoutes = [
@@ -48,21 +50,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 1 Homepage
     {
       url: baseUrl,
-      lastModified: now,
+      lastModified: lastUpdated,
       changeFrequency: "daily",
       priority: 1.0,
     },
     // 25 Tools
     ...calculatorRoutes.map((route) => ({
       url: `${baseUrl}${route}`,
-      lastModified: now,
+      lastModified: lastUpdated,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
     // 5 Pages
     ...infoRoutes.map((route) => ({
       url: `${baseUrl}${route}`,
-      lastModified: now,
+      lastModified: lastUpdated,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),

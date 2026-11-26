@@ -31,8 +31,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/topcalcbox-logo-96.webp",
+    icon: [
+      { url: "/topcalcbox-logo-96.webp", type: "image/webp" },
+      { url: "/topcalcbox-logo-192.png", sizes: "192x192", type: "image/png" },
+    ],
     apple: "/topcalcbox-logo-192.png",
+    shortcut: "/topcalcbox-logo-96.webp",
   },
   openGraph: {
     type: "website",
