@@ -14,7 +14,7 @@ export default function Page() {
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-500/20 rounded-full blur-[80px] pointer-events-none" />
         <div className="relative z-10 flex flex-col items-center justify-center">
           <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">Privacy Policy</h1>
-          <p className="text-slate-400 mt-2 text-sm">Last Updated: September 17, 2026</p>
+          <p className="text-slate-400 mt-2 text-sm">Last Updated: November 29, 2026</p>
         </div>
       </div>
       <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-200 shadow-sm text-slate-600 space-y-6 text-sm md:text-base leading-relaxed mb-4">
@@ -57,7 +57,31 @@ export default function Page() {
         </div>
 
         <div>
-          <h2 className="text-base md:text-lg font-bold text-slate-900 mb-1">8. CONTACT US</h2>
+          <h2 className="text-base md:text-lg font-bold text-slate-900 mb-1">8. TOPCALCBOX ANDROID APP</h2>
+          <p className="mb-2">
+            The TopCalcBox app for Android does not need an account. Your calculations, history, favorites, profile name and photo stay on your phone and are never sent to us.
+          </p>
+          <p className="mb-2">
+            The free app shows ads from Google AdMob (Google LLC). To show ads, limit how often you see them and prevent fraud, Google&apos;s ads SDK collects your device&apos;s advertising ID, device and app information (such as model, Android version, language and app version), your IP address (which gives an approximate location), how you interact with the ads, and crash and diagnostic data. This information is collected and used by Google under its own policy:{" "}
+            <a 
+              href="https://policies.google.com/technologies/partner-sites" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-orange-600 hover:underline font-semibold"
+            >
+              https://policies.google.com/technologies/partner-sites
+            </a>
+          </p>
+          <p className="mb-2">
+            You can reset or delete your advertising ID, or turn off personalised ads, in your phone&apos;s Settings (Google &rsaquo; Ads). In the European Economic Area, the UK and Switzerland the app first asks for your consent, and you can change it in the app under Account &rsaquo; Ad privacy choices.
+          </p>
+          <p>
+            The app does not use your microphone, precise location, contacts or camera.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base md:text-lg font-bold text-slate-900 mb-1">9. CONTACT US</h2>
           <p>If you have any questions about this Privacy Policy or the way TopCalcBox handles information, you can contact us at:</p>
           <p className="mt-1 font-bold text-orange-600">Email: help.rka@gmail.com</p>
         </div>
