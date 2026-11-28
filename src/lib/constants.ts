@@ -43,6 +43,9 @@ export type Tool = {
   popular?: boolean;
 };
 
+export const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.topcalcbox.allinone";
+
 // Premium Orange/Warm Palette:
 // - Orange (Vibrant, Energetic)
 // - Amber (Warm, Golden)

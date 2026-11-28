@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, ShieldCheck, Sparkles, ArrowUpRight } from "lucide-react";
-import { TOOLS } from "@/lib/constants";
+import { TOOLS, PLAY_STORE_URL } from "@/lib/constants";
 
 const POPULAR_LINKS = [
   { label: "Percentage Calculator", href: "/percentage-calculator" },
@@ -85,8 +85,8 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Direct Support Email Pill */}
-            <div>
+            {/* Action Row: Support Email & Google Play */}
+            <div className="flex flex-wrap items-center gap-2.5">
               <a
                 href="mailto:help.rka@gmail.com"
                 className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:border-orange-300 shadow-xs hover:shadow-sm text-xs font-bold text-slate-700 hover:text-orange-600 transition-all group"
@@ -94,6 +94,19 @@ export function Footer() {
                 <Mail className="w-3.5 h-3.5 text-orange-500" />
                 <span>help.rka@gmail.com</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-500 transition-colors" />
+              </a>
+
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-xs hover:shadow-sm text-xs font-bold transition-all group border border-slate-800"
+              >
+                <svg className="w-3.5 h-3.5 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.609 1.814L13.793 12 3.61 22.186a2.372 2.372 0 0 1-.3-.388c-.198-.337-.31-.73-.31-1.155V3.357c0-.425.112-.818.31-1.155.086-.147.188-.278.3-.388zM15.207 13.414l2.747 2.747-11.83 6.83 9.083-9.577zm0-2.828L6.124.979l11.83 6.85-2.747 2.757zm1.414 1.414l3.197-1.847c.806-.465.806-1.228 0-1.693l-3.197-1.847-1.414 1.414 1.414 1.414 1.414 1.414-1.414 1.414-1.414 1.414 1.414 1.414 3.197-1.847z" />
+                </svg>
+                <span>Google Play</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors" />
               </a>
             </div>
           </div>

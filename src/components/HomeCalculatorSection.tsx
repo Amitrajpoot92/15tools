@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { SimpleHeroCalculator } from "@/components/SimpleHeroCalculator";
-import { TOOLS } from "@/lib/constants";
+import { TOOLS, PLAY_STORE_URL } from "@/lib/constants";
 import { 
   Search, 
   Sparkles, 
@@ -132,6 +132,22 @@ export function HomeCalculatorSection() {
               <span>100% Free, No Login Required</span>
             </div>
           </div>
+        </div>
+
+        {/* Play Store App CTA Pill */}
+        <div className="flex justify-center mt-3 mb-1">
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm hover:shadow transition-all group border border-slate-800"
+          >
+            <svg className="w-3.5 h-3.5 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.609 1.814L13.793 12 3.61 22.186a2.372 2.372 0 0 1-.3-.388c-.198-.337-.31-.73-.31-1.155V3.357c0-.425.112-.818.31-1.155.086-.147.188-.278.3-.388zM15.207 13.414l2.747 2.747-11.83 6.83 9.083-9.577zm0-2.828L6.124.979l11.83 6.85-2.747 2.757zm1.414 1.414l3.197-1.847c.806-.465.806-1.228 0-1.693l-3.197-1.847-1.414 1.414 1.414 1.414 1.414 1.414-1.414 1.414-1.414 1.414 1.414 1.414 3.197-1.847z" />
+            </svg>
+            <span>Get the Free App on Google Play</span>
+            <span className="text-orange-400 group-hover:translate-x-0.5 transition-transform text-[11px]">➔</span>
+          </a>
         </div>
 
         {/* Clean Search Bar */}

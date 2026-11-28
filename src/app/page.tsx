@@ -23,7 +23,7 @@ export default function Home() {
     { q: "Can I use TopCalcBox on my mobile phone?", a: "Yes. TopCalcBox is designed to work smoothly on smartphones, tablets, and desktop devices." },
     { q: "How do I choose the right calculator?", a: "Choose a calculator from the relevant category, or use the search option to quickly find the tool you need." },
     { q: "Is my information safe when I use a calculator?", a: "Yes. TopCalcBox is designed with user privacy in mind. Calculator inputs are processed directly in your browser and are not sent to our servers or stored by us. No account or personal information is required to use our calculators." },
-    { q: "Can I install TopCalcBox on my device?", a: "Yes. If your device and browser support installation, you can use the “App” button in the header to install TopCalcBox on your device for quick access from your home screen." }
+    { q: "Can I install TopCalcBox on my device?", a: "Yes. You can download our official “Calculator: All in One” app directly from the Google Play Store for fast, 100% offline access, or install the web app to your home screen using the Play Store / App button." }
   ];
 
   const faqColors = [

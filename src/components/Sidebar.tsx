@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { TOOLS } from "@/lib/constants";
+import { TOOLS, PLAY_STORE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Calculator, Menu, X, Download } from "lucide-react";
+import { Calculator, Menu, X, Download, ArrowUpRight } from "lucide-react";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -71,14 +71,18 @@ export function Sidebar() {
           </div>
         </Link>
         <div className="flex items-center space-x-2">
-          <button 
-            onClick={handleInstallClick} 
-            aria-label="Install App"
-            className="flex items-center space-x-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm"
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Get on Google Play"
+            className="flex items-center space-x-1.5 bg-slate-900 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm"
           >
-            <Download className="w-3.5 h-3.5" />
-            <span>App</span>
-          </button>
+            <svg className="w-3.5 h-3.5 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.609 1.814L13.793 12 3.61 22.186a2.372 2.372 0 0 1-.3-.388c-.198-.337-.31-.73-.31-1.155V3.357c0-.425.112-.818.31-1.155.086-.147.188-.278.3-.388zM15.207 13.414l2.747 2.747-11.83 6.83 9.083-9.577zm0-2.828L6.124.979l11.83 6.85-2.747 2.757zm1.414 1.414l3.197-1.847c.806-.465.806-1.228 0-1.693l-3.197-1.847-1.414 1.414 1.414 1.414 1.414 1.414-1.414 1.414-1.414 1.414 1.414 1.414 3.197-1.847z" />
+            </svg>
+            <span>Play Store</span>
+          </a>
           <button 
             onClick={() => setIsOpen(true)}
             aria-label="Open menu"
@@ -187,15 +191,34 @@ export function Sidebar() {
         })}
       </div>
       
-      {/* Sidebar Footer - Download App */}
-      <div className="p-4 border-t border-slate-100 bg-slate-50/50">
+      {/* Sidebar Footer - Get App on Google Play */}
+      <div className="p-3.5 border-t border-slate-100 bg-slate-50/70 space-y-2">
+        <a 
+          href={PLAY_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Get it on Google Play"
+          className="w-full flex items-center justify-between px-3.5 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all shadow-sm group"
+        >
+          <div className="flex items-center space-x-2">
+            <svg className="w-4 h-4 text-orange-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.609 1.814L13.793 12 3.61 22.186a2.372 2.372 0 0 1-.3-.388c-.198-.337-.31-.73-.31-1.155V3.357c0-.425.112-.818.31-1.155.086-.147.188-.278.3-.388zM15.207 13.414l2.747 2.747-11.83 6.83 9.083-9.577zm0-2.828L6.124.979l11.83 6.85-2.747 2.757zm1.414 1.414l3.197-1.847c.806-.465.806-1.228 0-1.693l-3.197-1.847-1.414 1.414 1.414 1.414 1.414 1.414-1.414 1.414-1.414 1.414 1.414 1.414 3.197-1.847z" />
+            </svg>
+            <div className="text-left">
+              <span className="text-[9px] text-slate-400 block leading-none font-semibold">GET IT ON</span>
+              <span className="text-[12px] text-white font-extrabold leading-none mt-0.5">Google Play</span>
+            </div>
+          </div>
+          <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors" />
+        </a>
+
         <button 
           onClick={handleInstallClick} 
-          aria-label="Download App"
-          className="w-full flex items-center justify-center space-x-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 hover:shadow-md transition-all shadow-sm"
+          aria-label="Install Web App"
+          className="w-full flex items-center justify-center space-x-1.5 py-1 text-slate-500 hover:text-slate-800 text-[11px] font-semibold transition-colors"
         >
-          <Download className="w-4 h-4" />
-          <span>Download App</span>
+          <Download className="w-3 h-3 text-slate-400" />
+          <span>Add to Home Screen (PWA)</span>
         </button>
       </div>
       </aside>

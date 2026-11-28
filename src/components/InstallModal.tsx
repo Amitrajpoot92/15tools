@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { TOOLS } from "@/lib/constants";
+import { TOOLS, PLAY_STORE_URL } from "@/lib/constants";
 import { 
   X, 
   Download, 
@@ -13,7 +13,8 @@ import {
   Smartphone, 
   Laptop, 
   Apple, 
-  HelpCircle 
+  HelpCircle,
+  ArrowUpRight
 } from "lucide-react";
 
 interface InstallModalProps {
@@ -116,7 +117,47 @@ export function InstallModal({ isOpen, onClose, deferredPrompt, onInstalled }: I
         </div>
 
         {/* Modal Content */}
-        <div className="p-6 space-y-5">
+        <div className="p-6 space-y-4">
+          {/* Official Google Play Store Option */}
+          <div className="space-y-1.5">
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-between p-3.5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl shadow-md hover:shadow-lg transition-all group border border-slate-800"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center p-2 shrink-0">
+                  <svg className="w-6 h-6 text-orange-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.609 1.814L13.793 12 3.61 22.186a2.372 2.372 0 0 1-.3-.388c-.198-.337-.31-.73-.31-1.155V3.357c0-.425.112-.818.31-1.155.086-.147.188-.278.3-.388zM15.207 13.414l2.747 2.747-11.83 6.83 9.083-9.577zm0-2.828L6.124.979l11.83 6.85-2.747 2.757zm1.414 1.414l3.197-1.847c.806-.465.806-1.228 0-1.693l-3.197-1.847-1.414 1.414 1.414 1.414 1.414 1.414-1.414 1.414-1.414 1.414 1.414 1.414 3.197-1.847z" />
+                  </svg>
+                </div>
+                <div className="text-left">
+                  <span className="text-[10px] font-bold text-orange-400 uppercase tracking-widest block">
+                    OFFICIAL ANDROID APP
+                  </span>
+                  <span className="text-sm font-extrabold text-white tracking-tight leading-tight block">
+                    Get on Google Play Store
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center space-x-1 text-xs font-bold text-orange-400 group-hover:text-orange-300">
+                <span>Install</span>
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+            </a>
+            <p className="text-center text-[11px] text-slate-500 font-medium">
+              100% Free • All 25 Calculators • Works Offline
+            </p>
+          </div>
+
+          {/* Divider */}
+          <div className="relative flex py-1 items-center">
+            <div className="flex-grow border-t border-slate-200"></div>
+            <span className="flex-shrink mx-3 text-slate-400 text-[10px] uppercase tracking-wider font-bold">or install web app</span>
+            <div className="flex-grow border-t border-slate-200"></div>
+          </div>
+
           {/* Quick Info Badge */}
           <div className="flex items-center space-x-2.5 bg-emerald-50 border border-emerald-200/80 rounded-2xl p-3 text-emerald-900 text-xs font-medium">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
